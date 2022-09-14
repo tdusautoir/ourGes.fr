@@ -19,20 +19,25 @@
                 <p>GES</p>
             </div>
             <div class="nav-menu">
-                <p>TEST</p>
-                <p>TEST</p>
-                <p>TEST</p>
-                <img src="./img/user.png" alt="">
+                <p>test</p>
+                <p>test</p>
+                <p>test</p>
+                <!-- IS LOGGED -->
+                <!-- <img src="./img/user.png" alt=""> -->
+                <p>login</p>
             </div>
         </nav>
         <div class="content">
             <div class="left-title">
                 <div class="title-effect">
-                    <p>better</p>
+                    <p>a better</p>
                 </div>
                 <div class="title-effect">
                     <p class="snd">myGes.</p>
                 </div>
+            </div>
+            <div class="right-img">
+                <img src="./img/right-img.png" alt="" draggable="false">
             </div>
         </div>
     </div>
