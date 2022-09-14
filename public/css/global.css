@@ -6,7 +6,95 @@
 }
 
 body {
+    max-width: 1440px;
+    min-height: 100vh;
+    margin: 0 auto;
     background: linear-gradient(45deg, rgba(25, 33, 46, 1) 75%, rgba(33, 45, 64, 1) 100%);
+    background-repeat: no-repeat;
     color: var(--text);
-    height: 100vh;
+}
+
+.container {
+    margin: 0 20px;
+}
+
+nav {
+    display: flex;
+    padding: 30px 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav .nav-logo {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10px;
+    text-shadow: 6px 6px 10px rgba(17, 21, 28, 0.65);
+    cursor: pointer;
+}
+
+nav .nav-logo p {
+    font-size: 1rem;
+}
+
+nav .nav-logo p:last-child {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+nav .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav .nav-menu>* {
+    transition: 300ms;
+    cursor: pointer;
+    text-transform: lowercase;
+}
+
+nav .nav-menu img {
+    max-height: 3rem;
+    border-radius: 100vmax;
+}
+
+nav .nav-menu img:hover {
+    opacity: 0.5;
+}
+
+nav .nav-menu p:hover {
+    color: var(--textHover);
+    transform: translateY(-2px);
+}
+
+.content {
+    margin-top: 100px;
+}
+
+.content .left-title .title-effect {
+    height: fit-content;
+    overflow: hidden;
+}
+
+.content .left-title p {
+    font-size: 5rem;
+    font-weight: 600;
+    animation: slideUpTitle 800ms ease 500ms both;
+}
+
+.content .left-title p.snd {
+    font-size: 6rem;
+    animation-delay: 700ms;
+}
+
+@keyframes slideUpTitle {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
 }

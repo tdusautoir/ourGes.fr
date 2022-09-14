@@ -1,4 +1,5 @@
 :root {
     --background: #19212E;
-    --text: #F4F1DE;
+    --text: white;
+    --textHover: rgb(218, 218, 218);
 }

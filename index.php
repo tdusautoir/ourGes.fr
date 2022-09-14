@@ -12,6 +12,30 @@
 </head>
 
 <body>
+    <div class="container">
+        <nav>
+            <div class="nav-logo">
+                <p>our</p>
+                <p>GES</p>
+            </div>
+            <div class="nav-menu">
+                <p>TEST</p>
+                <p>TEST</p>
+                <p>TEST</p>
+                <img src="./img/user.png" alt="">
+            </div>
+        </nav>
+        <div class="content">
+            <div class="left-title">
+                <div class="title-effect">
+                    <p>better</p>
+                </div>
+                <div class="title-effect">
+                    <p class="snd">myGes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
