@@ -93,7 +93,7 @@ if (isset($_GET['action'])) {
                     </div>
                 </div>
                 <div class="right-img">
-                    <img src="./img/right-img.png" alt="" draggable="false">
+                    <img src="./public/img/right-img.png" alt="" draggable="false">
                 </div>
             </div>
         <?php else : ?>
@@ -104,7 +104,5 @@ if (isset($_GET['action'])) {
     </div>
     <?php require './components/flash_message.php'; ?>
 </body>
-
-<script src="https://kit.fontawesome.com/ee66252351.js" crossorigin="anonymous"></script>
 
 </html>
