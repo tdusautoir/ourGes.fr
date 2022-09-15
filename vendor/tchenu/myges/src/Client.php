@@ -4,7 +4,7 @@ namespace MyGes;
 
 use GuzzleHttp\Client as HTTPClient;
 
-require_once('./functions.php');
+require_once('../functions.php');
 
 class Client
 {

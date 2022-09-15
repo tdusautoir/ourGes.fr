@@ -1,3 +1,10 @@
+<?php
+
+require_once './functions.php';
+init_php_session();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,32 +31,37 @@
                 <a>test</a>
                 <a>test</a>
                 <!-- IS LOGGED -->
-                <!-- <img src="./img/user.png" alt=""> -->
-                <button onclick="showForm()">login</button>
-                <!-- NOT LOGGED -->
+                <?php if (!is_logged()) : ?>
+                    <button onclick="showForm()">login</button>
+                <?php else : ?>
+                    <!-- NOT LOGGED -->
+                    <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="photo de profil">
+                <?php endif; ?>
                 <i class="fa fa-bars"></i>
             </div>
         </nav>
         <div class="content">
-            <div class="login-form" id="login-form">
-                <form action="./controller/login.php" method="POST">
-                    <input name="login" type="text">
-                    <input name="password" type="password">
-                    <button type="submit">Se connecter</button>
-                </form>
-            </div>
-            <div class="left-title">
-                <span class="tag mb-1">Built by students, for students</span>
-                <div class="title-effect">
-                    <p>a better</p>
+            <?php if (!is_logged()) : ?>
+                <div class="login-form" id="login-form">
+                    <form action="./controller/login.php" method="POST">
+                        <input name="username" type="text">
+                        <input name="password" type="password">
+                        <button type="submit">Se connecter</button>
+                    </form>
                 </div>
-                <div class="title-effect">
-                    <p class="snd">myGes.</p>
+                <div class="left-title">
+                    <span class="tag mb-1">Built by students, for students</span>
+                    <div class="title-effect">
+                        <p>a better</p>
+                    </div>
+                    <div class="title-effect">
+                        <p class="snd">myGes.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="right-img">
-                <img src="./img/right-img.png" alt="" draggable="false">
-            </div>
+                <div class="right-img">
+                    <img src="./img/right-img.png" alt="" draggable="false">
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </body>
