@@ -97,10 +97,19 @@ if (isset($_GET['action'])) {
             </div>
         <?php else : ?>
             <div class="content">
-                <span class="tag mb-1"><?= str_replace('3', '3 ', $_SESSION['class']->promotion) . " - " . $_SESSION['class']->year; ?></span>
             </div>
         <?php endif; ?>
     </div>
+    <!-- MODAL D'ERREUR -->
+    <!-- <div class="modal error">
+        <i class="fa fa-cirlce-xmark"></i>
+        <p>Votre mot de passe est invalide</p>
+    </div> -->
+    <!-- MODAL DE SUCCÈS -->
+    <!-- <div class="modal success">
+        <i class="fa fa-circle-check"></i>
+        <p>Connexion réussie !</p>
+    </div> -->
 </body>
 
 <script src="./public/js/script.js"></script>

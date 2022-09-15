@@ -15,3 +15,11 @@
 .fa-angle-down::before {
     content: "\f107";
 }
+
+.fa-cirlce-xmark::before {
+    content: "\f057";
+}
+
+.fa-circle-check::before {
+    content: "\f058";
+}

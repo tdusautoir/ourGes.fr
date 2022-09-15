@@ -246,7 +246,7 @@ nav .nav-menu i {
     padding: 0 80px;
 }
 
-.content.flex{
+.content.flex {
     display: flex;
     justify-content: space-between;
 }
@@ -310,4 +310,40 @@ nav .nav-menu i {
     max-width: 75%;
     aspect-ratio: 1;
     transform: translateX(0) rotate(10deg);
+}
+
+.modal {
+    width: auto;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 8px;
+    margin: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideLeft 700ms ease 300ms forwards;
+}
+
+.modal.error {
+    border: 2px solid #db3333;
+    color: #db3333;
+    background: #eeb2b2;
+}
+
+.modal.success {
+    border: 2px solid #289a37;
+    color: #289a37;
+    background: #cbe6cf;
+}
+
+.modal p {
+    font-weight: 600;
+}
+
+.modal i {
+    font-weight: 100;
+    font-size: 2rem;
 }

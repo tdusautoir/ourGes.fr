@@ -8,15 +8,15 @@
     }
 }
 
-@keyframes slideLeftImg {
+@keyframes slideLeft {
     from {
         opacity: 0;
-        transform: translateX(50vw) rotate(20deg);
+        transform: translateX(20vw);
     }
 
     to {
         opacity: 1;
-        transform: translateX(0) rotate(10deg);
+        transform: translateX(0);
     }
 }
 
