@@ -20,7 +20,9 @@ try {
 $me = new MyGes\Me($client);
 
 $profile = $me->getProfile();
+$class = $me->getClasses(2022);
 
+$_SESSION['class'] = $class[0];
 $_SESSION['profile'] = $profile;
 
 header('location: ../index.php');

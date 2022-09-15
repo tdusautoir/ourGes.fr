@@ -18,6 +18,18 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+.tag {
+    font-family: SF, arial, sans-serif;
+    width: fit-content;
+    background: #3d406d;
+    border-radius: 3px;
+    color: #c2bcfa;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 5px 8px;
+}
+
 .mb-1 {
     margin-bottom: 20px;
 }
@@ -152,18 +164,6 @@ nav .nav-menu i {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.content .left-title .tag {
-    font-family: SF, arial, sans-serif;
-    width: fit-content;
-    background: #3d406d;
-    border-radius: 3px;
-    color: #c2bcfa;
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    padding: 5px 8px;
 }
 
 .content .left-title .title-effect {
