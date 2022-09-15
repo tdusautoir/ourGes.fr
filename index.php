@@ -41,7 +41,7 @@ init_php_session();
             </div>
         </nav>
         <div class="content">
-            <?php if (!is_logged()) : ?>
+            <?php if (is_logged()) : ?>
                 <div class="login-form" id="login-form">
                     <form action="./controller/login.php" method="POST">
                         <input name="username" type="text">
