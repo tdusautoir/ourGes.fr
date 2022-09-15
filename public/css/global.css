@@ -9,7 +9,8 @@ body {
     max-width: 1440px;
     min-width: 280px;
     overflow: hidden;
-    min-height: 200vh;
+    min-height: 100vh;
+    overflow: auto;
     margin: 0 auto;
     background: linear-gradient(45deg, rgba(25, 33, 46, 1) 75%, rgba(33, 45, 64, 1) 100%);
     background-repeat: no-repeat;
@@ -23,6 +24,22 @@ body {
 
 .container {
     margin: 0 20px;
+}
+
+.container .login-form {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    left: 0;
+    opacity: 0;
+    display: none;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.container .login-form.active {
+    display: block;
+    animation: slideIn 400ms ease 300ms both;
 }
 
 nav {
@@ -63,7 +80,8 @@ nav .nav-menu>* {
 }
 
 nav .nav-menu img {
-    max-height: 3rem;
+    max-height: 2.5rem;
+    object-fit: contain;
     border-radius: 100vmax;
 }
 
@@ -125,22 +143,6 @@ nav .nav-menu i {
     padding: 0 80px;
 }
 
-.content .login-form {
-    position: absolute;
-    top: 45px;
-    right: 0;
-    left: 0;
-    opacity: 0;
-    display: none;
-    width: fit-content;
-    margin: 0 auto;
-}
-
-.content .login-form.active {
-    display: block;
-    animation: slideIn 400ms ease 300ms both;
-}
-
 .content .left-title,
 .content .right-img {
     flex-basis: 50%;
@@ -169,15 +171,37 @@ nav .nav-menu i {
     overflow: hidden;
 }
 
-.content .left-title p {
+.content .left-title .title-effect p {
     font-size: 3rem;
     font-weight: 600;
     animation: slideUpTitle 800ms ease 500ms both;
 }
 
-.content .left-title p.snd {
+.content .left-title .title-effect p.snd {
     font-size: 3rem;
     animation-delay: 600ms;
+}
+
+.content .left-title .headline .headline-buttons {
+    display: flex;
+    gap: 25px;
+}
+
+.content .left-title .headline .headline-buttons a,
+.content .left-title .headline .headline-buttons button {
+    background: rgb(123, 85, 205);
+    background: linear-gradient(145deg, rgba(123, 85, 205, 1) 0%, rgba(97, 151, 191, 1) 100%);
+    border-radius: 4px;
+    padding: 4px 12px;
+    outline: none;
+    border: none;
+    color: var(--text);
+    font-size: 0.93rem;
+}
+
+.content .left-title .headline .headline-buttons a:last-child {
+    background: transparent;
+    outline: 1px solid white;
 }
 
 .content .right-img {

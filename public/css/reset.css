@@ -1,5 +1,12 @@
 /* CSS Mini Reset */
 
+*:link,
+*:visited {
+    list-style: none;
+    color: var(--text);
+    text-decoration: none;
+}
+
 html,
 body,
 div,
