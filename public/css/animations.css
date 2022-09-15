@@ -1,0 +1,33 @@
+@keyframes slideUpTitle {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideLeftImg {
+    from {
+        opacity: 0;
+        transform: translateX(50vw) rotate(20deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) rotate(10deg);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5vw);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

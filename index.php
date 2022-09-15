@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OurGes</title>
+    <script src="./public/js/script.js"></script>
     <link rel="stylesheet" href="./public/css/reset.css">
+    <link rel="stylesheet" href="./public/css/animations.css">
     <link rel="stylesheet" href="./public/css/var.css">
     <link rel="stylesheet" href="./public/css/global.css">
 </head>
@@ -19,15 +21,22 @@
                 <p>GES</p>
             </div>
             <div class="nav-menu">
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
+                <a>test</a>
+                <a>test</a>
+                <a>test</a>
                 <!-- IS LOGGED -->
                 <!-- <img src="./img/user.png" alt=""> -->
-                <p>login</p>
+                <button onclick="showForm()">login</button>
             </div>
         </nav>
         <div class="content">
+            <div class="login-form" id="login-form">
+                <form action="./controller/login.php" method="POST">
+                    <input name="login" type="text">
+                    <input name="password" type="password">
+                    <button type="submit">Se connecter</button>
+                </form>
+            </div>
             <div class="left-title">
                 <div class="title-effect">
                     <p>a better</p>

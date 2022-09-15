@@ -64,7 +64,7 @@ nav .nav-menu img:hover {
     opacity: 0.5;
 }
 
-nav .nav-menu p:last-child {
+nav .nav-menu a:last-child {
     background-image: radial-gradient(circle at 100% 100%, transparent 4px, #7b55cd 4px, #7b55cd 5px, transparent 5px), linear-gradient(to right, #7b55cd, #6197bf), radial-gradient(circle at 0% 100%, transparent 4px, #6197bf 4px, #6197bf 5px, transparent 5px), linear-gradient(to bottom, #6197bf, #6197bf), radial-gradient(circle at 0% 0%, transparent 4px, #6197bf 4px, #6197bf 5px, transparent 5px), linear-gradient(to left, #6197bf, #7b55cd), radial-gradient(circle at 100% 0%, transparent 4px, #7b55cd 4px, #7b55cd 5px, transparent 5px), linear-gradient(to top, #7b55cd, #7b55cd);
     background-size: 5px 5px, calc(100% - 10px) 1px, 5px 5px, 1px calc(100% - 10px);
     background-position: top left, top center, top right, center right, bottom right, bottom center, bottom left, center left;
@@ -73,7 +73,24 @@ nav .nav-menu p:last-child {
     padding: 5px 10px;
 }
 
-nav .nav-menu p:hover:not(:last-child) {
+nav .nav-menu a:hover {
+    color: var(--textHover);
+    transform: translateY(-2px);
+}
+
+nav .nav-menu button {
+    background-image: radial-gradient(circle at 100% 100%, transparent 4px, #7b55cd 4px, #7b55cd 5px, transparent 5px), linear-gradient(to right, #7b55cd, #6197bf), radial-gradient(circle at 0% 100%, transparent 4px, #6197bf 4px, #6197bf 5px, transparent 5px), linear-gradient(to bottom, #6197bf, #6197bf), radial-gradient(circle at 0% 0%, transparent 4px, #6197bf 4px, #6197bf 5px, transparent 5px), linear-gradient(to left, #6197bf, #7b55cd), radial-gradient(circle at 100% 0%, transparent 4px, #7b55cd 4px, #7b55cd 5px, transparent 5px), linear-gradient(to top, #7b55cd, #7b55cd);
+    background-size: 5px 5px, calc(100% - 10px) 1px, 5px 5px, 1px calc(100% - 10px);
+    background-position: top left, top center, top right, center right, bottom right, bottom center, bottom left, center left;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    color: var(--text);
+
+    padding: 5px 10px;
+}
+
+nav .nav-menu button:hover {
     color: var(--textHover);
     transform: translateY(-2px);
 }
@@ -83,6 +100,22 @@ nav .nav-menu p:hover:not(:last-child) {
     display: flex;
     justify-content: space-between;
     padding: 0 80px;
+}
+
+.content .login-form{
+    position: absolute;
+    top: 45px;
+    right: 0;
+    left: 0;
+    opacity: 0;
+    display: none;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.content .login-form.active{
+    display: block;
+    animation: slideIn 200ms ease 600ms both;
 }
 
 .content .left-title,
@@ -112,16 +145,6 @@ nav .nav-menu p:hover:not(:last-child) {
     animation-delay: 860ms;
 }
 
-@keyframes slideUpTitle {
-    from {
-        transform: translateY(100%);
-    }
-
-    to {
-        transform: translateY(0);
-    }
-}
-
 .content .right-img {
     display: flex;
     justify-content: end;
@@ -131,16 +154,4 @@ nav .nav-menu p:hover:not(:last-child) {
     max-width: 75%;
     aspect-ratio: 1;
     animation: slideLeftImg 1200ms ease 1400ms both;
-}
-
-@keyframes slideLeftImg {
-    from {
-        opacity: 0;
-        transform: translateX(50vw) rotate(20deg);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0) rotate(10deg);
-    }
 }
