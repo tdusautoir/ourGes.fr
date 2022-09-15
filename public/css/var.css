@@ -7,3 +7,11 @@
 .fa-bars::before {
     content: "\f0c9";
 }
+
+.fa-sign-out::before {
+    content: "\f2f5";
+}
+
+.fa-angle-down::before {
+    content: "\f107";
+}

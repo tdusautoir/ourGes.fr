@@ -34,6 +34,10 @@ body {
     margin-bottom: 20px;
 }
 
+.mb-2 {
+    margin-bottom: 10px;
+}
+
 .container {
     margin: 0 20px;
 }
@@ -52,6 +56,41 @@ body {
 .container .login-form.active {
     display: block;
     animation: slideIn 400ms ease 300ms both;
+}
+
+.container .login-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container .login-form .login-input {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.container .login-form .login-input input {
+    padding: 4px 12px;
+    border: 1px #3d406d solid;
+    border-radius: 2px;
+    color: var(--text);
+    background: var(--submenu);
+}
+
+.container .login-form button {
+    border: none;
+    cursor: pointer;
+}
+
+.container .login-form .login-input input:focus,
+.container .login-form button:focus {
+    outline: none;
+}
+
+.container .login-form .login-input input::placeholder {
+    color: rgb(185, 185, 185);
 }
 
 nav {
@@ -91,15 +130,38 @@ nav .nav-menu>* {
     text-transform: lowercase;
 }
 
-nav .nav-menu img {
+nav .nav-menu .usr-img {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+nav .nav-menu .usr-img img {
     max-height: 2.2rem;
     object-fit: cover;
     aspect-ratio: 1;
     border-radius: 100vmax;
 }
 
-nav .nav-menu img:hover {
-    opacity: 0.5;
+nav .nav-menu .usr-img:hover img {
+    opacity: 0.8;
+}
+
+nav .nav-menu .usr-img i {
+    display: flex;
+    font-size: 0.5rem;
+    transform: translateX(-12px) rotate(-90deg);
+    background-color: #19212E;
+    width: 0.5rem;
+    padding: 2.5px;
+    border-radius: 100vmax;
+    aspect-ratio: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+nav .nav-menu .usr-img i.active {
+    animation: angleRotate 300ms ease both;
 }
 
 nav .nav-menu a:last-child {
@@ -163,8 +225,14 @@ nav .nav-menu i {
     display: none;
 }
 
-.container .dropdown-menu span {
+.container .dropdown-menu-1 span {
     font-weight: 600;
+}
+
+.container .dropdown-menu-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .container .dropdown-menu.active {
@@ -207,7 +275,7 @@ nav .nav-menu i {
 
 .content .left-title .title-effect p.snd {
     font-size: 3rem;
-    animation-delay: 600ms;
+    animation-delay: 700ms;
 }
 
 .content .left-title .headline .headline-buttons {
@@ -225,6 +293,7 @@ nav .nav-menu i {
     border: none;
     color: var(--text);
     font-size: 0.93rem;
+    cursor: pointer;
 }
 
 .content .left-title .headline .headline-buttons a:last-child {
