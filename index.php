@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OurGes</title>
-    <script src="./public/js/script.js"></script>
     <link rel="stylesheet" href="./public/css/reset.css">
     <link rel="stylesheet" href="./public/css/animations.css">
     <link rel="stylesheet" href="./public/css/var.css">
@@ -27,6 +26,8 @@
                 <!-- IS LOGGED -->
                 <!-- <img src="./img/user.png" alt=""> -->
                 <button onclick="showForm()">login</button>
+                <!-- NOT LOGGED -->
+                <i class="fa fa-bars"></i>
             </div>
         </nav>
         <div class="content">
@@ -38,6 +39,7 @@
                 </form>
             </div>
             <div class="left-title">
+                <span class="tag mb-1">Built by students, for students</span>
                 <div class="title-effect">
                     <p>a better</p>
                 </div>
@@ -51,5 +53,9 @@
         </div>
     </div>
 </body>
+
+<script src="./public/js/script.js"></script>
+
+<script src="https://kit.fontawesome.com/ee66252351.js" crossorigin="anonymous"></script>
 
 </html>

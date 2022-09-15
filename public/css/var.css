@@ -3,3 +3,7 @@
     --text: white;
     --textHover: rgb(218, 218, 218);
 }
+
+.fa-bars::before {
+    content: "\f0c9";
+}

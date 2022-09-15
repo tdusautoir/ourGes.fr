@@ -7,11 +7,18 @@
 
 body {
     max-width: 1440px;
-    min-height: 100vh;
+    min-width: 280px;
+    overflow: hidden;
+    min-height: 200vh;
     margin: 0 auto;
     background: linear-gradient(45deg, rgba(25, 33, 46, 1) 75%, rgba(33, 45, 64, 1) 100%);
     background-repeat: no-repeat;
     color: var(--text);
+    -webkit-font-smoothing: antialiased;
+}
+
+.mb-1 {
+    margin-bottom: 20px;
 }
 
 .container {
@@ -95,6 +102,22 @@ nav .nav-menu button:hover {
     transform: translateY(-2px);
 }
 
+nav .nav-menu i {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    nav .nav-menu i {
+        display: unset;
+    }
+
+    nav .nav-menu a,
+    nav .nav-menu button,
+    nav .nav-menu img {
+        display: none;
+    }
+}
+
 .content {
     margin-top: 50px;
     display: flex;
@@ -102,7 +125,7 @@ nav .nav-menu button:hover {
     padding: 0 80px;
 }
 
-.content .login-form{
+.content .login-form {
     position: absolute;
     top: 45px;
     right: 0;
@@ -113,9 +136,9 @@ nav .nav-menu button:hover {
     margin: 0 auto;
 }
 
-.content .login-form.active{
+.content .login-form.active {
     display: block;
-    animation: slideIn 200ms ease 600ms both;
+    animation: slideIn 400ms ease 300ms both;
 }
 
 .content .left-title,
@@ -129,20 +152,32 @@ nav .nav-menu button:hover {
     justify-content: center;
 }
 
+.content .left-title .tag {
+    font-family: SF, arial, sans-serif;
+    width: fit-content;
+    background: #3d406d;
+    border-radius: 3px;
+    color: #c2bcfa;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 5px 8px;
+}
+
 .content .left-title .title-effect {
     height: fit-content;
     overflow: hidden;
 }
 
 .content .left-title p {
-    font-size: 6rem;
+    font-size: 3rem;
     font-weight: 600;
-    animation: slideUpTitle 800ms ease 690ms both;
+    animation: slideUpTitle 800ms ease 500ms both;
 }
 
 .content .left-title p.snd {
-    font-size: 7.3rem;
-    animation-delay: 860ms;
+    font-size: 3rem;
+    animation-delay: 600ms;
 }
 
 .content .right-img {
@@ -153,5 +188,5 @@ nav .nav-menu button:hover {
 .content .right-img img {
     max-width: 75%;
     aspect-ratio: 1;
-    animation: slideLeftImg 1200ms ease 1400ms both;
+    transform: translateX(0) rotate(10deg);
 }
