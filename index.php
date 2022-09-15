@@ -14,6 +14,13 @@
 
 <body>
     <div class="container">
+        <div class="login-form" id="login-form">
+            <form action="./controller/login.php" method="POST">
+                <input name="login" type="text">
+                <input name="password" type="password">
+                <button type="submit">connect</button>
+            </form>
+        </div>
         <nav>
             <div class="nav-logo">
                 <p>our</p>
@@ -25,26 +32,31 @@
                 <a>test</a>
                 <!-- IS LOGGED -->
                 <!-- <img src="./img/user.png" alt=""> -->
-                <button onclick="showForm()">login</button>
                 <!-- NOT LOGGED -->
+                <button onclick="showForm()">login</button>
                 <i class="fa fa-bars"></i>
             </div>
         </nav>
         <div class="content">
-            <div class="login-form" id="login-form">
-                <form action="./controller/login.php" method="POST">
-                    <input name="login" type="text">
-                    <input name="password" type="password">
-                    <button type="submit">Se connecter</button>
-                </form>
-            </div>
             <div class="left-title">
                 <span class="tag mb-1">Built by students, for students</span>
                 <div class="title-effect">
                     <p>a better</p>
                 </div>
-                <div class="title-effect">
+                <div class="title-effect mb-1">
                     <p class="snd">myGes.</p>
+                </div>
+                <div class="headline">
+                    <p class="mb-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo tempore accusantium ipsa temporibus doloribus aliquid repudiandae cupiditate labore veritatis neque omnis amet ab, alias sunt commodi incidunt blanditiis quidem tenetur voluptas fugiat officiis nulla eveniet vel excepturi? Nulla quam quaerat necessitatibus, aliquam maiores, earum at ipsam animi, est a repudiandae.</p>
+                    <div class="headline-buttons">
+                        <button onclick="showForm()">
+                            <p>login</p>
+                        </button>
+                        </a>
+                        <a href="https://myges.fr/#/" target="blank">
+                            <p>myges</p>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="right-img">
