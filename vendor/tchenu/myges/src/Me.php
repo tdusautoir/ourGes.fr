@@ -173,7 +173,6 @@ class Me
     {
         $url = $this->getUrl(self::GET_ABSENCES_ENDPOINT);
         $url = str_replace('{year}', $year, $url);
-
         $client = new HTTPClient();
         $response = $client->request('GET', $url, [
             'headers' => [

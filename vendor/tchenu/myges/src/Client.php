@@ -87,8 +87,6 @@ class Client
      */
     private function extractFragments(array $headers): ?string
     {
-        dump($headers);
-        dump($headers["Location"]);
         $location = $headers['Location'][0];
 
         $locationUrl = parse_url($location);
