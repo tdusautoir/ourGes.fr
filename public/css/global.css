@@ -6,7 +6,6 @@
 }
 
 body {
-    max-width: 1440px;
     min-width: 280px;
     overflow: hidden;
     min-height: 100vh;
@@ -92,8 +91,9 @@ nav .nav-menu>* {
 }
 
 nav .nav-menu img {
-    max-height: 2.5rem;
-    object-fit: contain;
+    max-height: 2.2rem;
+    object-fit: cover;
+    aspect-ratio: 1;
     border-radius: 100vmax;
 }
 
@@ -148,7 +148,31 @@ nav .nav-menu i {
     }
 }
 
+.container .dropdown-menu {
+    width: 140px;
+    padding: 10px;
+    border-radius: 4px;
+    height: auto;
+    background: var(--submenu);
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    margin-top: -30px;
+    font-size: 0.8rem;
+    display: none;
+}
+
+.container .dropdown-menu span {
+    font-weight: 600;
+}
+
+.container .dropdown-menu.active {
+    display: unset;
+}
+
 .content {
+    max-width: 1440px;
+    margin: 0 auto;
     margin-top: 50px;
     display: flex;
     justify-content: space-between;

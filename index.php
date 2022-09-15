@@ -42,11 +42,16 @@ init_php_session();
                     <button onclick="showForm()">login</button>
                 <?php else : ?>
                     <!-- NOT LOGGED -->
-                    <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="photo de profil">
+                    <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="photo de profil" onclick="showSubmenu()">
                 <?php endif; ?>
                 <i class="fa fa-bars"></i>
             </div>
         </nav>
+        <div class="dropdown-menu" id="dropdown-menu">
+            <p>Signed in as</p>
+            <span>Achille David</span>
+            <button>disconnet</button>
+        </div>
         <div class="content">
             <?php if (!is_logged()) : ?>
                 <div class="left-title">
