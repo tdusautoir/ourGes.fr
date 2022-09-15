@@ -29,9 +29,11 @@ if (isset($_GET['action'])) {
     <div class="container">
         <div class="login-form" id="login-form">
             <form action="./controller/login.php" method="POST">
-                <input name="username" type="text">
-                <input name="password" type="password">
-                <button type="submit">connect</button>
+                <div class="login-input">
+                    <input name="username" type="text" placeholder="username" autocomplete="off" maxlength="20">
+                    <input name="password" type="password" placeholder="password" autocomplete="off" maxlength="30">
+                </div>
+                <button type="submit" class="tag">connect</button>
             </form>
         </div>
         <nav>
@@ -48,15 +50,23 @@ if (isset($_GET['action'])) {
                     <button onclick="showForm()">login</button>
                 <?php else : ?>
                     <!-- NOT LOGGED -->
-                    <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="photo de profil" onclick="showSubmenu()">
+                    <div class="usr-img" onclick="showSubmenu()">
+                        <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="photo de profil">
+                        <i class="fa fa-angle-down" id="fa-angle-down"></i>
+                    </div>
                 <?php endif; ?>
                 <i class="fa fa-bars"></i>
             </div>
         </nav>
         <div class="dropdown-menu" id="dropdown-menu">
-            <p>Signed in as</p>
-            <span>Achille David</span>
-            <a href="index.php?action=logout">disconnet</a>
+            <div class="dropdown-menu-1 mb-2">
+                <p>Signed in as</p>
+                <span>Achille David</span>
+            </div>
+            <div class="dropdown-menu-2">
+                <p class="tag">3ESGI</p>
+                <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
+            </div>
         </div>
         <div class="content">
             <?php if (!is_logged()) : ?>
@@ -85,7 +95,6 @@ if (isset($_GET['action'])) {
                     <img src="./img/right-img.png" alt="" draggable="false">
                 </div>
             <?php else : ?>
-                <span class="tag mb-1"><?= $_SESSION['class']->name ?></span>
             <?php endif; ?>
         </div>
     </div>
