@@ -55,11 +55,11 @@ if (isset($_GET['action'])) {
         </nav>
         <div class="dropdown-menu" id="dropdown-menu">
             <p>Signed in as</p>
-            <span>Achille David</span>
+            <span><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></span>
             <a href="index.php?action=logout">disconnet</a>
         </div>
-        <div class="content">
-            <?php if (!is_logged()) : ?>
+        <?php if (!is_logged()) : ?>
+            <div class="content flex">
                 <div class="left-title">
                     <span class="tag mb-1">Built by students, for students</span>
                     <div class="title-effect">
@@ -84,10 +84,12 @@ if (isset($_GET['action'])) {
                 <div class="right-img">
                     <img src="./img/right-img.png" alt="" draggable="false">
                 </div>
-            <?php else : ?>
-                <span class="tag mb-1"><?= $_SESSION['class']->name ?></span>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php else : ?>
+            <div class="content">
+                <span class="tag mb-1"><?= str_replace('3', '3 ', $_SESSION['class']->promotion) . " - " . $_SESSION['class']->year; ?></span>
+            </div>
+        <?php endif; ?>
     </div>
 </body>
 

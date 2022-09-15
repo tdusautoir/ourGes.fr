@@ -14,13 +14,16 @@ try {
     // client-id = skolae-app
     $client = new MyGes\Client('skolae-app', $username, $password);
 } catch (MyGes\Exceptions\BadCredentialsException $e) {
-    die($e->getMessage()); // bad credentials
+    $e->getMessage(); // bad credentials
 }
 
 $me = new MyGes\Me($client);
 
 $profile = $me->getProfile();
 $class = $me->getClasses(2022);
+
+// $news = $me->getNews(0);
+// $_SESSION['news'] = $news;
 
 $_SESSION['class'] = $class[0];
 $_SESSION['profile'] = $profile;

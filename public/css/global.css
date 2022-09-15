@@ -20,6 +20,7 @@ body {
 .tag {
     font-family: SF, arial, sans-serif;
     width: fit-content;
+    height: fit-content;
     background: #3d406d;
     border-radius: 3px;
     color: #c2bcfa;
@@ -174,9 +175,12 @@ nav .nav-menu i {
     max-width: 1440px;
     margin: 0 auto;
     margin-top: 50px;
+    padding: 0 80px;
+}
+
+.content.flex{
     display: flex;
     justify-content: space-between;
-    padding: 0 80px;
 }
 
 .content .left-title,

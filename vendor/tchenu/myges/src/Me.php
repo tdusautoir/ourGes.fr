@@ -17,6 +17,7 @@ class Me
     const GET_GRADES_ENDPOINT   = '/{year}/grades';
     const GET_ABSENCES_ENDPOINT = '/{year}/absences';
     const GET_CLASSES_ENDPOINT  = '/{year}/classes';
+    const GET_CLASS_ENDPOINT = '/classes/{id}';
     const GET_STUDENTS_ENDPOINT = '/classes/{classeId}/students';
     const GET_STUDENT_ENDPOINT  = '/students/{studentId}';
 
@@ -205,6 +206,30 @@ class Me
 
         return json_decode($response->getBody())->result;
     }
+
+    /**
+     * Get classe / id
+     *
+     * @param integer $id
+     * @return void
+     */
+
+    //change ?Object to array
+    public function getClasse(int $id): object
+    {
+        $url = $this->getUrl(self::GET_CLASS_ENDPOINT);
+        $url = str_replace('{id}', $id, $url);
+
+        $client = new HTTPClient();
+        $response = $client->request('GET', $url, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $this->client->getAccessToken(),
+            ]
+        ]);
+
+        return json_decode($response->getBody())->result;
+    }
+
 
     /**
      * Get student by studentId
