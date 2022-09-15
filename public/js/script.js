@@ -5,5 +5,9 @@ function showForm() {
 
 function showSubmenu() {
   let submenu = document.getElementById("dropdown-menu");
-  submenu.className += " active";
+  if (submenu.classList.contains("active")) {
+    submenu.className = "dropdown-menu";
+  } else {
+    submenu.className += " active";
+  }
 }

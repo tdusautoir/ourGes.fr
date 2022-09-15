@@ -3,6 +3,12 @@
 require_once './functions.php';
 init_php_session();
 
+if (isset($_GET['action'])) {
+    if ($_GET['action'] == 'logout') {
+        clean_php_session();
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +56,7 @@ init_php_session();
         <div class="dropdown-menu" id="dropdown-menu">
             <p>Signed in as</p>
             <span>Achille David</span>
-            <button>disconnet</button>
+            <a href="index.php?action=logout">disconnet</a>
         </div>
         <div class="content">
             <?php if (!is_logged()) : ?>
