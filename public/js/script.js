@@ -18,3 +18,24 @@ function showSubmenu() {
     angleDown.className += " active";
   }
 }
+
+function showFlashMessage(type) {
+  flash = document.getElementById("flash");
+  if (flash) {
+    if (type === "error") {
+      setTimeout(function () {
+        flash.className += " active";
+        setTimeout(function () {
+          flash.className = "modal error";
+        }, 3000);
+      }, 400);
+    } else if (type === "success") {
+      setTimeout(function () {
+        flash.className += " active";
+        setTimeout(function () {
+          flash.className = "modal success";
+        }, 3000);
+      }, 400);
+    }
+  }
+}

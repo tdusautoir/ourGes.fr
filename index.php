@@ -23,6 +23,7 @@ if (isset($_GET['action'])) {
     <link rel="stylesheet" href="./public/css/animations.css">
     <link rel="stylesheet" href="./public/css/var.css">
     <link rel="stylesheet" href="./public/css/global.css">
+    <script src="./public/js/script.js"></script>
 </head>
 
 <body>
@@ -97,22 +98,12 @@ if (isset($_GET['action'])) {
             </div>
         <?php else : ?>
             <div class="content">
+                <p><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></p>
             </div>
         <?php endif; ?>
     </div>
-    <!-- MODAL D'ERREUR -->
-    <!-- <div class="modal error">
-        <i class="fa fa-cirlce-xmark"></i>
-        <p>Votre mot de passe est invalide</p>
-    </div> -->
-    <!-- MODAL DE SUCCÈS -->
-    <!-- <div class="modal success">
-        <i class="fa fa-circle-check"></i>
-        <p>Connexion réussie !</p>
-    </div> -->
+    <?php require './components/flash_message.php'; ?>
 </body>
-
-<script src="./public/js/script.js"></script>
 
 <script src="https://kit.fontawesome.com/ee66252351.js" crossorigin="anonymous"></script>
 

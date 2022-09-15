@@ -324,7 +324,16 @@ nav .nav-menu i {
     display: flex;
     align-items: center;
     gap: 10px;
-    animation: slideLeft 700ms ease 300ms forwards;
+
+    transform: translateX(20vw);
+    opacity: 0;
+    transition: ease 0.4s;
+}
+
+.modal.active{
+    transform: translateX(0);
+    opacity: 1;
+    transition: ease 0.4s;
 }
 
 .modal.error {

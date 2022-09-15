@@ -15,6 +15,7 @@ const FLASH_SUCCESS = 'success';
 //flash name
 const ERROR_LOGIN = 'error_login';
 const ERROR_HANDLER = 'error_handler';
+const SUCCESS_LOGIN = 'success_login';
 
 function dump($var) //function for debug
 {
@@ -50,7 +51,7 @@ function is_logged(): bool
 function errorHandler($errno, $errstr, $errfile, $errline)
 {
     $error = [$errno, $errstr, $errfile, $errline];
-    create_flash_message(ERROR_HANDLER, $errstr, FLASH_ERROR);
+    create_flash_message(ERROR_HANDLER, 'Une erreur est survenue, veuillez réessayer plus tard.', FLASH_ERROR);
     header("location: ../index.php");
 }
 
