@@ -93,7 +93,7 @@ body {
 .container .login-form .login-input input {
     padding: 4px 12px;
     border: 1px #3d406d solid;
-    border-radius: 2px;
+    border-radius: 4px;
     color: var(--text);
     background: var(--submenu);
 }
