@@ -1,12 +1,14 @@
 /* for debug */
-pre{
+pre {
     position: absolute;
     background: black;
     top: 0
 }
-pre:hover{
+
+pre:hover {
     opacity: 0.2;
 }
+
 /* =============== */
 
 * {
@@ -144,6 +146,7 @@ nav .nav-menu .usr-img {
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    cursor: default;
 }
 
 nav .nav-menu .usr-img img {
@@ -151,9 +154,10 @@ nav .nav-menu .usr-img img {
     object-fit: cover;
     aspect-ratio: 1;
     border-radius: 100vmax;
+    cursor: pointer;
 }
 
-nav .nav-menu .usr-img:hover img {
+nav .nav-menu .usr-img img:hover {
     opacity: 0.8;
 }
 
@@ -214,13 +218,14 @@ nav .nav-menu i {
 }
 
 @media screen and (max-width: 600px) {
-    nav .nav-menu i {
+    nav .nav-menu i.fa-bars {
         display: unset;
     }
 
     nav .nav-menu a,
     nav .nav-menu button,
-    nav .nav-menu img {
+    nav .nav-menu img,
+    nav .nav-menu i.fa-angle-down {
         display: none;
     }
 }
@@ -285,12 +290,12 @@ nav .nav-menu i {
 .content .left-title .title-effect p {
     font-size: 3rem;
     font-weight: 600;
-    animation: slideUpTitle 800ms ease 500ms both;
+    animation: slideUpTitle 800ms ease 300ms both;
 }
 
 .content .left-title .title-effect p.snd {
     font-size: 3rem;
-    animation-delay: 700ms;
+    animation-delay: 560ms;
 }
 
 .content .left-title .headline .headline-buttons {
@@ -345,7 +350,7 @@ nav .nav-menu i {
     transition: ease 0.4s;
 }
 
-.modal.active{
+.modal.active {
     transform: translateX(0);
     opacity: 1;
     transition: ease 0.4s;
@@ -377,7 +382,7 @@ nav .nav-menu i {
     gap: 20px;
 }
 
-.content .dashboard h4{
+.content .dashboard h4 {
     font-size: 12px;
 }
 
@@ -388,25 +393,25 @@ nav .nav-menu i {
     gap: 20px;
 }
 
-.content .dashboard .dsb-left .title{
+.content .dashboard .dsb-left .title {
     padding: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.content .dashboard .dsb-left .new-banner{
-    background: rgba(0,0,0,0.2);
+.content .dashboard .dsb-left .new-banner {
+    background: rgba(0, 0, 0, 0.2);
     background-blend-mode: soft-light;
     background-size: cover;
 }
 
-.content .dashboard .dsb-left .new-banner .title{
+.content .dashboard .dsb-left .new-banner .title {
     margin-bottom: 10px;
     font-weight: 500;
 }
 
-.content .dashboard .dsb-left .new-banner .description{
+.content .dashboard .dsb-left .new-banner .description {
     background: rgba(23, 29, 41, 0.7);
     display: flex;
     gap: 20px;
@@ -414,13 +419,13 @@ nav .nav-menu i {
     justify-content: space-between;
 }
 
-.content .dashboard .dsb-left .new-banner .description p{
+.content .dashboard .dsb-left .new-banner .description p {
     padding: 10px;
     border-radius: 5px;
     width: 100%;
 }
 
-.content .dashboard .dsb-left .course{
+.content .dashboard .dsb-left .course {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -428,9 +433,16 @@ nav .nav-menu i {
     font-size: 14px;
 }
 
-.content .dashboard .dsb-left .coef, .content .dashboard .dsb-left .teacher{
+.content .dashboard .dsb-left .course-list {
+    max-height: 150px;
+    overflow: auto;
+}
+
+.content .dashboard .dsb-left .coef,
+.content .dashboard .dsb-left .teacher {
     color: rgb(171 171 171);
 }
+
 .content .dashboard .dsb-left div,
 .content .dashboard .dsb-right div {
     padding: 10px;

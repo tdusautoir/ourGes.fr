@@ -24,6 +24,7 @@ if (isset($_GET['action'])) {
     <link rel="stylesheet" href="./public/css/animations.css">
     <link rel="stylesheet" href="./public/css/var.css">
     <link rel="stylesheet" href="./public/css/global.css">
+    <link rel="icon" href="./img/favicon.png" />
     <script src="./public/js/script.js"></script>
 </head>
 
@@ -52,8 +53,8 @@ if (isset($_GET['action'])) {
                     <button onclick="showForm()">login</button>
                 <?php else : ?>
                     <!-- NOT LOGGED -->
-                    <div class="usr-img" onclick="showSubmenu()">
-                        <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="photo de profil">
+                    <div class="usr-img">
+                        <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="photo de profil" onclick="showSubmenu()">
                         <i class="fa fa-angle-down" id="fa-angle-down"></i>
                     </div>
                 <?php endif; ?>
@@ -75,13 +76,17 @@ if (isset($_GET['action'])) {
                 <div class="left-title">
                     <span class="tag mb-1">Built by students, for students</span>
                     <div class="title-effect">
-                        <p>a better</p>
+                        <p>myGes,</p>
                     </div>
                     <div class="title-effect mb-1">
-                        <p class="snd">myGes.</p>
+                        <p class="snd">but better.</p>
                     </div>
                     <div class="headline">
-                        <p class="mb-1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quo tempore accusantium ipsa temporibus doloribus aliquid repudiandae cupiditate labore veritatis neque omnis amet ab, alias sunt commodi incidunt blanditiis quidem tenetur voluptas fugiat officiis nulla eveniet vel excepturi? Nulla quam quaerat necessitatibus, aliquam maiores, earum at ipsam animi, est a repudiandae.</p>
+                        <p class="mb-1">
+                            @everyone attention il n’y aura pas de myGes durant 2 jours.
+                            Nouvelle infra plus performante ?
+                            Il va y avoir un abandon de myGes et on va migrer sur Salesforce.
+                        </p>
                         <div class="headline-buttons">
                             <button onclick="showForm()">
                                 <p>login</p>
@@ -129,17 +134,19 @@ if (isset($_GET['action'])) {
                         </div>
                         <div class="courses">
                             <div class="title mb-1">
-                                <h4 class="tag">Courses</h4>
+                                <h4 class="tag">classes</h4>
                                 <span class="coef">coef.</span>
                             </div>
-                            <?php foreach ($_SESSION['grades'] as $course) : ?>
-                                <div class="course">
-                                    <!-- name of the course - professor -->
-                                    <p><?= $course->course . " - " ?><span class='teacher'><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
-                                    <!-- coef -->
-                                    <span class="coef"><?= $course->coef ?></span>
-                                </div>
-                            <?php endforeach; ?>
+                            <div class="course-list">
+                                <?php foreach ($_SESSION['grades'] as $course) : ?>
+                                    <div class="course">
+                                        <!-- name of the course - professor -->
+                                        <p><?= $course->course . " - " ?><span class='teacher'><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
+                                        <!-- coef -->
+                                        <span class="coef"><?= $course->coef ?></span>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
                     <div class="dsb-right">
