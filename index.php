@@ -6,6 +6,7 @@ init_php_session();
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'logout') {
         clean_php_session();
+        header('location: ./');
     }
 }
 
@@ -43,9 +44,9 @@ if (isset($_GET['action'])) {
                 <p>GES</p>
             </div>
             <div class="nav-menu">
+                <!-- <a>test</a>
                 <a>test</a>
-                <a>test</a>
-                <a>test</a>
+                <a>test</a> -->
                 <!-- IS LOGGED -->
                 <?php if (!is_logged()) : ?>
                     <button onclick="showForm()">login</button>

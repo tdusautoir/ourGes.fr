@@ -48,16 +48,17 @@ function is_logged(): bool
     return false;
 }
 
-function errorHandler($errno, $errstr, $errfile, $errline)
+function errorHandler($errno, $errstr, $errfile, $errline) //error
 {
-    $error = [$errno, $errstr, $errfile, $errline];
-    create_flash_message(ERROR_HANDLER, 'Une erreur est survenue, veuillez réessayer plus tard.', FLASH_ERROR);
+    $error = [$errno, $errstr, $errfile, $errline]; //information about the error (for debug)
+    create_flash_message(ERROR_HANDLER, 'An error has occured, please try again.', FLASH_ERROR);
     header("location: ../index.php");
 }
 
-function fatalErrorHandler()
+
+function fatalErrorHandler() //fatal error
 {
-    create_flash_message(ERROR_HANDLER, 'Une erreur est survenue, veuillez réessayer plus tard.', FLASH_ERROR);
+    create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
     header("location: ../index.php");
 }
 
