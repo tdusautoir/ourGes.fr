@@ -14,7 +14,7 @@ try {
 } catch (MyGes\Exceptions\BadCredentialsException $e) {
     //wrong credentials
     $err = $e->getMessage();
-    create_flash_message(ERROR_LOGIN, 'Identifiants invalides.', FLASH_ERROR);
+    create_flash_message(ERROR_LOGIN, 'Invalid login informations.', FLASH_ERROR);
     header('location: ../index.php');
     return;
 }
@@ -28,7 +28,7 @@ $class = $me->getClasses(2022);
 // $_SESSION['news'] = $news;
 
 init_php_session();
-create_flash_message(SUCCESS_LOGIN, 'Connexion réussie.', FLASH_SUCCESS);
+create_flash_message(SUCCESS_LOGIN, 'Successfully connected.', FLASH_SUCCESS);
 
 $_SESSION['class'] = $class[0];
 $_SESSION['profile'] = $profile;

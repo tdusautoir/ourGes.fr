@@ -7,7 +7,6 @@
 
 body {
     min-width: 280px;
-    overflow: hidden;
     min-height: 100vh;
     overflow: auto;
     margin: 0 auto;
@@ -164,6 +163,10 @@ nav .nav-menu .usr-img i.active {
     animation: angleRotate 300ms ease both;
 }
 
+nav .nav-menu .usr-img i.close {
+    animation: angleRotateClose 300ms ease both;
+}
+
 nav .nav-menu a:last-child {
     background-image: radial-gradient(circle at 100% 100%, transparent 4px, #7b55cd 4px, #7b55cd 5px, transparent 5px), linear-gradient(to right, #7b55cd, #6197bf), radial-gradient(circle at 0% 100%, transparent 4px, #6197bf 4px, #6197bf 5px, transparent 5px), linear-gradient(to bottom, #6197bf, #6197bf), radial-gradient(circle at 0% 0%, transparent 4px, #6197bf 4px, #6197bf 5px, transparent 5px), linear-gradient(to left, #6197bf, #7b55cd), radial-gradient(circle at 100% 0%, transparent 4px, #7b55cd 4px, #7b55cd 5px, transparent 5px), linear-gradient(to top, #7b55cd, #7b55cd);
     background-size: 5px 5px, calc(100% - 10px) 1px, 5px 5px, 1px calc(100% - 10px);
@@ -244,6 +247,7 @@ nav .nav-menu i {
     margin: 0 auto;
     margin-top: 50px;
     padding: 0 80px;
+    height: inherit;
 }
 
 .content.flex {
@@ -355,4 +359,34 @@ nav .nav-menu i {
 .modal i {
     font-weight: 100;
     font-size: 2rem;
+}
+
+.content .dashboard {
+    display: flex;
+    gap: 20px;
+}
+
+.content .dashboard .dsb-left {
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.content .dashboard .dsb-left div,
+.content .dashboard .dsb-right div {
+    padding: 10px;
+    background: #273246;
+    box-shadow: 5px 5px 27px 0px rgba(0, 0, 0, 0.31);
+    border-radius: 4px;
+}
+
+
+.content .dashboard .dsb-right div {
+    width: 100%;
+}
+
+.content .dashboard .dsb-right {
+    flex-basis: 40%;
+    display: flex;
 }

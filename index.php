@@ -98,7 +98,16 @@ if (isset($_GET['action'])) {
             </div>
         <?php else : ?>
             <div class="content">
-                <p><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></p>
+                <div class="dashboard">
+                    <div class="dsb-left">
+                        <div class="notes">notes</div>
+                        <div class="news">news</div>
+                        <div class="documents">documents</div>
+                    </div>
+                    <div class="dsb-right">
+                        <div class="planning">planning</div>
+                    </div>
+                </div>
             </div>
         <?php endif; ?>
     </div>

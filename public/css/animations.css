@@ -41,3 +41,13 @@
         transform: translateX(-12px) rotate(0);
     }
 }
+
+@keyframes angleRotateClose {
+    from {
+        transform: translateX(-12px) rotate(0);
+    }
+
+    to {
+        transform: translateX(-12px) rotate(-90deg);
+    }
+}

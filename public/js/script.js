@@ -12,10 +12,10 @@ function showSubmenu() {
   let angleDown = document.getElementById("fa-angle-down");
   if (submenu.classList.contains("active")) {
     submenu.className = "dropdown-menu";
-    angleDown.className = "fa fa-angle-down";
+    angleDown.className = "fa fa-angle-down close";
   } else {
     submenu.className += " active";
-    angleDown.className += " active";
+    angleDown.className = "fa fa-angle-down active";
   }
 }
 
