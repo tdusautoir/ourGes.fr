@@ -16,7 +16,7 @@ try {
     //wrong credentials
     $err = $e->getMessage();
     create_flash_message(ERROR_LOGIN, 'Invalid login informations.', FLASH_ERROR);
-    header('location: ../index.php');
+    header('location: ../');
     return;
 }
 
@@ -47,4 +47,4 @@ $_SESSION['profile'] = $profile;
 $_SESSION['grades'] = $grades;
 $_SESSION['agenda'] = $agenda;
 
-header('location: ../index.php');
+header('location: ../');

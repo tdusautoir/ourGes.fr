@@ -52,14 +52,14 @@ function errorHandler($errno, $errstr, $errfile, $errline) //error
 {
     $error = [$errno, $errstr, $errfile, $errline]; //information about the error (for debug)
     create_flash_message(ERROR_HANDLER, 'An error has occured, please try again.', FLASH_ERROR);
-    header("location: ../index.php");
+    header("location: ../");
 }
 
 
 function fatalErrorHandler() //fatal error
 {
     create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
-    header("location: ../index.php");
+    header("location: ../");
 }
 
 
