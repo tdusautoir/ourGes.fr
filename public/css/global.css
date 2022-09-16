@@ -67,8 +67,15 @@ body {
 
 .container .login-form.active {
     display: block;
-    animation: slideIn 400ms ease 300ms both;
+    animation: slideIn 400ms ease 100ms both;
 }
+
+.container .login-form.close {
+    display: block;
+    animation: slideDown 400ms ease 100ms both;
+    pointer-events: none;
+}
+
 
 .container .login-form form {
     display: flex;
@@ -99,6 +106,7 @@ body {
 .container .login-form .login-input input:focus,
 .container .login-form button:focus {
     outline: none;
+    transition: 100ms;
 }
 
 .container .login-form .login-input input::placeholder {
@@ -242,6 +250,7 @@ nav .nav-menu i {
     margin-top: -30px;
     font-size: 0.8rem;
     display: none;
+    z-index: 10000;
 }
 
 .container .dropdown-menu-1 span {
@@ -256,6 +265,13 @@ nav .nav-menu i {
 
 .container .dropdown-menu.active {
     display: unset;
+    animation: slideUpMenu 300ms ease both;
+}
+
+.container .dropdown-menu.close {
+    display: unset;
+    animation: slideDownMenu 300ms ease both;
+    pointer-events: none;
 }
 
 .content {
@@ -465,7 +481,6 @@ nav .nav-menu i {
     border-radius: 4px;
 }
 
-
 .content .dashboard .dsb-right .case {
     width: 100%;
 }
@@ -476,32 +491,29 @@ nav .nav-menu i {
     max-width: 40%;
 }
 
-.content .dashboard .dsb-right .planning .planning-head {
+.content .dashboard .dashboard-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.content .dashboard .dsb-right .planning .planning-head .arrows-planning-head {
+.content .dashboard .dashboard-head .arrows-dashboard-head {
     display: flex;
     gap: 10px;
 }
 
-.content .dashboard .dsb-right .planning .planning-head .arrows-planning-head {
-    display: flex;
-    gap: 10px;
-}
-
-.content .dashboard .dsb-right .planning .planning-head .arrows-planning-head i:hover {
+.content .dashboard .dashboard-head .arrows-dashboard-head i:hover {
     cursor: pointer;
     color: var(--textHover);
 }
 
-.content .dashboard .dsb-right .planning .planning-head .arrows-planning-head i {
+.content .dashboard .dashboard-head .arrows-dashboard-head i {
     transform: rotate(90deg);
     transition: 300ms;
 }
 
-.content .dashboard .dsb-right .planning .planning-head .arrows-planning-head i:last-child {
+.content .dashboard .dashboard-head .arrows-dashboard-head i:last-child {
     transform: rotate(-90deg);
 }
+
+/* devloped by achille david and thibaut dusautoir */

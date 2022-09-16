@@ -1,9 +1,9 @@
 function showForm() {
   let formLogin = document.getElementById("login-form");
   if (formLogin.classList.contains("active")) {
-    formLogin.className = "login-form";
+    formLogin.className = "login-form close";
   } else {
-    formLogin.className += " active";
+    formLogin.className = "login-form active";
   }
 }
 
@@ -11,10 +11,10 @@ function showSubmenu() {
   let submenu = document.getElementById("dropdown-menu");
   let angleDown = document.getElementById("fa-angle-down");
   if (submenu.classList.contains("active")) {
-    submenu.className = "dropdown-menu";
+    submenu.className = "dropdown-menu close";
     angleDown.className = "fa fa-angle-down close";
   } else {
-    submenu.className += " active";
+    submenu.className = "dropdown-menu active";
     angleDown.className = "fa fa-angle-down active";
   }
 }
@@ -39,3 +39,5 @@ function showFlashMessage(type) {
     }
   }
 }
+
+/* devloped by achille david and thibaut dusautoir */

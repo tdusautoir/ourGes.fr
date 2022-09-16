@@ -54,7 +54,7 @@ if (isset($_GET['action'])) {
                 <?php else : ?>
                     <!-- NOT LOGGED -->
                     <div class="usr-img">
-                        <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="photo de profil" onclick="showSubmenu()">
+                        <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="profile" onclick="showSubmenu()">
                         <i class="fa fa-angle-down" id="fa-angle-down"></i>
                     </div>
                 <?php endif; ?>
@@ -114,8 +114,12 @@ if (isset($_GET['action'])) {
                             <h4 class="tag">Marks</h4>
                         </div>
                         <div class="news case">
-                            <div class="title mb-1">
+                            <div class="dashboard-head mb-2">
                                 <h4 class="tag">News</h4>
+                                <div class="arrows-dashboard-head">
+                                    <i class="fa fa-angle-down"></i>
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
                             </div>
                             <?php foreach ($_SESSION['news'] as $new) : ?>
                                 <div class="new-banner" style="background-image: url(<?= $new->image ?>);">
@@ -155,9 +159,9 @@ if (isset($_GET['action'])) {
                     </div>
                     <div class="dsb-right">
                         <div class="planning case">
-                            <div class="planning-head">
+                            <div class="dashboard-head mb-2">
                                 <h4 class="tag">Planning</h4>
-                                <div class="arrows-planning-head">
+                                <div class="arrows-dashboard-head">
                                     <i class="fa fa-angle-down"></i>
                                     <i class="fa fa-angle-down"></i>
                                 </div>
@@ -172,3 +176,5 @@ if (isset($_GET['action'])) {
 </body>
 
 </html>
+
+<!-- devloped by achille david and thibaut dusautoir -->
