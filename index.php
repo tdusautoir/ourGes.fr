@@ -82,10 +82,14 @@ if (isset($_GET['action'])) {
                         <p class="snd">but better.</p>
                     </div>
                     <div class="headline">
+                        <p>
+                            ourGes is an extension to myGes
+                        </p>
+                        <p class="mb-2">
+                            you can easily find your school information using a simple and easy-to-use interface
+                        </p>
                         <p class="mb-1">
-                            @everyone attention il n’y aura pas de myGes durant 2 jours.
-                            Nouvelle infra plus performante ?
-                            Il va y avoir un abandon de myGes et on va migrer sur Salesforce.
+                            developed by <a href="https://github.com/achilledavid" target="blank">achille</a> and <a href="https://github.com/tdusautoir" target="blank">thibaut</a>
                         </p>
                         <div class="headline-buttons">
                             <button onclick="showForm()">
@@ -106,10 +110,10 @@ if (isset($_GET['action'])) {
             <div class="content">
                 <div class="dashboard">
                     <div class="dsb-left">
-                        <div class="notes">
-                            <h4 class="tag">Notes</h4>
+                        <div class="notes case">
+                            <h4 class="tag">Marks</h4>
                         </div>
-                        <div class="news">
+                        <div class="news case">
                             <div class="title mb-1">
                                 <h4 class="tag">News</h4>
                             </div>
@@ -126,13 +130,13 @@ if (isset($_GET['action'])) {
                                         <?php if (isset($new->html)) :  ?>
                                             <?= $new->html ?>
                                         <?php else : ?>
-                                            <p>Aucune description.</p>
+                                            <p>Aucune description</p>
                                         <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                        <div class="courses">
+                        <div class="courses case">
                             <div class="title mb-1">
                                 <h4 class="tag">classes</h4>
                                 <span class="coef">coef.</span>
@@ -150,8 +154,14 @@ if (isset($_GET['action'])) {
                         </div>
                     </div>
                     <div class="dsb-right">
-                        <div class="planning">
-                            <h4 class="tag">Planning</h4>
+                        <div class="planning case">
+                            <div class="planning-head">
+                                <h4 class="tag">Planning</h4>
+                                <div class="arrows-planning-head">
+                                    <i class="fa fa-angle-down"></i>
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -274,6 +274,7 @@ nav .nav-menu i {
 .content .left-title,
 .content .right-img {
     flex-basis: 50%;
+    max-width: 50%;
 }
 
 .content .left-title {
@@ -296,6 +297,14 @@ nav .nav-menu i {
 .content .left-title .title-effect p.snd {
     font-size: 3rem;
     animation-delay: 560ms;
+}
+
+.content .left-title .headline p a {
+    transition: 300ms;
+}
+
+.content .left-title .headline p a:hover {
+    color: var(--textHover);
 }
 
 .content .left-title .headline .headline-buttons {
@@ -388,6 +397,7 @@ nav .nav-menu i {
 
 .content .dashboard .dsb-left {
     flex-basis: 60%;
+    max-width: 60%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -404,6 +414,7 @@ nav .nav-menu i {
     background: rgba(0, 0, 0, 0.2);
     background-blend-mode: soft-light;
     background-size: cover;
+    padding: 10px;
 }
 
 .content .dashboard .dsb-left .new-banner .title {
@@ -412,17 +423,21 @@ nav .nav-menu i {
 }
 
 .content .dashboard .dsb-left .new-banner .description {
-    background: rgba(23, 29, 41, 0.7);
+    background: rgba(23, 29, 41, 0.8);
     display: flex;
     gap: 20px;
     flex-direction: row;
     justify-content: space-between;
+    text-transform: lowercase;
+    padding: 10px;
 }
 
 .content .dashboard .dsb-left .new-banner .description p {
     padding: 10px;
     border-radius: 5px;
     width: 100%;
+    max-height: 100px;
+    overflow: auto;
 }
 
 .content .dashboard .dsb-left .course {
@@ -443,8 +458,7 @@ nav .nav-menu i {
     color: rgb(171 171 171);
 }
 
-.content .dashboard .dsb-left div,
-.content .dashboard .dsb-right div {
+.content .dashboard .case {
     padding: 10px;
     background: #273246;
     /* box-shadow: 5px 5px 27px 0px rgba(0, 0, 0, 0.31); */
@@ -452,11 +466,42 @@ nav .nav-menu i {
 }
 
 
-.content .dashboard .dsb-right div {
+.content .dashboard .dsb-right .case {
     width: 100%;
 }
 
 .content .dashboard .dsb-right {
     flex-basis: 40%;
     display: flex;
+    max-width: 40%;
+}
+
+.content .dashboard .dsb-right .planning .planning-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content .dashboard .dsb-right .planning .planning-head .arrows-planning-head {
+    display: flex;
+    gap: 10px;
+}
+
+.content .dashboard .dsb-right .planning .planning-head .arrows-planning-head {
+    display: flex;
+    gap: 10px;
+}
+
+.content .dashboard .dsb-right .planning .planning-head .arrows-planning-head i:hover {
+    cursor: pointer;
+    color: var(--textHover);
+}
+
+.content .dashboard .dsb-right .planning .planning-head .arrows-planning-head i {
+    transform: rotate(90deg);
+    transition: 300ms;
+}
+
+.content .dashboard .dsb-right .planning .planning-head .arrows-planning-head i:last-child {
+    transform: rotate(-90deg);
 }
