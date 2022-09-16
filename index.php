@@ -100,12 +100,51 @@ if (isset($_GET['action'])) {
             <div class="content">
                 <div class="dashboard">
                     <div class="dsb-left">
-                        <div class="notes">notes</div>
-                        <div class="news">news</div>
-                        <div class="documents">documents</div>
+                        <div class="notes">
+                            <h4 class="tag">Notes</h4>
+                        </div>
+                        <div class="news">
+                            <div class="title mb-1">
+                                <h4 class="tag">News</h4>
+                            </div>
+                            <?php foreach ($_SESSION['news'] as $new) : ?>
+                                <div class="new-banner" style="background-image: url(<?= $new->image ?>);">
+                                    <!-- new title-->
+                                    <p class="title"><?= $new->title ?></p>
+                                    <div class="description">
+                                        <?php if (isset($new->url)) : ?>
+                                            <!-- new video-->
+                                            <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <?php endif; ?>
+                                        <!-- new description -->
+                                        <?php if (isset($new->html)) :  ?>
+                                            <?= $new->html ?>
+                                        <?php else : ?>
+                                            <p>Aucune description.</p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="courses">
+                            <div class="title mb-1">
+                                <h4 class="tag">Courses</h4>
+                                <span class="coef">coef.</span>
+                            </div>
+                            <?php foreach ($_SESSION['grades'] as $course) : ?>
+                                <div class="course">
+                                    <!-- name of the course - professor -->
+                                    <p><?= $course->course . " - " ?><span class='teacher'><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
+                                    <!-- coef -->
+                                    <span class="coef"><?= $course->coef ?></span>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                     <div class="dsb-right">
-                        <div class="planning">planning</div>
+                        <div class="planning">
+                            <h4 class="tag">Planning</h4>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -55,6 +55,13 @@ function errorHandler($errno, $errstr, $errfile, $errline)
     header("location: ../index.php");
 }
 
+function fatalErrorHandler()
+{
+    create_flash_message(ERROR_HANDLER, 'Une erreur est survenue, veuillez réessayer plus tard.', FLASH_ERROR);
+    header("location: ../index.php");
+}
+
+
 function create_flash_message(string $name, string $message, string $type): void //creer un flash message
 {
     // supprimer le flash message s'il est défini suivant le nom

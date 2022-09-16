@@ -1,3 +1,14 @@
+/* for debug */
+pre{
+    position: absolute;
+    background: black;
+    top: 0
+}
+pre:hover{
+    opacity: 0.2;
+}
+/* =============== */
+
 * {
     margin: 0;
     padding: 0;
@@ -366,6 +377,10 @@ nav .nav-menu i {
     gap: 20px;
 }
 
+.content .dashboard h4{
+    font-size: 12px;
+}
+
 .content .dashboard .dsb-left {
     flex-basis: 60%;
     display: flex;
@@ -373,11 +388,54 @@ nav .nav-menu i {
     gap: 20px;
 }
 
+.content .dashboard .dsb-left .title{
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.content .dashboard .dsb-left .new-banner{
+    background: rgba(0,0,0,0.2);
+    background-blend-mode: soft-light;
+    background-size: cover;
+}
+
+.content .dashboard .dsb-left .new-banner .title{
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.content .dashboard .dsb-left .new-banner .description{
+    background: rgba(23, 29, 41, 0.7);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.content .dashboard .dsb-left .new-banner .description p{
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 20px;
+    width: 100%;
+}
+
+.content .dashboard .dsb-left .course{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 5px 10px 5px;
+    font-size: 14px;
+}
+
+.content .dashboard .dsb-left .coef, .content .dashboard .dsb-left .teacher{
+    color: rgb(171 171 171);
+}
 .content .dashboard .dsb-left div,
 .content .dashboard .dsb-right div {
     padding: 10px;
     background: #273246;
-    box-shadow: 5px 5px 27px 0px rgba(0, 0, 0, 0.31);
+    /* box-shadow: 5px 5px 27px 0px rgba(0, 0, 0, 0.31); */
     border-radius: 4px;
 }
 
