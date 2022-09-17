@@ -21,7 +21,7 @@ pre:hover {
 body {
     min-width: 280px;
     min-height: 100vh;
-    overflow: auto;
+    overflow: hidden;
     margin: 0 auto;
     background: linear-gradient(45deg, rgba(25, 33, 46, 1) 75%, rgba(33, 45, 64, 1) 100%);
     background-repeat: no-repeat;
@@ -454,6 +454,12 @@ nav .nav-menu i {
     width: 100%;
     max-height: 100px;
     overflow: auto;
+}
+
+.content .dashboard .dsb-left .grade {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5px 10px 5px;
 }
 
 .content .dashboard .dsb-left .course {

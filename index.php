@@ -6,7 +6,7 @@ init_php_session();
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'logout') {
         clean_php_session();
-        header('location: ./');
+        header("location: ./");
     }
 }
 
@@ -111,7 +111,36 @@ if (isset($_GET['action'])) {
                 <div class="dashboard">
                     <div class="dsb-left">
                         <div class="notes case">
-                            <h4 class="tag">Marks</h4>
+                            <div class="dashboard-head mb-2">
+                                <h4 class="tag">News</h4>
+                                <div class="dashboard-legend">
+                                    <span>Marks</span>
+                                    <span>Average</span>
+                                </div>
+                            </div>
+                            <?php foreach ($_SESSION['grades'] as $grade) : ?>
+                                <div class="grade">
+                                    <p class="course-name"><?= $grade->course ?></p>
+                                    <div>
+                                        <span class="marks">
+                                            <?php if (isset($grade->grades)) :
+                                                foreach ($grade->grades as $key => $mark) :
+                                                    if (end($grade->grades) == $mark) :
+                                                        echo $mark;
+                                                    else :
+                                                        echo $mark . ",";
+                                                    endif;
+                                                endforeach;
+                                            endif; ?>
+                                        </span>
+                                        <span class="average">
+                                            <?php if (isset($grade->average)) :
+                                                echo $grade->average;
+                                            endif; ?>
+                                        </span>
+                                    </div>
+                                </div>
+                            <?php endforeach ?>
                         </div>
                         <div class="news case">
                             <div class="dashboard-head mb-2">
@@ -122,22 +151,24 @@ if (isset($_GET['action'])) {
                                 </div>
                             </div>
                             <?php foreach ($_SESSION['news'] as $new) : ?>
-                                <div class="new-banner" style="background-image: url(<?= $new->image ?>);">
-                                    <!-- new title-->
-                                    <p class="title"><?= $new->title ?></p>
-                                    <div class="description">
-                                        <?php if (isset($new->url)) : ?>
-                                            <!-- new video-->
-                                            <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                        <?php endif; ?>
-                                        <!-- new description -->
-                                        <?php if (isset($new->html)) :  ?>
-                                            <?= $new->html ?>
-                                        <?php else : ?>
-                                            <p>Aucune description</p>
-                                        <?php endif; ?>
+                                <?php if (isset($new->ba_id)) : ?>
+                                    <div class="new-banner" style="background-image: url(<?= $new->image ?>);">
+                                        <!-- new title-->
+                                        <p class="title"><?= $new->title ?></p>
+                                        <div class="description">
+                                            <?php if (isset($new->url)) : ?>
+                                                <!-- new video-->
+                                                <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            <?php endif; ?>
+                                            <!-- new description -->
+                                            <?php if (isset($new->html)) :  ?>
+                                                <?= $new->html ?>
+                                            <?php else : ?>
+                                                <p>Aucune description</p>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
                         <div class="courses case">
