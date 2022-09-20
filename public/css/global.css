@@ -486,8 +486,14 @@ nav .nav-menu i {
 }
 
 .content .dashboard .dsb-left .coef,
-.content .dashboard .dsb-left .teacher {
+.content .dashboard .dsb-left .teacher,
+.content .dashboard .dsb-left .dashboard-legend {
     color: rgb(171 171 171);
+    font-size: 14px;
+}
+
+.content .dashboard .dsb-left .grade{
+    font-size: 14px;
 }
 
 .content .dashboard .dsb-left .exam {
