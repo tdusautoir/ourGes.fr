@@ -1,0 +1,91 @@
+@keyframes slideUpTitle {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUpMenu {
+    from {
+        opacity: 0;
+        transform: translateY(20%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDownMenu {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(20%);
+    }
+}
+
+@keyframes slideLeft {
+    from {
+        opacity: 0;
+        transform: translateX(20vw);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5vw);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 1;
+        transform: translateY(0vw);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-5vw);
+    }
+}
+
+@keyframes angleRotate {
+    from {
+        transform: translateX(-12px) rotate(-90deg);
+    }
+
+    to {
+        transform: translateX(-12px) rotate(0);
+    }
+}
+
+@keyframes angleRotateClose {
+    from {
+        transform: translateX(-12px) rotate(0);
+    }
+
+    to {
+        transform: translateX(-12px) rotate(-90deg);
+    }
+}
+
+/* devloped by achille david and thibaut dusautoir */
