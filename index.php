@@ -19,7 +19,7 @@ if (isset($_GET['action'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OurGes</title>
+    <title>ourGes - myGes, but better</title>
     <link rel="stylesheet" href="./public/css/reset.css">
     <link rel="stylesheet" href="./public/css/animations.css">
     <link rel="stylesheet" href="./public/css/var.css">
@@ -96,8 +96,9 @@ if (isset($_GET['action'])) {
                                 <p>login</p>
                             </button>
                             </a>
-                            <a href="https://myges.fr/#/" target="blank">
-                                <p>myges</p>
+                            <a href="https://github.com/tdusautoir/ourGes" target="blank">
+                                <img src="./img/github.png" alt="">
+                                <p>see on github</p>
                             </a>
                         </div>
                     </div>
@@ -172,9 +173,9 @@ if (isset($_GET['action'])) {
                             <?php endforeach; ?>
                         </div>
                         <div class="courses case">
-                            <div class="title mb-1">
+                            <div class="title mb-2">
                                 <h4 class="tag">classes</h4>
-                                <span class="coef">coef.</span>
+                                <span class="coef">coef</span>
                             </div>
                             <div class="course-list">
                                 <?php foreach ($_SESSION['grades'] as $course) : ?>

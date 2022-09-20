@@ -21,7 +21,7 @@ pre:hover {
 body {
     min-width: 280px;
     min-height: 100vh;
-    overflow: hidden;
+    overflow: auto;
     margin: 0 auto;
     background: linear-gradient(45deg, rgba(25, 33, 46, 1) 75%, rgba(33, 45, 64, 1) 100%);
     background-repeat: no-repeat;
@@ -52,6 +52,7 @@ body {
 
 .container {
     margin: 0 20px;
+    margin-bottom: 50px;
 }
 
 .container .login-form {
@@ -342,8 +343,17 @@ nav .nav-menu i {
 }
 
 .content .left-title .headline .headline-buttons a:last-child {
-    background: transparent;
-    outline: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    background: #2d2d2d;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.content .left-title .headline .headline-buttons a:last-child img {
+    height: 15px;
+    aspect-ratio: 1;
 }
 
 .content .right-img {
@@ -360,7 +370,7 @@ nav .nav-menu i {
 .modal {
     width: auto;
     height: auto;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
     padding: 8px;
@@ -478,6 +488,16 @@ nav .nav-menu i {
 .content .dashboard .dsb-left .coef,
 .content .dashboard .dsb-left .teacher {
     color: rgb(171 171 171);
+}
+
+.content .dashboard .dsb-left .exam {
+    color: #c2bcfa;
+    font-weight: 600;
+}
+
+.notes-r {
+    display: flex;
+    flex-direction: column;
 }
 
 .content .dashboard .case {

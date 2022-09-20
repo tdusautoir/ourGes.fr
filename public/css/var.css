@@ -24,6 +24,10 @@
     content: "\f058";
 }
 
+.fa-github::before {
+    content: "\f09b";
+}
+
 /*icones*/
 .fa,
 .fas,
