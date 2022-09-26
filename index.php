@@ -10,6 +10,8 @@ if (isset($_GET['action'])) {
     }
 }
 
+$pageNews = 0;
+
 ?>
 
 <!DOCTYPE html>
@@ -119,41 +121,44 @@ if (isset($_GET['action'])) {
                                     <span>Average</span>
                                 </div>
                             </div>
-                            <?php foreach ($_SESSION['grades'] as $grade) : ?>
-                                <div class="grade">
-                                    <p class="course-name"><?= $grade->course ?></p>
-                                    <div>
-                                        <span class="marks">
-                                            <?php if (isset($grade->grades)) :
-                                                foreach ($grade->grades as $key => $mark) :
-                                                    if (end($grade->grades) == $mark) :
-                                                        echo $mark;
-                                                    else :
-                                                        echo $mark . ",";
-                                                    endif;
-                                                endforeach;
-                                            endif; ?>
-                                        </span>
-                                        <span class="average">
-                                            <?php if (isset($grade->average)) :
-                                                echo $grade->average;
-                                            endif; ?>
-                                        </span>
+                            <div class="course-list">
+                                <?php foreach ($_SESSION['grades'] as $grade) : ?>
+                                    <div class="grade">
+                                        <p class="course-name"><?= $grade->course ?></p>
+                                        <div>
+                                            <span class="marks">
+                                                <?php if (isset($grade->grades)) :
+                                                    foreach ($grade->grades as $key => $mark) :
+                                                        if (end($grade->grades) == $mark) :
+                                                            echo $mark;
+                                                        else :
+                                                            echo $mark . ",";
+                                                        endif;
+                                                    endforeach;
+                                                endif; ?>
+                                            </span>
+                                            <span class="average">
+                                                <?php if (isset($grade->average)) :
+                                                    echo $grade->average;
+                                                endif; ?>
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                            <?php endforeach ?>
+                                <?php endforeach ?>
+                            </div>
                         </div>
                         <div class="news case">
                             <div class="dashboard-head mb-2">
                                 <h4 class="tag">News</h4>
                                 <div class="arrows-dashboard-head">
-                                    <i class="fa fa-angle-down"></i>
-                                    <i class="fa fa-angle-down"></i>
+                                    <i onclick="navigateToPrecedent()" class="fa fa-angle-down"></i>
+                                    <i onclick="navigateToFollowing()" class="fa fa-angle-down"></i>
                                 </div>
                             </div>
-                            <?php foreach ($_SESSION['news'] as $new) : ?>
+                            <?php foreach ($_SESSION['news'] as $new) :
+                                $pageNews++; ?>
                                 <?php if (isset($new->ba_id)) : ?>
-                                    <div class="new-banner" style="background-image: url(<?= $new->image ?>);">
+                                    <div class="new-banner" id=new-<?= $pageNews ?> style="background-image: url(<?= $new->image ?>);">
                                         <!-- new title-->
                                         <p class="title"><?= $new->title ?></p>
                                         <div class="description">
@@ -164,8 +169,6 @@ if (isset($_GET['action'])) {
                                             <!-- new description -->
                                             <?php if (isset($new->html)) :  ?>
                                                 <?= $new->html ?>
-                                            <?php else : ?>
-                                                <p>Aucune description</p>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -206,6 +209,7 @@ if (isset($_GET['action'])) {
     </div>
     <?php require './components/flash_message.php'; ?>
 </body>
+<script src="./public/js/navigate.js"></script>
 
 </html>
 

@@ -40,4 +40,4 @@ function showFlashMessage(type) {
   }
 }
 
-/* devloped by achille david and thibaut dusautoir */
+/* developed by achille david and thibaut dusautoir */

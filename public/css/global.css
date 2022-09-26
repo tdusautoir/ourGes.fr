@@ -437,9 +437,11 @@ nav .nav-menu i {
 }
 
 .content .dashboard .dsb-left .new-banner {
+    display: none;
     background: rgba(0, 0, 0, 0.2);
     background-blend-mode: soft-light;
     background-size: cover;
+    border-radius: 5px;
     padding: 10px;
 }
 
@@ -450,10 +452,6 @@ nav .nav-menu i {
 
 .content .dashboard .dsb-left .new-banner .description {
     background: rgba(23, 29, 41, 0.8);
-    display: flex;
-    gap: 20px;
-    flex-direction: row;
-    justify-content: space-between;
     text-transform: lowercase;
     padding: 10px;
 }
@@ -461,7 +459,6 @@ nav .nav-menu i {
 .content .dashboard .dsb-left .new-banner .description p {
     padding: 10px;
     border-radius: 5px;
-    width: 100%;
     max-height: 100px;
     overflow: auto;
 }
@@ -480,8 +477,9 @@ nav .nav-menu i {
     font-size: 14px;
 }
 
-.content .dashboard .dsb-left .course-list {
-    max-height: 150px;
+.content .dashboard .dsb-left .course-list,
+.content .dashboard .dsb-left .grade-list{
+    max-height: 220px;
     overflow: auto;
 }
 
