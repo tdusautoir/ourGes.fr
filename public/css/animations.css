@@ -70,21 +70,21 @@
 
 @keyframes angleRotate {
     from {
-        transform: translateX(-12px) rotate(-90deg);
+        transform: rotate(-90deg);
     }
 
     to {
-        transform: translateX(-12px) rotate(0);
+        transform: rotate(0);
     }
 }
 
 @keyframes angleRotateClose {
     from {
-        transform: translateX(-12px) rotate(0);
+        transform: rotate(0);
     }
 
     to {
-        transform: translateX(-12px) rotate(-90deg);
+        transform: rotate(-90deg);
     }
 }
 

@@ -1,7 +1,12 @@
 :root {
     --submenu: #161d29;
-    --text: white;
-    --textHover: rgb(218, 218, 218);
+    --background: rgba(33, 45, 64, 1);
+    --white: white;
+    --grey: rgb(185, 185, 185);
+    --tag-bg: #3d406d;
+    --tag-cl: #c2bcfa;
+
+    --border-radius: 4px;
 }
 
 .fa-bars::before {
@@ -26,6 +31,14 @@
 
 .fa-github::before {
     content: "\f09b";
+}
+
+.fa-eye-slash::before {
+    content: "\f070";
+}
+
+.fa-eye::before {
+    content: "\f06e";
 }
 
 /*icones*/
