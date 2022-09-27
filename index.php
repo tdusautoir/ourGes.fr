@@ -109,7 +109,7 @@ $pageNews = 0;
                     <div class="dashboard__col flex flex-col">
 
                         <div class="dashboard__card pd-1">
-                            <div class="dashboard__card__head flex flex-al mb-2">
+                            <div class="dashboard__card__head flex flex-al mb-1">
                                 <h4 class="tag">Marks</h4>
                                 <div class="dashboard__card__legend dashboard__card__tab flex gap-1">
                                     <span>Marks</span>
@@ -124,7 +124,7 @@ $pageNews = 0;
                                             <p class="course-list__marks">
                                                 <?php if (isset($grade->grades)) :
                                                     foreach ($grade->grades as $key => $mark) :
-                                                        if (end($grade->grades) == $mark) :
+                                                        if (end($gradel->grades) == $mark) :
                                                             echo $mark;
                                                         else :
                                                             echo $mark . ",";
@@ -204,6 +204,40 @@ $pageNews = 0;
 
                     </div>
                 </div>
+            </div>
+
+            <div class="message flex flex-col" id="message">
+                <div class="message__head flex flex-al pd-1">
+                    <p>#<?= $_SESSION['class']->promotion ?> - Chat général</p>
+                    <i class="fa fa-angle-down" id="fa-angle-down-message" onclick="showMessage()"></i>
+                </div>
+                <div class="message__content flex flex-col pd-1">
+                    <div class="chats-container">
+
+                        <!-- CHAT BY OTHER -->
+                        <div class="chat flex gap-1">
+                            <div class="chat__usr">
+                                <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
+                            </div>
+                            <div class="chat__content flex flex-col">
+                                <div class="chat__content__name flex flex-al">
+                                    <p><?= $_SESSION['profile']->firstname ?></p>
+                                    <p>13:51</p>
+                                </div>
+                                <div class="chat__content__text pd-1">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui magnam nesciunt repudiandae, obcaecati magni tempora natus voluptatum necessitatibus quas quasi, laborum, omnis voluptatem iure! Harum, unde. Saepe corrupti dicta, veritatis nemo impedit earum esse illo omnis tempora praesentium commodi? Iure animi labore, in distinctio facilis delectus expedita repellat. Beatae, ipsum.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <form action="">
+                    <div class="message__write flex gap-1 flex-al">
+                        <input type="text" placeholder="Envoyer un message dans #<?= $_SESSION['class']->promotion ?>" maxlength="144">
+                        <i class="fa fa-paper-plane"></i>
+                    </div>
+                </form>
             </div>
         <?php endif; ?>
     </div>
