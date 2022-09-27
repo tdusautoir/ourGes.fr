@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
 /* for debug */
 pre {
     position: absolute;
@@ -11,11 +14,17 @@ pre:hover {
 
 /* =============== */
 
+html {
+    background-color: var(--html-bg);
+}
+
 * {
     margin: 0;
     padding: 0;
     list-style: none;
-    font-family: "Montserrat";
+    font-family: 'Montserrat';
+    font-weight: 300;
+    letter-spacing: -0.5px;
 }
 
 button {
@@ -104,6 +113,7 @@ body {
 }
 
 .tag {
+    letter-spacing: 0;
     width: fit-content;
     height: fit-content;
 
@@ -179,11 +189,12 @@ nav {
 
 .nav__logo {
     text-shadow: 6px 6px 10px rgba(17, 21, 28, 0.65);
+    font-weight: 400;
 }
 
 .nav__logo p:last-child {
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .nav__menu>* {
@@ -260,7 +271,8 @@ nav {
 }
 
 .nav__submenu__head span {
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0;
 }
 
 .nav__submenu__foot {
@@ -281,7 +293,7 @@ nav {
 
 .content {
     max-width: 1440px;
-    padding: 0 80px;
+    padding: 0 80px 80px 80px;
 }
 
 .content {
@@ -300,7 +312,7 @@ nav {
 
 .hero__title p {
     font-size: 3rem;
-    font-weight: 600;
+    font-weight: 700;
 
     animation: slideUpTitle 800ms ease var(--transition) both;
 }
@@ -311,6 +323,7 @@ nav {
 
 .hero__headline p a {
     transition: var(--transition);
+    font-weight: 300;
 }
 
 .hero__headline p a:hover {
@@ -440,6 +453,16 @@ nav {
     width: 100%;
 }
 
+.dashboard__card__head__title p {
+    color: var(--green);
+    font-weight: 700;
+}
+
+.dashboard__card__tab span {
+    color: rgb(171 171 171);
+    text-transform: lowercase;
+}
+
 .course-list__course__coef,
 .course-list__course__teacher,
 .dashbord__card__legend {
@@ -462,11 +485,6 @@ nav {
     justify-content: space-between;
     padding: 10px 5px 10px 5px;
     font-size: 0.75rem;
-}
-
-.dashboard__card__tab span {
-    min-width: 65px;
-    max-width: 65px;
 }
 
 .news__banner {
@@ -523,15 +541,16 @@ nav {
 
     border-radius: var(--border-radius) var(--border-radius) 0 0;
     background: var(--submenu);
+
+    cursor: pointer;
 }
 
 .message__head p {
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .message__head i {
     transform: rotate(180deg);
-    cursor: pointer;
 }
 
 .message__head i.active {
@@ -565,7 +584,7 @@ nav {
 }
 
 .chat__content {
-    max-width: 50%;
+    max-width: 300px;
     gap: 3px;
 }
 
@@ -591,7 +610,7 @@ nav {
 }
 
 .message__write {
-    padding: 0 20px 10px 20px;
+    padding: 0 10px 10px 10px;
 }
 
 .message__write input {

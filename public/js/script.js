@@ -26,14 +26,14 @@ function showFlashMessage(type) {
       setTimeout(function () {
         flash.className += " active";
         setTimeout(function () {
-          flash.className = "modal error";
+          flash.className = "modal error gap-1 flex flex-al";
         }, 3000);
       }, 400);
     } else if (type === "success") {
       setTimeout(function () {
         flash.className += " active";
         setTimeout(function () {
-          flash.className = "modal success";
+          flash.className = "modal success gap-1 flex flex-al";
         }, 3000);
       }, 400);
     }
@@ -56,14 +56,25 @@ function showPwd() {
 function showMessage() {
   let message = document.getElementById("message");
   let angleDown = document.getElementById("fa-angle-down-message");
+  let body = document.getElementById("body");
+  let container = document.getElementById("container")
 
   if (message.classList.contains("active")) {
     message.className = "message flex flex-col close ";
     angleDown.className = "fa fa-angle-down close";
+    body.style.overflow = "unset";
+    container.style.pointerEvents = "unset";
   } else {
     message.classList = "message flex flex-col active";
     angleDown.className = "fa fa-angle-down active";
+    body.style.overflow = "hidden";
+    container.style.pointerEvents = "none";
   }
+}
+
+function updateScroll() {
+  var element = document.getElementById("chats-container");
+  element.scrollTop = element.scrollHeight;
 }
 
 /* developed by achille david and thibaut dusautoir */

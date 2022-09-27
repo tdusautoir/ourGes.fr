@@ -1,5 +1,6 @@
 :root {
     --submenu: #161d29;
+    --html-bg: rgba(25, 33, 46, 1);
     --background: rgba(33, 45, 64, 1);
     --background-light: #273246;
     --white: white;
@@ -10,6 +11,7 @@
     --blue: #0071e3;
     --red: #db3333;
     --red-light: #eeb2b2;
+    --green: #5fb759;
 
 
     --transition: 300ms;
