@@ -1,11 +1,18 @@
 :root {
     --submenu: #161d29;
     --background: rgba(33, 45, 64, 1);
+    --background-light: #273246;
     --white: white;
     --grey: rgb(185, 185, 185);
+    --black-light: #2d2d2d;
     --tag-bg: #3d406d;
     --tag-cl: #c2bcfa;
+    --blue: #0071e3;
+    --red: #db3333;
+    --red-light: #eeb2b2;
 
+
+    --transition: 300ms;
     --border-radius: 4px;
 }
 

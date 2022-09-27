@@ -1,5 +1,5 @@
 sessionStorage.pageNews = 0; //set page news
-const news_banners = document.getElementsByClassName("new-banner"); //get news banners
+const news_banners = document.getElementsByClassName("news__banner"); //get news banners
 news_banners[0].style.display = "block";
 
 function navigateToFollowing() {

@@ -59,6 +59,14 @@ body {
     margin: 0 auto;
 }
 
+.mt-3 {
+    margin-top: 30px;
+}
+
+.mt-5 {
+    margin-top: 50px;
+}
+
 .mb-1 {
     margin-bottom: 10px;
 }
@@ -71,12 +79,24 @@ body {
     margin-bottom: 50px;
 }
 
+.mr-tab {
+    margin-right: 20px;
+}
+
+.ml-tab {
+    margin-left: 50px;
+}
+
 .pd-1 {
     padding: 10px;
 }
 
 .gap-1 {
     gap: 10px;
+}
+
+.gap-2 {
+    gap: 20px;
 }
 
 .ovf {
@@ -167,7 +187,7 @@ nav {
 }
 
 .nav__menu>* {
-    transition: 300ms;
+    transition: var(--transition);
     cursor: pointer;
 }
 
@@ -195,7 +215,7 @@ nav {
     display: flex;
     font-size: 0.5rem;
     transform: rotate(-90deg);
-    background-color: var(--submenu);
+    background-color: var(--tag-bg);
     width: 0.5rem;
     aspect-ratio: 1;
     border: 3px solid var(--background);
@@ -206,11 +226,11 @@ nav {
 }
 
 .nav__menu__usr i.active {
-    animation: angleRotate 300ms ease both;
+    animation: angleRotate var(--transition) ease both;
 }
 
 .nav__menu__usr i.close {
-    animation: angleRotateClose 300ms ease both;
+    animation: angleRotateClose var(--transition) ease both;
 }
 
 .nav__menu button {
@@ -226,7 +246,6 @@ nav {
 
 .nav__submenu {
     width: 140px;
-    padding: 10px;
     border-radius: var(--border-radius);
     height: auto;
     background: var(--submenu);
@@ -251,20 +270,18 @@ nav {
 
 .nav__submenu.active {
     display: unset;
-    animation: slideUpMenu 300ms ease both;
+    animation: slideUpMenu var(--transition) ease both;
 }
 
 .nav__submenu.close {
     display: unset;
-    animation: slideDownMenu 300ms ease both;
+    animation: slideDownMenu var(--transition) ease both;
     pointer-events: none;
 }
 
 .content {
     max-width: 1440px;
-    margin-top: 50px;
     padding: 0 80px;
-    height: inherit;
 }
 
 .content {
@@ -278,14 +295,14 @@ nav {
 }
 
 .hero__title {
-    height: fit-content;
     overflow: hidden;
 }
 
 .hero__title p {
     font-size: 3rem;
     font-weight: 600;
-    animation: slideUpTitle 800ms ease 300ms both;
+
+    animation: slideUpTitle 800ms ease var(--transition) both;
 }
 
 .hero__title p.snd {
@@ -293,7 +310,7 @@ nav {
 }
 
 .hero__headline p a {
-    transition: 300ms;
+    transition: var(--transition);
 }
 
 .hero__headline p a:hover {
@@ -306,19 +323,21 @@ nav {
 
 .hero__buttons a,
 .hero__buttons button {
-    background: rgb(123, 85, 205);
-    background: linear-gradient(145deg, rgba(123, 85, 205, 1) 0%, rgba(97, 151, 191, 1) 100%);
-    border-radius: var(--border-radius);
     padding: 4px 12px;
+
+    background: linear-gradient(145deg, rgba(123, 85, 205, 1) 0%, rgba(97, 151, 191, 1) 100%);
     outline: none;
     border: none;
-    color: var(--white);
+
     font-size: 0.93rem;
+    border-radius: var(--border-radius);
+    color: var(--white);
+
     cursor: pointer;
 }
 
 .hero__buttons a {
-    background: #2d2d2d;
+    background: var(--black-light);
     gap: 6px;
 }
 
@@ -338,30 +357,30 @@ nav {
 }
 
 .modal {
-    width: auto;
-    height: auto;
     position: fixed;
     bottom: 0;
     right: 0;
+
     padding: 8px;
     margin: 20px;
+
     border-radius: var(--border-radius);
 
     transform: translateX(20vw);
     opacity: 0;
-    transition: ease 0.4s;
+    transition: ease var(--transition);
 }
 
 .modal.active {
     transform: translateX(0);
     opacity: 1;
-    transition: ease 0.4s;
+    transition: ease var(--transition);
 }
 
 .modal.error {
-    border: 2px solid #db3333;
-    color: #db3333;
-    background: #eeb2b2;
+    border: 2px solid var(--red);
+    color: var(--red);
+    background: var(--red-light);
 }
 
 .modal.success {
@@ -379,119 +398,101 @@ nav {
     font-size: 2rem;
 }
 
-/* ------ */
-
-.content .dashboard {
+.dashboard {
     gap: 20px;
 }
 
-.content .dashboard h4 {
-    font-size: 0.7rem;
+.dashboard__card {
+    background: var(--background-light);
+    border-radius: var(--border-radius);
 }
 
-.content .dashboard .dsb-left {
+.dashboard__card__head {
+    justify-content: space-between;
+}
+
+.dashboard__head__arrows i {
+    transform: rotate(90deg);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.dashboard__head__arrows i:last-child {
+    transform: rotate(-90deg);
+}
+
+.dashboard__head__arrows i:hover {
+    color: var(--grey);
+}
+
+.dashboard__col {
     flex-basis: 60%;
     max-width: 60%;
     gap: 20px;
 }
 
-.content .dashboard .dsb-left .title {
-    padding: 0;
-    justify-content: space-between;
-}
-
-.content .dashboard .dsb-left .new-banner {
-    display: none;
-    background: rgba(0, 0, 0, 0.2);
-    background-blend-mode: soft-light;
-    background-size: cover;
-    border-radius: var(--border-radius);
-    padding: 10px;
-}
-
-.content .dashboard .dsb-left .new-banner .title {
-    font-weight: 500;
-}
-
-.content .dashboard .dsb-left .new-banner .description {
-    background: rgba(23, 29, 41, 0.8);
-    text-transform: lowercase;
-    padding: 10px;
-}
-
-.content .dashboard .dsb-left .new-banner .description p {
-    padding: 10px;
-    border-radius: var(--border-radius);
-    max-height: 100px;
-    overflow: auto;
-}
-
-.content .dashboard .dsb-left .grade {
-    justify-content: space-between;
-    padding: 10px 5px 10px 5px;
-}
-
-.content .dashboard .dsb-left .course {
-    justify-content: space-between;
-    padding: 10px 5px 10px 5px;
-    font-size: 0.75rem;
-}
-
-.content .dashboard .dsb-left .course-list,
-.content .dashboard .dsb-left .grade-list {
-    max-height: 220px;
-    overflow: auto;
-}
-
-.content .dashboard .dsb-left .coef,
-.content .dashboard .dsb-left .teacher,
-.content .dashboard .dsb-left .dashboard-legend {
-    color: rgb(171 171 171);
-    font-size: 0.75rem;
-}
-
-.content .dashboard .dsb-left .grade {
-    font-size: 0.75rem;
-}
-
-.content .dashboard .dsb-left .exam {
-    color: #c2bcfa;
-    font-weight: 600;
-}
-
-.content .dashboard .case {
-    padding: 10px;
-    background: #273246;
-    /* box-shadow: 5px 5px 27px 0px rgba(0, 0, 0, 0.31); */
-    border-radius: var(--border-radius);
-}
-
-.content .dashboard .dsb-right .case {
-    width: 100%;
-}
-
-.content .dashboard .dsb-right {
+.dashboard__row {
     flex-basis: 40%;
     max-width: 40%;
 }
 
-.content .dashboard .dashboard-head {
+.dashboard__row .dashboard__card {
+    width: 100%;
+}
+
+.course-list__course__coef,
+.course-list__course__teacher,
+.dashbord__card__legend {
+    color: rgb(171 171 171);
+}
+
+.course-list,
+.grade-list {
+    max-height: 220px;
+    overflow: auto;
+}
+
+.course-list__course {
+    justify-content: space-between;
+    padding: 10px 5px 10px 5px;
+    font-size: 0.75rem;
+}
+
+.course-list__grade {
+    justify-content: space-between;
+    padding: 10px 5px 10px 5px;
+    font-size: 0.75rem;
+}
+
+.dashboard__card__tab span {
+    min-width: 65px;
+    max-width: 65px;
+}
+
+.news__banner {
+    display: none;
+    background-blend-mode: soft-light;
+    background-size: cover;
+    border-radius: var(--border-radius);
+}
+
+.news__banner__title {
+    padding: 0;
     justify-content: space-between;
 }
 
-
-.content .dashboard .dashboard-head .arrows-dashboard-head i:hover {
-    cursor: pointer;
-    color: var(--grey);
+.news__banner__desc {
+    background: rgba(0, 0, 0, 0.7);
 }
 
-.content .dashboard .dashboard-head .arrows-dashboard-head i {
-    transform: rotate(90deg);
-    transition: 300ms;
+.news__banner__desc p {
+    padding: 2.5px;
 }
 
-.content .dashboard .dashboard-head .arrows-dashboard-head i:last-child {
-    transform: rotate(-90deg);
+.news__banner__desc p {
+    border-radius: var(--border-radius);
+    max-height: 100px;
+    overflow: auto;
 }
 
 /* devloped by achille david and thibaut dusautoir */

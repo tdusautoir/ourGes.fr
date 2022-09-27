@@ -31,7 +31,7 @@ $pageNews = 0;
 </head>
 
 <body class="m-0a ovf">
-    <div class="container mb-5">
+    <div class="container">
         <div class="login m-0a" id="login-form">
             <form class="flex flex-col flex-al" action="./controller/login.php" method="POST">
                 <div class="login__items gap-1 mb-1 flex flex-al">
@@ -58,7 +58,7 @@ $pageNews = 0;
                 <?php endif; ?>
             </div>
         </nav>
-        <div class="nav__submenu" id="dropdown-menu">
+        <div class="nav__submenu pd-1" id="dropdown-menu">
             <div class="nav__submenu__head mb-1">
                 <p>Signed in as</p>
                 <span><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></span>
@@ -69,7 +69,7 @@ $pageNews = 0;
             </div>
         </div>
         <?php if (!is_logged()) : ?>
-            <div class="content flex">
+            <div class="content mt-3 flex">
                 <div class="hero flex flex-col flex-js">
                     <span class="tag mb-2">Built by students, for students</span>
                     <div class="hero__title">
@@ -104,23 +104,24 @@ $pageNews = 0;
                 </div>
             </div>
         <?php else : ?>
-            <div class="content m-0a">
+            <div class="content m-0a mb-5">
                 <div class="dashboard flex">
-                    <div class="dsb-left flex flex-col">
-                        <div class="notes case">
-                            <div class="dashboard-head flex flex-al mb-2">
+                    <div class="dashboard__col flex flex-col">
+
+                        <div class="dashboard__card pd-1">
+                            <div class="dashboard__card__head flex flex-al mb-2">
                                 <h4 class="tag">Marks</h4>
-                                <div class="dashboard-legend">
+                                <div class="dashboard__card__legend dashboard__card__tab flex gap-1">
                                     <span>Marks</span>
                                     <span>Average</span>
                                 </div>
                             </div>
                             <div class="course-list">
                                 <?php foreach ($_SESSION['grades'] as $grade) : ?>
-                                    <div class="grade flex">
-                                        <p class="course-name"><?= $grade->course ?></p>
-                                        <div>
-                                            <span class="marks">
+                                    <div class="course-list__grade flex">
+                                        <p class="course-list__name"><?= $grade->course ?></p>
+                                        <div class="dashboard__card__tab flex gap-1">
+                                            <p class="course-list__marks">
                                                 <?php if (isset($grade->grades)) :
                                                     foreach ($grade->grades as $key => $mark) :
                                                         if (end($grade->grades) == $mark) :
@@ -130,21 +131,22 @@ $pageNews = 0;
                                                         endif;
                                                     endforeach;
                                                 endif; ?>
-                                            </span>
-                                            <span class="average">
+                                            </p>
+                                            <p class="course-list__average ml-tab mr-tab">
                                                 <?php if (isset($grade->average)) :
                                                     echo $grade->average;
                                                 endif; ?>
-                                            </span>
+                                            </p>
                                         </div>
                                     </div>
                                 <?php endforeach ?>
                             </div>
                         </div>
-                        <div class="news case">
-                            <div class="dashboard-head flex mb-1">
+
+                        <div class="dashboard__card pd-1">
+                            <div class="dashboard__card__head flex flex-al mb-1">
                                 <h4 class="tag">News</h4>
-                                <div class="arrows-dashboard-head gap-1 flex">
+                                <div class="dashboard__head__arrows gap-1 flex">
                                     <i onclick="navigateToPrecedent()" class="fa fa-angle-down"></i>
                                     <i onclick="navigateToFollowing()" class="fa fa-angle-down"></i>
                                 </div>
@@ -152,10 +154,10 @@ $pageNews = 0;
                             <?php foreach ($_SESSION['news'] as $new) :
                                 $pageNews++; ?>
                                 <?php if (isset($new->ba_id)) : ?>
-                                    <div class="new-banner" id=new-<?= $pageNews ?> style="background-image: url(<?= $new->image ?>);">
+                                    <div class="news__banner pd-1" id=new-<?= $pageNews ?> style="background-image: url(<?= $new->image ?>);">
                                         <!-- new title-->
-                                        <p class="title flex mb-1"><?= $new->title ?></p>
-                                        <div class="description">
+                                        <p class="news__banner__title flex mb-1"><?= $new->title ?></p>
+                                        <div class="news__banner__desc pd-1">
                                             <?php if (isset($new->url)) : ?>
                                                 <!-- new video-->
                                                 <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -169,33 +171,37 @@ $pageNews = 0;
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
-                        <div class="courses case">
-                            <div class="title flex mb-1">
-                                <h4 class="tag">classes</h4>
-                                <span class="coef">coef</span>
+
+                        <div class="dashboard__card pd-1">
+                            <div class="dashboard__card__head flex flex-al mb-1">
+                                <h4 class="tag">Classes</h4>
+                                <span class="course-list__course__coef">coef</span>
                             </div>
                             <div class="course-list">
                                 <?php foreach ($_SESSION['grades'] as $course) : ?>
-                                    <div class="course flex">
+                                    <div class="course-list__course flex">
                                         <!-- name of the course - professor -->
-                                        <p><?= $course->course . " - " ?><span class='teacher'><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
+                                        <p><?= $course->course . " - " ?><span class='course-list__course__teacher'><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
                                         <!-- coef -->
-                                        <span class="coef"><?= $course->coef ?></span>
+                                        <span class="course-list__course__coef"><?= $course->coef ?></span>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
-                    <div class="dsb-right flex">
-                        <div class="planning case">
-                            <div class="dashboard-head flex flex-al mb-1">
+
+                    <div class="dashboard__row flex">
+
+                        <div class="dashboard__card pd-1">
+                            <div class="dashboard__card__head flex flex-al mb-1">
                                 <h4 class="tag">Planning</h4>
-                                <div class="arrows-dashboard-head gap-1 flex">
+                                <div class="dashboard__head__arrows gap-1 flex">
                                     <i class="fa fa-angle-down"></i>
                                     <i class="fa fa-angle-down"></i>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
