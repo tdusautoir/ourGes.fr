@@ -10,6 +10,8 @@ if (isset($_GET['action'])) {
     }
 }
 
+include './agenda.php';
+
 $pageNews = 0;
 
 ?>
@@ -47,11 +49,8 @@ $pageNews = 0;
                 <p>GES</p>
             </div>
             <div class="nav-menu">
-                <!-- <a>test</a>
-                <a>test</a>
-                <a>test</a> -->
-                <!-- IS LOGGED -->
                 <?php if (!is_logged()) : ?>
+                    <!-- IS LOGGED -->
                     <button onclick="showForm()">login</button>
                 <?php else : ?>
                     <!-- NOT LOGGED -->
@@ -201,6 +200,19 @@ $pageNews = 0;
                                     <i class="fa fa-angle-down"></i>
                                 </div>
                             </div>
+                            <div class="planning-content">
+                                <?php foreach (WEEKS as $key => $class) : ?>
+                                    <div class="<?= $class ?>">
+                                        <?php foreach (DAYS as $key => $jour) : ?>
+                                            <div <?php if ($key + 1 === (int)date('N')) : ?> class="day active" <?php else : ?> class="day" <?php endif ?>>
+                                                <p>
+                                                    <?= $jour ?>
+                                                </p>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -209,7 +221,8 @@ $pageNews = 0;
     </div>
     <?php require './components/flash_message.php'; ?>
 </body>
-<script src="./public/js/navigate.js"></script>
+<script src=" ./public/js/navigate.js">
+</script>
 
 </html>
 

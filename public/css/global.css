@@ -463,6 +463,12 @@ nav .nav-menu i {
     overflow: auto;
 }
 
+.content .dashboard .dsb-right .planning .planning-content .week{
+    display: flex;    
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
 .content .dashboard .dsb-left .grade {
     display: flex;
     justify-content: space-between;
