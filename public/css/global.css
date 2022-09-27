@@ -495,4 +495,127 @@ nav {
     overflow: auto;
 }
 
+.message {
+    position: fixed;
+    bottom: 0;
+    right: 30px;
+
+    width: 400px;
+    height: 550px;
+    transform: translateY(520px);
+
+    background: var(--background);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.message.active {
+    animation: slideInMessage var(--transition) ease both;
+}
+
+.message.close {
+    animation: slideDownMessage var(--transition) ease both;
+}
+
+.message__head {
+    height: 10px;
+
+    justify-content: space-between;
+
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    background: var(--submenu);
+}
+
+.message__head p {
+    font-weight: 600;
+}
+
+.message__head i {
+    transform: rotate(180deg);
+    cursor: pointer;
+}
+
+.message__head i.active {
+    animation: arrowMessageUp var(--transition) ease both;
+}
+
+.message__head i.close {
+    animation: arrowMessageDown var(--transition) ease both;
+}
+
+.message__content {
+    min-height: 460px;
+    max-height: 460px;
+    justify-content: flex-end;
+}
+
+.chats-container {
+    overflow: auto;
+}
+
+.chat__usr {
+    width: 30px;
+    height: 30px;
+}
+
+.chat__usr img {
+    max-width: 30px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 100vmax;
+}
+
+.chat__content {
+    max-width: 50%;
+    gap: 3px;
+}
+
+.chat__content__name {
+    overflow: hidden;
+    font-size: 0.8rem;
+    color: var(--grey);
+    justify-content: space-between;
+}
+
+.chat__content__text {
+    width: fit-content;
+    height: fit-content;
+    border-radius: var(--border-radius);
+
+    background: var(--tag-bg);
+    color: var(--tag-cl);
+}
+
+.chat__content__text p {
+    font-size: 0.75rem;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.message__write {
+    padding: 0 20px 10px 20px;
+}
+
+.message__write input {
+    width: 100%;
+    padding: 5px;
+
+    color: var(--white);
+    background: var(--submenu);
+
+    outline: 1px #3d406d solid;
+    border: none;
+    border-radius: var(--border-radius);
+}
+
+.message__write i {
+    font-size: 0.75rem;
+    color: var(--tag-cl);
+
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.message__write i:hover {
+    filter: brightness(0.7);
+}
+
 /* devloped by achille david and thibaut dusautoir */

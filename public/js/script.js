@@ -53,4 +53,17 @@ function showPwd() {
   }
 }
 
+function showMessage() {
+  let message = document.getElementById("message");
+  let angleDown = document.getElementById("fa-angle-down-message");
+
+  if (message.classList.contains("active")) {
+    message.className = "message flex flex-col close ";
+    angleDown.className = "fa fa-angle-down close";
+  } else {
+    message.classList = "message flex flex-col active";
+    angleDown.className = "fa fa-angle-down active";
+  }
+}
+
 /* developed by achille david and thibaut dusautoir */
