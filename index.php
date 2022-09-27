@@ -32,100 +32,99 @@ $pageNews = 0;
     <script src="./public/js/script.js"></script>
 </head>
 
-<body>
+<body class="m-0a ovf">
     <div class="container">
-        <div class="login-form" id="login-form">
-            <form action="./controller/login.php" method="POST">
-                <div class="login-input">
+        <div class="login m-0a" id="login-form">
+            <form class="flex flex-col flex-al" action="./controller/login.php" method="POST">
+                <div class="login__items gap-1 mb-1 flex flex-al">
                     <input name="username" type="text" placeholder="username" autocomplete="off" maxlength="20">
-                    <input name="password" type="password" placeholder="password" autocomplete="off" maxlength="30">
+                    <input id="password" name="password" type="password" placeholder="password" autocomplete="off" maxlength="30">
+                    <i onclick="showPwd()" class="fa fa-eye-slash" id="eye"></i>
                 </div>
                 <button type="submit" class="tag">connect</button>
             </form>
         </div>
-        <nav>
-            <div class="nav-logo">
+        <nav class="flex flex-al">
+            <div class="nav__logo flex flex-js pd-1">
                 <p>our</p>
                 <p>GES</p>
             </div>
-            <div class="nav-menu">
+            <div class="nav__menu flex flex-al">
                 <?php if (!is_logged()) : ?>
                     <!-- IS LOGGED -->
                     <button onclick="showForm()">login</button>
                 <?php else : ?>
-                    <!-- NOT LOGGED -->
-                    <div class="usr-img">
+                    <div class="nav__menu__usr flex">
                         <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="profile" onclick="showSubmenu()">
                         <i class="fa fa-angle-down" id="fa-angle-down"></i>
                     </div>
                 <?php endif; ?>
-                <i class="fa fa-bars"></i>
             </div>
         </nav>
-        <div class="dropdown-menu" id="dropdown-menu">
-            <div class="dropdown-menu-1 mb-2">
+        <div class="nav__submenu pd-1" id="dropdown-menu">
+            <div class="nav__submenu__head mb-1">
                 <p>Signed in as</p>
                 <span><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></span>
             </div>
-            <div class="dropdown-menu-2">
+            <div class="nav__submenu__foot flex">
                 <p class="tag"><?= $_SESSION['class']->promotion ?></p>
                 <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
             </div>
         </div>
         <?php if (!is_logged()) : ?>
-            <div class="content flex">
-                <div class="left-title">
-                    <span class="tag mb-1">Built by students, for students</span>
-                    <div class="title-effect">
+            <div class="content mt-3 flex">
+                <div class="hero flex flex-col flex-js">
+                    <span class="tag mb-2">Built by students, for students</span>
+                    <div class="hero__title">
                         <p>myGes,</p>
                     </div>
-                    <div class="title-effect mb-1">
+                    <div class="hero__title mb-2">
                         <p class="snd">but better.</p>
                     </div>
-                    <div class="headline">
+                    <div class="hero__headline">
                         <p>
                             ourGes is an extension to myGes
                         </p>
-                        <p class="mb-2">
+                        <p class="mb-1">
                             you can easily find your school information using a simple and easy-to-use interface
                         </p>
-                        <p class="mb-1">
+                        <p class="mb-2">
                             developed by <a href="https://github.com/achilledavid" target="blank">achille</a> and <a href="https://github.com/tdusautoir" target="blank">thibaut</a>
                         </p>
-                        <div class="headline-buttons">
+                        <div class="hero__buttons flex">
                             <button onclick="showForm()">
                                 <p>login</p>
                             </button>
-                            </a>
-                            <a href="https://github.com/tdusautoir/ourGes" target="blank">
+                            <a class="flex flex-js flex-al" href="https://github.com/tdusautoir/ourGes" target="blank">
                                 <img src="./img/github.png" alt="">
                                 <p>see on github</p>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="right-img">
+                <div class="img flex">
                     <img src="./public/img/right-img.png" alt="" draggable="false">
                 </div>
             </div>
         <?php else : ?>
-            <div class="content">
-                <div class="dashboard">
-                    <div class="dsb-left">
-                        <div class="notes case">
-                            <div class="dashboard-head mb-2">
-                                <h4 class="tag">News</h4>
-                                <div class="dashboard-legend">
+            <div class="content m-0a mb-5">
+                <div class="dashboard flex">
+                    <div class="dashboard__col flex flex-col">
+
+                        <div class="dashboard__card pd-1">
+                            <div class="dashboard__card__head flex flex-al mb-2">
+                                <h4 class="tag">Marks</h4>
+                                <div class="dashboard__card__legend dashboard__card__tab flex gap-1">
                                     <span>Marks</span>
                                     <span>Average</span>
                                 </div>
                             </div>
                             <div class="course-list">
                                 <?php foreach ($_SESSION['grades'] as $grade) : ?>
-                                    <div class="grade">
-                                        <p class="course-name"><?= $grade->course ?></p>
-                                        <div>
-                                            <span class="marks">
+                                    <div class="course-list__grade flex">
+                                        <p class="course-list__name"><?= $grade->course ?></p>
+                                        <div class="dashboard__card__tab flex gap-1">
+                                            <p class="course-list__marks">
                                                 <?php if (isset($grade->grades)) :
                                                     foreach ($grade->grades as $key => $mark) :
                                                         if (end($grade->grades) == $mark) :
@@ -135,21 +134,22 @@ $pageNews = 0;
                                                         endif;
                                                     endforeach;
                                                 endif; ?>
-                                            </span>
-                                            <span class="average">
+                                            </p>
+                                            <p class="course-list__average ml-tab mr-tab">
                                                 <?php if (isset($grade->average)) :
                                                     echo $grade->average;
                                                 endif; ?>
-                                            </span>
+                                            </p>
                                         </div>
                                     </div>
                                 <?php endforeach ?>
                             </div>
                         </div>
-                        <div class="news case">
-                            <div class="dashboard-head mb-2">
+
+                        <div class="dashboard__card pd-1">
+                            <div class="dashboard__card__head flex flex-al mb-1">
                                 <h4 class="tag">News</h4>
-                                <div class="arrows-dashboard-head">
+                                <div class="dashboard__head__arrows gap-1 flex">
                                     <i onclick="navigateToPrecedent()" class="fa fa-angle-down"></i>
                                     <i onclick="navigateToFollowing()" class="fa fa-angle-down"></i>
                                 </div>
@@ -157,10 +157,10 @@ $pageNews = 0;
                             <?php foreach ($_SESSION['news'] as $new) :
                                 $pageNews++; ?>
                                 <?php if (isset($new->ba_id)) : ?>
-                                    <div class="new-banner" id=new-<?= $pageNews ?> style="background-image: url(<?= $new->image ?>);">
+                                    <div class="news__banner pd-1" id=new-<?= $pageNews ?> style="background-image: url(<?= $new->image ?>);">
                                         <!-- new title-->
-                                        <p class="title"><?= $new->title ?></p>
-                                        <div class="description">
+                                        <p class="news__banner__title flex mb-1"><?= $new->title ?></p>
+                                        <div class="news__banner__desc pd-1">
                                             <?php if (isset($new->url)) : ?>
                                                 <!-- new video-->
                                                 <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -174,28 +174,31 @@ $pageNews = 0;
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
-                        <div class="courses case">
-                            <div class="title mb-2">
-                                <h4 class="tag">classes</h4>
-                                <span class="coef">coef</span>
+
+                        <div class="dashboard__card pd-1">
+                            <div class="dashboard__card__head flex flex-al mb-1">
+                                <h4 class="tag">Classes</h4>
+                                <span class="course-list__course__coef">coef</span>
                             </div>
                             <div class="course-list">
                                 <?php foreach ($_SESSION['grades'] as $course) : ?>
-                                    <div class="course">
+                                    <div class="course-list__course flex">
                                         <!-- name of the course - professor -->
-                                        <p><?= $course->course . " - " ?><span class='teacher'><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
+                                        <p><?= $course->course . " - " ?><span class='course-list__course__teacher'><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
                                         <!-- coef -->
-                                        <span class="coef"><?= $course->coef ?></span>
+                                        <span class="course-list__course__coef"><?= $course->coef ?></span>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
-                    <div class="dsb-right">
-                        <div class="planning case">
-                            <div class="dashboard-head mb-2">
+
+                    <div class="dashboard__row flex">
+
+                        <div class="dashboard__card pd-1">
+                            <div class="dashboard__card__head flex flex-al mb-1">
                                 <h4 class="tag">Planning</h4>
-                                <div class="arrows-dashboard-head">
+                                <div class="dashboard__head__arrows gap-1 flex">
                                     <i class="fa fa-angle-down"></i>
                                     <i class="fa fa-angle-down"></i>
                                 </div>
@@ -214,6 +217,7 @@ $pageNews = 0;
                                 <?php endforeach; ?>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
