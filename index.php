@@ -14,7 +14,6 @@ if (isset($_GET['action'])) {
 include './agenda.php';
 
 $pageNews = 0;
-
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +23,7 @@ $pageNews = 0;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ourGes - myGes, but better</title>
+    <title>ourGes - myGes, but faster</title>
     <link rel="stylesheet" href="./public/css/reset.css">
     <link rel="stylesheet" href="./public/css/animations.css">
     <link rel="stylesheet" href="./public/css/var.css">
@@ -33,8 +32,105 @@ $pageNews = 0;
     <script src="./public/js/script.js"></script>
 </head>
 
-<body class="m-0a ovf">
-    <div class="container">
+<body class="m-0a ovf" id="body">
+
+    <?php if (is_logged()) : ?>
+        <div class="message flex flex-col" id="message">
+            <div class="message__head flex flex-al pd-1" onclick="showMessage(); updateScroll()">
+                <p>#<?= $_SESSION['class']->promotion ?> - Chat général</p>
+                <i class="fa fa-angle-down" id="fa-angle-down-message"></i>
+            </div>
+            <div class="message__content flex flex-col pd-1">
+                <div class="chats-container flex flex-col gap-2" id="chats-container">
+
+                    <div class="chat flex gap-1">
+                        <div class="chat__usr">
+                            <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
+                        </div>
+                        <div class="chat__content flex flex-col">
+                            <div class="chat__content__name flex flex-al gap-1">
+                                <p><?= $_SESSION['profile']->firstname ?></p>
+                                <p>13:51</p>
+                            </div>
+                            <div class="chat__content__text pd-1">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui magnam nesciunt repudiandae, obcaecati magni tempora natus voluptatum necessitatibus quas quasi, laborum, omnis voluptatem iure! Harum, unde. Saepe corrupti dicta, veritatis nemo impedit earum esse illo omnis tempora praesentium commodi? Iure animi labore, in distinctio facilis delectus expedita repellat. Beatae, ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat flex gap-1">
+                        <div class="chat__usr">
+                            <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
+                        </div>
+                        <div class="chat__content flex flex-col">
+                            <div class="chat__content__name flex flex-al gap-1">
+                                <p><?= $_SESSION['profile']->firstname ?></p>
+                                <p>13:51</p>
+                            </div>
+                            <div class="chat__content__text pd-1">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui magnam nesciunt repudiandae, obcaecati magni tempora natus voluptatum necessitatibus quas quasi, laborum, omnis voluptatem iure! Harum, unde. Saepe corrupti dicta, veritatis nemo impedit earum esse illo omnis tempora praesentium commodi? Iure animi labore, in distinctio facilis delectus expedita repellat. Beatae, ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat flex gap-1">
+                        <div class="chat__usr">
+                            <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
+                        </div>
+                        <div class="chat__content flex flex-col">
+                            <div class="chat__content__name flex flex-al gap-1">
+                                <p><?= $_SESSION['profile']->firstname ?></p>
+                                <p>13:51</p>
+                            </div>
+                            <div class="chat__content__text pd-1">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui magnam nesciunt repudiandae, obcaecati magni tempora natus voluptatum necessitatibus quas quasi, laborum, omnis voluptatem iure! Harum, unde. Saepe corrupti dicta, veritatis nemo impedit earum esse illo omnis tempora praesentium commodi? Iure animi labore, in distinctio facilis delectus expedita repellat. Beatae, ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat flex gap-1">
+                        <div class="chat__usr">
+                            <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
+                        </div>
+                        <div class="chat__content flex flex-col">
+                            <div class="chat__content__name flex flex-al gap-1">
+                                <p><?= $_SESSION['profile']->firstname ?></p>
+                                <p>13:51</p>
+                            </div>
+                            <div class="chat__content__text pd-1">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui magnam nesciunt repudiandae, obcaecati magni tempora natus voluptatum necessitatibus quas quasi, laborum, omnis voluptatem iure! Harum, unde. Saepe corrupti dicta, veritatis nemo impedit earum esse illo omnis tempora praesentium commodi? Iure animi labore, in distinctio facilis delectus expedita repellat. Beatae, ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat flex gap-1">
+                        <div class="chat__usr">
+                            <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
+                        </div>
+                        <div class="chat__content flex flex-col">
+                            <div class="chat__content__name flex flex-al gap-1">
+                                <p><?= $_SESSION['profile']->firstname ?></p>
+                                <p>13:51</p>
+                            </div>
+                            <div class="chat__content__text pd-1">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui magnam nesciunt repudiandae, obcaecati magni tempora natus voluptatum necessitatibus quas quasi, laborum, omnis voluptatem iure! Harum, unde. Saepe corrupti dicta, veritatis nemo impedit earum esse illo omnis tempora praesentium commodi? Iure animi labore, in distinctio facilis delectus expedita repellat. Beatae, ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <form action="">
+                <div class="message__write flex gap-1 flex-al">
+                    <input type="text" placeholder="Envoyer un message dans #<?= $_SESSION['class']->promotion ?>" maxlength="144">
+                    <i class="fa fa-paper-plane"></i>
+                </div>
+            </form>
+
+        </div>
+    <?php endif; ?>
+
+    <div class="container" id="container">
         <div class="login m-0a" id="login-form">
             <form class="flex flex-col flex-al" action="./controller/login.php" method="POST">
                 <div class="login__items gap-1 mb-1 flex flex-al">
@@ -80,7 +176,7 @@ $pageNews = 0;
                         <p>myGes,</p>
                     </div>
                     <div class="hero__title mb-2">
-                        <p class="snd">but better.</p>
+                        <p class="snd">but faster.</p>
                     </div>
                     <div class="hero__headline">
                         <p>
@@ -108,16 +204,18 @@ $pageNews = 0;
                 </div>
             </div>
         <?php else : ?>
-            <div class="content m-0a mb-5">
+            <div class="content m-0a">
                 <div class="dashboard flex">
                     <div class="dashboard__col flex flex-col">
 
                         <div class="dashboard__card pd-1">
                             <div class="dashboard__card__head flex flex-al mb-1">
-                                <h4 class="tag">Marks</h4>
+                                <div class="dashboard__card__head__title flex flex-al gap-1">
+                                    <h4 class="tag">Marks</h4>
+                                    <p class="global-average">15.35</p>
+                                </div>
                                 <div class="dashboard__card__legend dashboard__card__tab flex gap-1">
-                                    <span>Marks</span>
-                                    <span>Average</span>
+                                    <span>Av.</span>
                                 </div>
                             </div>
                             <div class="course-list">
@@ -198,7 +296,13 @@ $pageNews = 0;
 
                         <div class="dashboard__card pd-1">
                             <div class="dashboard__card__head flex flex-al mb-1">
-                                <h4 class="tag">Planning</h4>
+                                <div class="dashboard__card__head__title flex flex-al gap-1">
+                                    <h4 class="tag">Planning</h4>
+                                    <div class="date-container flex-al flex">
+                                        <p class="date">Mardi</p>
+                                        <p class="date">27/09/22</p>
+                                    </div>
+                                </div>
                                 <div class="dashboard__head__arrows gap-1 flex">
                                     <i onclick="navigateToPrecedentDay()" class="fa fa-angle-down"></i>
                                     <i onclick="navigateToFollowingDay()" class="fa fa-angle-down"></i>
@@ -227,43 +331,8 @@ $pageNews = 0;
                                 <?php endforeach; ?>
                             </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
-
-            <div class="message flex flex-col" id="message">
-                <div class="message__head flex flex-al pd-1">
-                    <p>#<?= $_SESSION['class']->promotion ?> - Chat général</p>
-                    <i class="fa fa-angle-down" id="fa-angle-down-message" onclick="showMessage()"></i>
-                </div>
-                <div class="message__content flex flex-col pd-1">
-                    <div class="chats-container">
-
-                        <!-- CHAT BY OTHER -->
-                        <div class="chat flex gap-1">
-                            <div class="chat__usr">
-                                <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
-                            </div>
-                            <div class="chat__content flex flex-col">
-                                <div class="chat__content__name flex flex-al">
-                                    <p><?= $_SESSION['profile']->firstname ?></p>
-                                    <p>13:51</p>
-                                </div>
-                                <div class="chat__content__text pd-1">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui magnam nesciunt repudiandae, obcaecati magni tempora natus voluptatum necessitatibus quas quasi, laborum, omnis voluptatem iure! Harum, unde. Saepe corrupti dicta, veritatis nemo impedit earum esse illo omnis tempora praesentium commodi? Iure animi labore, in distinctio facilis delectus expedita repellat. Beatae, ipsum.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <form action="">
-                    <div class="message__write flex gap-1 flex-al">
-                        <input type="text" placeholder="Envoyer un message dans #<?= $_SESSION['class']->promotion ?>" maxlength="144">
-                        <i class="fa fa-paper-plane"></i>
-                    </div>
-                </form>
             </div>
         <?php endif; ?>
     </div>
