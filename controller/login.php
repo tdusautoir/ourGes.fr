@@ -22,15 +22,19 @@ try {
 $me = new MyGes\Me($client);
 
 if (isset($me)) {
+
+    //get actual year
+    $currentYear = date('Y');
+
     try {
         //get profile
         $profile = $me->getProfile();
 
         //get class
-        $class = $me->getClasses(2022);
+        $class = $me->getClasses($currentYear);
 
         //get grades 
-        $grades = $me->getGrades(2022);
+        $grades = $me->getGrades($currentYear);
 
         //get Agenda
         $Today = date("d/m/Y", strtotime("today"));

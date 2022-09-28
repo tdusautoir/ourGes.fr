@@ -459,8 +459,14 @@ nav {
 }
 
 .dashboard__card__head__title .date-container {
+    display: none;
     font-size: 0.75rem;
     gap: 5px;
+}
+
+
+.dashboard__card__head__title .date-container.current {
+    display: flex;
 }
 
 .dashboard__card__tab span {
@@ -497,6 +503,10 @@ nav {
     background-blend-mode: soft-light;
     background-size: cover;
     border-radius: var(--border-radius);
+}
+
+.news__banner.active{
+    display: block;
 }
 
 .news__banner__title {
@@ -648,10 +658,13 @@ nav {
     display: none;
 }
 
+.day.current{
+    display: block;
+}
+
 .class{
     border: 1px solid white;
     padding: 20px;
 }
 
-a
 /* devloped by achille david and thibaut dusautoir */

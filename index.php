@@ -13,7 +13,6 @@ if (isset($_GET['action'])) {
 
 include './agenda.php';
 
-$pageNews = 0;
 ?>
 
 <!DOCTYPE html>
@@ -253,10 +252,9 @@ $pageNews = 0;
                                     <i onclick="navigateToFollowing()" class="fa fa-angle-down"></i>
                                 </div>
                             </div>
-                            <?php foreach ($_SESSION['news'] as $new) :
-                                $pageNews++; ?>
+                            <?php foreach ($_SESSION['news'] as $new) : ?>
                                 <?php if (isset($new->ba_id)) : ?>
-                                    <div class="news__banner pd-1" id=new-<?= $pageNews ?> style="background-image: url(<?= $new->image ?>);">
+                                    <div class="news__banner pd-1" style="background-image: url(<?= $new->image ?>);">
                                         <!-- new title-->
                                         <p class="news__banner__title flex mb-1"><?= $new->title ?></p>
                                         <div class="news__banner__desc pd-1">
@@ -298,10 +296,12 @@ $pageNews = 0;
                             <div class="dashboard__card__head flex flex-al mb-1">
                                 <div class="dashboard__card__head__title flex flex-al gap-1">
                                     <h4 class="tag">Planning</h4>
-                                    <div class="date-container flex-al flex">
-                                        <p class="date">Mardi</p>
-                                        <p class="date">27/09/22</p>
-                                    </div>
+                                    <?php foreach ($DAYS as $key => $day) : ?>
+                                        <div class="date-container flex-al flex">
+                                            <p class="date"><?= date('l', $day) ?></p>
+                                            <p class="date"><?= date('d/m/y', $day) ?></p>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                                 <div class="dashboard__head__arrows gap-1 flex">
                                     <i onclick="navigateToPrecedentDay()" class="fa fa-angle-down"></i>
@@ -310,10 +310,9 @@ $pageNews = 0;
                             </div>
                             <div class="planning-content">
                                 <?php foreach ($DAYS as $key => $day) : ?>
-                                    <div <?php if ($day == date('l')) : ?> class="current day" <?php else : ?> class="day" <?php endif ?>>
-                                        <p><?= $day ?></p>
+                                    <div <?php if (date('l', $day) == date('l')) : ?> class="current day" <?php else : ?> class="day" <?php endif ?>>
                                         <?php foreach ($_SESSION['agenda'] as $class) : ?>
-                                            <?php if (date('l', $class->start_date / 1000) == $day) : //if the name of the day is equal --> same day
+                                            <?php if (date('l', $class->start_date / 1000) == date('l', $day)) : //if the name of the day (ex : 'Monday') is equal --> same day
 
                                                 //calcul the class time
                                                 $startDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][0]->start_date / 1000));
