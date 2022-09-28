@@ -1,3 +1,17 @@
+var click = 0;
+
+function easter() {
+  let easter = document.getElementById("michael");
+  click++;
+  if (click > 9) {
+    easter.className = "michael active";
+    click = 0;
+    setTimeout(() => {
+      easter.className = "michael";
+    }, 2000);
+  }
+}
+
 function showForm() {
   let formLogin = document.getElementById("login-form");
   if (formLogin.classList.contains("active")) {

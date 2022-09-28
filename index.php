@@ -22,7 +22,7 @@ include './agenda.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ourGes - myGes, but faster</title>
+    <title>ourGes - myGes, but easier</title>
     <link rel="stylesheet" href="./public/css/reset.css">
     <link rel="stylesheet" href="./public/css/animations.css">
     <link rel="stylesheet" href="./public/css/var.css">
@@ -36,7 +36,7 @@ include './agenda.php';
     <?php if (is_logged()) : ?>
         <div class="message flex flex-col" id="message">
             <div class="message__head flex flex-al pd-1" onclick="showMessage(); updateScroll()">
-                <p>#<?= $_SESSION['class']->promotion ?> - Chat général</p>
+                <p>#<?= $_SESSION['class']->promotion ?> - General Chat</p>
                 <i class="fa fa-angle-down" id="fa-angle-down-message"></i>
             </div>
             <div class="message__content flex flex-col pd-1">
@@ -121,7 +121,7 @@ include './agenda.php';
             </div>
             <form action="">
                 <div class="message__write flex gap-1 flex-al">
-                    <input type="text" placeholder="Envoyer un message dans #<?= $_SESSION['class']->promotion ?>" maxlength="144">
+                    <input type="text" placeholder="Send a message in #<?= $_SESSION['class']->promotion ?>" maxlength="144">
                     <i class="fa fa-paper-plane"></i>
                 </div>
             </form>
@@ -143,7 +143,7 @@ include './agenda.php';
         <nav class="flex flex-al">
             <div class="nav__logo flex flex-js pd-1">
                 <p>our</p>
-                <p>GES</p>
+                <p onclick="easter()">GES</p>
             </div>
             <div class="nav__menu flex flex-al">
                 <?php if (!is_logged()) : ?>
@@ -175,7 +175,7 @@ include './agenda.php';
                         <p>myGes,</p>
                     </div>
                     <div class="hero__title mb-2">
-                        <p class="snd">but faster.</p>
+                        <p class="snd">but easier.</p>
                     </div>
                     <div class="hero__headline">
                         <p>
@@ -293,7 +293,7 @@ include './agenda.php';
                     <div class="dashboard__row flex">
 
                         <div class="dashboard__card pd-1">
-                            <div class="dashboard__card__head flex flex-al mb-1">
+                            <div class="dashboard__card__head flex flex-al mb-2">
                                 <div class="dashboard__card__head__title flex flex-al gap-1">
                                     <h4 class="tag">Planning</h4>
                                     <?php foreach ($DAYS as $key => $day) : ?>
@@ -308,7 +308,7 @@ include './agenda.php';
                                     <i onclick="navigateToFollowingDay()" class="fa fa-angle-down"></i>
                                 </div>
                             </div>
-                            <div class="planning-content">
+                            <div class="planning__content flex flex-col">
                                 <?php foreach ($DAYS as $key => $day) : ?>
                                     <div <?php if (date('l', $day) == date('l')) : ?> class="current day" <?php else : ?> class="day" <?php endif ?>>
                                         <?php foreach ($_SESSION['agenda'] as $class) : ?>
@@ -320,9 +320,11 @@ include './agenda.php';
                                                 $interval = date_diff($startDate, $endDate); ?>
 
                                                 <div class="class hour-<?= /* class hour */ $interval->format('%h') ?>">
-                                                    <p><?= $class->name ?></p>
-                                                    <p><?= $class->comment ?></p>
-                                                    <p><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
+                                                    <p class="class__hour mb-1"><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
+                                                    <div class="class__details ml-1">
+                                                        <p><?= $class->name ?></p>
+                                                        <p><?= $class->comment ?></p>
+                                                    </div>
                                                 </div>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
@@ -335,6 +337,7 @@ include './agenda.php';
             </div>
         <?php endif; ?>
     </div>
+    <img src="https://www.section.io/engineering-education/authors/michael-barasa/avatar.png" class="michael" id="michael" alt="">
     <?php require './components/flash_message.php'; ?>
 </body>
 <script src=" ./public/js/navigate.js">

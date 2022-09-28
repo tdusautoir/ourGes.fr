@@ -92,6 +92,10 @@ body {
     margin-right: 20px;
 }
 
+.ml-1 {
+    margin-left: 10px;
+}
+
 .ml-tab {
     margin-left: 50px;
 }
@@ -371,7 +375,7 @@ nav {
 
 .modal {
     position: fixed;
-    bottom: 0;
+    bottom: 10px;
     right: 0;
 
     padding: 8px;
@@ -505,7 +509,7 @@ nav {
     border-radius: var(--border-radius);
 }
 
-.news__banner.active{
+.news__banner.active {
     display: block;
 }
 
@@ -652,19 +656,46 @@ nav {
     filter: brightness(0.7);
 }
 
+.michael {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -32%);
+}
+
+.michael.active {
+    display: block;
+}
+
 /* developpment planning */
 
 .day {
     display: none;
 }
 
-.day.current{
+.day.current {
     display: block;
 }
 
-.class{
-    border: 1px solid white;
-    padding: 20px;
+.class {
+    font-size: 0.8rem;
+    border: 2px solid var(--tag-bg);
+    border-radius: var(--border-radius);
+    /* background: var(--tag-bg); */
+    /* color: var(--background); */
+    padding: 8px;
+}
+
+.class__hour {
+    font-size: 0.75rem;
+    color: var(--tag-cl);
+}
+
+.class__details p:first-child {
+    font-size: 1rem;
+    text-transform: capitalize;
 }
 
 /* devloped by achille david and thibaut dusautoir */
