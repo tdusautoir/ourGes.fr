@@ -8,7 +8,7 @@ function easter() {
     click = 0;
     setTimeout(() => {
       easter.className = "michael";
-    }, 2000);
+    }, 100);
   }
 }
 
@@ -60,10 +60,10 @@ function showPwd() {
 
   if (pwd.type === "password") {
     pwd.type = "text";
-    eye.className = "fa fa-eye"
+    eye.className = "fa fa-eye";
   } else {
-    pwd.type = "password"
-    eye.className = "fa fa-eye-slash"
+    pwd.type = "password";
+    eye.className = "fa fa-eye-slash";
   }
 }
 
@@ -71,7 +71,7 @@ function showMessage() {
   let message = document.getElementById("message");
   let angleDown = document.getElementById("fa-angle-down-message");
   let body = document.getElementById("body");
-  let container = document.getElementById("container")
+  let container = document.getElementById("container");
 
   if (message.classList.contains("active")) {
     message.className = "message flex flex-col close ";
