@@ -2,6 +2,7 @@
 
 require_once './functions.php';
 init_php_session();
+date_default_timezone_set('Europe/Paris');
 
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'logout') {
@@ -127,7 +128,7 @@ $pageNews = 0;
                                             <p class="course-list__marks">
                                                 <?php if (isset($grade->grades)) :
                                                     foreach ($grade->grades as $key => $mark) :
-                                                        if (end($gradel->grades) == $mark) :
+                                                        if (end($grade->grades) == $mark) :
                                                             echo $mark;
                                                         else :
                                                             echo $mark . ",";
@@ -199,19 +200,28 @@ $pageNews = 0;
                             <div class="dashboard__card__head flex flex-al mb-1">
                                 <h4 class="tag">Planning</h4>
                                 <div class="dashboard__head__arrows gap-1 flex">
-                                    <i class="fa fa-angle-down"></i>
-                                    <i class="fa fa-angle-down"></i>
+                                    <i onclick="navigateToPrecedentDay()" class="fa fa-angle-down"></i>
+                                    <i onclick="navigateToFollowingDay()" class="fa fa-angle-down"></i>
                                 </div>
                             </div>
                             <div class="planning-content">
-                                <?php foreach (WEEKS as $key => $class) : ?>
-                                    <div class="<?= $class ?>">
-                                        <?php foreach (DAYS as $key => $jour) : ?>
-                                            <div <?php if ($key + 1 === (int)date('N')) : ?> class="day active" <?php else : ?> class="day" <?php endif ?>>
-                                                <p>
-                                                    <?= $jour ?>
-                                                </p>
-                                            </div>
+                                <?php foreach ($DAYS as $key => $day) : ?>
+                                    <div <?php if ($day == date('l')) : ?> class="current day" <?php else : ?> class="day" <?php endif ?>>
+                                        <p><?= $day ?></p>
+                                        <?php foreach ($_SESSION['agenda'] as $class) : ?>
+                                            <?php if (date('l', $class->start_date / 1000) == $day) : //if the name of the day is equal --> same day
+
+                                                //calcul the class time
+                                                $startDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][0]->start_date / 1000));
+                                                $endDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][0]->end_date / 1000));
+                                                $interval = date_diff($startDate, $endDate); ?>
+
+                                                <div class="class hour-<?= /* class hour */ $interval->format('%h') ?>">
+                                                    <p><?= $class->name ?></p>
+                                                    <p><?= $class->comment ?></p>
+                                                    <p><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
+                                                </div>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     </div>
                                 <?php endforeach; ?>

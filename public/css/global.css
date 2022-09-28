@@ -618,4 +618,16 @@ nav {
     filter: brightness(0.7);
 }
 
+/* developpment planning */
+
+.day {
+    display: none;
+}
+
+.class{
+    border: 1px solid white;
+    padding: 20px;
+}
+
+a
 /* devloped by achille david and thibaut dusautoir */
