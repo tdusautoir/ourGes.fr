@@ -453,9 +453,14 @@ nav {
     width: 100%;
 }
 
-.dashboard__card__head__title p {
+.dashboard__card__head__title .global-average {
     color: var(--green);
     font-weight: 700;
+}
+
+.dashboard__card__head__title .date-container {
+    font-size: 0.75rem;
+    gap: 5px;
 }
 
 .dashboard__card__tab span {

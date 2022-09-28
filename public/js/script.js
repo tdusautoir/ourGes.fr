@@ -62,13 +62,9 @@ function showMessage() {
   if (message.classList.contains("active")) {
     message.className = "message flex flex-col close ";
     angleDown.className = "fa fa-angle-down close";
-    body.style.overflow = "unset";
-    container.style.pointerEvents = "unset";
   } else {
     message.classList = "message flex flex-col active";
     angleDown.className = "fa fa-angle-down active";
-    body.style.overflow = "hidden";
-    container.style.pointerEvents = "none";
   }
 }
 

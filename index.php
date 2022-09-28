@@ -55,6 +55,66 @@ $pageNews = 0;
                         </div>
                     </div>
 
+                    <div class="chat flex gap-1">
+                        <div class="chat__usr">
+                            <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
+                        </div>
+                        <div class="chat__content flex flex-col">
+                            <div class="chat__content__name flex flex-al gap-1">
+                                <p><?= $_SESSION['profile']->firstname ?></p>
+                                <p>13:51</p>
+                            </div>
+                            <div class="chat__content__text pd-1">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui magnam nesciunt repudiandae, obcaecati magni tempora natus voluptatum necessitatibus quas quasi, laborum, omnis voluptatem iure! Harum, unde. Saepe corrupti dicta, veritatis nemo impedit earum esse illo omnis tempora praesentium commodi? Iure animi labore, in distinctio facilis delectus expedita repellat. Beatae, ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat flex gap-1">
+                        <div class="chat__usr">
+                            <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
+                        </div>
+                        <div class="chat__content flex flex-col">
+                            <div class="chat__content__name flex flex-al gap-1">
+                                <p><?= $_SESSION['profile']->firstname ?></p>
+                                <p>13:51</p>
+                            </div>
+                            <div class="chat__content__text pd-1">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui magnam nesciunt repudiandae, obcaecati magni tempora natus voluptatum necessitatibus quas quasi, laborum, omnis voluptatem iure! Harum, unde. Saepe corrupti dicta, veritatis nemo impedit earum esse illo omnis tempora praesentium commodi? Iure animi labore, in distinctio facilis delectus expedita repellat. Beatae, ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat flex gap-1">
+                        <div class="chat__usr">
+                            <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
+                        </div>
+                        <div class="chat__content flex flex-col">
+                            <div class="chat__content__name flex flex-al gap-1">
+                                <p><?= $_SESSION['profile']->firstname ?></p>
+                                <p>13:51</p>
+                            </div>
+                            <div class="chat__content__text pd-1">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui magnam nesciunt repudiandae, obcaecati magni tempora natus voluptatum necessitatibus quas quasi, laborum, omnis voluptatem iure! Harum, unde. Saepe corrupti dicta, veritatis nemo impedit earum esse illo omnis tempora praesentium commodi? Iure animi labore, in distinctio facilis delectus expedita repellat. Beatae, ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat flex gap-1">
+                        <div class="chat__usr">
+                            <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
+                        </div>
+                        <div class="chat__content flex flex-col">
+                            <div class="chat__content__name flex flex-al gap-1">
+                                <p><?= $_SESSION['profile']->firstname ?></p>
+                                <p>13:51</p>
+                            </div>
+                            <div class="chat__content__text pd-1">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui magnam nesciunt repudiandae, obcaecati magni tempora natus voluptatum necessitatibus quas quasi, laborum, omnis voluptatem iure! Harum, unde. Saepe corrupti dicta, veritatis nemo impedit earum esse illo omnis tempora praesentium commodi? Iure animi labore, in distinctio facilis delectus expedita repellat. Beatae, ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <form action="">
@@ -148,7 +208,7 @@ $pageNews = 0;
                             <div class="dashboard__card__head flex flex-al mb-1">
                                 <div class="dashboard__card__head__title flex flex-al gap-1">
                                     <h4 class="tag">Marks</h4>
-                                    <p>15.35</p>
+                                    <p class="global-average">15.35</p>
                                 </div>
                                 <div class="dashboard__card__legend dashboard__card__tab flex gap-1">
                                     <span>Av.</span>
@@ -232,12 +292,19 @@ $pageNews = 0;
 
                         <div class="dashboard__card pd-1">
                             <div class="dashboard__card__head flex flex-al mb-1">
-                                <h4 class="tag">Planning</h4>
+                                <div class="dashboard__card__head__title flex flex-al gap-1">
+                                    <h4 class="tag">Planning</h4>
+                                    <div class="date-container flex-al flex">
+                                        <p class="date">Mardi</p>
+                                        <p class="date">27/09/22</p>
+                                    </div>
+                                </div>
                                 <div class="dashboard__head__arrows gap-1 flex">
                                     <i class="fa fa-angle-down"></i>
                                     <i class="fa fa-angle-down"></i>
                                 </div>
                             </div>
+                            <div class="planning"></div>
                         </div>
 
                     </div>
