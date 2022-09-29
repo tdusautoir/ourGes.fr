@@ -545,6 +545,8 @@ nav {
 
     background: var(--background);
     border-radius: var(--border-radius) var(--border-radius) 0 0;
+
+    z-index: 10;
 }
 
 .message.active {
@@ -567,7 +569,8 @@ nav {
     cursor: pointer;
 }
 
-.message__head p {
+.message__head p,
+.message__head span {
     font-weight: 700;
 }
 
@@ -721,6 +724,28 @@ nav {
     text-transform: capitalize;
 }
 
+@media screen and (max-width:280px) {
+    .nav__menu__usr i {
+        display: none;
+    }
+}
+
+@media screen and (max-width:320px) {
+    .message {
+        display: none;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .message {
+        width: 280px;
+    }
+
+    .message__head p span {
+        display: none;
+    }
+}
+
 @media screen and (max-width:660px) {
 
     .login {
@@ -738,15 +763,26 @@ nav {
         top: 56px;
         right: 20px;
     }
+
+    .course-list__course {
+        gap: 20px;
+    }
+
+    .date-container p:first-child {
+        display: none;
+    }
 }
 
 @media screen and (max-width:1024px) {
 
     .content {
         justify-content: center;
-        text-align: center;
         padding: 0 20px 20px 20px;
-        margin-top: 100px;
+    }
+
+    .hero {
+        text-align: center;
+        margin-top: 70px;
     }
 
     .img {
@@ -767,6 +803,16 @@ nav {
     .hero__buttons {
         margin-top: 40px;
         justify-content: center;
+    }
+
+    .dashboard {
+        flex-direction: column-reverse;
+    }
+
+    .dashboard__col,
+    .dashboard__row {
+        flex-basis: unset;
+        max-width: unset;
     }
 }
 
