@@ -89,7 +89,7 @@ body {
 }
 
 .mr-tab {
-    margin-right: 20px;
+    margin-right: -2px;
 }
 
 .ml-1 {
@@ -387,6 +387,7 @@ nav {
     transform: translateX(20vw);
     opacity: 0;
     transition: ease var(--transition);
+    z-index: 1000;
 }
 
 .modal.active {
@@ -670,14 +671,20 @@ nav {
 }
 
 .message__write i {
+    padding: 7px;
+    border: 1px solid #3d406d;
+    border-radius: var(--border-radius);
     font-size: 0.75rem;
     color: var(--tag-cl);
-
-    transition: var(--transition);
     cursor: pointer;
+    background: var(--html-bg);
 }
 
-.message__write i:hover {
+.message__write i::before {
+    transition: var(--transition);
+}
+
+.message__write i:hover::before {
     filter: brightness(0.7);
 }
 
@@ -814,6 +821,22 @@ nav {
         flex-basis: unset;
         max-width: unset;
     }
+}
+
+::-webkit-scrollbar {
+    position: absolute;
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #00000045;
+    width: 6px;
+    border-radius: 100vmax;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.278);
+    border-radius: 100vmax;
 }
 
 /* devloped by achille david and thibaut dusautoir */
