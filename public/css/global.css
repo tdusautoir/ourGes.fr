@@ -676,12 +676,14 @@ nav {
 }
 
 .day.current {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .class {
     font-size: 0.8rem;
-    border: 2px solid #2b2d4c;
+    border: 2px solid #515486;
     border-radius: var(--border-radius);
     background: #3d406d66;
     padding: 8px;

@@ -297,7 +297,7 @@ include './agenda.php';
                                 <div class="dashboard__card__head__title flex flex-al gap-1">
                                     <h4 class="tag">Planning</h4>
                                     <?php foreach ($DAYS as $key => $day) : ?>
-                                        <div class="date-container flex-al flex">
+                                        <div class="date-container flex">
                                             <p class="date"><?= date('l', $day) ?></p>
                                             <p class="date"><?= date('d/m/y', $day) ?></p>
                                         </div>
@@ -308,7 +308,7 @@ include './agenda.php';
                                     <i onclick="navigateToFollowingDay()" class="fa fa-angle-down"></i>
                                 </div>
                             </div>
-                            <div class="planning__content flex flex-col">
+                            <div class="planning__content">
                                 <?php foreach ($DAYS as $key => $day) : ?>
                                     <div <?php if (date('l', $day) == date('l')) : ?> class="current day" <?php else : ?> class="day" <?php endif ?>>
                                         <?php foreach ($_SESSION['agenda'] as $class) : ?>
