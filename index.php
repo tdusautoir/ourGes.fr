@@ -35,8 +35,8 @@ include './agenda.php';
 
     <?php if (is_logged()) : ?>
         <div class="message flex flex-col" id="message">
-            <div class="message__head flex flex-al pd-1" onclick="showMessage(); updateScroll()">
-                <p>#<?= $_SESSION['class']->promotion ?> - General Chat</p>
+            <div class="message__head flex flex-al" onclick="showMessage(); updateScroll()">
+                <p class="flex flex-al">#<?= $_SESSION['class']->promotion ?> - General Chat</p>
                 <i class="fa fa-angle-down" id="fa-angle-down-message"></i>
             </div>
             <div class="message__content flex flex-col pd-1">

@@ -11,7 +11,7 @@
 @keyframes slideUpMenu {
     from {
         opacity: 0;
-        transform: translateX(20%);
+        transform: translateX(20px);
     }
 
     to {
@@ -28,7 +28,7 @@
 
     to {
         opacity: 0;
-        transform: translateX(20%);
+        transform: translateX(20px);
     }
 }
 

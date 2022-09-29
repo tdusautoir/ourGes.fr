@@ -296,6 +296,7 @@ nav {
 }
 
 .content {
+    margin: 50px auto 0 auto;
     max-width: 1440px;
     padding: 0 80px 80px 80px;
 }
@@ -520,6 +521,7 @@ nav {
 
 .news__banner__desc {
     background: rgba(0, 0, 0, 0.7);
+    font-size: 0.75rem;
 }
 
 .news__banner__desc p {
@@ -534,11 +536,11 @@ nav {
 
 .message {
     position: fixed;
-    bottom: 0;
+    bottom: 0px;
     right: 30px;
 
     width: 400px;
-    height: 550px;
+    height: 560px;
     transform: translateY(520px);
 
     background: var(--background);
@@ -554,7 +556,8 @@ nav {
 }
 
 .message__head {
-    height: 10px;
+    /* height: 40px; */
+    padding: 10px;
 
     justify-content: space-between;
 
@@ -566,6 +569,25 @@ nav {
 
 .message__head p {
     font-weight: 700;
+}
+
+.message__head p::after {
+    content: 'new message';
+    display: inline-block;
+    letter-spacing: 0;
+    width: fit-content;
+    height: fit-content;
+
+    background: var(--tag-bg);
+    color: var(--tag-cl);
+    font-family: SF, arial, sans-serif;
+    font-size: 0.55rem;
+    font-weight: 800;
+    text-transform: uppercase;
+
+    border-radius: var(--border-radius);
+    padding: 4px 5px;
+    margin-left: 10px;
 }
 
 .message__head i {
@@ -629,7 +651,7 @@ nav {
 }
 
 .message__write {
-    padding: 0 10px 10px 10px;
+    padding: 5px 10px 10px 10px;
 }
 
 .message__write input {
@@ -697,6 +719,55 @@ nav {
 .class__details p:first-child {
     font-size: 1rem;
     text-transform: capitalize;
+}
+
+@media screen and (max-width:660px) {
+
+    .login {
+        padding: 15px;
+        border: 2px solid #515486;
+        background: #262b41;
+        border-radius: var(--border-radius);
+    }
+
+    .login__items {
+        flex-direction: column;
+    }
+
+    .login__items i {
+        top: 56px;
+        right: 20px;
+    }
+}
+
+@media screen and (max-width:1024px) {
+
+    .content {
+        justify-content: center;
+        text-align: center;
+        padding: 0 20px 20px 20px;
+        margin-top: 100px;
+    }
+
+    .img {
+        display: none;
+    }
+
+    .hero {
+        flex-basis: unset;
+        max-width: unset;
+    }
+
+    .hero .tag {
+        width: max-content;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+
+    .hero__buttons {
+        margin-top: 40px;
+        justify-content: center;
+    }
 }
 
 /* devloped by achille david and thibaut dusautoir */
