@@ -616,6 +616,18 @@ nav {
     overflow: auto;
 }
 
+.reverse {
+    flex-direction: row-reverse;
+}
+
+.reverse .chat__content {
+    align-items: end;
+}
+
+.reverse .chat__content__name {
+    flex-direction: row-reverse;
+}
+
 .chat__usr {
     width: 30px;
     height: 30px;

@@ -149,7 +149,7 @@ include './agenda.php';
                             <div class="dashboard__card__head flex flex-al mb-1">
                                 <div class="dashboard__card__head__title flex flex-al gap-1">
                                     <h4 class="tag">Marks</h4>
-                                    <p class="global-average">15.35</p>
+                                    <!-- <p class="global-average">15.35</p> -->
                                 </div>
                                 <div class="dashboard__card__legend dashboard__card__tab flex gap-1">
                                     <span>Av.</span>
