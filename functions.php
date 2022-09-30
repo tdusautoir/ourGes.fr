@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 //Constants
 const FLASH = 'FLASH_MESSAGES';
 const FORM = 'FORM_INFO';

@@ -1,15 +1,10 @@
 <?php
 
-require_once './functions.php';
-init_php_session();
+session_start();
 date_default_timezone_set('Europe/Paris');
 
-if (isset($_GET['action'])) {
-    if ($_GET['action'] == 'logout') {
-        clean_php_session();
-        header("location: ./");
-    }
-}
+require_once './functions.php';
+require_once './controller/action.php';
 
 include './agenda.php';
 
