@@ -49,6 +49,7 @@ class ComposerStaticInit48dfb76d5020841c5c6d86d2b2841a76
         'M' => 
         array (
             'MyGes\\' => 6,
+            'MyApp\\' => 6,
         ),
         'G' => 
         array (
@@ -126,6 +127,10 @@ class ComposerStaticInit48dfb76d5020841c5c6d86d2b2841a76
         'MyGes\\' => 
         array (
             0 => __DIR__ . '/..' . '/tchenu/myges/src',
+        ),
+        'MyApp\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/server',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

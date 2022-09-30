@@ -2,8 +2,9 @@
 
 require_once '../functions.php';
 require_once '../vendor/autoload.php';
+require_once '../db/config.php';
 
-// set_error_handler("errorHandler");
+set_error_handler("errorHandler");
 
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -30,8 +31,32 @@ if (isset($me)) {
         //get profile
         $profile = $me->getProfile();
 
+        dump($profile);
+
+        //check if the profile already exist in the db
+        $req = $db->prepare("SELECT * FROM chat_user WHERE chat_user.user_id = :user_id");
+        $req->bindValue(":user_id", $profile->uid);
+        $req->execute();
+
+        //insert the profile in db if not
+        if ($req->rowCount() < 1) {
+            $add_account = $db->query("INSERT INTO chat_user (user_id, user_name, user_login_status) VALUES ($profile->uid, '$profile->firstname', 'Login')");
+        }
+
         //get class
         $class = $me->getClasses($currentYear);
+
+        //check if the promotions is already in db
+        $req = $db->prepare("SELECT * FROM promotions WHERE promotions.name = :promotion_name");
+        $req->bindValue(":promotion_name", $class[0]->promotion);
+        $req->execute();
+
+        //insert the promotions in db if not
+        if ($req->rowCount() < 1) {
+            $add_promotion = $db->prepare("INSERT INTO promotions (name) VALUES (:promotion_name)");
+            $add_promotion->bindValue(":promotion_name", $class[0]->promotion);
+            $add_promotion->execute();
+        }
 
         //get grades 
         $grades = $me->getGrades($currentYear);
