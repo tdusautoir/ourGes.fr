@@ -311,19 +311,27 @@ include './agenda.php';
                             <div class="planning__content">
                                 <?php foreach ($DAYS as $key => $day) : ?>
                                     <div <?php if (date('l', $day) == date('l')) : ?> class="current day" <?php else : ?> class="day" <?php endif ?>>
-                                        <?php foreach ($_SESSION['agenda'] as $class) : ?>
+                                        <?php foreach ($_SESSION['agenda'] as $key => $class) : ?>
                                             <?php if (date('l', $class->start_date / 1000) == date('l', $day)) : //if the name of the day (ex : 'Monday') is equal --> same day
 
                                                 //calcul the class time
-                                                $startDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][0]->start_date / 1000));
-                                                $endDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][0]->end_date / 1000));
-                                                $interval = date_diff($startDate, $endDate); ?>
+                                                $startDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->start_date / 1000));
+                                                $endDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->end_date / 1000));
+                                                // $interval = date_diff($startDate, $endDate); 
+                                                // class hour --> $interval->format('%h')
+                                            ?>
 
-                                                <div class="class hour-<?= /* class hour */ $interval->format('%h') ?>">
+                                                <div class="class">
                                                     <p class="class__hour mb-1"><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
                                                     <div class="class__details ml-1">
                                                         <p><?= $class->name ?></p>
                                                         <p><?= $class->comment ?></p>
+                                                        <?php if (isset($class->rooms[0])) : ?>
+                                                            <p><?= $class->rooms[0]->name ?></p>
+                                                        <?php endif; ?>
+                                                        <?php if (isset($class->teacher)) : ?>
+                                                            <p><?= $class->teacher ?></p>
+                                                        <?php endif; ?>
                                                     </div>
                                                 </div>
                                             <?php endif; ?>
