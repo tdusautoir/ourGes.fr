@@ -89,7 +89,7 @@ body {
 }
 
 .mr-tab {
-    margin-right: 20px;
+    margin-right: -2px;
 }
 
 .ml-1 {
@@ -296,6 +296,7 @@ nav {
 }
 
 .content {
+    margin: 50px auto 0 auto;
     max-width: 1440px;
     padding: 0 80px 80px 80px;
 }
@@ -386,6 +387,7 @@ nav {
     transform: translateX(20vw);
     opacity: 0;
     transition: ease var(--transition);
+    z-index: 1000;
 }
 
 .modal.active {
@@ -520,6 +522,7 @@ nav {
 
 .news__banner__desc {
     background: rgba(0, 0, 0, 0.7);
+    font-size: 0.75rem;
 }
 
 .news__banner__desc p {
@@ -534,15 +537,17 @@ nav {
 
 .message {
     position: fixed;
-    bottom: 0;
+    bottom: 0px;
     right: 30px;
 
     width: 400px;
-    height: 550px;
+    height: 560px;
     transform: translateY(520px);
 
     background: var(--background);
     border-radius: var(--border-radius) var(--border-radius) 0 0;
+
+    z-index: 10;
 }
 
 .message.active {
@@ -554,7 +559,8 @@ nav {
 }
 
 .message__head {
-    height: 10px;
+    /* height: 40px; */
+    padding: 10px;
 
     justify-content: space-between;
 
@@ -564,8 +570,28 @@ nav {
     cursor: pointer;
 }
 
-.message__head p {
+.message__head p,
+.message__head span {
     font-weight: 700;
+}
+
+.message__head p::after {
+    content: 'new message';
+    display: inline-block;
+    letter-spacing: 0;
+    width: fit-content;
+    height: fit-content;
+
+    background: var(--tag-bg);
+    color: var(--tag-cl);
+    font-family: SF, arial, sans-serif;
+    font-size: 0.55rem;
+    font-weight: 800;
+    text-transform: uppercase;
+
+    border-radius: var(--border-radius);
+    padding: 4px 5px;
+    margin-left: 10px;
 }
 
 .message__head i {
@@ -629,7 +655,7 @@ nav {
 }
 
 .message__write {
-    padding: 0 10px 10px 10px;
+    padding: 5px 10px 10px 10px;
 }
 
 .message__write input {
@@ -645,14 +671,20 @@ nav {
 }
 
 .message__write i {
+    padding: 7px;
+    border: 1px solid #3d406d;
+    border-radius: var(--border-radius);
     font-size: 0.75rem;
     color: var(--tag-cl);
-
-    transition: var(--transition);
     cursor: pointer;
+    background: var(--html-bg);
 }
 
-.message__write i:hover {
+.message__write i::before {
+    transition: var(--transition);
+}
+
+.message__write i:hover::before {
     filter: brightness(0.7);
 }
 
@@ -697,6 +729,114 @@ nav {
 .class__details p:first-child {
     font-size: 1rem;
     text-transform: capitalize;
+}
+
+@media screen and (max-width:280px) {
+    .nav__menu__usr i {
+        display: none;
+    }
+}
+
+@media screen and (max-width:320px) {
+    .message {
+        display: none;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .message {
+        width: 280px;
+    }
+
+    .message__head p span {
+        display: none;
+    }
+}
+
+@media screen and (max-width:660px) {
+
+    .login {
+        padding: 15px;
+        border: 2px solid #515486;
+        background: #262b41;
+        border-radius: var(--border-radius);
+    }
+
+    .login__items {
+        flex-direction: column;
+    }
+
+    .login__items i {
+        top: 56px;
+        right: 20px;
+    }
+
+    .course-list__course {
+        gap: 20px;
+    }
+
+    .date-container p:first-child {
+        display: none;
+    }
+}
+
+@media screen and (max-width:1024px) {
+
+    .content {
+        justify-content: center;
+        padding: 0 20px 20px 20px;
+    }
+
+    .hero {
+        text-align: center;
+        margin-top: 70px;
+    }
+
+    .img {
+        display: none;
+    }
+
+    .hero {
+        flex-basis: unset;
+        max-width: unset;
+    }
+
+    .hero .tag {
+        width: max-content;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+
+    .hero__buttons {
+        margin-top: 40px;
+        justify-content: center;
+    }
+
+    .dashboard {
+        flex-direction: column-reverse;
+    }
+
+    .dashboard__col,
+    .dashboard__row {
+        flex-basis: unset;
+        max-width: unset;
+    }
+}
+
+::-webkit-scrollbar {
+    position: absolute;
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #00000045;
+    width: 6px;
+    border-radius: 100vmax;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.278);
+    border-radius: 100vmax;
 }
 
 /* devloped by achille david and thibaut dusautoir */
