@@ -321,11 +321,10 @@ include './agenda.php';
                                                     <div class="class__details ml-1">
                                                         <p><?= $class->name ?></p>
                                                         <p><?= $class->comment ?></p>
-                                                        <?php if (isset($class->rooms[0])) : ?>
-                                                            <p><?= $class->rooms[0]->name ?></p>
-                                                        <?php endif; ?>
                                                         <?php if (isset($class->teacher)) : ?>
-                                                            <p><?= $class->teacher ?></p>
+                                                            <p><?= $class->teacher ?> <?php if (isset($class->rooms[0])) : ?>
+                                                                    - <?= $class->rooms[0]->name ?>
+                                                                <?php endif; ?></p>
                                                         <?php endif; ?>
                                                     </div>
                                                 </div>

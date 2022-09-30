@@ -709,8 +709,8 @@ nav {
 
 .day.current {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: column-reverse;
+    gap: 10px;
 }
 
 .class {
