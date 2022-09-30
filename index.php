@@ -57,62 +57,17 @@ include './agenda.php';
                         </div>
                     </div>
 
-                    <div class="chat flex gap-1">
+                    <div class="chat reverse flex gap-1">
                         <div class="chat__usr">
                             <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
                         </div>
                         <div class="chat__content flex flex-col">
                             <div class="chat__content__name flex flex-al gap-1">
                                 <p><?= $_SESSION['profile']->firstname ?></p>
-                                <p>17:48</p>
+                                <p>19:46</p>
                             </div>
                             <div class="chat__content__text pd-1">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, temporibus?</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chat flex gap-1">
-                        <div class="chat__usr">
-                            <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
-                        </div>
-                        <div class="chat__content flex flex-col">
-                            <div class="chat__content__name flex flex-al gap-1">
-                                <p><?= $_SESSION['profile']->firstname ?></p>
-                                <p>00:12</p>
-                            </div>
-                            <div class="chat__content__text pd-1">
-                                <p>Lorem, ipsum dolor.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chat flex gap-1">
-                        <div class="chat__usr">
-                            <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
-                        </div>
-                        <div class="chat__content flex flex-col">
-                            <div class="chat__content__name flex flex-al gap-1">
-                                <p><?= $_SESSION['profile']->firstname ?></p>
-                                <p>13:51</p>
-                            </div>
-                            <div class="chat__content__text pd-1">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui magnam nesciunt repudiandae, obcaecati magni tempora natus voluptatum necessitatibus quas quasi, laborum, omnis voluptatem iure! Harum, unde. Saepe corrupti dicta, veritatis nemo impedit earum esse illo omnis tempora praesentium commodi? Iure animi labore, in distinctio facilis delectus expedita repellat. Beatae, ipsum.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chat flex gap-1">
-                        <div class="chat__usr">
-                            <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="">
-                        </div>
-                        <div class="chat__content flex flex-col">
-                            <div class="chat__content__name flex flex-al gap-1">
-                                <p><?= $_SESSION['profile']->firstname ?></p>
-                                <p>11:00</p>
-                            </div>
-                            <div class="chat__content__text pd-1">
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt laboriosam, delectus possimus nobis blanditiis distinctio similique dolore nam ab fugit?</p>
+                                <p>salut</p>
                             </div>
                         </div>
                     </div>
@@ -211,7 +166,7 @@ include './agenda.php';
                             <div class="dashboard__card__head flex flex-al mb-1">
                                 <div class="dashboard__card__head__title flex flex-al gap-1">
                                     <h4 class="tag">Marks</h4>
-                                    <p class="global-average">15.35</p>
+                                    <!-- <p class="global-average">15.35</p> -->
                                 </div>
                                 <div class="dashboard__card__legend dashboard__card__tab flex gap-1">
                                     <span>Av.</span>
