@@ -57,7 +57,7 @@ include './agenda.php';
             </div>
             <form action="" id="chat-form">
                 <div class="message__write flex gap-1 flex-al">
-                    <input type="hidden" value="<?= $_SESSION['class']->promotion ?>" id="name_promotion">
+                    <input type="hidden" value="<?= $_SESSION['class']->promotion ?>" id="name_promo">
                     <input type="hidden" value="<?= $_SESSION['profile']->uid ?>" id="id_user">
                     <input type="text" id="chat-message" placeholder="Send a message in #<?= $_SESSION['class']->promotion ?>" maxlength="144">
                     <button type="submit"><i class="fa fa-paper-plane"></i></button>

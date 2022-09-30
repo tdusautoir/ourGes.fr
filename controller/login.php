@@ -2,7 +2,8 @@
 
 require_once '../functions.php';
 require_once '../vendor/autoload.php';
-require_once '../db/config.php';
+require_once '../models/Chatroom.php';
+require_once '../models/User.php';
 
 set_error_handler("errorHandler");
 
@@ -31,32 +32,19 @@ if (isset($me)) {
         //get profile
         $profile = $me->getProfile();
 
-        dump($profile);
-
-        //check if the profile already exist in the db
-        $req = $db->prepare("SELECT * FROM chat_user WHERE chat_user.user_id = :user_id");
-        $req->bindValue(":user_id", $profile->uid);
-        $req->execute();
-
-        //insert the profile in db if not
-        if ($req->rowCount() < 1) {
-            $add_account = $db->query("INSERT INTO chat_user (user_id, user_name, user_login_status) VALUES ($profile->uid, '$profile->firstname', 'Login')");
-        }
+        //create user if the user doesn't already exist
+        $User = new \User;
+        $User->setUserId($profile->uid);
+        $User->setUserName($profile->firstname);
+        $User->create_user();
 
         //get class
         $class = $me->getClasses($currentYear);
 
-        //check if the promotions is already in db
-        $req = $db->prepare("SELECT * FROM promotions WHERE promotions.name = :promotion_name");
-        $req->bindValue(":promotion_name", $class[0]->promotion);
-        $req->execute();
-
-        //insert the promotions in db if not
-        if ($req->rowCount() < 1) {
-            $add_promotion = $db->prepare("INSERT INTO promotions (name) VALUES (:promotion_name)");
-            $add_promotion->bindValue(":promotion_name", $class[0]->promotion);
-            $add_promotion->execute();
-        }
+        //create promotion if the promo doesn't already exist
+        $Chatroom = new \ChatRoom;
+        $Chatroom->setPromotion($class[0]->promotion);
+        $Chatroom->create_promotion();
 
         //get grades 
         $grades = $me->getGrades($currentYear);

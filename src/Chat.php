@@ -6,6 +6,9 @@ use PDO;
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
 
+require dirname(__DIR__) . "/models/User.php";
+require dirname(__DIR__) . "/models/ChatRoom.php";
+
 class Chat implements MessageComponentInterface
 {
     protected $clients;
@@ -26,24 +29,21 @@ class Chat implements MessageComponentInterface
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
-        global $db;
-
         $numberReceiver = count($this->clients) - 1;
 
         $data = json_decode($msg, true);
 
-        //get promo id from his name
-        $find_id_promo = $db->prepare("SELECT id FROM promotions WHERE name = :promotion_name");
-        $find_id_promo->bindValue(':promotion_name', $data['promotion_name']);
-        $find_id_promo->execute();
-        $id_promo = $find_id_promo->fetch(PDO::FETCH_ASSOC);
+        //create promotion id from his name
+        $Chatroom = new \ChatRoom;
+        $Chatroom->setPromotion($data['promotion_name']);
+        $promotion_id = $Chatroom->find_promotion_by_name();
 
-        //add the msg in the chatroom
-        $add_msg = $db->prepare('INSERT INTO chatrooms (id_promotion, user_id, msg) VALUES (:id_promotion, :user_id, :msg)');
-        $add_msg->bindValue(':id_promotion', $id_promo['id']);
-        $add_msg->bindValue(':user_id', $data['user_id']);
-        $add_msg->bindValue(':msg', $data['msg']);
-        $add_msg->execute();
+
+        $Chatroom->setPromotionId($promotion_id);
+        $Chatroom->setUserId($data['user_id']);
+        $Chatroom->setMessage($data['msg']);
+        $Chatroom->add_message();
+
 
         foreach ($this->clients as $client) {
 

@@ -2,7 +2,7 @@
 
 //ChatUser.php
 
-class ChatUser
+class User
 {
     private $user_id;
     private $user_name;
@@ -11,7 +11,7 @@ class ChatUser
 
     public function __construct()
     {
-        require_once('Database_connection.php');
+        require_once('Db.php');
 
         $database_object = new Db;
 
@@ -48,61 +48,16 @@ class ChatUser
         return $this->user_login_status;
     }
 
-    function update_user_login_data()
+    function create_user()
     {
-        $query = "
-		UPDATE chat_user
-		SET user_login_status = :user_login_status 
-		WHERE user_id = :user_id
-		";
+        //check if the profile already exist in the db
+        $req = $this->connect->prepare("SELECT * FROM chat_user WHERE chat_user.user_id = :user_id");
+        $req->bindValue(":user_id", $this->user_id);
+        $req->execute();
 
-        $statement = $this->connect->prepare($query);
-
-        $statement->bindParam(':user_login_status', $this->user_login_status);
-
-        $statement->bindParam(':user_id', $this->user_id);
-
-        if ($statement->execute()) {
-            return true;
-        } else {
-            return false;
+        //insert the profile in db if not
+        if ($req->rowCount() < 1) {
+            $add_account = $this->connect->query("INSERT INTO chat_user (user_id, user_name, user_login_status) VALUES ($this->user_id, '$this->user_name', 'Login')");
         }
-    }
-
-    function get_user_data_by_id()
-    {
-        $query = "
-		SELECT * FROM chat_user_table 
-		WHERE user_id = :user_id";
-
-        $statement = $this->connect->prepare($query);
-
-        $statement->bindParam(':user_id', $this->user_id);
-
-        try {
-            if ($statement->execute()) {
-                $user_data = $statement->fetch(PDO::FETCH_ASSOC);
-            } else {
-                $user_data = array();
-            }
-        } catch (Exception $error) {
-            echo $error->getMessage();
-        }
-        return $user_data;
-    }
-
-    function get_user_all_data()
-    {
-        $query = "
-		SELECT * FROM chat_user_table 
-		";
-
-        $statement = $this->connect->prepare($query);
-
-        $statement->execute();
-
-        $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-        return $data;
     }
 }
