@@ -57,7 +57,7 @@ class User
 
         //insert the profile in db if not
         if ($req->rowCount() < 1) {
-            $add_account = $this->connect->query("INSERT INTO chat_user (user_id, user_name, user_login_status) VALUES ($this->user_id, '$this->user_name', 'Login')");
+            $this->connect->query("INSERT INTO chat_user (user_id, user_name, user_login_status) VALUES ($this->user_id, '$this->user_name', 'Login')");
         }
     }
 }

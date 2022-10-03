@@ -6,7 +6,7 @@ require_once './controller/action.php';
 
 init_php_session();
 
-include './agenda.php';
+require_once './agenda.php';
 ?>
 
 <!DOCTYPE html>
@@ -258,19 +258,33 @@ include './agenda.php';
                                                 //calcul the class time
                                                 $startDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->start_date / 1000));
                                                 $endDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->end_date / 1000));
-                                                // $interval = date_diff($startDate, $endDate); 
-                                                // class hour --> $interval->format('%h')
+
+                                                //calcul the class time
+                                                $interval = date_diff($startDate, $endDate);
+                                                if ($interval->format('%h') > 3) {
+                                                    $className = 'class--long-3';
+                                                } elseif ($interval->format('%h') > 2) {
+                                                    $className = 'class--long';
+                                                } else {
+                                                    $className = "";
+                                                }
                                             ?>
 
-                                                <div class="class" onclick="showClassModal()">
+                                                <div class="class <?php if (!empty($className)) {
+                                                                        echo $className;
+                                                                    } ?>" onclick="showClassModal()">
                                                     <p class="class__hour mb-1"><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
                                                     <div class="class__details ml-1">
                                                         <p><?= $class->name ?></p>
-                                                        <p><?= $class->comment ?></p>
-                                                        <?php if (isset($class->teacher)) : ?>
-                                                            <p><?= $class->teacher ?> <?php if (isset($class->rooms[0])) : ?>
-                                                                    - <?= $class->rooms[0]->name ?>
-                                                                <?php endif; ?></p>
+                                                        <?php if (isset($class->comment)) : ?>
+                                                            <p><?= $class->comment ?></p>
+                                                        <?php endif; ?>
+                                                        <?php if (isset($class->rooms[0])) : ?>
+                                                            <?php if (isset($class->teacher) && strlen($class->teacher) > 1) : /* $class->teacher is equal to 1 caracter when it's not defined */ ?>
+                                                                <p><?= $class->teacher ?> - <?= $class->rooms[0]->name ?></p>
+                                                            <?php else : ?>
+                                                                <p><?= $class->rooms[0]->name ?></p>
+                                                            <?php endif; ?>
                                                         <?php endif; ?>
                                                     </div>
                                                 </div>
