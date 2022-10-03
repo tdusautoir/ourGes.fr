@@ -27,6 +27,10 @@ html {
     letter-spacing: -0.5px;
 }
 
+*::selection {
+    background: #7faddaae;
+}
+
 button {
     border: none;
     cursor: pointer;
@@ -44,6 +48,7 @@ body {
     background: linear-gradient(45deg, rgba(25, 33, 46, 1) 75%, rgba(33, 45, 64, 1) 100%);
     background-repeat: no-repeat;
     color: var(--white);
+    transition: var(--transition);
 
     -webkit-font-smoothing: antialiased;
 }
@@ -134,6 +139,15 @@ body {
 
 .container {
     margin: 0 20px;
+    transition: 500ms;
+}
+
+.container.active {
+    transform: scale(0.96);
+    pointer-events: none;
+    overflow: hidden;
+    pointer-events: none;
+    filter: blur(1px);
 }
 
 .login {
@@ -296,7 +310,7 @@ nav {
 }
 
 .content {
-    margin: 50px auto 0 auto;
+    margin: 10px auto 0 auto;
     max-width: 1440px;
     padding: 0 80px 80px 80px;
 }
@@ -731,6 +745,7 @@ nav {
     border-radius: var(--border-radius);
     background: #3d406d66;
     padding: 8px;
+    cursor: pointer;
 }
 
 .class__hour {
@@ -741,6 +756,32 @@ nav {
 .class__details p:first-child {
     font-size: 1rem;
     text-transform: capitalize;
+}
+
+.class__modal {
+    opacity: 0;
+    pointer-events: none;
+    position: fixed;
+    width: 400px;
+    aspect-ratio: 1;
+    background: red;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 500;
+}
+
+.class__modal.active {
+    animation: classModalActive 600ms ease 200ms both;
+}
+
+.class__modal__bg {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 499;
 }
 
 @media screen and (max-width:280px) {
