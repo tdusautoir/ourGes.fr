@@ -506,6 +506,9 @@ nav {
 .grade-list {
     max-height: 220px;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 
 .course-list__course {
@@ -718,11 +721,10 @@ nav {
 
 .michael {
     display: none;
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 50%;
     left: 50%;
-    right: 50%;
-    transform: translate(-50%, -32%);
+    transform: translate(-50%, -50%);
 }
 
 .michael.active {
@@ -748,6 +750,14 @@ nav {
     background: #3d406d66;
     padding: 8px;
     cursor: pointer;
+}
+
+.class--long {
+    height: 160px;
+}
+
+.class--long-4 {
+    height: 240px;
 }
 
 .class__hour {
@@ -779,11 +789,19 @@ nav {
 
 .class__modal__bg {
     display: none;
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.8);
     z-index: 499;
+}
+
+#pl-nxt.active {
+    color: red;
+}
+
+#pl-nxt.close {
+    color: white;
 }
 
 @media screen and (max-width:280px) {
@@ -813,7 +831,7 @@ nav {
     .login {
         padding: 15px;
         border: 2px solid #515486;
-        background: #262b41;
+        background: var(--html-bg);
         border-radius: var(--border-radius);
     }
 

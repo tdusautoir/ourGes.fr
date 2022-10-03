@@ -14,6 +14,7 @@ function easter() {
 
 function showForm() {
   let formLogin = document.getElementById("login-form");
+  let loginContainer = document.getElementById("login__container");
   if (formLogin.classList.contains("active")) {
     formLogin.className = "login m-0a close";
   } else {
@@ -97,7 +98,7 @@ function showClassModal() {
   if (modal.classList.contains("active")) {
   }
   else {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     modal.classList = "class__modal active";
     bg.style.display = "block"
     body.style.overflow = "hidden"
