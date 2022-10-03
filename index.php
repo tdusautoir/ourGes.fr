@@ -24,7 +24,6 @@ require_once './agenda.php';
     <link rel="icon" href="./img/favicon.png" />
     <script src="./public/js/script.js"></script>
     <script src="./public/js/jquery-3.6.0.min.js"></script>
-    <script src="./public/js/socket.js"></script>
 </head>
 
 <div class="class__modal__bg" id="class__modal__bg">
@@ -246,8 +245,8 @@ require_once './agenda.php';
                                     <?php endforeach; ?>
                                 </div>
                                 <div class="dashboard__head__arrows gap-1 flex">
-                                    <i onclick="navigateToPrecedentDay()" class="fa fa-angle-down"></i>
-                                    <i onclick="navigateToFollowingDay()" class="fa fa-angle-down"></i>
+                                    <i onclick="navigateToPrecedentDay()" id="pl-lst" class="fa fa-angle-down"></i>
+                                    <i onclick="navigateToFollowingDay()" id="pl-nxt" class="fa fa-angle-down"></i>
                                 </div>
                             </div>
                             <div class="planning__content">
@@ -262,15 +261,14 @@ require_once './agenda.php';
 
                                                 //calcul the class time
                                                 $interval = date_diff($startDate, $endDate);
-                                                if ($interval->format('%h') > 3) {
-                                                    $className = 'class--long-3';
-                                                } elseif ($interval->format('%h') > 2) {
+                                                if ($interval->format('%h') >= 4) {
+                                                    $className = 'class--long-4';
+                                                } elseif ($interval->format('%h') >= 3) {
                                                     $className = 'class--long';
                                                 } else {
                                                     $className = "";
                                                 }
                                             ?>
-
                                                 <div class="class <?php if (!empty($className)) {
                                                                         echo $className;
                                                                     } ?>" onclick="showClassModal()">
@@ -299,6 +297,16 @@ require_once './agenda.php';
                 </div>
             </div>
             <script src=" ./public/js/navigate.js"></script>
+            <script>
+                $(function() {
+                    const socket = new WebSocket("ws://localhost:8080/");
+
+                    socket.onopen = function(e) {
+                        console.log("Connection established!");
+                    };
+                });
+            </script>
+            <script src="./public/js/socket.js"></script>
         <?php endif; ?>
     </div>
     <!-- easter-egg -->
