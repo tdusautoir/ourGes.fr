@@ -87,4 +87,37 @@ function updateScroll() {
   element.scrollTop = element.scrollHeight;
 }
 
+function showClassModal() {
+  let modal = document.getElementById("class__modal");
+  let container = document.getElementById("container");
+  let body = document.getElementById("body");
+  let bg = document.getElementById("class__modal__bg")
+  let arrow = document.querySelector("nav__menu__usr i");
+
+  if (modal.classList.contains("active")) {
+  }
+  else {
+    window.scrollTo(0, 0);
+    modal.classList = "class__modal active";
+    bg.style.display = "block"
+    body.style.overflow = "hidden"
+    container.className = "container active";
+
+    window.addEventListener('keydown', function (e) {
+      if (e.keyCode == 27) {
+        if (modal.classList.contains("active")) {
+          modal.className = "class__modal close";
+          bg.style.display = "none"
+          body.style.overflow = "auto"
+          container.className = "container close";
+        }
+      }
+    }, false);
+  }
+}
+
+function test() {
+
+}
+
 /* developed by achille david and thibaut dusautoir */

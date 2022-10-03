@@ -27,6 +27,10 @@ include './agenda.php';
     <script src="./public/js/socket.js"></script>
 </head>
 
+<div class="class__modal__bg" id="class__modal__bg">
+    <div class="class__modal" id="class__modal"></div>
+</div>
+
 <body class="m-0a ovf" id="body">
 
     <?php if (is_logged()) : ?>
@@ -60,10 +64,9 @@ include './agenda.php';
                     <input type="hidden" value="<?= $_SESSION['class']->promotion ?>" id="name_promo">
                     <input type="hidden" value="<?= $_SESSION['profile']->uid ?>" id="id_user">
                     <input type="text" id="chat-message" placeholder="Send a message in #<?= $_SESSION['class']->promotion ?>" maxlength="144">
-                    <button type="submit"><i class="fa fa-paper-plane"></i></button>
+                    <button type="submit" style="background:transparent;"><i class="fa fa-paper-plane"></i></button>
                 </div>
             </form>
-
         </div>
     <?php endif; ?>
 
@@ -259,7 +262,7 @@ include './agenda.php';
                                                 // class hour --> $interval->format('%h')
                                             ?>
 
-                                                <div class="class">
+                                                <div class="class" onclick="showClassModal()">
                                                     <p class="class__hour mb-1"><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
                                                     <div class="class__details ml-1">
                                                         <p><?= $class->name ?></p>
