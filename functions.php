@@ -159,3 +159,12 @@ function display_flash_message_by_type(string $type): void //Afficher le flash m
         }
     }
 }
+
+//to sort the agenda array
+function cmp($a, $b)
+{
+    if ($a->start_date < $b->start_date) {
+        return 1;
+    }
+    return 0;
+}

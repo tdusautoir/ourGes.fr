@@ -1,5 +1,10 @@
 <?php
 
+//to sort the agenda
+if (isset($_SESSION['agenda'])) {
+    usort($_SESSION['agenda'], "cmp");
+}
+
 $DAYS = [
     strtotime("today"),
     strtotime("+1 day"),
