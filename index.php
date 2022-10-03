@@ -63,12 +63,40 @@ require_once './agenda.php';
                 <div class="message__write flex gap-1 flex-al">
                     <input type="hidden" value="<?= $_SESSION['class']->promotion ?>" id="name_promo">
                     <input type="hidden" value="<?= $_SESSION['profile']->uid ?>" id="id_user">
-                    <input type="text" id="chat-message" placeholder="Send a message in #<?= $_SESSION['class']->promotion ?>" maxlength="144">
+                    <input type="text" id="chat-message" placeholder="Send a message in #<?= $_SESSION['class']->promotion ?>" autocomplete="off" maxlength="144">
                     <button type="submit" style="background:transparent;"><i class="fa fa-paper-plane"></i></button>
                 </div>
             </form>
         </div>
     <?php endif; ?>
+
+    <nav class="flex flex-al">
+        <div class="nav__logo flex flex-js pd-1">
+            <p>our</p>
+            <p onclick="easter()">GES</p>
+        </div>
+        <div class="nav__menu flex flex-al">
+            <?php if (!is_logged()) : ?>
+                <!-- IS LOGGED -->
+                <button onclick="showForm()">login</button>
+            <?php else : ?>
+                <div class="nav__menu__usr flex">
+                    <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="profile" onclick="showSubmenu()">
+                    <i class="fa fa-angle-down" id="fa-angle-down"></i>
+                </div>
+            <?php endif; ?>
+        </div>
+    </nav>
+    <div class="nav__submenu pd-1" id="dropdown-menu">
+        <div class="nav__submenu__head mb-1">
+            <p>Signed in as</p>
+            <span><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></span>
+        </div>
+        <div class="nav__submenu__foot flex">
+            <p class="tag"><?= $_SESSION['class']->promotion ?></p>
+            <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
+        </div>
+    </div>
 
     <div class="container" id="container">
         <div class="login m-0a" id="login-form">
@@ -80,33 +108,6 @@ require_once './agenda.php';
                 </div>
                 <button type="submit" class="tag">connect</button>
             </form>
-        </div>
-        <nav class="flex flex-al">
-            <div class="nav__logo flex flex-js pd-1">
-                <p>our</p>
-                <p onclick="easter()">GES</p>
-            </div>
-            <div class="nav__menu flex flex-al">
-                <?php if (!is_logged()) : ?>
-                    <!-- IS LOGGED -->
-                    <button onclick="showForm()">login</button>
-                <?php else : ?>
-                    <div class="nav__menu__usr flex">
-                        <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="profile" onclick="showSubmenu()">
-                        <i class="fa fa-angle-down" id="fa-angle-down"></i>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </nav>
-        <div class="nav__submenu pd-1" id="dropdown-menu">
-            <div class="nav__submenu__head mb-1">
-                <p>Signed in as</p>
-                <span><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></span>
-            </div>
-            <div class="nav__submenu__foot flex">
-                <p class="tag"><?= $_SESSION['class']->promotion ?></p>
-                <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
-            </div>
         </div>
         <?php if (!is_logged()) : ?>
             <div class="content mt-3 flex">
@@ -307,4 +308,4 @@ require_once './agenda.php';
 
 </html>
 
-<!-- devloped by achille david and thibaut dusautoir -->
+<!-- developed by achille david and thibaut dusautoir -->
