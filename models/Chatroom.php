@@ -76,6 +76,7 @@ class ChatRoom
             $add_promotion = $this->connect->prepare("INSERT INTO promotions (name) VALUES (:promotion_name)");
             $add_promotion->bindValue(":promotion_name", $this->promotion);
             $add_promotion->execute();
+            return $this->connect->lastInsertId();
         }
     }
 
@@ -87,7 +88,9 @@ class ChatRoom
         $find_id_promo->execute();
         $id_promo = $find_id_promo->fetch(PDO::FETCH_ASSOC);
 
-        return $id_promo['id'];
+        if (isset($id_promo)) {
+            return $id_promo['id'];
+        }
     }
 
     function add_message()

@@ -5,7 +5,7 @@ require_once '../vendor/autoload.php';
 require_once '../models/Chatroom.php';
 require_once '../models/User.php';
 
-set_error_handler("errorHandler");
+// set_error_handler("errorHandler");
 
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -29,6 +29,17 @@ if (isset($me)) {
     $currentYear = date('Y');
 
     try {
+        //get class
+        $class = $me->getClasses($currentYear);
+
+        //create promotion if the promo doesn't already exist
+        $Chatroom = new \ChatRoom;
+        $Chatroom->setPromotion($class[0]->promotion);
+        $promotionId = $Chatroom->find_promotion_by_name($class[0]->promotion);
+        if (!$promotionId) {
+            $promotionId = $Chatroom->create_promotion();
+        }
+
         //get profile
         $profile = $me->getProfile();
 
@@ -36,15 +47,8 @@ if (isset($me)) {
         $User = new \User;
         $User->setUserId($profile->uid);
         $User->setUserName($profile->firstname);
+        $User->setPromotionId($promotionId);
         $User->create_user();
-
-        //get class
-        $class = $me->getClasses($currentYear);
-
-        //create promotion if the promo doesn't already exist
-        $Chatroom = new \ChatRoom;
-        $Chatroom->setPromotion($class[0]->promotion);
-        $Chatroom->create_promotion();
 
         //get grades 
         $grades = $me->getGrades($currentYear);

@@ -24,6 +24,7 @@ require_once './agenda.php';
     <link rel="icon" href="./img/favicon.png" />
     <script src="./public/js/script.js"></script>
     <script src="./public/js/jquery-3.6.0.min.js"></script>
+    <script src="./public/js/socket.js"></script>
 </head>
 
 <div class="class__modal__bg" id="class__modal__bg">
@@ -58,9 +59,8 @@ require_once './agenda.php';
 
                 </div>
             </div>
-            <form action="" id="chat-form">
+            <form id="chat-form">
                 <div class="message__write flex gap-1 flex-al">
-                    <input type="hidden" value="<?= $_SESSION['class']->promotion ?>" id="name_promo">
                     <input type="hidden" value="<?= $_SESSION['profile']->uid ?>" id="id_user">
                     <input type="text" id="chat-message" placeholder="Send a message in #<?= $_SESSION['class']->promotion ?>" autocomplete="off" maxlength="144">
                     <button type="submit" style="background:transparent;"><i class="fa fa-paper-plane"></i></button>
@@ -298,15 +298,8 @@ require_once './agenda.php';
             </div>
             <script src=" ./public/js/navigate.js"></script>
             <script>
-                $(function() {
-                    const socket = new WebSocket("ws://localhost:8080/");
-
-                    socket.onopen = function(e) {
-                        console.log("Connection established!");
-                    };
-                });
+                init_socket('<?= $_SESSION['class']->promotion; ?>');
             </script>
-            <script src="./public/js/socket.js"></script>
         <?php endif; ?>
     </div>
     <!-- easter-egg -->
