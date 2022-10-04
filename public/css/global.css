@@ -229,7 +229,7 @@ nav {
     max-height: 35px;
     object-fit: cover;
     aspect-ratio: 1;
-    border-radius: 50%;
+    border-radius: 100vmax;
     cursor: pointer;
 }
 
@@ -246,10 +246,10 @@ nav {
     transform: rotate(-90deg);
     background-color: var(--tag-bg);
     width: 0.5rem;
-    aspect-ratio: 1;
+    height: 0.5rem;
     border: 3px solid var(--background);
     padding: 3px;
-    border-radius: 50%;
+    border-radius: 100vmax;
     align-items: center;
     justify-content: center;
 }
@@ -655,7 +655,7 @@ nav {
     max-width: 30px;
     aspect-ratio: 1;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 100vmax;
 }
 
 .chat__content {
@@ -904,12 +904,12 @@ nav {
 ::-webkit-scrollbar-track {
     background: #00000045;
     width: 6px;
-    border-radius: 50%;
+    border-radius: 100vmax;
 }
 
 ::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.278);
-    border-radius: 50%;
+    border-radius: 100vmax;
 }
 
 /* developed by achille david and thibaut dusautoir */
