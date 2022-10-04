@@ -16,7 +16,7 @@ function waitForSocketConnection(socket, callback) {
       console.log("wait for connection...");
       waitForSocketConnection(socket, callback);
     }
-  }, 5); //wait 5 milisecond for the connection...
+  }, 100); //wait 5 milisecond for the connection...
 }
 
 let init_socket = (promotion_name) => {
