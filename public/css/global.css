@@ -195,7 +195,6 @@ body {
     font-size: 0.7rem;
     font-weight: 500;
     color: rgb(185, 185, 185);
-    background-color: var(--submenu);
 
     cursor: pointer;
 }
@@ -790,8 +789,9 @@ nav {
 .class__modal__bg {
     display: none;
     position: fixed;
-    width: 100vw;
-    height: 100vh;
+    width: 100vw !important;
+    height: 100vh !important;
+    top: 0;
     background: rgba(0, 0, 0, 0.8);
     z-index: 499;
 }
@@ -855,7 +855,7 @@ nav {
 
     .content {
         justify-content: center;
-        padding: 0 20px 20px 20px;
+        padding: 0;
     }
 
     .hero {

@@ -27,10 +27,6 @@ require_once './agenda.php';
     <script src="./public/js/socket.js"></script>
 </head>
 
-<div class="class__modal__bg" id="class__modal__bg">
-    <div class="class__modal" id="class__modal"></div>
-</div>
-
 <body class="m-0a ovf" id="body">
 
     <?php if (is_logged()) : ?>
@@ -302,6 +298,11 @@ require_once './agenda.php';
             </script>
         <?php endif; ?>
     </div>
+
+    <div class="class__modal__bg" id="class__modal__bg">
+        <div class="class__modal" id="class__modal"></div>
+    </div>
+
     <!-- easter-egg -->
     <img src="https://www.section.io/engineering-education/authors/michael-barasa/avatar.png" class="michael" id="michael" alt="">
     <?php require './components/flash_message.php'; ?>
