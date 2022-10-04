@@ -41,7 +41,6 @@ function navigateToFollowingDay() {
 
   if (sessionStorage.pagePlanning < planning_day.length - 1) {
     sessionStorage.pagePlanning++;
-    console.log(sessionStorage.pagePlanning);
     if (sessionStorage.pagePlanning == planning_day.length - 1) {
       pl_nxt.className = "fa fa-angle-down active";
     }

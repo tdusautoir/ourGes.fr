@@ -796,12 +796,10 @@ nav {
     z-index: 499;
 }
 
+#pl-lst.active,
 #pl-nxt.active {
-    color: red;
-}
-
-#pl-nxt.close {
-    color: white;
+    color: var(--grey);
+    cursor: default;
 }
 
 @media screen and (max-width:280px) {
