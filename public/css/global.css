@@ -173,6 +173,8 @@ body {
 }
 
 .login__items input {
+    height: 16px;
+    width: 150px;
     padding: 4px 12px;
 
     color: var(--white);
@@ -188,9 +190,8 @@ body {
 
 .login__items i {
     position: absolute;
-    top: 4px;
-    right: 6px;
-    padding: 4px;
+    top: 8px;
+    right: 10px;
 
     font-size: 0.7rem;
     font-weight: 500;
@@ -221,6 +222,7 @@ nav {
 }
 
 .nav__menu__usr {
+    width: 35px;
     align-items: flex-end;
     cursor: default;
 }
@@ -839,8 +841,8 @@ nav {
     }
 
     .login__items i {
-        top: 56px;
-        right: 20px;
+        top: 59px;
+        right: 24px;
     }
 
     .course-list__course {
