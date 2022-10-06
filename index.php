@@ -21,7 +21,7 @@ require_once './agenda.php';
     <link rel="stylesheet" href="./public/css/animations.css">
     <link rel="stylesheet" href="./public/css/var.css">
     <link rel="stylesheet" href="./public/css/global.css">
-    <link rel="icon" href="./img/favicon.png" />
+    <link rel="icon" href="./public/img/favicon.png" />
     <script src="./public/js/script.js"></script>
     <script src="./public/js/jquery-3.6.0.min.js"></script>
     <script src="./public/js/socket.js"></script>
@@ -129,7 +129,7 @@ require_once './agenda.php';
                                 <p>login</p>
                             </button>
                             <a class="flex flex-js flex-al" href="https://github.com/tdusautoir/ourGes" target="blank">
-                                <img src="./img/github.png" alt="">
+                                <img src="./public/img/github.png" alt="">
                                 <p>see on github</p>
                             </a>
                         </div>
