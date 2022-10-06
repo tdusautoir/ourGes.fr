@@ -60,7 +60,6 @@ function navigateToPrecedentDay() {
 
   if (sessionStorage.pagePlanning >= 1) {
     sessionStorage.pagePlanning--;
-    console.log(sessionStorage.pagePlanning);
     if (sessionStorage.pagePlanning == 0) {
       pl_lst.className = "fa fa-angle-down active";
     }

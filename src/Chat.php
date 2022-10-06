@@ -91,17 +91,11 @@ class Chat implements MessageComponentInterface
                                         //data is from me (the sender)
                                         $data['from'] = 'me';
 
-                                        echo "\n";
-                                        var_dump($this->users[$id]->resourceId);
-
                                         $this->users[$id]->send(json_encode($data));
                                         $success = 1;
                                     } else {
                                         //data is from anyone else
                                         $data['from'] = '';
-
-                                        echo "\n";
-                                        var_dump($this->users[$id]->resourceId);
 
                                         $this->users[$id]->send(json_encode($data));
                                         $success = 1;

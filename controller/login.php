@@ -13,12 +13,19 @@ $password = $_POST['password'];
 try {
     // client-id = skolae-app
     $client = new MyGes\Client('skolae-app', $username, $password);
-} catch (MyGes\Exceptions\BadCredentialsException $e) {
-    //wrong credentials
+} catch (MyGes\Exceptions\BadCredentialsException | Exception $e) {
     $err = $e->getMessage();
-    create_flash_message(ERROR_LOGIN, 'Invalid login informations.', FLASH_ERROR);
-    header("location: ../");
-    return;
+
+    if (get_class($e) == "MyGes\Exceptions\BadCredentialsException") {
+        //wrong credentials
+        create_flash_message(ERROR_LOGIN, 'Invalid login informations.', FLASH_ERROR);
+        header("location: ../");
+        return;
+    } else {
+        create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
+        header("location: ../");
+        return;
+    }
 }
 
 $me = new MyGes\Me($client);
