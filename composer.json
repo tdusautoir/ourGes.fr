@@ -1,5 +1,11 @@
 {
+    "autoload": {
+        "psr-4": {
+            "MyApp\\": "src"
+        }
+    },      
     "require": {
-        "tchenu/myges": "^1.0"
+        "tchenu/myges": "^1.0",
+        "cboden/ratchet": "^0.4.4"
     }
 }

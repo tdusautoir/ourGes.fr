@@ -51,7 +51,7 @@ function is_logged(): bool
 function errorHandler($errno, $errstr, $errfile, $errline) //error
 {
     /* $error = [$errno, $errstr, $errfile, $errline]; //information about the error (for debug) */
-    create_flash_message(ERROR_HANDLER, 'An error has occured, please try again.', FLASH_ERROR);
+    create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
     header("location: ../");
 
     /* Don't execute PHP internal error handler */
@@ -158,4 +158,13 @@ function display_flash_message_by_type(string $type): void //Afficher le flash m
             }
         }
     }
+}
+
+//to sort the agenda array
+function cmp($a, $b)
+{
+    if ($a->start_date < $b->start_date) {
+        return 1;
+    }
+    return 0;
 }
