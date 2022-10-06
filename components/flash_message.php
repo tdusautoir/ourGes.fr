@@ -1,5 +1,5 @@
 <?php if (isset_flash_message_by_type(FLASH_ERROR)) : ?>
-    <div class="modal error" id="flash">
+    <div class="modal error gap-1 flex flex-al" id="flash">
         <i class="fa fa-cirlce-xmark"></i>
         <?php if (isset_flash_message_by_name(ERROR_LOGIN)) : ?>
             <p><?php display_flash_message_by_name(ERROR_LOGIN); ?></p>
@@ -12,7 +12,7 @@
     </script>
 <?php elseif (isset_flash_message_by_type(FLASH_SUCCESS)) : ?>
     <!-- MODAL DE SUCCÈS -->
-    <div class="modal success" id="flash">
+    <div class="modal success gap-1 flex flex-al" id="flash">
         <i class="fa fa-circle-check"></i>
         <p><?php display_flash_message_by_type(FLASH_SUCCESS); ?></p>
     </div>
