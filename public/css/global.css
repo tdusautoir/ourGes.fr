@@ -568,11 +568,11 @@ nav {
 .message {
     position: fixed;
     bottom: 0px;
-    right: 30px;
+    right: 20px;
 
-    width: 400px;
-    height: 560px;
-    transform: translateY(520px);
+    width: 500px;
+    height: 720px;
+    transform: translateY(680px);
 
     background: var(--background);
     border-radius: var(--border-radius) var(--border-radius) 0 0;
@@ -637,8 +637,8 @@ nav {
 }
 
 .message__content {
-    min-height: 460px;
-    max-height: 460px;
+    min-height: 620px;
+    max-height: 620px;
     justify-content: flex-end;
 }
 
@@ -814,6 +814,8 @@ nav {
 }
 
 .class__modal__content {
+    background: #0000004a;
+    padding: 20px;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -909,11 +911,6 @@ nav {
         font-size: 0.8rem;
     }
 
-    .message {
-        width: 300px;
-        right: 10px;
-    }
-
     .message__head p span {
         display: none;
     }
@@ -953,12 +950,17 @@ nav {
     .date-container p:first-child {
         display: none;
     }
+
+    .message {
+        right: 20px;
+        width: calc(100% - 40px);
+    }
 }
 
 @media screen and (max-width:1024px) {
 
     .container {
-        margin-bottom: 20px;
+        margin-bottom: 50px;
     }
 
     .content {
