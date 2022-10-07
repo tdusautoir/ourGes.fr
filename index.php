@@ -129,14 +129,14 @@ require_once './agenda.php';
                                 <p>login</p>
                             </button>
                             <a class="flex flex-js flex-al" href="https://github.com/tdusautoir/ourGes" target="blank">
-                                <img src="./public/img/github.png" alt="">
+                                <img src="./public/img/github.webp" alt="">
                                 <p>see on github</p>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="img flex">
-                    <img src="./public/img/right-img.png" alt="" draggable="false">
+                    <img src="./public/img/right-img.webp" alt="" draggable="false">
                 </div>
             </div>
         <?php else : ?>
