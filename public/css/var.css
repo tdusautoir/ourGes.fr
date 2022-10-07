@@ -17,6 +17,10 @@
     --border-radius: 4px;
 }
 
+.fa-xmark::before {
+    content: "\f00d";
+}
+
 .fa-bars::before {
     content: "\f0c9";
 }

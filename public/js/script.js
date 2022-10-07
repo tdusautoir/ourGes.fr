@@ -117,7 +117,19 @@ function showClassModal() {
   }
 }
 
-function test() {
+function hideClassModal() {
+  let modal = document.getElementById("class__modal");
+  let container = document.getElementById("container");
+  let body = document.getElementById("body");
+  let bg = document.getElementById("class__modal__bg")
+  let arrow = document.querySelector("nav__menu__usr i");
+
+  if (modal.classList.contains("active")) {
+    modal.className = "class__modal close";
+    bg.style.display = "none"
+    body.style.overflow = "auto"
+    container.className = "container close";
+  }
 
 }
 

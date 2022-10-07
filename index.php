@@ -300,7 +300,20 @@ require_once './agenda.php';
     </div>
 
     <div class="class__modal__bg" id="class__modal__bg">
-        <div class="class__modal" id="class__modal"></div>
+        <div class="class__modal" id="class__modal">
+            <div class="class__modal__title">
+                <i class="fa fa-xmark" onclick="hideClassModal()"></i>
+                <p>09:30 - 13:00</p>
+                <h1>Langage C - Avancé</h1>
+            </div>
+            <div class="class__modal__content">
+                <p>Professor : <span>M. Khalid GABER</span></p>
+                <p>Room : <span>207</span></p>
+                <p>Stage : <span>2ème étage</span></p>
+                <p>Modality : <span>Présentiel</span></p>
+                <p>Campus : <span>LILLE-SAFED</span></p>
+            </div>
+        </div>
     </div>
 
     <!-- <img src="https://www.section.io/engineering-education/authors/michael-barasa/avatar.png" class="michael" id="michael" alt=""> -->
