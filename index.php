@@ -315,7 +315,8 @@ require_once './agenda.php';
         </div>
     </div>
 
-    <!-- <img src="https://www.section.io/engineering-education/authors/michael-barasa/avatar.png" class="michael" id="michael" alt=""> -->
+    <img src="https://www.section.io/engineering-education/authors/michael-barasa/avatar.png" class="michael" id="michael" alt="">
+
     <?php require './components/flash_message.php'; ?>
 </body>
 
