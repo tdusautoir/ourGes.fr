@@ -861,6 +861,10 @@ nav {
 
 @media screen and (max-width:1024px) {
 
+    .container {
+        margin-bottom: 20px;
+    }
+
     .content {
         justify-content: center;
         padding: 0;
