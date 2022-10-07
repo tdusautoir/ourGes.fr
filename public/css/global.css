@@ -918,7 +918,7 @@ nav {
 
 @media screen and (max-width:660px) {
     .class__modal.active {
-        animation: none;
+        animation: fadein var(--transition) both;
         opacity: 1;
         pointer-events: all;
     }
