@@ -571,8 +571,8 @@ nav {
     right: 20px;
 
     width: 500px;
-    height: 720px;
-    transform: translateY(680px);
+    height: 600px;
+    transform: translateY(560px);
 
     background: var(--background);
     border-radius: var(--border-radius) var(--border-radius) 0 0;
@@ -637,8 +637,8 @@ nav {
 }
 
 .message__content {
-    min-height: 620px;
-    max-height: 620px;
+    min-height: 500px;
+    max-height: 500px;
     justify-content: flex-end;
 }
 

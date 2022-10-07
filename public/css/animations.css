@@ -90,7 +90,7 @@
 
 @keyframes slideInMessage {
     from {
-        transform: translateY(680px);
+        transform: translateY(560px);
     }
 
     to {
@@ -104,7 +104,7 @@
     }
 
     to {
-        transform: translateY(680px);
+        transform: translateY(560px);
     }
 }
 
