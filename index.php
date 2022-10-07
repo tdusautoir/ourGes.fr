@@ -194,16 +194,16 @@ require_once './agenda.php';
                                     <div class="news__banner pd-1" style="background-image: url(<?= $new->image ?>);">
                                         <!-- new title-->
                                         <p class="news__banner__title flex mb-1"><?= $new->title ?></p>
-                                        <div class="news__banner__desc pd-1">
-                                            <?php if (isset($new->url)) : ?>
-                                                <!-- new video-->
-                                                <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                            <?php endif; ?>
-                                            <!-- new description -->
-                                            <?php if (isset($new->html)) :  ?>
+                                        <?php if (isset($new->html)) :  ?>
+                                            <div class="news__banner__desc pd-1">
+                                                <?php if (isset($new->url)) : ?>
+                                                    <!-- new video-->
+                                                    <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                <?php endif; ?>
+                                                <!-- new description -->
                                                 <?= $new->html ?>
-                                            <?php endif; ?>
-                                        </div>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
