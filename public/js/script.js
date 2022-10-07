@@ -80,6 +80,13 @@ function showMessage() {
   } else {
     message.classList = "message flex flex-col active";
     angleDown.className = "fa fa-angle-down active";
+
+    window.addEventListener('keydown', function (e) {
+      if (e.keyCode == 27) {
+        message.classList = "message flex flex-col close";
+        angleDown.className = "fa fa-angle-down close";
+      }
+    }, false);
   }
 }
 

@@ -39,7 +39,7 @@ require_once './agenda.php';
 
                     <!-- <div class="chat flex gap-1">
                         <div class="chat__usr">
-                            <img src=$_SESSION['profile']->_links->photo->href alt="">
+                            <img src="./public/img/right-img.webp" alt="">
                         </div>
                         <div class="chat__content flex flex-col">
                             <div class="chat__content__name flex flex-al gap-1">
