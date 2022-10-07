@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set('Europe/Paris');
 
 require_once './functions.php';
 require_once './controller/action.php';
@@ -267,7 +266,7 @@ require_once './agenda.php';
                                             ?>
                                                 <div class="class <?php if (!empty($className)) {
                                                                         echo $className;
-                                                                    } ?>" onclick="showClassModal()">
+                                                                    } ?>" onclick="showClassModal(); getClassInfo(<?= $key ?>);">
                                                     <p class="class__hour mb-1"><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
                                                     <div class="class__details ml-1">
                                                         <p><?= $class->name ?></p>

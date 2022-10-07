@@ -92,28 +92,30 @@ function showClassModal() {
   let modal = document.getElementById("class__modal");
   let container = document.getElementById("container");
   let body = document.getElementById("body");
-  let bg = document.getElementById("class__modal__bg")
+  let bg = document.getElementById("class__modal__bg");
   let arrow = document.querySelector("nav__menu__usr i");
 
-  if (modal.classList.contains("active")) {
-  }
-  else {
+  if (!modal.classList.contains("active")) {
     // window.scrollTo(0, 0);
     modal.classList = "class__modal active";
-    bg.style.display = "block"
-    body.style.overflow = "hidden"
+    bg.style.display = "block";
+    body.style.overflow = "hidden";
     container.className = "container active";
 
-    window.addEventListener('keydown', function (e) {
-      if (e.keyCode == 27) {
-        if (modal.classList.contains("active")) {
-          modal.className = "class__modal close";
-          bg.style.display = "none"
-          body.style.overflow = "auto"
-          container.className = "container close";
+    window.addEventListener(
+      "keydown",
+      function (e) {
+        if (e.key == "Escape") {
+          if (modal.classList.contains("active")) {
+            modal.className = "class__modal close";
+            bg.style.display = "none";
+            body.style.overflow = "auto";
+            container.className = "container close";
+          }
         }
-      }
-    }, false);
+      },
+      false
+    );
   }
 }
 
@@ -121,16 +123,52 @@ function hideClassModal() {
   let modal = document.getElementById("class__modal");
   let container = document.getElementById("container");
   let body = document.getElementById("body");
-  let bg = document.getElementById("class__modal__bg")
+  let bg = document.getElementById("class__modal__bg");
   let arrow = document.querySelector("nav__menu__usr i");
 
   if (modal.classList.contains("active")) {
     modal.className = "class__modal close";
-    bg.style.display = "none"
-    body.style.overflow = "auto"
+    bg.style.display = "none";
+    body.style.overflow = "auto";
     container.className = "container close";
   }
+}
 
+function getClassInfo(classId) {
+  let modal = document.getElementById("class__modal");
+  let xhr = new XMLHttpRequest();
+  let url = "./controller/getClassInfo.php?classId=" + classId;
+  xhr.open("GET", url, true);
+  xhr.onload = () => {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        let jsondata = JSON.parse(xhr.responseText);
+        let data = jsondata[0];
+        let date = jsondata[1];
+
+        console.log(date);
+
+        modal.innerHTML = `
+        <div class="class__modal__title">
+          <i class="fa fa-xmark" onclick="hideClassModal()"></i>
+          <p>${date[0]} - ${date[1]}</p>
+          <h1>${data.name}</h1>
+        </div>
+        <div class="class__modal__content">
+          <p>Professor : <span>${data.teacher}</span></p>
+          <p>Room : <span>${data.rooms[0].name}</span></p>
+          <p>Stage : <span>${data.rooms[0].floor}</span></p>
+          <p>Modality : <span>${data.modality}</span></p>
+          <p>Campus : <span>${data.rooms[0].campus}</span></p>
+        </div>`;
+
+        if (jsondata.error != undefined) {
+          window.location.reload();
+        }
+      }
+    }
+  };
+  xhr.send();
 }
 
 /* developed by achille david and thibaut dusautoir */
