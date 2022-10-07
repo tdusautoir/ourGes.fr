@@ -525,14 +525,18 @@ nav {
 }
 
 .news__banner {
+    flex-direction: column;
+    min-height: 260px;
     display: none;
     background-blend-mode: soft-light;
+    background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     border-radius: var(--border-radius);
 }
 
 .news__banner.active {
-    display: block;
+    display: flex;
 }
 
 .news__banner__title {
@@ -541,6 +545,7 @@ nav {
 }
 
 .news__banner__desc {
+    height: 220px;
     background: rgba(0, 0, 0, 0.7);
     font-size: 0.75rem;
 }
@@ -855,6 +860,10 @@ nav {
 }
 
 @media screen and (max-width:1024px) {
+
+    .container {
+        margin-bottom: 20px;
+    }
 
     .content {
         justify-content: center;
