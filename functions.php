@@ -68,18 +68,17 @@ function fatalErrorHandler() //fatal error
     return true;
 }
 
-
-function create_flash_message(string $name, string $message, string $type): void //creer un flash message
+//create a flash message
+function create_flash_message(string $name, string $message, string $type): void
 {
-    // supprimer le flash message s'il est défini suivant le nom
     if (isset($_SESSION[FLASH][$name])) {
         unset($_SESSION[FLASH][$name]);
     }
-    // Ajouter le flash message dans la session
     $_SESSION[FLASH][$name] = ['message' => $message, 'type' => $type];
 }
 
-function isset_flash_message_by_name(string $name): bool //Verifier si le flash message est défini via son nom
+//check if flash message is define by name
+function isset_flash_message_by_name(string $name): bool
 {
     if (isset($_SESSION[FLASH][$name])) {
         return true;
@@ -88,11 +87,12 @@ function isset_flash_message_by_name(string $name): bool //Verifier si le flash 
     }
 }
 
-function isset_flash_message_by_type(string $type): bool //Verifier si le flash message est défini via son type
+//check if flash message is define by type
+function isset_flash_message_by_type(string $type): bool
 {
     if (isset($_SESSION[FLASH])) {
-        foreach ($_SESSION[FLASH] as $key => $value) { //parcourir les flashs messages et verifier si le type est défini
-            if ($value['type'] == $type) { //si oui, retourner vrai
+        foreach ($_SESSION[FLASH] as $key => $value) {
+            if ($value['type'] == $type) {
                 return true;
             } else {
                 return false;
@@ -102,7 +102,8 @@ function isset_flash_message_by_type(string $type): bool //Verifier si le flash 
     return false;
 }
 
-function delete_flash_message_by_name(string $name): bool //Supprimer un flash message via son nom
+//Delete flash message by name
+function delete_flash_message_by_name(string $name): bool
 {
     if (isset($_SESSION[FLASH][$name])) {
         unset($_SESSION[FLASH][$name]);
@@ -112,11 +113,12 @@ function delete_flash_message_by_name(string $name): bool //Supprimer un flash m
 }
 
 
-function delete_flash_message_by_type(string $type): bool //Supprimer un flash message via son type
+//delete flash message by type
+function delete_flash_message_by_type(string $type): bool
 {
     if (isset($_SESSION[FLASH])) {
-        foreach ($_SESSION[FLASH] as $key => $value) { //parcourir les flashs messages et verifier si le type existe
-            if ($value['type'] == $type) { //si oui, le supprimer
+        foreach ($_SESSION[FLASH] as $key => $value) {
+            if ($value['type'] == $type) {
                 unset($_SESSION[FLASH][$key]);
             } else {
                 return false;
@@ -126,41 +128,43 @@ function delete_flash_message_by_type(string $type): bool //Supprimer un flash m
     return false;
 }
 
-function display_flash_message_by_name(string $name): void //Afficher le flash message via son nom
+//Display flash message by type
+function display_flash_message_by_name(string $name): void
 {
-    //s'il n'existe pas ne rien renvoyer
     if (!isset($_SESSION[FLASH][$name])) {
         return;
     }
-
-    // recuperer la valeur du message dans une variable
     $flash_message[$name] = $_SESSION[FLASH][$name];
-
-    // supprimer le flash message de la session
     unset($_SESSION[FLASH][$name]);
 
 
     echo $flash_message[$name]['message'];
 }
 
-function display_flash_message_by_type(string $type): void //Afficher le flash message via son type
+
+//Display flash message by type
+function display_flash_message_by_type(string $type): void
 {
     if (isset($_SESSION[FLASH])) {
-        foreach ($_SESSION[FLASH] as $key => $value) {  //parcourir les flashs messages et verifier si le type existe
-            if ($value['type'] == $type) { //si oui, récupérer le message dans une variable
+        foreach ($_SESSION[FLASH] as $key => $value) {
+            if ($value['type'] == $type) {
+
                 $flash_message = $value['message'];
-
-                // supprimer le flash message de la session
                 unset($_SESSION[FLASH][$key]);
-
-                // Afficher le flash message
                 echo $flash_message;
             }
         }
     }
 }
 
-//to sort the agenda array
+// Check if a value is a integer (
+// "23" return true, 23 return true, 23.4 return false
+function isInteger($input)
+{
+    return (ctype_digit(strval($input)));
+}
+
+//to sort the agenda array by starting date
 function cmp($a, $b)
 {
     if ($a->start_date < $b->start_date) {
