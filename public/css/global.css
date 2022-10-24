@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap');
 
 /* for debug */
 pre {
@@ -478,9 +478,17 @@ nav {
     width: 100%;
 }
 
-.dashboard__card__head__title .global-average {
+.over {
     color: var(--green);
-    font-weight: 700;
+}
+
+.under {
+    color: var(--red);
+}
+
+.dashboard__card__head__title .global-average {
+    font-weight: 800;
+    font-family: 'Nunito';
 }
 
 .dashboard__card__head__title .date-container {
@@ -571,8 +579,8 @@ nav {
     right: 20px;
 
     width: 500px;
-    height: 720px;
-    transform: translateY(680px);
+    height: 600px;
+    transform: translateY(560px);
 
     background: var(--background);
     border-radius: var(--border-radius) var(--border-radius) 0 0;
@@ -637,8 +645,8 @@ nav {
 }
 
 .message__content {
-    min-height: 620px;
-    max-height: 620px;
+    min-height: 500px;
+    max-height: 500px;
     justify-content: flex-end;
 }
 
@@ -930,7 +938,7 @@ nav {
 
 @media screen and (max-width:660px) {
     .class__modal.active {
-        animation: none;
+        animation: fadein var(--transition) both;
         opacity: 1;
         pointer-events: all;
     }

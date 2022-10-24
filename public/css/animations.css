@@ -90,7 +90,7 @@
 
 @keyframes slideInMessage {
     from {
-        transform: translateY(680px);
+        transform: translateY(560px);
     }
 
     to {
@@ -104,7 +104,7 @@
     }
 
     to {
-        transform: translateY(680px);
+        transform: translateY(560px);
     }
 }
 
@@ -139,6 +139,16 @@
         opacity: 1;
         pointer-events: all;
         transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }
 

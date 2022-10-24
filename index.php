@@ -178,7 +178,8 @@ require_once './agenda.php';
                             <div class="dashboard__card__head flex flex-al mb-1">
                                 <div class="dashboard__card__head__title flex flex-al gap-1">
                                     <h4 class="tag">Marks</h4>
-                                    <!-- <p class="global-average">15.35</p> -->
+                                    <!-- <p class="global-average over">15.35</p> -->
+                                    <p class="global-average under">9.31</p>
                                 </div>
                                 <div class="dashboard__card__legend dashboard__card__tab flex gap-1">
                                     <span>Av.</span>
@@ -260,7 +261,7 @@ require_once './agenda.php';
                     <div class="dashboard__row flex">
 
                         <div class="dashboard__card pd-1">
-                            <div class="dashboard__card__head flex flex-al mb-2">
+                            <div class="dashboard__card__head flex flex-al mb-1">
                                 <div class="dashboard__card__head__title flex flex-al gap-1">
                                     <h4 class="tag">Planning</h4>
                                     <?php foreach ($DAYS as $key => $day) : ?>
@@ -334,7 +335,6 @@ require_once './agenda.php';
             <div class="class__modal__title">
             </div>
         </div>
-
         <!-- <img src="https://www.section.io/engineering-education/authors/michael-barasa/avatar.png" class="michael" id="michael" alt=""> -->
         <?php require './components/flash_message.php'; ?>
 </body>
