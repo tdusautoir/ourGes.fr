@@ -2,6 +2,7 @@
 
 require_once './functions.php';
 require_once './controller/action.php';
+require_once './controller/getChat.php';
 
 init_php_session();
 
@@ -34,29 +35,60 @@ require_once './agenda.php';
                 <p class="flex flex-al">#<?= $_SESSION['class']->promotion ?><span>&nbsp;- General Chat</span></p>
                 <i class="fa fa-angle-down" id="fa-angle-down-message"></i>
             </div>
-            <div class="message__content flex flex-col pd-1">
+            <div class="message__content flex flex-col pd-1 <?= !isset($promotionChatData) ? 'empty' : ''; ?>">
                 <div class="chats-container flex flex-col gap-2" id="chats-container">
-
-                    <!-- <div class="chat flex gap-1">
-                        <div class="chat__usr">
-                            <img src="./public/img/right-img.webp" alt="">
-                        </div>
-                        <div class="chat__content flex flex-col">
-                            <div class="chat__content__name flex flex-al gap-1">
-                                <p>$_SESSION['profile']->firstname</p>
-                                <p>19:46</p>
-                            </div>
-                            <div class="chat__content__text pd-1">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo, quia possimus explicabo ea nihil modi.</p>
-                            </div>
-                        </div>
-                    </div> -->
-
+                    <?php if (isset($promotionChatData)) :
+                        foreach ($promotionChatData as $message) :
+                            $sendDate = date_create($message['created_on']);
+                            if ($message['user_id'] == $_SESSION['profile']->uid) : ?>
+                                <div class="chat reverse flex gap-1">
+                                    <div class="chat__usr">
+                                        <?php if (!isset($message['user_img'])) : ?>
+                                            <img src="./public/img/right-img.webp" alt="">
+                                        <?php else : ?>
+                                            <img src="<?= $message['user_img'] ?>" alt="">
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="chat__content flex flex-col">
+                                        <div class="chat__content__name flex flex-al gap-1">
+                                            <p><?= $message['user_name'] ?></p>
+                                            <p><?= date_format($sendDate, "H:i"); ?></p>
+                                        </div>
+                                        <div class="chat__content__text pd-1">
+                                            <p><?= $message['msg'] ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php else : ?>
+                                <div class="chat flex gap-1">
+                                    <div class="chat__usr">
+                                        <?php if (!isset($message['user_img'])) : ?>
+                                            <img src="./public/img/right-img.webp" alt="">
+                                        <?php else : ?>
+                                            <img src="<?= $message['user_img'] ?>" alt="">
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="chat__content flex flex-col">
+                                        <div class="chat__content__name flex flex-al gap-1">
+                                            <p><?= $message['user_name'] ?></p>
+                                            <p><?= date_format($sendDate, "H:i"); ?></p>
+                                        </div>
+                                        <div class="chat__content__text pd-1">
+                                            <p><?= $message['msg'] ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                        <?php endif;
+                        endforeach;
+                    else : ?>
+                        <p>Aucun message</p>
+                    <?php endif; ?>
                 </div>
             </div>
             <form id="chat-form">
                 <div class="message__write flex gap-1 flex-al">
                     <input type="hidden" value="<?= $_SESSION['profile']->uid ?>" id="id_user">
+                    <input type="hidden" value="<?= $_SESSION['profile']->_links->photo->href ?>" id="img_user">
                     <input type="text" id="chat-message" placeholder="Send a message in #<?= $_SESSION['class']->promotion ?>" autocomplete="off" maxlength="144">
                     <button type="submit" style="background:transparent;"><i class="fa fa-paper-plane"></i></button>
                 </div>
@@ -142,7 +174,6 @@ require_once './agenda.php';
             <div class="content m-0a">
                 <div class="dashboard flex">
                     <div class="dashboard__col flex flex-col">
-
                         <div class="dashboard__card pd-1">
                             <div class="dashboard__card__head flex flex-al mb-1">
                                 <div class="dashboard__card__head__title flex flex-al gap-1">
@@ -301,22 +332,11 @@ require_once './agenda.php';
     <div class="class__modal__bg" id="class__modal__bg">
         <div class="class__modal" id="class__modal">
             <div class="class__modal__title">
-                <i class="fa fa-xmark" onclick="hideClassModal()"></i>
-                <p>09:30 - 13:00</p>
-                <h1>Langage C - Avancé</h1>
-            </div>
-            <div class="class__modal__content">
-                <p>Professor : <span>M. Khalid GABER</span></p>
-                <p>Room : <span>207</span></p>
-                <p>Stage : <span>2ème étage</span></p>
-                <p>Modality : <span>Présentiel</span></p>
-                <p>Campus : <span>LILLE-SAFED</span></p>
             </div>
         </div>
-    </div>
 
-    <!-- <img src="https://www.section.io/engineering-education/authors/michael-barasa/avatar.png" class="michael" id="michael" alt=""> -->
-    <?php require './components/flash_message.php'; ?>
+        <!-- <img src="https://www.section.io/engineering-education/authors/michael-barasa/avatar.png" class="michael" id="michael" alt=""> -->
+        <?php require './components/flash_message.php'; ?>
 </body>
 
 </html>

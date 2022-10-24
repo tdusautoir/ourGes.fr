@@ -102,4 +102,21 @@ class ChatRoom
         $add_msg->bindValue(':msg', $this->message);
         $add_msg->execute();
     }
+
+    function get_all_chat_data_from_promotion()
+    {
+        $get_chat_data = $this->connect->prepare('SELECT * FROM (SELECT chatrooms.msg, chatrooms.user_id, chatrooms.created_on, chat_user.user_name, chat_user.user_img, promotions.name FROM chatrooms INNER JOIN chat_user ON chat_user.user_id = chatrooms.user_id INNER JOIN promotions ON chatrooms.id_promotion = promotions.id WHERE promotions.name = :promotion ORDER BY chatrooms.id DESC LIMIT 10) chat ORDER BY chat.created_on ASC;');
+        $get_chat_data->bindValue(':promotion', $this->promotion);
+        $get_chat_data->execute();
+
+        return $get_chat_data->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function get_all_chat_data()
+    {
+        $get_chat_data = $this->connect->prepare('SELECT * FROM chatrooms INNER JOIN chat_user ON chat_user.user_id = chatrooms.user_id ORDER BY chatrooms.id ASC');
+        $get_chat_data->execute();
+
+        return $get_chat_data->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

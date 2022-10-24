@@ -81,12 +81,16 @@ function showMessage() {
     message.classList = "message flex flex-col active";
     angleDown.className = "fa fa-angle-down active";
 
-    window.addEventListener('keydown', function (e) {
-      if (e.keyCode == 27) {
-        message.classList = "message flex flex-col close";
-        angleDown.className = "fa fa-angle-down close";
-      }
-    }, false);
+    window.addEventListener(
+      "keydown",
+      function (e) {
+        if (e.key == "Escape") {
+          message.classList = "message flex flex-col close";
+          angleDown.className = "fa fa-angle-down close";
+        }
+      },
+      false
+    );
   }
 }
 
@@ -152,8 +156,6 @@ function getClassInfo(classId) {
         let jsondata = JSON.parse(xhr.responseText);
         let data = jsondata[0];
         let date = jsondata[1];
-
-        console.log(date);
 
         modal.innerHTML = `
         <div class="class__modal__title">

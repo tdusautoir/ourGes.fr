@@ -53,7 +53,7 @@ class Me
      */
     public function updateProfile(array $fields): ?array
     {
-        $data = $this->getProfile();
+        $data = (object) $this->getProfile();
 
         foreach ($fields as $field => $value) {
             $data->{$field} = $value;

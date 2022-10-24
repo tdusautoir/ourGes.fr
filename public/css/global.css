@@ -642,6 +642,18 @@ nav {
     justify-content: flex-end;
 }
 
+.message__content.empty{
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.message__content.empty p{
+    opacity: 0.6;
+    font-style: italic;
+    padding: 0 5px;
+}
+
 .chats-container {
     overflow: auto;
 }

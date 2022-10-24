@@ -35,27 +35,33 @@ if (isset($me)) {
     //get actual year
     $currentYear = date('Y');
 
-    try {
+    // try {
         //get class
         $class = $me->getClasses($currentYear);
 
-        //create promotion if the promo doesn't already exist
-        $Chatroom = new \ChatRoom;
+    //create promotion if the promo doesn't already exist
+    $Chatroom = new ChatRoom;
         $Chatroom->setPromotion($class[0]->promotion);
         $promotionId = $Chatroom->find_promotion_by_name($class[0]->promotion);
         if (!$promotionId) {
             $promotionId = $Chatroom->create_promotion();
         }
 
-        //get profile
-        $profile = $me->getProfile();
+    //get profile
+    $profile = (object) $me->getProfile();
 
-        //create user if the user doesn't already exist
-        $User = new \User;
+    //create user if the user doesn't already exist
+    $User = new User;
         $User->setUserId($profile->uid);
         $User->setUserName($profile->firstname);
         $User->setPromotionId($promotionId);
         $User->create_user();
+
+    //insert the profile image
+    if (isset($profile->_links->photo->href)) {
+        $User->setUserImg($profile->_links->photo->href);
+        $User->add_user_img();
+    }
 
         //get grades 
         $grades = $me->getGrades($currentYear);
@@ -82,12 +88,12 @@ if (isset($me)) {
 
         //get News
         $news = $me->getNewsBanners();
-    } catch (Exception $e) {
-        $err = $e->getMessage();
-        create_flash_message(ERROR_LOGIN, 'An error has occured, please try again.', FLASH_ERROR);
-        header("location: ../");
-        return;
-    }
+    // } catch (Exception $e) {
+    //     $err = $e->getMessage();
+    //     create_flash_message(ERROR_LOGIN, 'An error has occured, please try again.', FLASH_ERROR);
+    //     header("location: ../");
+    //     return;
+    // }
 
     init_php_session();
     create_flash_message(SUCCESS_LOGIN, 'Successfully connected.', FLASH_SUCCESS);
