@@ -105,6 +105,16 @@
     }
 }
 
+@keyframes slideInMessageP {
+    from {
+        transform: translateY(560px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
 @keyframes slideDownMessage {
     from {
         transform: translateY(0);
@@ -114,6 +124,16 @@
     to {
         transform: translateY(560px);
         width: 500px;
+    }
+}
+
+@keyframes slideDownMessageP {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(560px);
     }
 }
 

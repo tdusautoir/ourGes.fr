@@ -176,7 +176,7 @@ require_once './agenda.php';
                 <div class="content m-0a">
                     <div class="db-btn mb-2 flex gap-2">
                         <a onclick="showMessage(); updateScroll()">
-                            <p class="db-btn__itm gap-1 flex flex-al tag">
+                            <p class="db-btn__itm sendmessage gap-1 flex flex-al tag">
                                 <i class="fa fa-comment"></i>
                                 Send a message
                             </p>

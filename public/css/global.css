@@ -652,13 +652,13 @@ nav {
     justify-content: flex-end;
 }
 
-.message__content.empty{
+.message__content.empty {
     justify-content: center;
     align-items: center;
     align-content: center;
 }
 
-.message__content.empty p{
+.message__content.empty p {
     opacity: 0.6;
     font-style: italic;
     padding: 0 5px;
@@ -946,7 +946,7 @@ nav {
     }
 }
 
-@media screen and (max-width:320px) {
+@media screen and (max-width:319px) {
     .message {
         display: none;
     }
@@ -979,6 +979,10 @@ nav {
 
     .db-btn {
         justify-content: space-between;
+    }
+
+    .sendmessage {
+        display: none;
     }
 }
 
@@ -1067,6 +1071,14 @@ nav {
     .dashboard__row {
         flex-basis: unset;
         max-width: unset;
+    }
+
+    .message.active {
+        animation: slideInMessageP var(--transition) ease both;
+    }
+
+    .message.close {
+        animation: slideDownMessageP var(--transition) ease both;
     }
 }
 
