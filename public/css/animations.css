@@ -89,8 +89,25 @@
 }
 
 @keyframes slideInMessage {
+    0% {
+        transform: translateY(560px);
+        width: 500px;
+    }
+
+    50% {
+        transform: translateY(0);
+        width: 500px;
+    }
+
+    100% {
+        transform: translateY(0);
+        width: 50%;
+    }
+}
+
+@keyframes slideInMessageP {
     from {
-        transform: translateY(520px);
+        transform: translateY(560px);
     }
 
     to {
@@ -101,10 +118,22 @@
 @keyframes slideDownMessage {
     from {
         transform: translateY(0);
+        width: 50%;
     }
 
     to {
-        transform: translateY(520px);
+        transform: translateY(560px);
+        width: 500px;
+    }
+}
+
+@keyframes slideDownMessageP {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(560px);
     }
 }
 
@@ -139,6 +168,36 @@
         opacity: 1;
         pointer-events: all;
         transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes transition {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+@keyframes transitionR {
+    from {
+        transform: translateY(100vh);
+    }
+
+    to {
+        transform: translateY(0);
     }
 }
 

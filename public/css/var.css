@@ -17,6 +17,22 @@
     --border-radius: 4px;
 }
 
+.fa-chart-pie::before {
+    content: "\f200";
+}
+
+.fa-user-tie::before {
+    content: "\f508"
+}
+
+.fa-comment::before {
+    content: "\f075";
+}
+
+.fa-xmark::before {
+    content: "\f00d";
+}
+
 .fa-bars::before {
     content: "\f0c9";
 }

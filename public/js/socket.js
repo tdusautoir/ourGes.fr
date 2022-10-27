@@ -41,9 +41,11 @@ $(function () {
     e.preventDefault();
 
     let id_user = $("#id_user").val();
+    let img_user = $("#img_user").val();
     let message = $("#chat-message").val();
     let data = {
       command: "send_message",
+      user_img: img_user,
       user_id: id_user,
       msg: message,
     };
@@ -55,6 +57,9 @@ $(function () {
 socket.onmessage = function (e) {
   console.log(JSON.parse(e.data));
 
+  $(".message__content").removeClass("empty");
+  $(".message__content .empty-message").remove();
+
   let data = JSON.parse(e.data);
   let chat_class = "";
 
@@ -64,7 +69,7 @@ socket.onmessage = function (e) {
     chat_class = ""; //data is from someone else
   }
 
-  let html_data = `<div class='chat ${chat_class} flex gap-1'><div class='chat__usr'><img src='./img/logo.png' alt=''></div><div class='chat__content flex flex-col'><div class='chat__content__name flex flex-al gap-1'><p>${data.from}</p><p>19:46</p></div><div class='chat__content__text pd-1'><p>${data.msg}</p></div></div></div>`;
+  let html_data = `<div class='chat ${chat_class} flex gap-1'><div class='chat__usr'><img src='${data.user_img}' alt=''></div><div class='chat__content flex flex-col'><div class='chat__content__name flex flex-al gap-1'><p>${data.from}</p><p>19:46</p></div><div class='chat__content__text pd-1'><p>${data.msg}</p></div></div></div>`;
 
   $("#chats-container").append(html_data);
 

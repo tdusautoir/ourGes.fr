@@ -1,16 +1,16 @@
-var click = 0;
+// var click = 0;
 
-function easter() {
-  let easter = document.getElementById("michael");
-  click++;
-  if (click > 9) {
-    easter.className = "michael active";
-    click = 0;
-    setTimeout(() => {
-      easter.className = "michael";
-    }, 100);
-  }
-}
+// function easter() {
+//   let easter = document.getElementById("michael");
+//   click++;
+//   if (click > 9) {
+//     easter.className = "michael active";
+//     click = 0;
+//     setTimeout(() => {
+//       easter.className = "michael";
+//     }, 100);
+//   }
+// }
 
 function showForm() {
   let formLogin = document.getElementById("login-form");
@@ -72,14 +72,30 @@ function showMessage() {
   let message = document.getElementById("message");
   let angleDown = document.getElementById("fa-angle-down-message");
   let body = document.getElementById("body");
-  let container = document.getElementById("container");
+  let container = document.getElementById("test");
 
   if (message.classList.contains("active")) {
     message.className = "message flex flex-col close ";
     angleDown.className = "fa fa-angle-down close";
+    container.style.filter = "unset";
+    container.style.pointerEvents = "all";
+    body.style.overflow = "auto";
   } else {
     message.classList = "message flex flex-col active";
     angleDown.className = "fa fa-angle-down active";
+    container.style.filter = "brightness(0.5)";
+    container.style.pointerEvents = "none";
+    body.style.overflow = "hidden";
+
+    window.addEventListener('keydown', function (e) {
+      if (e.keyCode == 27) {
+        message.className = "message flex flex-col close ";
+        angleDown.className = "fa fa-angle-down close";
+        container.style.filter = "unset";
+        container.style.pointerEvents = "all";
+        body.style.overflow = "auto";
+      }
+    }, false);
   }
 }
 
@@ -92,33 +108,99 @@ function showClassModal() {
   let modal = document.getElementById("class__modal");
   let container = document.getElementById("container");
   let body = document.getElementById("body");
-  let bg = document.getElementById("class__modal__bg")
+  let bg = document.getElementById("class__modal__bg");
   let arrow = document.querySelector("nav__menu__usr i");
 
-  if (modal.classList.contains("active")) {
-  }
-  else {
+  if (!modal.classList.contains("active")) {
     // window.scrollTo(0, 0);
     modal.classList = "class__modal active";
-    bg.style.display = "block"
-    body.style.overflow = "hidden"
+    bg.style.display = "block";
+    body.style.overflow = "hidden";
     container.className = "container active";
 
-    window.addEventListener('keydown', function (e) {
-      if (e.keyCode == 27) {
-        if (modal.classList.contains("active")) {
-          modal.className = "class__modal close";
-          bg.style.display = "none"
-          body.style.overflow = "auto"
-          container.className = "container close";
+    window.addEventListener(
+      "keydown",
+      function (e) {
+        if (e.key == "Escape") {
+          if (modal.classList.contains("active")) {
+            modal.className = "class__modal close";
+            bg.style.display = "none";
+            body.style.overflow = "auto";
+            container.className = "container close";
+          }
         }
-      }
-    }, false);
+      },
+      false
+    );
   }
 }
 
-function test() {
+function hideClassModal() {
+  let modal = document.getElementById("class__modal");
+  let container = document.getElementById("container");
+  let body = document.getElementById("body");
+  let bg = document.getElementById("class__modal__bg");
+  let arrow = document.querySelector("nav__menu__usr i");
 
+  if (modal.classList.contains("active")) {
+    modal.className = "class__modal close";
+    bg.style.display = "none";
+    body.style.overflow = "auto";
+    container.className = "container close";
+  }
+}
+
+function getClassInfo(classId) {
+  let modal = document.getElementById("class__modal");
+  let xhr = new XMLHttpRequest();
+  let url = "./controller/getClassInfo.php?classId=" + classId;
+  xhr.open("GET", url, true);
+  xhr.onload = () => {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        let jsondata = JSON.parse(xhr.responseText);
+        let data = jsondata[0];
+        let date = jsondata[1];
+
+        modal.innerHTML = `
+        <div class="class__modal__title">
+          <i class="fa fa-xmark" onclick="hideClassModal()"></i>
+          <p>${date[0]} - ${date[1]}</p>
+          <h1>${data.name}</h1>
+        </div>
+        <div class="class__modal__content">
+          <p class="flex flex-al gap-1"><i class="fa fa-user-tie" style="font-size: 14px;"></i>Professor : <span>${data.teacher}</span></p>
+          <p>Room : <span>${data.rooms[0].name}</span></p>
+          <p>Stage : <span>${data.rooms[0].floor}</span></p>
+          <p>Modality : <span>${data.modality}</span></p>
+          <p>Campus : <span>${data.rooms[0].campus}</span></p>
+        </div>`;
+
+        if (jsondata.error != undefined) {
+          window.location.reload();
+        }
+      }
+    }
+  };
+  xhr.send();
+}
+
+function delay(URL) {
+  setTimeout(function () { window.location = URL }, 600);
+}
+
+function transition() {
+  let container = document.getElementById("container");
+  let body = document.getElementById("body");
+
+  if (container.classList.contains("activated")) {
+    container.className = "container"
+    body.style.overflow = "auto";
+  }
+  else {
+    container.className = "container activated"
+    body.style.overflow = "hidden";
+  }
 }
 
 /* developed by achille david and thibaut dusautoir */

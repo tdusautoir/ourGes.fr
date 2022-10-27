@@ -1,11 +1,10 @@
 <?php
 
-//ChatUser.php
-
 class User
 {
     private $user_id;
     private $user_name;
+    private $user_img;
     private $promotion_id;
     private $user_login_status;
     public $connect;
@@ -38,6 +37,17 @@ class User
     {
         return $this->user_name;
     }
+
+    function setUserImg($user_img)
+    {
+        $this->user_img = $user_img;
+    }
+
+    function getUserImg()
+    {
+        return $this->user_img;
+    }
+
 
     function setPromotionId($promotion_id)
     {
@@ -92,5 +102,36 @@ class User
             return 1;
         }
         return 0;
+    }
+
+    function get_user_chat_data()
+    {
+        $get_chat_data = $this->connect->prepare('SELECT * FROM chatrooms INNER JOIN chat_user ON chat_user.user_id = chatrooms.user_id WHERE chatrooms.user_id = :user_id ORDER BY chatrooms.id ASC');
+        $get_chat_data->bindValue(":user_id", $this->user_id);
+        $get_chat_data->execute();
+
+        return $get_chat_data->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    function add_user_img()
+    {
+        //check if an image already exist in the db
+        $req = $this->connect->prepare("SELECT user_img FROM chat_user WHERE chat_user.user_id = :user_id");
+        $req->bindValue(":user_id", $this->user_id);
+        $req->execute();
+
+        $data = $req->fetch(PDO::FETCH_ASSOC);
+
+        //update the image in db if image don't exist
+        if (!isset($data['user_img'])) {
+            $this->connect->query("UPDATE chat_user SET user_img = '$this->user_img' WHERE user_id = $this->user_id");
+            return;
+        }
+
+        //update image in db if he change his img
+        if (isset($data['user_img']) && $data['user_img'] == $this->user_img) {
+            $this->connect->query("UPDATE chat_user SET user_img = '$this->user_img' WHERE user_id = $this->user_id");
+            return;
+        }
     }
 }
