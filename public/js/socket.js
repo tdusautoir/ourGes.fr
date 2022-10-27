@@ -57,6 +57,9 @@ $(function () {
 socket.onmessage = function (e) {
   console.log(JSON.parse(e.data));
 
+  $(".message__content").removeClass("empty");
+  $(".message__content .empty-message").remove();
+
   let data = JSON.parse(e.data);
   let chat_class = "";
 

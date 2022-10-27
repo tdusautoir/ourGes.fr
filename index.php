@@ -35,9 +35,10 @@ require_once './agenda.php';
                 <p class="flex flex-al">#<?= $_SESSION['class']->promotion ?><span>&nbsp;- General Chat</span></p>
                 <i class="fa fa-angle-down" id="fa-angle-down-message"></i>
             </div>
-            <div class="message__content flex flex-col pd-1 <?= !isset($promotionChatData) ? 'empty' : ''; ?>">
+            <div class="message__content flex flex-col pd-1 <?php if (!$promotionChatData) : echo "empty";
+                                                            endif; ?>">
                 <div class="chats-container flex flex-col gap-2" id="chats-container">
-                    <?php if (isset($promotionChatData)) :
+                    <?php if ($promotionChatData) :
                         foreach ($promotionChatData as $message) :
                             $sendDate = date_create($message['created_on']);
                             if ($message['user_id'] == $_SESSION['profile']->uid) : ?>
@@ -81,7 +82,7 @@ require_once './agenda.php';
                         <?php endif;
                         endforeach;
                     else : ?>
-                        <p>Aucun message</p>
+                        <p class="empty-message">Aucun message</p>
                     <?php endif; ?>
                 </div>
             </div>

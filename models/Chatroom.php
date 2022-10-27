@@ -105,11 +105,36 @@ class ChatRoom
 
     function get_all_chat_data_from_promotion()
     {
-        $get_chat_data = $this->connect->prepare('SELECT * FROM (SELECT chatrooms.msg, chatrooms.user_id, chatrooms.created_on, chat_user.user_name, chat_user.user_img, promotions.name FROM chatrooms INNER JOIN chat_user ON chat_user.user_id = chatrooms.user_id INNER JOIN promotions ON chatrooms.id_promotion = promotions.id WHERE promotions.name = :promotion ORDER BY chatrooms.id DESC LIMIT 10) chat ORDER BY chat.created_on ASC;');
+        $data = [];
+
+        $get_user_data = $this->connect->prepare('SELECT * FROM chat_user INNER JOIN promotions ON promotions.id = chat_user.promotion_id WHERE promotions.name = :promotion');
+        $get_user_data->bindValue(':promotion', $this->promotion);
+        $get_user_data->execute();
+
+        $user_data = $get_user_data->fetchAll(PDO::FETCH_ASSOC);
+
+        $get_chat_data = $this->connect->prepare('SELECT * FROM (SELECT chatrooms.msg, chatrooms.user_id, chatrooms.created_on, promotions.name FROM chatrooms INNER JOIN promotions ON chatrooms.id_promotion = promotions.id WHERE promotions.name = :promotion ORDER BY chatrooms.id DESC LIMIT 10) chat ORDER BY chat.created_on ASC;');
         $get_chat_data->bindValue(':promotion', $this->promotion);
         $get_chat_data->execute();
 
-        return $get_chat_data->fetchAll(PDO::FETCH_ASSOC);
+        if ($get_chat_data->rowCount() > 0) {
+            $data = $get_chat_data->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        foreach ($user_data as $user) {
+            foreach ($data as $key => $msg) {
+                if ($msg['user_id'] == $user['user_id']) {
+                    $data[$key]['user_img'] = $user['user_img'];
+                    $data[$key]['user_name'] = $user['user_name'];
+                }
+            }
+        }
+
+        if (isset($data)) {
+            return $data;
+        }
+
+        return 0;
     }
 
     function get_all_chat_data()
@@ -117,6 +142,10 @@ class ChatRoom
         $get_chat_data = $this->connect->prepare('SELECT * FROM chatrooms INNER JOIN chat_user ON chat_user.user_id = chatrooms.user_id ORDER BY chatrooms.id ASC');
         $get_chat_data->execute();
 
-        return $get_chat_data->fetchAll(PDO::FETCH_ASSOC);
+        if ($get_chat_data->rowCount() > 0) {
+            return $get_chat_data->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return 0;
     }
 }
