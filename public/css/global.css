@@ -235,6 +235,7 @@ nav {
     aspect-ratio: 1;
     border-radius: 100vmax;
     cursor: pointer;
+    transition: var(--transition);
 }
 
 .nav__menu__usr img:hover {
@@ -470,6 +471,7 @@ nav {
 }
 
 .dashboard__row {
+    gap: 20px;
     flex-basis: 40%;
     max-width: 40%;
 }
@@ -589,7 +591,7 @@ nav {
 }
 
 .message.active {
-    animation: slideInMessage var(--transition) ease both;
+    animation: slideInMessage 600ms ease both;
 }
 
 .message.close {
@@ -614,22 +616,22 @@ nav {
 }
 
 .message__head p::after {
-    content: 'new message';
+    content: 'New';
     display: inline-block;
     letter-spacing: 0;
-    width: fit-content;
-    height: fit-content;
 
-    background: var(--tag-bg);
-    color: var(--tag-cl);
+    background: #e63946;
+    color: var(--white);
     font-family: SF, arial, sans-serif;
     font-size: 0.55rem;
     font-weight: 800;
     text-transform: uppercase;
+    position: absolute;
+    top: 12px;
+    right: 30px;
 
     border-radius: var(--border-radius);
-    padding: 4px 5px;
-    margin-left: 10px;
+    padding: 3px 5px;
 }
 
 .message__head i {
@@ -898,6 +900,46 @@ nav {
     margin-top: 10px;
 }
 
+.db-btn {
+    justify-content: end;
+    cursor: pointer;
+    position: relative;
+}
+
+.db-btn__itm {
+    border: 2px solid var(--tag-cl);
+    transition: var(--transition);
+}
+
+.db-btn__itm:hover {
+    background-color: #3d406db8;
+}
+
+.survey::after {
+    content: 'NEW !';
+    position: absolute;
+    top: -16px;
+    right: 8px;
+    padding: 3px 5px;
+    background: #e63946;
+    color: white;
+    border-radius: var(--border-radius);
+}
+
+.test {
+    background: linear-gradient(45deg, rgba(25, 33, 46, 1) 75%, rgba(33, 45, 64, 1) 100%);
+    background-repeat: no-repeat;
+    transition: var(--transition);
+}
+
+.container.activated {
+    animation: transition 500ms ease both;
+}
+
+.container-survey {
+    animation: transitionR 500ms ease both;
+}
+
 @media screen and (max-width:280px) {
     .nav__menu__usr i {
         display: none;
@@ -933,6 +975,10 @@ nav {
 
     .message__head p span {
         display: none;
+    }
+
+    .db-btn {
+        justify-content: space-between;
     }
 }
 

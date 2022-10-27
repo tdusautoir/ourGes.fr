@@ -72,25 +72,30 @@ function showMessage() {
   let message = document.getElementById("message");
   let angleDown = document.getElementById("fa-angle-down-message");
   let body = document.getElementById("body");
-  let container = document.getElementById("container");
+  let container = document.getElementById("test");
 
   if (message.classList.contains("active")) {
     message.className = "message flex flex-col close ";
     angleDown.className = "fa fa-angle-down close";
+    container.style.filter = "unset";
+    container.style.pointerEvents = "all";
+    body.style.overflow = "auto";
   } else {
     message.classList = "message flex flex-col active";
     angleDown.className = "fa fa-angle-down active";
+    container.style.filter = "brightness(0.5)";
+    container.style.pointerEvents = "none";
+    body.style.overflow = "hidden";
 
-    window.addEventListener(
-      "keydown",
-      function (e) {
-        if (e.key == "Escape") {
-          message.classList = "message flex flex-col close";
-          angleDown.className = "fa fa-angle-down close";
-        }
-      },
-      false
-    );
+    window.addEventListener('keydown', function (e) {
+      if (e.keyCode == 27) {
+        message.className = "message flex flex-col close ";
+        angleDown.className = "fa fa-angle-down close";
+        container.style.filter = "unset";
+        container.style.pointerEvents = "all";
+        body.style.overflow = "auto";
+      }
+    }, false);
   }
 }
 
@@ -164,7 +169,7 @@ function getClassInfo(classId) {
           <h1>${data.name}</h1>
         </div>
         <div class="class__modal__content">
-          <p>Professor : <span>${data.teacher}</span></p>
+          <p class="flex flex-al gap-1"><i class="fa fa-user-tie" style="font-size: 14px;"></i>Professor : <span>${data.teacher}</span></p>
           <p>Room : <span>${data.rooms[0].name}</span></p>
           <p>Stage : <span>${data.rooms[0].floor}</span></p>
           <p>Modality : <span>${data.modality}</span></p>
@@ -178,6 +183,24 @@ function getClassInfo(classId) {
     }
   };
   xhr.send();
+}
+
+function delay(URL) {
+  setTimeout(function () { window.location = URL }, 600);
+}
+
+function transition() {
+  let container = document.getElementById("container");
+  let body = document.getElementById("body");
+
+  if (container.classList.contains("activated")) {
+    container.className = "container"
+    body.style.overflow = "auto";
+  }
+  else {
+    container.className = "container activated"
+    body.style.overflow = "hidden";
+  }
 }
 
 /* developed by achille david and thibaut dusautoir */
