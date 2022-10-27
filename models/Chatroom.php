@@ -115,7 +115,7 @@ class ChatRoom
 
         $get_chat_data = $this->connect->prepare('SELECT * FROM (SELECT chatrooms.msg, chatrooms.user_id, chatrooms.created_on, promotions.name FROM chatrooms INNER JOIN promotions ON chatrooms.id_promotion = promotions.id WHERE promotions.name = :promotion ORDER BY chatrooms.id DESC LIMIT 10) chat ORDER BY chat.created_on ASC;');
         $get_chat_data->bindValue(':promotion', $this->promotion);
-        $get_chat_data->execute();
+        //$get_chat_data->execute();
 
         if ($get_chat_data->rowCount() > 0) {
             $data = $get_chat_data->fetchAll(PDO::FETCH_ASSOC);
