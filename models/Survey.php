@@ -83,11 +83,12 @@ class Survey
 
     function create_survey()
     {
-        $req = $this->connect->prepare('INSERT INTO survey (token, name, description, type) VALUES (:token, :name, :description, :type)');
+        $req = $this->connect->prepare('INSERT INTO survey (token, name, description, type, owner_id) VALUES (:token, :name, :description, :type, :owner_id)');
         $req->bindValue(':token', $this->token);
         $req->bindValue(':name', $this->name);
         $req->bindValue(':description', $this->description);
         $req->bindValue(':type', $this->type);
+        $req->bindValue(':owner_id', $_SESSION['profile']->uid);
         $stmt = $req->execute();
 
         if (!isset($stmt)) {

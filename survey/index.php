@@ -40,8 +40,9 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     <link rel="stylesheet" href="../public/css/global.css">
     <link rel="stylesheet" href="../public/css/survey.css">
     <link rel="icon" href="../public/img/favicon.png" />
-    <script src="../public/js/script.js"></script>
     <script src="../public/js/jquery-3.6.0.min.js"></script>
+    <script src="../public/js/script.js"></script>
+    <script src="../public/js/survey.js"></script>
 </head>
 
 <body class="m-0a ovf" id="body">
