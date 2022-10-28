@@ -67,34 +67,39 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
             <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
         </div>
     </div>
-    <div class="container" id="container">
+    <div class="container container-survey" id="container">
         <div class="content m-0a">
-            <a href="../">
-                <p>retour</p>
-            </a>
-
             <div class="survey">
                 <?php if (!isset($_GET['token']) || empty($_GET['token'])) : ?>
                     <div class="survey__form">
+                        <h1>Create a survey</h1>
                         <form action="../controller/survey.php" method="POST">
-                            <label for="name">Nom du sondage</label>
-                            <input type="text" name="name">
-                            <label for="description">Description</label>
-                            <input type="text" name="description">
-                            <label for="type">Type</label>
+                            <div class="survey__form__name">
+                                <input type="text" name="name" class="survey-name" autocomplete="off" maxlength="50" placeholder="Name">
+                                <p onclick="addDesc()" id="survey__desc__name" class="survey__desc__name"><i class="fa fa-plus"></i>Add a description</p>
+                            </div>
+                            <div class="survey-desc-container" id="survey__desc">
+                                <input type="text" name="description" class="survey__desc" autocomplete="off" maxlength="100" placeholder="Description (optional)">
+                                <p onclick="addDesc()" id="survey__desc__name" class="desc__mask"><i class="fa fa-minus"></i>Mask description</p>
+                            </div>
                             <select name="type">
+                                <option value="1" selected disabled>Type</option>
                                 <option value="1">Choix simple</option>
                                 <option value="2">Plusieurs choix</option>
                             </select>
                             <input type="hidden" name="nb-choice" value="1">
-                            <label for="choice-1">Choix</label>
-                            <input type="text" name="choice-1">
-                            <button type="submit">Creer</button>
+                            <input type="text" name="choice-1" autocomplete="off" maxlength="50" placeholder="Choice">
+                            <div class="create-container">
+                                <!-- <input type="checkbox"> -->
+                                <button type="submit" class="tag">Create</button>
+                            </div>
                         </form>
                     </div>
                 <?php else : ?>
+                    <div class="survey__title">
+                        <h1><?= $survey_data['name'] ?></h1>
+                    </div>
                     <div class="survey__content">
-                        <p>Nom : <?= $survey_data['name'] ?></p>
                         <p>Description : <?= $survey_data['description'] ?></p>
                         <div class="survey__form">
                             <form action="../controller/survey.php" method="POST">
@@ -103,6 +108,9 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                     </div>
                 <?php endif; ?>
             </div>
+            <a href="../">
+                <p>retour</p>
+            </a>
         </div>
     </div>
 

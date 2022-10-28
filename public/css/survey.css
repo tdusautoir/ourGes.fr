@@ -1,33 +1,171 @@
-form {
+.db-btn__itm.sondage::after {
+    content: 'NEW !';
+    position: absolute;
+    top: -16px;
+    right: 8px;
+    padding: 3px 5px;
+    background: #e63946;
+    color: white;
+    border-radius: var(--border-radius);
+}
+
+.survey {
     display: flex;
-    flex-direction: column;
-    margin-top: 20px;
     gap: 20px;
 }
 
-input {
-    color: white;
-    background: none;
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid var(--tag-cl);
+.survey__form {
+    flex-basis: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: var(--background-light);
+    border-radius: var(--border-radius);
 }
 
-select {
-    appearance: none;
-    background: none;
-    color: white;
-    border: 1px solid var(--tag-cl);
-    border-radius: 5px;
-    padding: 10px;
+.survey__form form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-button {
+.survey__form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.survey__form form input,
+.survey__form form select {
+    border: none;
+    outline: none;
+    padding: 15px 20px;
+    font-size: 1rem;
+    background-color: var(--background);
+    border-radius: var(--border-radius);
+    color: var(--tag-cl);
     appearance: none;
-    background: none;
-    color: white;
-    border: 1px solid var(--tag-cl);
-    border-radius: 5px;
-    padding: 10px;
+}
+
+.survey__form form input.survey-name {
+    font-size: 1.2rem;
+}
+
+.survey__form form input:focus {
+    outline: 1px solid var(--tag-cl);
+}
+
+.survey__form form select {
+    width: 100%;
+    color: var(--tag-cl);
+    background-image: url(../img/arrow.png);
+    background-position: right 10px bottom 50%;
+    background-repeat: no-repeat;
+    background-size: 10px;
+    cursor: pointer;
+}
+
+.survey__form h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.survey__form__name {
+    display: flex;
+    flex-direction: column;
+}
+
+.survey__form__name p {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0 0 15px;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: var(--transition);
     width: fit-content;
+}
+
+.survey__form__name p:hover,
+.survey-desc-container p:hover {
+    filter: brightness(0.85);
+}
+
+.survey__form__name p.active {
+    display: none;
+}
+
+.survey-desc-container {
+    display: unset;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.survey-desc-container input {
+    width: calc(100% - 40px);
+}
+
+.survey-desc-container p {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-right: 15px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.survey-desc-container i {
+    font-size: 0.4rem;
+}
+
+.survey__desc__name.active {
+    display: none;
+}
+
+.survey-desc-container {
+    display: none;
+}
+
+.survey-desc-container.active {
+    display: flex;
+}
+
+.survey__title {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.survey__title h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    max-width: 100%;
+}
+
+.create-container {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+}
+
+.survey__form form button {
+    border: 2px solid var(--tag-cl);
+    width: fit-content;
+    transition: 300ms;
+}
+
+.survey__form form button:hover {
+    background: #3d406d66;
+}
+
+@media screen and (max-width:900px) {
+    .survey {
+        flex-direction: column;
+    }
 }

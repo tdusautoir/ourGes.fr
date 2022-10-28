@@ -915,17 +915,6 @@ nav {
     background-color: #3d406db8;
 }
 
-.db-btn__itm .survey::after {
-    content: 'NEW !';
-    position: absolute;
-    top: -16px;
-    right: 8px;
-    padding: 3px 5px;
-    background: #e63946;
-    color: white;
-    border-radius: var(--border-radius);
-}
-
 .test {
     background: linear-gradient(45deg, rgba(25, 33, 46, 1) 75%, rgba(33, 45, 64, 1) 100%);
     background-repeat: no-repeat;
@@ -977,9 +966,10 @@ nav {
         display: none;
     }
 
+    /* 
     .db-btn {
         justify-content: space-between;
-    }
+    } */
 
     .sendmessage {
         display: none;

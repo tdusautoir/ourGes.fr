@@ -194,13 +194,28 @@ function transition() {
   let body = document.getElementById("body");
 
   if (container.classList.contains("activated")) {
-    container.className = "container"
+    container.className = "container";
     body.style.overflow = "auto";
   }
   else {
     container.className = "container activated"
     body.style.overflow = "hidden";
   }
+}
+
+function addDesc() {
+  let desc = document.getElementById("survey__desc")
+  let name = document.getElementById("survey__desc__name")
+
+  if (desc.classList.contains("active")) {
+    desc.className = "survey-desc-container close";
+    name.className = "survey__desc__name close";
+  }
+  else {
+    desc.className = "survey-desc-container active";
+    name.className = "survey__desc__name active";
+  }
+
 }
 
 /* developed by achille david and thibaut dusautoir */

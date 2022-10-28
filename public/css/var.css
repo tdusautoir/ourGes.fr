@@ -17,6 +17,14 @@
     --border-radius: 4px;
 }
 
+.fa-plus::before {
+    content: '\2b';
+}
+
+.fa-minus::before {
+    content: '\f068';
+}
+
 .fa-chart-pie::before {
     content: "\f200";
 }
@@ -67,7 +75,6 @@
 
 .fa-paper-plane::before {
     content: "\f1d8"
-
 }
 
 /*icones*/

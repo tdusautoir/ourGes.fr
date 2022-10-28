@@ -20,6 +20,7 @@ require_once './agenda.php';
     <link rel="stylesheet" href="./public/css/animations.css">
     <link rel="stylesheet" href="./public/css/var.css">
     <link rel="stylesheet" href="./public/css/global.css">
+    <link rel="stylesheet" href="./public/css/survey.css">
     <link rel="icon" href="./public/img/favicon.png" />
     <script src="./public/js/script.js"></script>
     <script src="./public/js/jquery-3.6.0.min.js"></script>
@@ -56,7 +57,7 @@ require_once './agenda.php';
         </div>
     <?php endif; ?>
 
-    <div class="container" id="container">
+    <div class="container container-survey" id="container">
         <?php if (!is_logged()) : ?>
             <div class="login m-0a" id="login-form">
                 <form class="flex flex-col flex-al" action="./controller/login.php" method="POST">
@@ -106,7 +107,7 @@ require_once './agenda.php';
             <div class="content m-0a">
                 <div class="db-btn mb-2 flex gap-2">
                     <a href="javascript:delay('./survey/')" onclick="transition()">
-                        <p class="db-btn__itm survey gap-1 flex flex-al tag">
+                        <p class="db-btn__itm sondage gap-1 flex flex-al tag">
                             <i class="fa fa-chart-pie"></i>
                             Create a survey
                         </p>
