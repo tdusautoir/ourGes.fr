@@ -1,0 +1,33 @@
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+input {
+    color: white;
+    background: none;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid var(--tag-cl);
+}
+
+select {
+    appearance: none;
+    background: none;
+    color: white;
+    border: 1px solid var(--tag-cl);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+button {
+    appearance: none;
+    background: none;
+    color: white;
+    border: 1px solid var(--tag-cl);
+    border-radius: 5px;
+    padding: 10px;
+    width: fit-content;
+}

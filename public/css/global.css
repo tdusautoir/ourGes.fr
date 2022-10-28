@@ -915,7 +915,7 @@ nav {
     background-color: #3d406db8;
 }
 
-.survey::after {
+.db-btn__itm .survey::after {
     content: 'NEW !';
     position: absolute;
     top: -16px;

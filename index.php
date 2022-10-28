@@ -2,7 +2,6 @@
 
 require_once './functions.php';
 require_once './controller/action.php';
-require_once './controller/getChat.php';
 
 init_php_session();
 
@@ -24,98 +23,27 @@ require_once './agenda.php';
     <link rel="icon" href="./public/img/favicon.png" />
     <script src="./public/js/script.js"></script>
     <script src="./public/js/jquery-3.6.0.min.js"></script>
-    <script src="./public/js/socket.js"></script>
 </head>
 
 <body class="m-0a ovf" id="body">
-
-    <?php if (is_logged()) : ?>
-        <div class="message flex flex-col" id="message">
-            <div class="message__head flex flex-al" onclick="showMessage(); updateScroll()">
-                <p class="flex flex-al">#<?= $_SESSION['class']->promotion ?><span>&nbsp;- General Chat</span></p>
-                <i class="fa fa-angle-down" id="fa-angle-down-message"></i>
-            </div>
-            <div class="message__content flex flex-col pd-1 <?php if (!$promotionChatData) : echo "empty";
-                                                            endif; ?>">
-                <div class="chats-container flex flex-col gap-2" id="chats-container">
-                    <?php if ($promotionChatData) :
-                        foreach ($promotionChatData as $message) :
-                            $sendDate = date_create($message['created_on']);
-                            if ($message['user_id'] == $_SESSION['profile']->uid) : ?>
-                                <div class="chat reverse flex gap-1">
-                                    <div class="chat__usr">
-                                        <?php if (!isset($message['user_img'])) : ?>
-                                            <img src="./public/img/right-img.webp" alt="">
-                                        <?php else : ?>
-                                            <img src="<?= $message['user_img'] ?>" alt="">
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="chat__content flex flex-col">
-                                        <div class="chat__content__name flex flex-al gap-1">
-                                            <p><?= $message['user_name'] ?></p>
-                                            <p><?= date_format($sendDate, "H:i"); ?></p>
-                                        </div>
-                                        <div class="chat__content__text pd-1">
-                                            <p><?= $message['msg'] ?></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php else : ?>
-                                <div class="chat flex gap-1">
-                                    <div class="chat__usr">
-                                        <?php if (!isset($message['user_img'])) : ?>
-                                            <img src="./public/img/right-img.webp" alt="">
-                                        <?php else : ?>
-                                            <img src="<?= $message['user_img'] ?>" alt="">
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="chat__content flex flex-col">
-                                        <div class="chat__content__name flex flex-al gap-1">
-                                            <p><?= $message['user_name'] ?></p>
-                                            <p><?= date_format($sendDate, "H:i"); ?></p>
-                                        </div>
-                                        <div class="chat__content__text pd-1">
-                                            <p><?= $message['msg'] ?></p>
-                                        </div>
-                                    </div>
-                                </div>
-                        <?php endif;
-                        endforeach;
-                    else : ?>
-                        <p class="empty-message">Aucun message</p>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <form id="chat-form">
-                <div class="message__write flex gap-1 flex-al">
-                    <input type="hidden" value="<?= $_SESSION['profile']->uid ?>" id="id_user">
-                    <input type="hidden" value="<?= $_SESSION['profile']->_links->photo->href ?>" id="img_user">
-                    <input type="text" id="chat-message" placeholder="Send a message in #<?= $_SESSION['class']->promotion ?>" autocomplete="off" maxlength="144">
-                    <button type="submit" style="background:transparent;"><i class="fa fa-paper-plane"></i></button>
-                </div>
-            </form>
+    <nav class="flex flex-al">
+        <div class="nav__logo flex flex-js pd-1">
+            <p>our</p>
+            <p onclick="easter()">GES</p>
         </div>
-    <?php endif; ?>
-
-    <div class="test" id="test">
-
-        <nav class="flex flex-al">
-            <div class="nav__logo flex flex-js pd-1">
-                <p>our</p>
-                <p onclick="easter()">GES</p>
-            </div>
-            <div class="nav__menu flex flex-al">
-                <?php if (!is_logged()) : ?>
-                    <!-- IS LOGGED -->
-                    <button onclick="showForm()">login</button>
-                <?php else : ?>
-                    <div class="nav__menu__usr flex">
-                        <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="profile" onclick="showSubmenu()">
-                        <i class="fa fa-angle-down" id="fa-angle-down"></i>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </nav>
+        <div class="nav__menu flex flex-al">
+            <?php if (!is_logged()) : ?>
+                <!-- IS LOGGED -->
+                <button onclick="showForm()">login</button>
+            <?php else : ?>
+                <div class="nav__menu__usr flex">
+                    <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="profile" onclick="showSubmenu()">
+                    <i class="fa fa-angle-down" id="fa-angle-down"></i>
+                </div>
+            <?php endif; ?>
+        </div>
+    </nav>
+    <?php if (is_logged()) : ?>
         <div class="nav__submenu pd-1" id="dropdown-menu">
             <div class="nav__submenu__head mb-1">
                 <p>Signed in as</p>
@@ -126,8 +54,10 @@ require_once './agenda.php';
                 <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
             </div>
         </div>
+    <?php endif; ?>
 
-        <div class="container" id="container">
+    <div class="container" id="container">
+        <?php if (!is_logged()) : ?>
             <div class="login m-0a" id="login-form">
                 <form class="flex flex-col flex-al" action="./controller/login.php" method="POST">
                     <div class="login__items gap-1 mb-1 flex flex-al">
@@ -138,76 +68,69 @@ require_once './agenda.php';
                     <button type="submit" class="tag">connect</button>
                 </form>
             </div>
-            <?php if (!is_logged()) : ?>
-                <div class="content mt-3 flex">
-                    <div class="hero flex flex-col flex-js">
-                        <span class="tag mb-2">Built by students, for students</span>
-                        <div class="hero__title">
-                            <p>myGes,</p>
-                        </div>
-                        <div class="hero__title mb-2">
-                            <p class="snd">but easier.</p>
-                        </div>
-                        <div class="hero__headline">
-                            <p>
-                                ourGes is an extension to myGes
-                            </p>
-                            <p class="mb-1">
-                                you can easily find your school information using a simple and easy-to-use interface
-                            </p>
-                            <p class="mb-2">
-                                developed by <a href="https://github.com/achilledavid" target="blank">achille</a> and <a href="https://github.com/tdusautoir" target="blank">thibaut</a>
-                            </p>
-                            <div class="hero__buttons flex">
-                                <button onclick="showForm()">
-                                    <p>login</p>
-                                </button>
-                                <a class="flex flex-js flex-al" href="https://github.com/tdusautoir/ourGes" target="blank">
-                                    <img src="./public/img/github.webp" alt="">
-                                    <p>see on github</p>
-                                </a>
-                            </div>
-                        </div>
+            <div class="content mt-3 flex">
+                <div class="hero flex flex-col flex-js">
+                    <span class="tag mb-2">Built by students, for students</span>
+                    <div class="hero__title">
+                        <p>myGes,</p>
                     </div>
-                    <div class="img flex">
-                        <img src="./public/img/right-img.webp" alt="" draggable="false">
+                    <div class="hero__title mb-2">
+                        <p class="snd">but easier.</p>
+                    </div>
+                    <div class="hero__headline">
+                        <p>
+                            ourGes is an extension to myGes
+                        </p>
+                        <p class="mb-1">
+                            you can easily find your school information using a simple and easy-to-use interface
+                        </p>
+                        <p class="mb-2">
+                            developed by <a href="https://github.com/achilledavid" target="blank">achille</a> and <a href="https://github.com/tdusautoir" target="blank">thibaut</a>
+                        </p>
+                        <div class="hero__buttons flex">
+                            <button onclick="showForm()">
+                                <p>login</p>
+                            </button>
+                            <a class="flex flex-js flex-al" href="https://github.com/tdusautoir/ourGes" target="blank">
+                                <img src="./public/img/github.webp" alt="">
+                                <p>see on github</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            <?php else : ?>
-                <div class="content m-0a">
-                    <div class="db-btn mb-2 flex gap-2">
-                        <a onclick="showMessage(); updateScroll()">
-                            <p class="db-btn__itm sendmessage gap-1 flex flex-al tag">
-                                <i class="fa fa-comment"></i>
-                                Send a message
-                            </p>
-                        </a>
-                        <a href="javascript:delay('./survey/')" onclick="transition()">
-                            <p class="db-btn__itm survey gap-1 flex flex-al tag">
-                                <i class="fa fa-chart-pie"></i>
-                                Create a survey
-                            </p>
-                        </a>
-                    </div>
-                    <div class="dashboard flex">
-                        <div class="dashboard__col flex flex-col">
+                <div class="img flex">
+                    <img src="./public/img/right-img.webp" alt="" draggable="false">
+                </div>
+            </div>
+        <?php else : ?>
+            <div class="content m-0a">
+                <div class="db-btn mb-2 flex gap-2">
+                    <a href="javascript:delay('./survey/')" onclick="transition()">
+                        <p class="db-btn__itm survey gap-1 flex flex-al tag">
+                            <i class="fa fa-chart-pie"></i>
+                            Create a survey
+                        </p>
+                    </a>
+                </div>
+                <div class="dashboard flex">
+                    <div class="dashboard__col flex flex-col">
 
-                            <div class="dashboard__card pd-1">
-                                <div class="dashboard__card__head flex flex-al mb-1">
-                                    <div class="dashboard__card__head__title flex flex-al gap-1">
-                                        <h4 class="tag">Marks</h4>
-                                        <!-- <p class="global-average">15.35</p> -->
-                                    </div>
-                                    <div class="dashboard__card__legend dashboard__card__tab flex gap-1">
-                                        <span>Av.</span>
-                                    </div>
+                        <div class="dashboard__card pd-1">
+                            <div class="dashboard__card__head flex flex-al mb-1">
+                                <div class="dashboard__card__head__title flex flex-al gap-1">
+                                    <h4 class="tag">Marks</h4>
+                                    <!-- <p class="global-average">15.35</p> -->
                                 </div>
-                                <div class="course-list">
-                                    <?php foreach ($_SESSION['grades'] as $grade) : ?>
-                                        <div class="course-list__grade flex">
-                                            <p class="course-list__name"><?= $grade->course ?></p>
-                                            <div class="dashboard__card__tab flex gap-1">
-                                                <!-- <p class="course-list__marks">
+                                <div class="dashboard__card__legend dashboard__card__tab flex gap-1">
+                                    <span>Av.</span>
+                                </div>
+                            </div>
+                            <div class="course-list">
+                                <?php foreach ($_SESSION['grades'] as $grade) : ?>
+                                    <div class="course-list__grade flex">
+                                        <p class="course-list__name"><?= $grade->course ?></p>
+                                        <div class="dashboard__card__tab flex gap-1">
+                                            <!-- <p class="course-list__marks">
                                                 <?php if (isset($grade->grades)) :
                                                     foreach ($grade->grades as $key => $mark) :
                                                         if (end($grade->grades) == $mark) :
@@ -218,142 +141,141 @@ require_once './agenda.php';
                                                     endforeach;
                                                 endif; ?>
                                             </p> -->
-                                                <p class="course-list__average ml-tab mr-tab">
-                                                    <?php if (isset($grade->average)) :
-                                                        echo $grade->average;
-                                                    endif; ?>
-                                                </p>
-                                            </div>
+                                            <p class="course-list__average ml-tab mr-tab">
+                                                <?php if (isset($grade->average)) :
+                                                    echo $grade->average;
+                                                endif; ?>
+                                            </p>
                                         </div>
-                                    <?php endforeach ?>
-                                </div>
-                            </div>
-
-                            <div class="dashboard__card pd-1">
-                                <div class="dashboard__card__head flex flex-al mb-1">
-                                    <h4 class="tag">News</h4>
-                                    <div class="dashboard__head__arrows gap-1 flex">
-                                        <i onclick="navigateToPrecedent()" class="fa fa-angle-down"></i>
-                                        <i onclick="navigateToFollowing()" class="fa fa-angle-down"></i>
                                     </div>
-                                </div>
-                                <?php foreach ($_SESSION['news'] as $new) : ?>
-                                    <?php if (isset($new->ba_id)) : ?>
-                                        <div class="news__banner pd-1" style="background-image: url(<?= $new->image ?>);">
-                                            <!-- new title-->
-                                            <p class="news__banner__title flex mb-1"><?= $new->title ?></p>
-                                            <?php if (isset($new->html)) :  ?>
-                                                <div class="news__banner__desc pd-1">
-                                                    <?php if (isset($new->url)) : ?>
-                                                        <!-- new video-->
-                                                        <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                    <?php endif; ?>
-                                                    <!-- new description -->
-                                                    <?= $new->html ?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            </div>
-
-                            <div class="dashboard__card pd-1">
-                                <div class="dashboard__card__head flex flex-al mb-1">
-                                    <h4 class="tag">Classes</h4>
-                                    <span class="course-list__course__coef">coef</span>
-                                </div>
-                                <div class="course-list">
-                                    <?php foreach ($_SESSION['grades'] as $course) : ?>
-                                        <div class="course-list__course flex">
-                                            <!-- name of the course - professor -->
-                                            <p><?= $course->course . " - " ?><span class='course-list__course__teacher'><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
-                                            <!-- coef -->
-                                            <span class="course-list__course__coef"><?= $course->coef ?></span>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
+                                <?php endforeach ?>
                             </div>
                         </div>
 
-                        <div class="dashboard__row flex">
-
-                            <div class="dashboard__card pd-1">
-                                <div class="dashboard__card__head flex flex-al mb-1">
-                                    <div class="dashboard__card__head__title flex flex-al gap-1">
-                                        <h4 class="tag">Planning</h4>
-                                        <?php foreach ($DAYS as $key => $day) : ?>
-                                            <div class="date-container flex">
-                                                <p class="date"><?= date('l', $day) ?></p>
-                                                <p class="date"><?= date('d/m/y', $day) ?></p>
-                                            </div>
-                                        <?php endforeach; ?>
-                                    </div>
-                                    <div class="dashboard__head__arrows gap-1 flex">
-                                        <i onclick="navigateToPrecedentDay()" id="pl-lst" class="fa fa-angle-down"></i>
-                                        <i onclick="navigateToFollowingDay()" id="pl-nxt" class="fa fa-angle-down"></i>
-                                    </div>
+                        <div class="dashboard__card pd-1">
+                            <div class="dashboard__card__head flex flex-al mb-1">
+                                <h4 class="tag">News</h4>
+                                <div class="dashboard__head__arrows gap-1 flex">
+                                    <i onclick="navigateToPrecedent()" class="fa fa-angle-down"></i>
+                                    <i onclick="navigateToFollowing()" class="fa fa-angle-down"></i>
                                 </div>
-                                <div class="planning__content">
-                                    <?php foreach ($DAYS as $key => $day) : ?>
-                                        <div <?php if (date('l', $day) == date('l')) : ?> class="current day" <?php else : ?> class="day" <?php endif ?>>
-                                            <?php foreach ($_SESSION['agenda'] as $key => $class) : ?>
-                                                <?php if (date('l', $class->start_date / 1000) == date('l', $day)) : //if the name of the day (ex : 'Monday') is equal --> same day
-
-                                                    //calcul the class time
-                                                    $startDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->start_date / 1000));
-                                                    $endDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->end_date / 1000));
-
-                                                    //calcul the class time
-                                                    $interval = date_diff($startDate, $endDate);
-                                                    if ($interval->format('%h') >= 4) {
-                                                        $className = 'class--long-4';
-                                                    } elseif ($interval->format('%h') >= 3) {
-                                                        $className = 'class--long';
-                                                    } else {
-                                                        $className = "";
-                                                    }
-                                                ?>
-                                                    <div class="class <?php if (!empty($className)) {
-                                                                            echo $className;
-                                                                        } ?>" onclick="showClassModal(); getClassInfo(<?= $key ?>);">
-                                                        <p class="class__hour mb-1"><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
-                                                        <div class="class__details ml-1">
-                                                            <p><?= $class->name ?></p>
-                                                            <?php if (isset($class->comment)) : ?>
-                                                                <p><?= $class->comment ?></p>
-                                                            <?php endif; ?>
-                                                            <?php if (isset($class->rooms[0])) : ?>
-                                                                <?php if (isset($class->teacher) && strlen($class->teacher) > 1) : /* $class->teacher is equal to 1 caracter when it's not defined */ ?>
-                                                                    <p><?= $class->teacher ?> - <?= $class->rooms[0]->name ?></p>
-                                                                <?php else : ?>
-                                                                    <p><?= $class->rooms[0]->name ?></p>
-                                                                <?php endif; ?>
-                                                            <?php endif; ?>
-                                                        </div>
-                                                    </div>
+                            </div>
+                            <?php foreach ($_SESSION['news'] as $new) : ?>
+                                <?php if (isset($new->ba_id)) : ?>
+                                    <div class="news__banner pd-1" style="background-image: url(<?= $new->image ?>);">
+                                        <!-- new title-->
+                                        <p class="news__banner__title flex mb-1"><?= $new->title ?></p>
+                                        <?php if (isset($new->html)) :  ?>
+                                            <div class="news__banner__desc pd-1">
+                                                <?php if (isset($new->url)) : ?>
+                                                    <!-- new video-->
+                                                    <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                                 <?php endif; ?>
-                                            <?php endforeach; ?>
+                                                <!-- new description -->
+                                                <?= $new->html ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <div class="dashboard__card pd-1">
+                            <div class="dashboard__card__head flex flex-al mb-1">
+                                <h4 class="tag">Classes</h4>
+                                <span class="course-list__course__coef">coef</span>
+                            </div>
+                            <div class="course-list">
+                                <?php foreach ($_SESSION['grades'] as $course) : ?>
+                                    <div class="course-list__course flex">
+                                        <!-- name of the course - professor -->
+                                        <p><?= $course->course . " - " ?><span class='course-list__course__teacher'><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
+                                        <!-- coef -->
+                                        <span class="course-list__course__coef"><?= $course->coef ?></span>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard__row flex">
+
+                        <div class="dashboard__card pd-1">
+                            <div class="dashboard__card__head flex flex-al mb-1">
+                                <div class="dashboard__card__head__title flex flex-al gap-1">
+                                    <h4 class="tag">Planning</h4>
+                                    <?php foreach ($DAYS as $key => $day) : ?>
+                                        <div class="date-container flex">
+                                            <p class="date"><?= date('l', $day) ?></p>
+                                            <p class="date"><?= date('d/m/y', $day) ?></p>
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
+                                <div class="dashboard__head__arrows gap-1 flex">
+                                    <i onclick="navigateToPrecedentDay()" id="pl-lst" class="fa fa-angle-down"></i>
+                                    <i onclick="navigateToFollowingDay()" id="pl-nxt" class="fa fa-angle-down"></i>
+                                </div>
+                            </div>
+                            <div class="planning__content">
+                                <?php foreach ($DAYS as $key => $day) : ?>
+                                    <div <?php if (date('l', $day) == date('l')) : ?> class="current day" <?php else : ?> class="day" <?php endif ?>>
+                                        <?php foreach ($_SESSION['agenda'] as $key => $class) : ?>
+                                            <?php if (date('l', $class->start_date / 1000) == date('l', $day)) : //if the name of the day (ex : 'Monday') is equal --> same day
+
+                                                //calcul the class time
+                                                $startDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->start_date / 1000));
+                                                $endDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->end_date / 1000));
+
+                                                //calcul the class time
+                                                $interval = date_diff($startDate, $endDate);
+                                                if ($interval->format('%h') >= 4) {
+                                                    $className = 'class--long-4';
+                                                } elseif ($interval->format('%h') >= 3) {
+                                                    $className = 'class--long';
+                                                } else {
+                                                    $className = "";
+                                                }
+                                            ?>
+                                                <div class="class <?php if (!empty($className)) {
+                                                                        echo $className;
+                                                                    } ?>" onclick="showClassModal(); getClassInfo(<?= $key ?>);">
+                                                    <p class="class__hour mb-1"><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
+                                                    <div class="class__details ml-1">
+                                                        <p><?= $class->name ?></p>
+                                                        <?php if (isset($class->comment)) : ?>
+                                                            <p><?= $class->comment ?></p>
+                                                        <?php endif; ?>
+                                                        <?php if (isset($class->rooms[0])) : ?>
+                                                            <?php if (isset($class->teacher) && strlen($class->teacher) > 1) : /* $class->teacher is equal to 1 caracter when it's not defined */ ?>
+                                                                <p><?= $class->teacher ?> - <?= $class->rooms[0]->name ?></p>
+                                                            <?php else : ?>
+                                                                <p><?= $class->rooms[0]->name ?></p>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
                 </div>
-                <script src=" ./public/js/navigate.js"></script>
-                <script>
-                    init_socket('<?= $_SESSION['class']->promotion; ?>');
-                </script>
-            <?php endif; ?>
-        </div>
-
-        <div class="class__modal__bg" id="class__modal__bg">
-            <div class="class__modal" id="class__modal">
-                <div class="class__modal__title">
-                </div>
             </div>
-            <!-- <img src="https://www.section.io/engineering-education/authors/michael-barasa/avatar.png" class="michael" id="michael" alt=""> -->
-            <?php require './components/flash_message.php'; ?>
+            <script src=" ./public/js/navigate.js"></script>
+        <?php endif; ?>
+    </div>
+
+    <div class="class__modal__bg" id="class__modal__bg">
+        <div class="class__modal" id="class__modal">
+            <div class="class__modal__title">
+            </div>
+        </div>
+    </div>
+
+    <!-- <img src="https://www.section.io/engineering-education/authors/michael-barasa/avatar.png" class="michael" id="michael" alt=""> -->
+    <?php require './components/flash_message.php'; ?>
 </body>
 
 </html>

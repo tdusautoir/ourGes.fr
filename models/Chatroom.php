@@ -9,7 +9,6 @@ class ChatRoom
     private $message;
     protected $connect;
 
-
     public function __construct()
     {
         require_once("Db.php");
