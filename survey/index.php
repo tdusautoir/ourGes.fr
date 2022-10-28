@@ -76,7 +76,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
             <div class="survey">
                 <?php if (!isset($_GET['token']) || empty($_GET['token'])) : ?>
                     <div class="survey__form">
-                        <form action="../controller/survey.php?action='add'" method="POST">
+                        <form action="../controller/survey.php" method="POST">
                             <label for="name">Nom du sondage</label>
                             <input type="text" name="name">
                             <label for="description">Description</label>
@@ -97,7 +97,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         <p>Nom : <?= $survey_data['name'] ?></p>
                         <p>Description : <?= $survey_data['description'] ?></p>
                         <div class="survey__form">
-                            <form action="../controller/survey.php?action='response'" method="POST">
+                            <form action="../controller/survey.php" method="POST">
                             </form>
                         </div>
                     </div>
