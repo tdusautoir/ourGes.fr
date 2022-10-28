@@ -119,7 +119,7 @@ class Survey
 
     function get_choices()
     {
-        $req = $this->connect->prepare('SELECT id, choice FROM survey_choices INNER JOIN survey ON survey.id = survey_choices.survey_id WHERE token = :token');
+        $req = $this->connect->prepare('SELECT survey_choices.id, choice FROM survey_choices INNER JOIN survey ON survey.id = survey_choices.survey_id WHERE token = :token');
         $req->bindValue(':token', $this->token);
         $stmt = $req->execute();
         $choices = $req->fetchAll(PDO::FETCH_ASSOC);
