@@ -107,9 +107,14 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         <h1><?= $survey_data['name'] ?></h1>
                     </div>
                     <div class="survey__content">
-                        <p>Description : <?= $survey_data['description'] ?></p>
+                        <?php if (isset($survey_data['description']) && !empty($survey_data['description'])) : ?>
+                            <p>Description : <?= $survey_data['description'] ?></p>
+                        <?php endif; ?>
                         <div class="survey__form">
-                            <form action="../controller/survey.php" method="POST">
+                            <form action="../controller/survey.php?method=response" method="POST">
+                                <?php foreach ($survey_data['choices'] as $choice) : ?>
+                                    <button type="text" value='<?= $choice['id'] ?>' name="response"><?= $choice['choice'] ?></button>
+                                <?php endforeach; ?>
                             </form>
                         </div>
                     </div>

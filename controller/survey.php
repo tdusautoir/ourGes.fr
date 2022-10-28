@@ -5,16 +5,16 @@ require_once '../functions.php';
 require_once '../models/Survey.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if ($_GET['method'] == 'response') {
+        echo "Vous avez repondu mais je vais me coucher, Achille fait le front de la page d'avant";
+        return;
+    }
+
     $survey = new Survey;
 
     if (!isset($_POST['name']) || empty($_POST['name'])) {
         //erreur
         die('erreur 1');
-        return;
-    }
-
-    if (!isset($_POST['description']) || empty($_POST['description'])) {
-        die('erreur 2');
         return;
     }
 
@@ -31,11 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $survey->setName($_POST['name']);
     $survey->setDescription($_POST['description']);
     $survey->setType($_POST['type']);
+    $survey->setNbChoice($_POST['nb-choice']);
     for ($i = 1; $i <= $_POST['nb-choice']; $i++) {
-        if (!isset($_POST["choice-$i"]) || empty($_POST["choice-$i"])) {
-            return;
+        if (isset($_POST["choice-$i"]) && !empty($_POST["choice-$i"])) {
+            $survey->setChoices($_POST["choice-$i"]);
+        } else {
+            $survey->setChoices("Choix $i");
         }
-        $survey->setChoices($_POST["choice-$i"]);
     }
     $token = guidv4();
     $survey->setToken($token);
@@ -43,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if ($survey->create_survey()) {
         header("location: ../survey/?token=$token");
     } else {
-        //erreur
+        echo "Erreur lors de la création";
         return;
     }
 }
