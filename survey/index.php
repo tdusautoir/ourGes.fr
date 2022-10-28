@@ -77,21 +77,27 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         <form action="../controller/survey.php" method="POST">
                             <div class="survey__form__name">
                                 <input type="text" name="name" class="survey-name" autocomplete="off" maxlength="50" placeholder="Name">
-                                <p onclick="addDesc()" id="survey__desc__name" class="survey__desc__name"><i class="fa fa-plus"></i>Add a description</p>
+                                <p onclick="showDesc()" id="survey-desc-btn" class="survey__desc__name"><i class="fa fa-plus"></i>Add a description</p>
                             </div>
                             <div class="survey-desc-container" id="survey__desc">
                                 <input type="text" name="description" class="survey__desc" autocomplete="off" maxlength="100" placeholder="Description (optional)">
-                                <p onclick="addDesc()" id="survey__desc__name" class="desc__mask"><i class="fa fa-minus"></i>Mask description</p>
+                                <p onclick="showDesc()" id="survey-desc-btn" class="desc__mask"><i class="fa fa-minus"></i>Mask description</p>
                             </div>
                             <select name="type">
                                 <option value="1" selected disabled>Type</option>
                                 <option value="1">Choix simple</option>
                                 <option value="2">Plusieurs choix</option>
                             </select>
-                            <input type="hidden" name="nb-choice" value="1">
-                            <input type="text" name="choice-1" autocomplete="off" maxlength="50" placeholder="Choice">
+                            <input type="hidden" id="nb-choice" name="nb-choice" value="1">
+                            <div class="survey-choice-container">
+                                <div id="survey-choices" class="survey-choices" id="survey__desc">
+                                    <div class="survey-choices-input">
+                                        <input type="text" name="choice-1" autocomplete="off" maxlength="50" placeholder="Choice 1">
+                                    </div>
+                                </div>
+                                <p onclick="addOption()" id="survey-choice-btn" class="desc__mask"><i class="fa fa-plus"></i>Add choice</p>
+                            </div>
                             <div class="create-container">
-                                <!-- <input type="checkbox"> -->
                                 <button type="submit" class="tag">Create</button>
                             </div>
                         </form>

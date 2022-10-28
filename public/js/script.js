@@ -203,19 +203,4 @@ function transition() {
   }
 }
 
-function addDesc() {
-  let desc = document.getElementById("survey__desc")
-  let name = document.getElementById("survey__desc__name")
-
-  if (desc.classList.contains("active")) {
-    desc.className = "survey-desc-container close";
-    name.className = "survey__desc__name close";
-  }
-  else {
-    desc.className = "survey-desc-container active";
-    name.className = "survey__desc__name active";
-  }
-
-}
-
 /* developed by achille david and thibaut dusautoir */

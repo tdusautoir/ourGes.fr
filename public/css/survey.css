@@ -35,6 +35,10 @@
     flex-direction: column;
 }
 
+.survey__form form input {
+    width: calc(100% - 40px);
+}
+
 .survey__form form input,
 .survey__form form select {
     border: none;
@@ -53,6 +57,40 @@
 
 .survey__form form input:focus {
     outline: 1px solid var(--tag-cl);
+}
+
+.survey__form form p {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-right: 15px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.survey__form form i {
+    font-size: 0.4rem;
+}
+
+.survey__form form p {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0 0 15px;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: var(--transition);
+    width: fit-content;
+}
+
+.survey__form form p:hover {
+    filter: brightness(0.85);
+}
+
+.survey__form form p.active {
+    display: none;
 }
 
 .survey__form form select {
@@ -77,50 +115,11 @@
     flex-direction: column;
 }
 
-.survey__form__name p {
-    display: flex;
-    gap: 5px;
-    margin: 10px 0 0 15px;
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.9);
-    cursor: pointer;
-    transition: var(--transition);
-    width: fit-content;
-}
-
-.survey__form__name p:hover,
-.survey-desc-container p:hover {
-    filter: brightness(0.85);
-}
-
-.survey__form__name p.active {
-    display: none;
-}
-
 .survey-desc-container {
     display: unset;
     flex-direction: column;
     align-items: flex-end;
     gap: 10px;
-}
-
-.survey-desc-container input {
-    width: calc(100% - 40px);
-}
-
-.survey-desc-container p {
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.9);
-    margin-right: 15px;
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.survey-desc-container i {
-    font-size: 0.4rem;
 }
 
 .survey__desc__name.active {
@@ -133,6 +132,24 @@
 
 .survey-desc-container.active {
     display: flex;
+}
+
+.survey-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.survey-choices-input {
+    display: flex;
+    align-items: center;
+}
+
+.survey-choices-input i {
+    font-size: 1rem!important;
+    font-weight: 100;
+    cursor: pointer;
+    padding: 16px 20px;
 }
 
 .survey__title {
