@@ -181,6 +181,12 @@
     background: #3d406d66;
 }
 
+.survey__form form input[type=checkbox] {
+    background-color: none;
+    border: none;
+    appearance: none;
+}
+
 @media screen and (max-width:900px) {
     .survey {
         flex-direction: column;

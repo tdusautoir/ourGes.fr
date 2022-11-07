@@ -98,11 +98,13 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                 <p onclick="addOption()" id="survey-choice-btn" class="desc__mask"><i class="fa fa-plus"></i>Add choice</p>
                             </div>
                             <div class="create-container">
+                                <input type="checkbox">
                                 <button type="submit" class="tag">Create</button>
                             </div>
                         </form>
                     </div>
                 <?php else : ?>
+                    .
                     <div class="survey__title">
                         <h1><?= $survey_data['name'] ?></h1>
                     </div>
