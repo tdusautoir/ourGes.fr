@@ -6,7 +6,7 @@ require_once '../models/Survey.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if ($_GET['method'] == 'response') {
-        echo "Vous avez repondu mais je vais me coucher, Achille fait le front de la page d'avant";
+        echo "Vous avez repondu mais je vais me coucher, Achille fait (on met un S à fais quand c'est à la deuxième personne enfait) le front de la page d'avant";
         return;
     }
 

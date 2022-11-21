@@ -12,7 +12,7 @@ function showDesc() {
 }
 
 function addOption() {
-  let choiceContainer = document.getElementById("survey-choices");
+  let choiceContainer = document.getElementById("choices__container");
   let inputNbChoice = document.getElementById("nb-choice");
   let nbChoice = inputNbChoice.value;
 
@@ -20,7 +20,7 @@ function addOption() {
 
   choiceContainer.insertAdjacentHTML(
     "beforeend",
-    `<div id="choice-${nbChoice}" class="survey-choices-input"><input type='text' name='choice-${nbChoice}' autocomplete='off' maxlength='50' placeholder='Choice ${nbChoice}'><i onclick="removeOption(${nbChoice})" class="fa fa-xmark"></i></div>`
+    `<div id="choice-${nbChoice}" class="survey-choices-input"><input type='text' class='survey__choice__snd' name='choice-${nbChoice}' autocomplete='off' maxlength='50' placeholder='Choice ${nbChoice}'><i onclick="removeOption(${nbChoice})" class="fa fa-xmark choice-close"></i></div>`
   );
 
   inputNbChoice.value++;
@@ -42,4 +42,16 @@ function removeOption(choiceId) {
   }
 
   inputNbChoice.value--;
+}
+
+function choose(choice) {
+  choice.className = "survey__choice survey__choice-check";
+  let choices = document.getElementById("survey__choices");
+  let res = document.getElementById("restest");
+  choices.style.pointerEvents = "none";
+  choices.className += " stat";
+  setTimeout(() => {
+    choice.className = "survey__choice survey__choice-checked";
+    stat.className += " stat"
+  }, 800);
 }

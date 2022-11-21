@@ -25,7 +25,6 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +38,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     <link rel="stylesheet" href="../public/css/var.css">
     <link rel="stylesheet" href="../public/css/global.css">
     <link rel="stylesheet" href="../public/css/survey.css">
+    <link rel="stylesheet" href="../public/css/responsive.css">
     <link rel="icon" href="../public/img/favicon.png" />
     <script src="../public/js/jquery-3.6.0.min.js"></script>
     <script src="../public/js/script.js"></script>
@@ -61,76 +61,99 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     <div class="nav__submenu pd-1" id="dropdown-menu">
         <div class="nav__submenu__head mb-1">
             <p>Signed in as</p>
-            <span><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></span>
+            <span>
+                <?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?>
+            </span>
         </div>
         <div class="nav__submenu__foot flex">
-            <p class="tag"><?= $_SESSION['class']->promotion ?></p>
+            <p class="tag">
+                <?= $_SESSION['class']->promotion ?>
+            </p>
             <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
         </div>
     </div>
     <div class="container container-survey" id="container">
         <div class="content m-0a">
-            <div class="survey">
-                <?php if (!isset($_GET['token']) || empty($_GET['token'])) : ?>
-                    <div class="survey__form">
-                        <h1>Create a survey</h1>
-                        <form action="../controller/survey.php" method="POST">
-                            <div class="survey__form__name">
-                                <input type="text" name="name" class="survey-name" autocomplete="off" maxlength="50" placeholder="Name">
-                                <p onclick="showDesc()" id="survey-desc-btn" class="survey__desc__name"><i class="fa fa-plus"></i>Add a description</p>
+            <div class="db-btn mb-2 flex gap-2">
+                <a href="javascript:delay('../')" onclick="transition()">
+                    <p class="db-btn__itm gap-1 flex flex-al tag"> Back </p>
+                </a>
+            </div>
+            <div class="dashboard flex">
+                <div class="dashboard__row flex">
+                    <div class="dashboard__card pd-1">
+                        <div class="dashboard__card__head flex flex-al mb-2">
+                            <div class="dashboard__card__head__title flex flex-al gap-1">
+                                <h4 class="tag">Create a survey</h4>
                             </div>
-                            <div class="survey-desc-container" id="survey__desc">
-                                <input type="text" name="description" class="survey__desc" autocomplete="off" maxlength="100" placeholder="Description (optional)">
-                                <p onclick="showDesc()" id="survey-desc-btn" class="desc__mask"><i class="fa fa-minus"></i>Mask description</p>
+                        </div>
+                        <form action="../controller/survey.php" class="survey__create" method="POST">
+                            <input type="text" name="name" autocomplete="off" maxlength="50" placeholder="Name">
+                            <input type="text" name="description" autocomplete="off" maxlength="100" placeholder="Description (optional)">
+                            <div class="create__row">
+                                <select name="type">
+                                    <option value="1" selected disabled>Type</option>
+                                    <option value="1">Simple choice</option>
+                                    <option value="2">Multiple choices</option>
+                                </select>
+                                <select name="type">
+                                    <option value="1" selected disabled>Responses</option>
+                                    <option value="1">Normal</option>
+                                    <option value="2">Anonymous</option>
+                                </select>
                             </div>
-                            <select name="type">
-                                <option value="1" selected disabled>Type</option>
-                                <option value="1">Choix simple</option>
-                                <option value="2">Plusieurs choix</option>
-                            </select>
                             <input type="hidden" id="nb-choice" name="nb-choice" value="1">
-                            <div class="survey-choice-container">
-                                <div id="survey-choices" class="survey-choices" id="survey__desc">
-                                    <div class="survey-choices-input">
-                                        <input type="text" name="choice-1" autocomplete="off" maxlength="50" placeholder="Choice 1">
-                                    </div>
+                            <div id="choices__container" class="choices__container">
+                                <div class="survey-choices-input">
+                                    <input type="text" name="choice-1" autocomplete="off" maxlength="50" placeholder="Choice 1">
                                 </div>
-                                <p onclick="addOption()" id="survey-choice-btn" class="desc__mask"><i class="fa fa-plus"></i>Add choice</p>
                             </div>
-                            <div class="create-container">
-                                <input type="checkbox">
-                                <button type="submit" class="tag">Create</button>
-                            </div>
+                            <p onclick="addOption()" id="survey-choice-btn" class="desc__mask"><i class="fa fa-plus"></i>Add choice</p>
+                            <button type="submit" class="tag">Create</button>
                         </form>
                     </div>
-                <?php else : ?>
-                    .
-                    <div class="survey__title">
-                        <h1><?= $survey_data['name'] ?></h1>
-                    </div>
-                    <div class="survey__content">
-                        <?php if (isset($survey_data['description']) && !empty($survey_data['description'])) : ?>
-                            <p>Description : <?= $survey_data['description'] ?></p>
+                </div>
+                <div class="dashboard__col flex flex-col">
+                    <div class="dashboard__card pd-1">
+                        <?php if (isset($_GET['token'])) : ?>
+                            <div class="dashboard__card__head flex flex-al mb-1">
+                                <h4 class="tag">Survey</h4>
+                            </div>
+                            <div class="survey__content">
+                                <h1 class="mb-1"><?= $survey_data['name'] ?></h1>
+                                <?php if (isset($survey_data['description']) && !empty($survey_data['description'])) : ?>
+                                    <p class="mb-2"><?= $survey_data['description'] ?></p>
+                                <?php endif; ?>
+                                <!-- <form action="../controller/survey.php?method=response" method="POST"> -->
+                                <div class="survey__choices" id="survey__choices">
+                                    <?php foreach ($survey_data['choices'] as $choice) : ?>
+                                        <div class="survey__choice" id="survey__choice" onclick="choose(this)">
+                                            <button value='<?= $choice['id'] ?>'>
+                                                <p><?= $choice['choice'] ?></p>
+                                            </button>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <!-- </form> -->
+                            </div>
+                        <?php else : ?>
+                            <div class="dashboard__card__head flex flex-al mb-1">
+                                <h4 class="tag">Survey</h4>
+                            </div>
                         <?php endif; ?>
-                        <div class="survey__form">
-                            <form action="../controller/survey.php?method=response" method="POST">
-                                <?php foreach ($survey_data['choices'] as $choice) : ?>
-                                    <button type="text" value='<?= $choice['id'] ?>' name="response"><?= $choice['choice'] ?></button>
-                                <?php endforeach; ?>
-                            </form>
+                    </div>
+                    <div class="dashboard__card pd-1">
+                        <div class="dashboard__card__head flex flex-al mb-1">
+                            <h4 class="tag">Recent</h4>
                         </div>
                     </div>
-                <?php endif; ?>
+                </div>
             </div>
-            <a href="../">
-                <p>retour</p>
-            </a>
         </div>
     </div>
-
+    </div>
     <?php require '../components/flash_message.php'; ?>
 </body>
 
 </html>
-
 <!-- developed by achille david and thibaut dusautoir -->

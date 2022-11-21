@@ -21,12 +21,23 @@ require_once './agenda.php';
     <link rel="stylesheet" href="./public/css/var.css">
     <link rel="stylesheet" href="./public/css/global.css">
     <link rel="stylesheet" href="./public/css/survey.css">
+    <link rel="stylesheet" href="../public/css/responsive.css">
     <link rel="icon" href="./public/img/favicon.png" />
     <script src="./public/js/script.js"></script>
     <script src="./public/js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="m-0a ovf" id="body">
+    <div class="login m-0a" id="login-form">
+        <form class="flex flex-col flex-al" action="./controller/login.php" method="POST">
+            <div class="login__items gap-1 mb-1 flex flex-al">
+                <input name="username" type="text" placeholder="username" autocomplete="off" maxlength="20">
+                <input id="password" name="password" type="password" placeholder="password" autocomplete="off" maxlength="30">
+                <i onclick="showPwd()" class="fa fa-eye-slash" id="eye"></i>
+            </div>
+            <button type="submit" class="tag">connect</button>
+        </form>
+    </div>
     <nav class="flex flex-al">
         <div class="nav__logo flex flex-js pd-1">
             <p>our</p>
@@ -59,16 +70,6 @@ require_once './agenda.php';
 
     <div class="container container-survey" id="container">
         <?php if (!is_logged()) : ?>
-            <div class="login m-0a" id="login-form">
-                <form class="flex flex-col flex-al" action="./controller/login.php" method="POST">
-                    <div class="login__items gap-1 mb-1 flex flex-al">
-                        <input name="username" type="text" placeholder="username" autocomplete="off" maxlength="20">
-                        <input id="password" name="password" type="password" placeholder="password" autocomplete="off" maxlength="30">
-                        <i onclick="showPwd()" class="fa fa-eye-slash" id="eye"></i>
-                    </div>
-                    <button type="submit" class="tag">connect</button>
-                </form>
-            </div>
             <div class="content mt-3 flex">
                 <div class="hero flex flex-col flex-js">
                     <span class="tag mb-2">Built by students, for students</span>

@@ -201,4 +201,38 @@
     }
 }
 
+@keyframes choiceIn {
+    from {
+        transform: rotate(20deg) translate(-50%, calc(-50% - 15px));
+        opacity: 0;
+    }
+
+    to {
+        transform: rotate(0) translateY(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+@keyframes choiceOut {
+    from {
+        transform: rotate(0) translateY(-50%, -50%);
+        opacity: 1;
+    }
+
+    to {
+        transform: rotate(20deg) translate(-50%, calc(-50% - 15px));
+        opacity: 0;
+    }
+}
+
+@keyframes stats {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 30%;
+    }
+}
+
 /* developed by achille david and thibaut dusautoir */

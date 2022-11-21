@@ -9,186 +9,183 @@
     border-radius: var(--border-radius);
 }
 
-.survey {
-    display: flex;
-    gap: 20px;
-}
-
-.survey__form {
-    flex-basis: 50%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background: var(--background-light);
-    border-radius: var(--border-radius);
-}
-
-.survey__form form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.survey__form form {
-    display: flex;
-    flex-direction: column;
-}
-
-.survey__form form input {
-    width: calc(100% - 40px);
-}
-
-.survey__form form input,
-.survey__form form select {
-    border: none;
-    outline: none;
-    padding: 15px 20px;
-    font-size: 1rem;
-    background-color: var(--background);
-    border-radius: var(--border-radius);
-    color: var(--tag-cl);
-    appearance: none;
-}
-
-.survey__form form input.survey-name {
-    font-size: 1.2rem;
-}
-
-.survey__form form input:focus {
-    outline: 1px solid var(--tag-cl);
-}
-
-.survey__form form p {
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.9);
-    margin-right: 15px;
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.survey__form form i {
-    font-size: 0.4rem;
-}
-
-.survey__form form p {
-    display: flex;
-    gap: 5px;
-    margin: 10px 0 0 15px;
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.9);
-    cursor: pointer;
-    transition: var(--transition);
-    width: fit-content;
-}
-
-.survey__form form p:hover {
-    filter: brightness(0.85);
-}
-
-.survey__form form p.active {
-    display: none;
-}
-
-.survey__form form select {
-    width: 100%;
-    color: var(--tag-cl);
-    background-image: url(../img/arrow.png);
-    background-position: right 10px bottom 50%;
-    background-repeat: no-repeat;
-    background-size: 10px;
-    cursor: pointer;
-}
-
-.survey__form h1 {
+.survey__content h1 {
     text-align: center;
     font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 10px;
 }
 
-.survey__form__name {
+.survey__content p.mb-2 {
+    text-align: center;
+}
+
+.survey__choices {
     display: flex;
-    flex-direction: column;
-}
-
-.survey-desc-container {
-    display: unset;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 10px;
-}
-
-.survey__desc__name.active {
-    display: none;
-}
-
-.survey-desc-container {
-    display: none;
-}
-
-.survey-desc-container.active {
-    display: flex;
-}
-
-.survey-choices {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.survey-choices-input {
-    display: flex;
-    align-items: center;
-}
-
-.survey-choices-input i {
-    font-size: 1rem!important;
-    font-weight: 100;
-    cursor: pointer;
-    padding: 16px 20px;
-}
-
-.survey__title {
-    display: flex;
-    width: 100%;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 20px;
+    background: var(--html-bg);
+    padding: 25px;
+    border-radius: var(--border-radius);
 }
 
-.survey__title h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    max-width: 100%;
-}
-
-.create-container {
+.survey__choice {
     display: flex;
+    width: 48%;
+    min-height: 130px;
+}
+
+.survey__choice button {
     width: 100%;
-    justify-content: end;
-}
-
-.survey__form form button {
+    background: var(--tag-bg);
+    color: var(--tag-cl);
+    text-transform: uppercase;
+    border-radius: var(--border-radius);
     border: 2px solid var(--tag-cl);
-    width: fit-content;
-    transition: 300ms;
+    transition: var(--transition);
+    position: relative;
+    padding: 20px 30px;
 }
 
-.survey__form form button:hover {
-    background: #3d406d66;
+.survey__choice button p {
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
-.survey__form form input[type=checkbox] {
-    background-color: none;
-    border: none;
+.survey__choice button:hover {
+    background: #3d406db8;
+}
+
+.survey__choice-checked button,
+.survey__choice-check button {
+    border: 2px solid #289a37;
+    color: #289a37;
+    background-color: #cbe6cf;
+}
+
+.survey__choice-checked button:hover,
+.survey__choice-check button:hover {
+    background-color: #cbe6cf;
+}
+
+.survey__choice-check button {
+    color: #cbe6cf;
+}
+
+.survey__choice-check button:before {
+    content: "";
+    position: absolute;
+    height: 50%;
+    aspect-ratio: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url(../img/check.svg);
+    animation: choiceIn 300ms ease both;
+}
+
+.survey__choice-checked button:before {
+    content: "";
+    position: absolute;
+    height: 50%;
+    aspect-ratio: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url(../img/check.svg);
+    animation: choiceOut 300ms ease both;
+}
+
+.stat .survey__choice {
+    position: relative;
+}
+
+.stat .survey__choice button {
+    opacity: 0.5;
+}
+
+.stat .survey__choice-checked button,
+.stat .survey__choice-check button {
+    opacity: 1;
+}
+
+
+.stat .survey__choice::after {
+    content: '';
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    width: 0;
+    height: 100%;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    background-color: red;
+    animation: stats 600ms 1500ms ease both;
+}
+
+.survey__create {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.create__row {
+    display: flex;
+    gap: 20px;
+}
+
+.create__row select {
+    width: 50%;
     appearance: none;
 }
 
-@media screen and (max-width:900px) {
-    .survey {
-        flex-direction: column;
-    }
+.choices__container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.choices__container .survey-choices-input {
+    flex-basis: calc(50% - 10px);
+    position: relative;
+}
+
+.survey__choice__snd {
+    padding-right: 30px !important;
+    width: calc(100% - 50px) !important;
+}
+
+.survey__create input,
+.survey__create select {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: var(--border-radius);
+    border: none;
+    outline: 1px solid var(--tag-cl);
+    background-color: var(--background);
+    color: var(--tag-cl);
+    font-weight: 400;
+}
+
+.survey__create input::placeholder {
+    color: var(--tag-cl);
+}
+
+.choices__container .survey-choices-input input {
+    width: calc(100% - 40px);
+}
+
+.survey__create select {
+    background-image: url(../img/angle-down.svg);
+    background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: right 10px bottom 50%;
+    padding-right: 35px;
+}
+
+.choice-close {
+    position: absolute;
+    right: 10px;
+    bottom: 30%;
+    color: black;
+    cursor: pointer;
 }
