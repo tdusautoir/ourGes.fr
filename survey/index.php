@@ -10,6 +10,10 @@ if (!is_logged()) {
     header("location: ../");
 }
 
+if(!is_logged() && isset($_GET['token']) && !empty($_GET['token'])){
+    header("location: ../?surveyToken=".$_GET['token']);
+}
+
 if (isset($_GET['token']) && !empty($_GET['token'])) {
     $survey = new Survey;
     $survey->setToken($_GET['token']);
@@ -41,7 +45,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     <link rel="stylesheet" href="../public/css/responsive.css">
     <link rel="icon" href="../public/img/favicon.png" />
     <script src="../public/js/jquery-3.6.0.min.js"></script>
-    <script src="../public/js/script.js"></script>
+    <script src="../public/js/script.js" defer></script>
     <script src="../public/js/survey.js"></script>
 </head>
 
@@ -96,11 +100,6 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                     <option value="1">Simple choice</option>
                                     <option value="2">Multiple choices</option>
                                 </select>
-                                <select name="type">
-                                    <option value="1" selected disabled>Responses</option>
-                                    <option value="1">Normal</option>
-                                    <option value="2">Anonymous</option>
-                                </select>
                             </div>
                             <input type="hidden" id="nb-choice" name="nb-choice" value="1">
                             <div id="choices__container" class="choices__container">
@@ -124,17 +123,25 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                 <?php if (isset($survey_data['description']) && !empty($survey_data['description'])) : ?>
                                     <p class="mb-2"><?= $survey_data['description'] ?></p>
                                 <?php endif; ?>
-                                <!-- <form action="../controller/survey.php?method=response" method="POST"> -->
-                                <div class="survey__choices" id="survey__choices">
-                                    <?php foreach ($survey_data['choices'] as $choice) : ?>
-                                        <div class="survey__choice" id="survey__choice" onclick="choose(this)">
-                                            <button value='<?= $choice['id'] ?>'>
-                                                <p><?= $choice['choice'] ?></p>
-                                            </button>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                                <!-- </form> -->
+                                <form action="../controller/survey.php?method=response" id="form_survey" method="POST">
+                                    <div class="survey__choices" id="survey__choices">
+                                        <?php foreach ($survey_data['choices'] as $choice) : ?>
+                                            <div class="survey__choice" id="survey__choice" onclick="choose(this)">
+                                                <?php if($survey_data['type'] == 1): ?>
+                                                    <button value='<?= $choice['id'] ?>'>
+                                                        <p><?= $choice['choice'] ?></p>
+                                                    </button>
+                                                <?php else: ?>
+                                                    <input type='checkbox' value='<?= $choice['id'] ?>' name=<?= strtolower($choice['choice']) ?>>
+                                                    <label for=<?= strtolower($choice['choice']) ?>><?= $choice['choice'] ?></label>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endforeach; ?>
+                                        <?php if(!($survey_data['type'] == 1)): ?>
+                                            <button type="submit">Valider</button>
+                                        <?php endif; ?>
+                                    </div>
+                                </form>
                             </div>
                         <?php else : ?>
                             <div class="dashboard__card__head flex flex-al mb-1">

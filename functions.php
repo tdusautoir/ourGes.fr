@@ -165,6 +165,17 @@ function isInteger($input)
     return (ctype_digit(strval($input)));
 }
 
+
+// Sort the agenda multiple times
+function sortAgenda(){
+    //to sort the agenda
+    if (isset($_SESSION['agenda'])) {
+        for($i = 0; $i < 10; $i++){
+            usort($_SESSION['agenda'], "cmp");
+        }
+    }
+}
+
 //to sort the agenda array by starting date
 function cmp($a, $b)
 {

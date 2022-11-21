@@ -5,9 +5,11 @@ require_once '../functions.php';
 require_once '../models/Survey.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if ($_GET['method'] == 'response') {
-        echo "Vous avez repondu mais je vais me coucher, Achille fait (on met un S à fais quand c'est à la deuxième personne enfait) le front de la page d'avant";
-        return;
+    if(isset($_GET['method'])){
+        if ($_GET['method'] == 'response') {
+            echo "Vous avez repondu mais je vais me coucher, Achille fait (on met un S à fais quand c'est à la deuxième personne enfait) le front de la page d'avant";
+            return;
+        }
     }
 
     $survey = new Survey;

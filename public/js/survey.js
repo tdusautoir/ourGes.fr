@@ -55,3 +55,11 @@ function choose(choice) {
     stat.className += " stat"
   }, 800);
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById('form_survey');
+  form.addEventListener('submit', function(event){
+    event.preventDefault();
+    console.log('test');
+  })
+})

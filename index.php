@@ -28,16 +28,18 @@ require_once './agenda.php';
 </head>
 
 <body class="m-0a ovf" id="body">
-    <div class="login m-0a" id="login-form">
-        <form class="flex flex-col flex-al" action="./controller/login.php" method="POST">
-            <div class="login__items gap-1 mb-1 flex flex-al">
-                <input name="username" type="text" placeholder="username" autocomplete="off" maxlength="20">
-                <input id="password" name="password" type="password" placeholder="password" autocomplete="off" maxlength="30">
-                <i onclick="showPwd()" class="fa fa-eye-slash" id="eye"></i>
-            </div>
-            <button type="submit" class="tag">connect</button>
-        </form>
-    </div>
+    <?php if(!is_logged()): ?>
+        <div class="login m-0a" id="login-form">
+            <form class="flex flex-col flex-al" action="<?= (isset($_GET['surveyToken']) && !empty($_GET['surveyToken'])) ?"./controller/login.php?surveyToken=".$_GET['surveyToken'] : "./controller/login.php" ?>" method="POST">
+                <div class="login__items gap-1 mb-1 flex flex-al">
+                    <input name="username" type="text" placeholder="username" autocomplete="off" maxlength="20">
+                    <input id="password" name="password" type="password" placeholder="password" autocomplete="off" maxlength="30">
+                    <i onclick="showPwd()" class="fa fa-eye-slash" id="eye"></i>
+                </div>
+                <button type="submit" class="tag">connect</button>
+            </form>
+        </div>
+    <?php endif; ?>
     <nav class="flex flex-al">
         <div class="nav__logo flex flex-js pd-1">
             <p>our</p>
