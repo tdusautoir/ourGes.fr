@@ -126,7 +126,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                 <form id="form_survey">
                                     <div class="survey__choices" id="survey__choices">
                                         <?php foreach ($survey_data['choices'] as $choice) : ?>
-                                            <div class="survey__choice" id="survey__choice" onclick="choose(this)">
+                                            <div class="survey__choice" id="survey__choice">
                                                 <?php if($survey_data['type'] == 1): ?>
                                                     <button type="button" value='<?= $choice['id'] ?>' onclick="submitChoice(this)">
                                                         <p><?= $choice['choice'] ?></p>

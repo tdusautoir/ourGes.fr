@@ -59,7 +59,9 @@ function submitChoice(event) {
   formData.set('choice', event.value);
   fetch("../controller/survey.php?method=response", { method: 'POST', body: formData })
     .then((res) => res.json())
-    .then(console.log)
+    .then(() => {
+        choose(event.parentNode);
+    })
     .catch((e) => { console.error(e) });
 }
 
