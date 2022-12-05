@@ -123,16 +123,16 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                 <?php if (isset($survey_data['description']) && !empty($survey_data['description'])) : ?>
                                     <p class="mb-2"><?= $survey_data['description'] ?></p>
                                 <?php endif; ?>
-                                <form action="../controller/survey.php?method=response" id="form_survey" method="POST">
+                                <form id="form_survey">
                                     <div class="survey__choices" id="survey__choices">
                                         <?php foreach ($survey_data['choices'] as $choice) : ?>
                                             <div class="survey__choice" id="survey__choice" onclick="choose(this)">
                                                 <?php if($survey_data['type'] == 1): ?>
-                                                    <button value='<?= $choice['id'] ?>'>
+                                                    <button type="button" value='<?= $choice['id'] ?>' onclick="submitChoice(this)">
                                                         <p><?= $choice['choice'] ?></p>
                                                     </button>
                                                 <?php else: ?>
-                                                    <input type='checkbox' value='<?= $choice['id'] ?>' name=<?= strtolower($choice['choice']) ?>>
+                                                    <input name='choices' type='checkbox' value='<?= $choice['id'] ?>' name=<?= strtolower($choice['choice']) ?>>
                                                     <label for=<?= strtolower($choice['choice']) ?>><?= $choice['choice'] ?></label>
                                                 <?php endif; ?>
                                             </div>

@@ -9,6 +9,7 @@ class Survey
     private $description;
     private $type;
     private $nb_choice;
+    private $user_id;
     private $responses = [];
     private $choices = [];
     protected $survey_id;
@@ -93,6 +94,17 @@ class Survey
         return $this->responses;
     }
 
+    function setUser($user_id)
+    {
+        $this->user_id = $user_id;
+    }
+
+    function getUser()
+    {
+        return $this->user_id;
+    }
+
+
     function create_survey()
     {
         $req = $this->connect->prepare('INSERT INTO survey (token, name, description, type, nb_choice, owner_id) VALUES (:token, :name, :description, :type, :nb_choice, :owner_id)');
@@ -144,6 +156,21 @@ class Survey
 
         if (isset($choices) && !empty($choices)) {
             return $choices;
+        }
+
+        return 0;
+    }
+
+    function send_response() {
+        $responses = $this->getResponses();
+        if(isset($responses) && !empty($responses)){
+            foreach($responses as $response){
+                $req = $this->connect->prepare('INSERT INTO survey_responses (choice_id, user_id) VALUES (:choice_id, :user_id)');
+                $req->bindValue(':choice_id', intval($response));
+                $req->bindValue(':user_id', $this->user_id);
+
+                return $req->execute();
+            }
         }
 
         return 0;

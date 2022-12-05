@@ -5,14 +5,24 @@ require_once '../functions.php';
 require_once '../models/Survey.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+
+    $survey = new Survey;
+
     if(isset($_GET['method'])){
         if ($_GET['method'] == 'response') {
-            echo "Vous avez repondu mais je vais me coucher, Achille fait (on met un S à fais quand c'est à la deuxième personne enfait) le front de la page d'avant";
+            if(isset($_POST['choice']) && isInteger($_POST['choice'])){
+                $survey->setResponses($_POST['choice']);
+                $survey->setUser($_SESSION['profile']->uid);
+                if($survey->send_response()){
+                    echo json_encode(['success' => true]);
+                    return;
+                }
+            }
+            echo json_encode(['error' => true]);
             return;
         }
     }
-
-    $survey = new Survey;
 
     if (!isset($_POST['name']) || empty($_POST['name'])) {
         //erreur

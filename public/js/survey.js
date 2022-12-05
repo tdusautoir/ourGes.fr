@@ -47,19 +47,28 @@ function removeOption(choiceId) {
 function choose(choice) {
   choice.className = "survey__choice survey__choice-check";
   let choices = document.getElementById("survey__choices");
-  let res = document.getElementById("restest");
   choices.style.pointerEvents = "none";
   choices.className += " stat";
   setTimeout(() => {
     choice.className = "survey__choice survey__choice-checked";
-    stat.className += " stat"
   }, 800);
+}
+
+function submitChoice(event) {
+  let formData = new FormData();
+  formData.set('choice', event.value);
+  fetch("../controller/survey.php?method=response", { method: 'POST', body: formData })
+    .then((res) => res.json())
+    .then(console.log)
+    .catch((e) => { console.error(e) });
 }
 
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById('form_survey');
   form.addEventListener('submit', function(event){
     event.preventDefault();
-    console.log('test');
+    let formData = new FormData(form);
+
+    fetch("../controller/survey.php?method=response", { method: 'POST', body: formData }).then((res) => res.json()).then(console.log);
   })
 })
