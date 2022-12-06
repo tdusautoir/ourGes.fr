@@ -10,8 +10,8 @@ if (!is_logged()) {
     header("location: ../");
 }
 
-if(!is_logged() && isset($_GET['token']) && !empty($_GET['token'])){
-    header("location: ../?surveyToken=".$_GET['token']);
+if (!is_logged() && isset($_GET['token']) && !empty($_GET['token'])) {
+    header("location: ../?surveyToken=" . $_GET['token']);
 }
 
 if (isset($_GET['token']) && !empty($_GET['token'])) {
@@ -92,22 +92,30 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                             </div>
                         </div>
                         <form action="../controller/survey.php" class="survey__create" method="POST">
-                            <input type="text" name="name" autocomplete="off" maxlength="50" placeholder="Name">
-                            <input type="text" name="description" autocomplete="off" maxlength="100" placeholder="Description (optional)">
-                            <div class="create__row">
+                            <div class="survey__form__container">
+                                <input type="text" name="name" autocomplete="off" maxlength="50" placeholder="Name">
+                                <input type="text" name="description" autocomplete="off" maxlength="100" placeholder="Description (optional)">
+
+                                <input type="hidden" id="nb-choice" name="nb-choice" value="2">
                                 <select name="type">
                                     <option value="1" selected disabled>Type</option>
                                     <option value="1">Simple choice</option>
                                     <option value="2">Multiple choices</option>
                                 </select>
-                            </div>
-                            <input type="hidden" id="nb-choice" name="nb-choice" value="1">
-                            <div id="choices__container" class="choices__container">
-                                <div class="survey-choices-input">
-                                    <input type="text" name="choice-1" autocomplete="off" maxlength="50" placeholder="Choice 1">
+                                <div id="choices__container" class="choices__container">
+                                    <div class="survey-choices-input">
+                                        <input type="text" name="choice-1" autocomplete="off" maxlength="50" placeholder="Choice 1">
+                                    </div>
+                                    <div class="survey-choices-input">
+                                        <input type="text" name="choice-2" autocomplete="off" maxlength="50" placeholder="Choice 2">
+                                    </div>
+                                </div>
+                                <div class="addOption">
+                                    <div class="addOption__content tag" onclick="addOption()">
+                                        Add a choice<i class="fa fa-plus"></i>
+                                    </div>
                                 </div>
                             </div>
-                            <p onclick="addOption()" id="survey-choice-btn" class="desc__mask"><i class="fa fa-plus"></i>Add choice</p>
                             <button type="submit" class="tag">Create</button>
                         </form>
                     </div>
@@ -127,17 +135,17 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                     <div class="survey__choices" id="survey__choices">
                                         <?php foreach ($survey_data['choices'] as $choice) : ?>
                                             <div class="survey__choice" id="survey__choice">
-                                                <?php if($survey_data['type'] == 1): ?>
+                                                <?php if ($survey_data['type'] == 1) : ?>
                                                     <button type="button" value='<?= $choice['id'] ?>' onclick="submitChoice(this)">
                                                         <p><?= $choice['choice'] ?></p>
                                                     </button>
-                                                <?php else: ?>
+                                                <?php else : ?>
                                                     <input name='choices' type='checkbox' value='<?= $choice['id'] ?>' name=<?= strtolower($choice['choice']) ?>>
                                                     <label for=<?= strtolower($choice['choice']) ?>><?= $choice['choice'] ?></label>
                                                 <?php endif; ?>
                                             </div>
                                         <?php endforeach; ?>
-                                        <?php if(!($survey_data['type'] == 1)): ?>
+                                        <?php if (!($survey_data['type'] == 1)) : ?>
                                             <button type="submit">Valider</button>
                                         <?php endif; ?>
                                     </div>
@@ -146,6 +154,9 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         <?php else : ?>
                             <div class="dashboard__card__head flex flex-al mb-1">
                                 <h4 class="tag">Survey</h4>
+                            </div>
+                            <div class="survey__choice">
+                                <p>aucun sondage</p>
                             </div>
                         <?php endif; ?>
                     </div>

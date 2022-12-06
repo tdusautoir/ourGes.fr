@@ -70,7 +70,7 @@ require_once './agenda.php';
         </div>
     <?php endif; ?>
 
-    <div class="container container-survey" id="container">
+    <div class="container close" id="container">
         <?php if (!is_logged()) : ?>
             <div class="content mt-3 flex">
                 <div class="hero flex flex-col flex-js">

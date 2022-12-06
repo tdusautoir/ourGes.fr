@@ -24,15 +24,15 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    background: var(--html-bg);
+    background: #1b2433;
     padding: 25px;
     border-radius: var(--border-radius);
 }
 
 .survey__choice {
     display: flex;
-    width: 48%;
-    min-height: 130px;
+    min-width: 30%;
+    min-height: 90px;
 }
 
 .survey__choice button {
@@ -96,36 +96,11 @@
     animation: choiceOut 300ms ease both;
 }
 
-.stat .survey__choice {
-    position: relative;
-}
-
-.stat .survey__choice button {
-    opacity: 0.5;
-}
-
-.stat .survey__choice-checked button,
-.stat .survey__choice-check button {
-    opacity: 1;
-}
-
-
-.stat .survey__choice::after {
-    content: '';
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    width: 0;
-    height: 100%;
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
-    background-color: red;
-    animation: stats 600ms 1500ms ease both;
-}
-
 .survey__create {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    justify-content: space-between;
+    height: calc(100% - 45px);
 }
 
 .create__row {
@@ -141,7 +116,15 @@
 .choices__container {
     display: flex;
     gap: 20px;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    background-color: #1b2433;
     flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.choices__container input {
+    background-color: var(--submenu) !important;
 }
 
 .choices__container .survey-choices-input {
@@ -160,14 +143,17 @@
     font-size: 1rem;
     border-radius: var(--border-radius);
     border: none;
-    outline: 1px solid var(--tag-cl);
-    background-color: var(--background);
-    color: var(--tag-cl);
+    outline: 1px #3d406d solid;
+    background-color: #1b2433;
+    color: #ffffff;
     font-weight: 400;
+    appearance: none;
+    transition: var(--transition);
 }
 
-.survey__create input::placeholder {
-    color: var(--tag-cl);
+.survey__create input:focus,
+.survey__create select:focus {
+    outline: 1px #61669f solid;
 }
 
 .choices__container .survey-choices-input input {
@@ -180,12 +166,50 @@
     background-size: 15px;
     background-position: right 10px bottom 50%;
     padding-right: 35px;
+    cursor: pointer;
 }
 
 .choice-close {
     position: absolute;
-    right: 10px;
+    right: 7px;
     bottom: 30%;
-    color: black;
+    color: #494d83;
     cursor: pointer;
+    font-weight: 300;
+    padding: 0 3px;
+    transition: var(--transition);
+}
+
+.choice-close:hover {
+    color: #61669f;
+    transform: translateY(-1px);
+}
+
+.survey__form__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.survey__create button {
+    border: 2px solid var(--tag-cl);
+    transition: var(--transition);
+}
+
+.survey__create button:hover {
+    background-color: #34395D;
+}
+
+.addOption {
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    justify-content: end;
+}
+
+.addOption__content {
+    display: flex;
+    gap: 5px;
 }

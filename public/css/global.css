@@ -781,6 +781,11 @@ nav {
     background: #3d406d66;
     padding: 8px;
     cursor: pointer;
+    transition: var(--transition);
+}
+
+.class:hover {
+    background: #2b324c;
 }
 
 .class--long {
