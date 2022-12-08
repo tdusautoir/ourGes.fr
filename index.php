@@ -225,7 +225,6 @@ require_once './agenda.php';
                                     <div <?php if (date('l', $day) == date('l')) : ?> class="current day" <?php else : ?> class="day" <?php endif ?>>
                                         <?php foreach ($_SESSION['agenda'] as $key => $class) : ?>
                                             <?php if (date('l', $class->start_date / 1000) == date('l', $day)) : //if the name of the day (ex : 'Monday') is equal --> same day
-
                                                 //calcul the class time
                                                 $startDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->start_date / 1000));
                                                 $endDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->end_date / 1000));

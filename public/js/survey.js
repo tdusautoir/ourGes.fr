@@ -57,20 +57,43 @@ function choose(choice) {
 function submitChoice(event) {
   let formData = new FormData();
   formData.set('choice', event.value);
+  formData.set('token', document.getElementsByName('token')[0].value);
   fetch("../controller/survey.php?method=response", { method: 'POST', body: formData })
     .then((res) => res.json())
-    .then(() => {
-      choose(event.parentNode);
+    .then((result) => {
+      if('success' in result) {
+        //success
+        choose(event.parentNode);
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        //error
+      }
     })
     .catch((e) => { console.error(e) });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById('form_survey');
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    let formData = new FormData(form);
-
-    fetch("../controller/survey.php?method=response", { method: 'POST', body: formData }).then((res) => res.json()).then(console.log);
-  })
+  if(form) {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      let formData = new FormData(form);
+  
+      fetch("../controller/survey.php?method=response", { method: 'POST', body: formData })
+        .then((res) => res.json())
+        .then((result) => {
+          if('success' in result) {
+            //success
+            choose(event.parentNode);
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
+          } else {
+            //error
+          }
+        }).catch((e) => { console.error(e) });
+    })
+  }
 })

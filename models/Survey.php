@@ -84,9 +84,14 @@ class Survey
         return $this->choices;
     }
 
-    function setResponses($response)
+    function setResponse($response)
     {
         array_push($this->responses, $response);
+    }
+
+    function setResponses($responses)
+    {
+       $this->responses = $responses;
     }
 
     function getResponses()
@@ -169,8 +174,44 @@ class Survey
                 $req->bindValue(':choice_id', intval($response));
                 $req->bindValue(':user_id', $this->user_id);
 
-                return $req->execute();
+
+                if($req->execute()){
+                    $updateSurveyCount = $this->connect->prepare('UPDATE survey SET nb_responses = nb_responses + 1 WHERE token = :token');
+                    $updateSurveyCount->bindValue(':token', $this->token);
+                    $updateSurveyCount->execute();
+
+                    $updateChoiceCount = $this->connect->prepare('UPDATE survey_choices SET nb_responses = nb_responses + 1 WHERE id = :choice_id');
+                    $updateChoiceCount->bindValue(':choice_id', intval($response));
+                    $updateChoiceCount->execute();
+                };
             }
+
+            return 1;
+        }
+
+        return 0;
+    }
+
+    function get_responses() {
+        if(isset($this->token)){
+            $req = $this->connect->prepare('SELECT ROUND((survey_choices.nb_responses / survey.nb_responses * 100), 1) as choice_percentage, survey_choices.nb_responses as nb_response, survey.nb_responses as total_response, survey_id, choice FROM survey_choices INNER JOIN survey ON survey.id = survey_choices.survey_id WHERE survey.token = :token;');
+            $req->bindValue(':token', $this->token);
+            $req->execute();
+
+            return $req->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return 0;
+    }
+
+    function get_response_from_user() {
+        if(isset($this->token) && isset($this->user_id)){
+            $req = $this->connect->prepare('SELECT choice FROM survey INNER JOIN survey_choices ON survey.id = survey_choices.survey_id INNER JOIN survey_responses ON survey_choices.id = survey_responses.choice_id WHERE survey.token = :token AND survey_responses.user_id = :user_id');
+            $req->bindValue(':token', $this->token);
+            $req->bindValue(':user_id', $this->user_id);
+            $req->execute();
+
+            return $req->fetchAll(PDO::FETCH_ASSOC);
         }
 
         return 0;

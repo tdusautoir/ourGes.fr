@@ -11,8 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     if(isset($_GET['method'])){
         if ($_GET['method'] == 'response') {
-            if(isset($_POST['choice']) && isInteger($_POST['choice'])){
-                $survey->setResponses($_POST['choice']);
+            if((isset($_POST['choice']) && isInteger($_POST['choice'])) || (isset($_POST['choices']) && !empty($_POST['choices']))){
+                $survey->setToken($_POST['token']);
+                (isset($_POST['choices']) && !empty($_POST['choices'])) ? $survey->setResponses($_POST['choices']) : $survey->setResponse($_POST['choice']);
                 $survey->setUser($_SESSION['profile']->uid);
                 if($survey->send_response()){
                     echo json_encode(['success' => true]);

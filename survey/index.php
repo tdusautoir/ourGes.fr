@@ -17,6 +17,7 @@ if (!is_logged() && isset($_GET['token']) && !empty($_GET['token'])) {
 if (isset($_GET['token']) && !empty($_GET['token'])) {
     $survey = new Survey;
     $survey->setToken($_GET['token']);
+    $survey->setUser($_SESSION['profile']->uid);
     $survey_data = $survey->get_survey();
 
     if (!$survey_data) {
@@ -26,6 +27,8 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     }
 
     $survey_data['choices'] = $survey->get_choices();
+    $survey_data['responses'] = $survey->get_responses();
+    $survey_data['user_responses'] = $survey->get_response_from_user(); 
 }
 
 ?>
@@ -131,25 +134,33 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                 <?php if (isset($survey_data['description']) && !empty($survey_data['description'])) : ?>
                                     <p class="mb-2"><?= $survey_data['description'] ?></p>
                                 <?php endif; ?>
-                                <form id="form_survey">
-                                    <div class="survey__choices" id="survey__choices">
-                                        <?php foreach ($survey_data['choices'] as $choice) : ?>
-                                            <div class="survey__choice" id="survey__choice">
-                                                <?php if ($survey_data['type'] == 1) : ?>
-                                                    <button type="button" value='<?= $choice['id'] ?>' onclick="submitChoice(this)">
-                                                        <p><?= $choice['choice'] ?></p>
-                                                    </button>
-                                                <?php else : ?>
-                                                    <input name='choices' type='checkbox' value='<?= $choice['id'] ?>' name=<?= strtolower($choice['choice']) ?>>
-                                                    <label for=<?= strtolower($choice['choice']) ?>><?= $choice['choice'] ?></label>
-                                                <?php endif; ?>
-                                            </div>
-                                        <?php endforeach; ?>
-                                        <?php if (!($survey_data['type'] == 1)) : ?>
-                                            <button type="submit">Valider</button>
-                                        <?php endif; ?>
-                                    </div>
-                                </form>
+                                <?php if(isset($survey_data['user_responses']) && !empty($survey_data['user_responses'])) : ?>
+                                    <?php foreach($survey_data['responses'] as $response) : ?>
+                                        <p>Choix : <?= $response['choice'] ?>, Pourcentage : <?= $response['choice_percentage'] ?>, Votes / Total : <?= $response['nb_response'] ?> / <?= $response['total_response'] ?></p>
+                                    <?php endforeach; ?>
+                                    <p>Your response : <?= end($survey_data['user_responses'])['choice']; ?></p>
+                                <?php else : ?>
+                                    <form id="form_survey">
+                                        <input type="hidden" name="token" value="<?= $_GET['token'] ?>">
+                                        <div class="survey__choices" id="survey__choices">
+                                            <?php foreach ($survey_data['choices'] as $choice) : ?>
+                                                <div class="survey__choice" id="survey__choice">
+                                                    <?php if ($survey_data['type'] == 1) : ?>
+                                                        <button type="button" value='<?= $choice['id'] ?>' onclick="submitChoice(this)">
+                                                            <p><?= $choice['choice'] ?></p>
+                                                        </button>
+                                                    <?php else : ?>
+                                                        <input name='choices[]' type='checkbox' value='<?= $choice['id'] ?>'>
+                                                        <label for=<?= strtolower($choice['choice']) ?>><?= $choice['choice'] ?></label>
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php endforeach; ?>
+                                            <?php if (!($survey_data['type'] == 1)) : ?>
+                                                <button type="submit">Valider</button>
+                                            <?php endif; ?>
+                                        </div>
+                                    </form>
+                                <?php endif; ?>
                             </div>
                         <?php else : ?>
                             <div class="dashboard__card__head flex flex-al mb-1">
