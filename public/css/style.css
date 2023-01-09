@@ -562,13 +562,25 @@ body {
   gap: 10px;
   align-items: center;
 }
-.dashboard__component.planning .dashboard__component__date p:last-child {
+.dashboard__component.planning .dashboard__component__date .date {
+  display: none;
   font-size: 0.85rem;
+}
+.dashboard__component.planning .dashboard__component__date .date.current {
+  display: block;
+}
+.dashboard__component.planning .dashboard__component__arrows i.active {
+  color: red;
 }
 .dashboard__component.planning .dashboard__component__content {
   overflow: auto;
   height: calc(100% - 40px);
   margin-top: 10px;
+}
+.dashboard__component.planning .dashboard__component__content .day {
+  display: none;
+}
+.dashboard__component.planning .dashboard__component__content .day.current {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -884,7 +896,7 @@ body {
     font-size: 5rem;
   }
   .hero__text__description p,
-  .hero__text__description a {
+.hero__text__description a {
     font-size: 1.3rem;
   }
   .hero__text__buttons {
@@ -892,12 +904,12 @@ body {
     align-items: center;
   }
   .hero__text__buttons button img,
-  .hero__text__buttons a img {
+.hero__text__buttons a img {
     width: 20px;
     height: 20px;
   }
   .hero__text__buttons button p,
-  .hero__text__buttons a p {
+.hero__text__buttons a p {
     font-size: 1.4rem;
   }
 }
@@ -932,11 +944,11 @@ body {
     font-size: 3rem;
   }
   .hero__text__description p,
-  .hero__text__description a {
+.hero__text__description a {
     font-size: 1rem;
   }
   .hero__text__buttons button p,
-  .hero__text__buttons a p {
+.hero__text__buttons a p {
     font-size: 1.2rem;
   }
 }

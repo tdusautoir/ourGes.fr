@@ -658,8 +658,19 @@ body {
                     gap: 10px;
                     align-items: center;
 
-                    p:last-child {
+                    .date {
+                        display: none;
                         font-size: 0.85rem;
+
+                        &.current {
+                            display: block;
+                        }
+                    }
+                }
+
+                &__arrows {
+                    i.active {
+                        color: red;
                     }
                 }
             }
@@ -668,9 +679,16 @@ body {
                 overflow: auto;
                 height: calc(100% - 40px);
                 margin-top: 10px;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
+
+                .day {
+                    display: none;
+
+                    &.current {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                    }
+                }
             }
 
             .planning__class {

@@ -52,7 +52,7 @@ class Me
      */
     public function updateProfile(array $fields) : ?array
     {
-        $data = $this->getProfile();
+        $data = (object) $this->getProfile();
 
         foreach ($fields as $field => $value) {
             $data->{$field} = $value;
@@ -104,7 +104,7 @@ class Me
      * @param integer $page
      * @return array
      */
-    public function getNews(int $page = 0) : ?array
+    public function getNews(int $page = 0) : ?object
     {
         $url = $this->getUrl(self::GET_NEWS_ENDPOINT);
 
@@ -188,7 +188,7 @@ class Me
      * @param integer $year
      * @return void
      */
-    public function getClasses(int $year) : ?Object
+    public function getClasses(int $year) : ?array
     {
         $url = $this->getUrl(self::GET_CLASSES_ENDPOINT);
         $url = str_replace('{year}', $year, $url);
@@ -230,7 +230,7 @@ class Me
      * @param integer $classeId
      * @return void
      */
-    public function getStudents(int $classeId) : ?Object
+    public function getStudents(int $classeId) : ?array
     {
         $url = $this->getUrl(self::GET_STUDENTS_ENDPOINT);
         $url = str_replace('{classeId}', $classeId, $url);
