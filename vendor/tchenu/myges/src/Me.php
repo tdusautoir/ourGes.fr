@@ -17,7 +17,6 @@ class Me
     const GET_GRADES_ENDPOINT   = '/{year}/grades';
     const GET_ABSENCES_ENDPOINT = '/{year}/absences';
     const GET_CLASSES_ENDPOINT  = '/{year}/classes';
-    const GET_CLASS_ENDPOINT = '/classes/{id}';
     const GET_STUDENTS_ENDPOINT = '/classes/{classeId}/students';
     const GET_STUDENT_ENDPOINT  = '/students/{studentId}';
 
@@ -31,7 +30,7 @@ class Me
      *
      * @return array
      */
-    public function getProfile(): ?object
+    public function getProfile() : ?object
     {
         $url = $this->getUrl(self::GET_PROFILE_ENDPOINT);
 
@@ -51,9 +50,9 @@ class Me
      * @param array $fields
      * @return array
      */
-    public function updateProfile(array $fields): ?array
+    public function updateProfile(array $fields) : ?array
     {
-        $data = (object) $this->getProfile();
+        $data = $this->getProfile();
 
         foreach ($fields as $field => $value) {
             $data->{$field} = $value;
@@ -81,7 +80,7 @@ class Me
      * @param string $endedAt
      * @return array
      */
-    public function getAgenda(string $startAt, string $endedAt): ?array
+    public function getAgenda(string $startAt, string $endedAt) : ?array
     {
         $url = $this->getUrl(self::GET_AGENDA_ENDPOINT);
 
@@ -105,8 +104,7 @@ class Me
      * @param integer $page
      * @return array
      */
-    //change ?array to ?object
-    public function getNews(int $page = 0): ?object
+    public function getNews(int $page = 0) : ?array
     {
         $url = $this->getUrl(self::GET_NEWS_ENDPOINT);
 
@@ -128,7 +126,7 @@ class Me
      *
      * @return array
      */
-    public function getNewsBanners(): ?array
+    public function getNewsBanners() : ?array
     {
         $url = $this->getUrl(self::GET_NEWS_BANNERS_ENDPOINT);
 
@@ -148,7 +146,7 @@ class Me
      * @param integer $year
      * @return array
      */
-    public function getGrades(int $year): ?array
+    public function getGrades(int $year) : ?array
     {
         $url = $this->getUrl(self::GET_GRADES_ENDPOINT);
         $url = str_replace('{year}', $year, $url);
@@ -169,10 +167,11 @@ class Me
      * @param integer $year
      * @return void
      */
-    public function getAbsences(int $year): ?array
+    public function getAbsences(int $year) : ?array
     {
         $url = $this->getUrl(self::GET_ABSENCES_ENDPOINT);
         $url = str_replace('{year}', $year, $url);
+
         $client = new HTTPClient();
         $response = $client->request('GET', $url, [
             'headers' => [
@@ -189,9 +188,7 @@ class Me
      * @param integer $year
      * @return void
      */
-
-    //change ?Object to array
-    public function getClasses(int $year): ?array
+    public function getClasses(int $year) : ?Object
     {
         $url = $this->getUrl(self::GET_CLASSES_ENDPOINT);
         $url = str_replace('{year}', $year, $url);
@@ -207,36 +204,12 @@ class Me
     }
 
     /**
-     * Get classe / id
-     *
-     * @param integer $id
-     * @return void
-     */
-
-    //change ?Object to array
-    public function getClasse(int $id): object
-    {
-        $url = $this->getUrl(self::GET_CLASS_ENDPOINT);
-        $url = str_replace('{id}', $id, $url);
-
-        $client = new HTTPClient();
-        $response = $client->request('GET', $url, [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $this->client->getAccessToken(),
-            ]
-        ]);
-
-        return json_decode($response->getBody())->result;
-    }
-
-
-    /**
      * Get student by studentId
      *
      * @param integer $studentId
      * @return void
      */
-    public function getStudent(int $studentId): ?Object
+    public function getStudent(int $studentId) : ?Object
     {
         $url = $this->getUrl(self::GET_STUDENT_ENDPOINT);
         $url = str_replace('{studentId}', $studentId, $url);
@@ -257,9 +230,7 @@ class Me
      * @param integer $classeId
      * @return void
      */
-
-    //change ?Object to array
-    public function getStudents(int $classeId): ?array
+    public function getStudents(int $classeId) : ?Object
     {
         $url = $this->getUrl(self::GET_STUDENTS_ENDPOINT);
         $url = str_replace('{classeId}', $classeId, $url);
@@ -280,7 +251,7 @@ class Me
      * @param string $endpoint
      * @return string
      */
-    private function getUrl(string $endpoint): string
+    private function getUrl(string $endpoint) : string
     {
         return self::SERVICES_URL . '/me' . $endpoint;
     }

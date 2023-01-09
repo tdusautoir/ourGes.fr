@@ -4,15 +4,13 @@ namespace MyGes;
 
 use GuzzleHttp\Client as HTTPClient;
 
-require_once('../functions.php');
-
 class Client
 {
     /**
      * OAuth Authorize URL
      */
     const OAUTH_AUTHORIZE_URL = 'https://authentication.kordis.fr/oauth/authorize?client_id={clientId}&response_type=token';
-
+    
     /**
      * OAuth clientId
      *
@@ -62,7 +60,7 @@ class Client
         if ($status === 401) {
             throw new Exceptions\BadCredentialsException('Wrong credentials');
         }
-
+        
         $fragments      = $this->extractFragments($headers);
         $accessToken    = $this->extractAccessToken($fragments);
 
@@ -85,16 +83,16 @@ class Client
      * @param array $headers
      * @return string|null
      */
-    private function extractFragments(array $headers): ?string
+    private function extractFragments(array $headers) : ?string
     {
         $location = $headers['Location'][0];
-
+    
         $locationUrl = parse_url($location);
 
         if (!isset($locationUrl['fragment']) || empty($locationUrl['fragment'])) {
             throw new \Exception('Impossible to extract fragments');
         }
-
+    
         return $locationUrl['fragment'];
     }
 
@@ -104,7 +102,7 @@ class Client
      * @param string $fragments
      * @return string|null
      */
-    private function extractAccessToken(string $fragments): ?string
+    private function extractAccessToken(string $fragments) : ?string
     {
         parse_str($fragments, $queryParams);
 

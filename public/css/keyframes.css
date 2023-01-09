@@ -1,0 +1,9 @@
+@keyframes hero__title {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+            content="ourGes est une extension de myGes. retrouvez vos informations scolaires grâce à un outil facile d'utilisation">
+        <link rel="stylesheet" href="../public/css/reset.css">
+        <link rel="stylesheet" href="../public/css/style.css">
+        <link rel="stylesheet" href="../public/css/variables.css">
+        <link rel="stylesheet" href="../public/css/keyframes.css">
+        <link rel="icon" href="../public/img/favicon.png" />
+        <script src="../public/javascript/script.js"></script>
+        <title>ourGes 2.0 - myGes, plus simple</title>
+    </head>
+
+    <body>
+        <!-- ---MODALS--- -->
+        <form action="" class="login">
+            <div class="login__inputs">
+                <input class="input" name="username" type="text" placeholder="identifiant" autocomplete="off"
+                    maxlength="30">
+                <input id="password" class="input" name="password" type="password" placeholder="mot de passe"
+                    autocomplete="off" maxlength="30">
+                <i onclick="password()" class="fa fa-eye-slash" id="eye"></i>
+            </div>
+            <div class="tag">
+                <p>connexion</p>
+            </div>
+        </form>
+        <div class="logout" id="logout">
+            <div class="logout__head">
+                <p>Bonjour</p>
+                <p>Achille DAVID</p>
+            </div>
+            <div class="logout__content">
+                <div class="tag">
+                    <p>3ESGI</p>
+                </div>
+                <i class="fa fa-sign-out"></i>
+            </div>
+        </div>
+        <div class="class__background" id="class__modal">
+            <div class="class">
+                <h2>Challenge Stack semestriel (figma/HTML/CSS)</h2>
+                <div class="class__content">
+                    <p><i class="fa fa-user-tie" style="font-size: 14px;"></i>Professeur : <span>Mr. VAAST</span></p>
+                    <p>Salle : <span>107</span></p>
+                    <p>Étage : <span>2ème étage</span></p>
+                    <p>Modalité : <span>Présentiel</span></p>
+                    <p>Campus : <span>Eductive Euralille</span></p>
+                </div>
+                <i class="fa fa-xmark" onclick="class__modal()"></i>
+            </div>
+        </div>
+        <!-- ---HEADER--- -->
+        <header class="header">
+            <div class="header__logo">
+                <p>our</p>
+                <p>GES</p>
+            </div>
+            <div class="header__buttons" onclick="logout()">
+                <!-- <button onclick="login()">
+                    <p>connexion</p>
+                </button> -->
+                <img src="../public/img/favicon.png" alt="user image">
+                <i class="fa fa-angle-down"></i>
+            </div>
+        </header>
+        <!-- ---LOGIN--- -->
+        <!-- <main class="hero">
+            <div class="hero__text">
+                <div class="tag">
+                    <p>BUILT BY STUDENTS, FOR STUDENTS</p>
+                </div>
+                <div class="hero__text__title">
+                    <div class="hero__text__title__container">
+                        <h1>myGes,</h1>
+                    </div>
+                    <div class="hero__text__title__container">
+                        <h1>plus simple.</h1>
+                    </div>
+                </div>
+                <div class="hero__text__description">
+                    <p>ourGes est une extension de myGes</p>
+                    <p>retrouvez vos informations scolaires grâce à un outil facile d'utilisation</p>
+                    <p>dévelopé par <a href="https://github.com/achilledavid" target="_blank">achille</a> et <a
+                            href="https://github.com/tdusautoir" target="_blank">thibaut</a></p>
+                </div>
+                <div class="hero__text__buttons">
+                    <button onclick="login()">
+                        <p>connexion</p>
+                    </button>
+                    <a href="https://github.com/tdusautoir/ourGes.fr" target="_blank">
+                        <img src="../public/img/github.webp" alt="github logo" draggable="false">
+                        <p>voir le github</p>
+                    </a>
+                </div>
+            </div>
+            <div class="hero__image">
+                <img src="../public/img/right-img.webp" alt="hero banner image" draggable="false">
+            </div>
+        </main> -->
+        <!-- ---DASHBOARD--- -->
+        <div class="dashboard__buttons">
+            <div class="tag tag--click tag--new">
+                <p><i class="fa fa-chart-pie"></i>Créer un sondage</p>
+            </div>
+        </div>
+        <main class="dashboard">
+            <div class="dashboard__left">
+                <div class="dashboard__component marks">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p>notes</p>
+                        </div>
+                        <span>moy.</span>
+                    </div>
+                    <div class="dashboard__component__content">
+                        <div class="dashboard__component__content__lign">
+                            <p>Anglais professionnel (ef)</p>
+                            <p>15.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard__component news">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p>actus</p>
+                        </div>
+                        <span>arrows</span>
+                    </div>
+                    <div class="dashboard__component__content"></div>
+                </div>
+                <div class="dashboard__component classes">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p>cours</p>
+                        </div>
+                        <span>coef.</span>
+                    </div>
+                    <div class="dashboard__component__content">
+                        <div class="dashboard__component__content__lign">
+                            <p>Anglais professionnel (ef) - <span>Mme Elodie FRANCHINEAU</span></p>
+                            <p>N.C</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard__right">
+                <div class="dashboard__component planning">
+                    <div class="dashboard__component__title">
+                        <div class="dashboard__component__date">
+                            <div class="tag">
+                                <p>planning</p>
+                            </div>
+                            <p>Friday 09/12/22</p>
+                        </div>
+                        <span>arrows</span>
+                    </div>
+                    <div class="dashboard__component__content">
+                        <div class="planning__class" onclick="class__modal()">
+                            <p>08:00 - 09:30</p>
+                            <p>Challenge stack semestriel (figma/html/css)</p>
+                            <p>M. VAAST - 103</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard__component absence">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p>absences</p>
+                        </div>
+                        <span>date</span>
+                    </div>
+                    <div class="dashboard__component__content">
+                        <div class="dashboard__component__content__lign justified">
+                            <p>Anglais professionnel (ef)</p>
+                            <p>15/02/22</p>
+                        </div>
+                        <div class="dashboard__component__content__lign ">
+                            <p>Anglais professionnel (ef)</p>
+                            <p>15/02/22</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+
+</html>
