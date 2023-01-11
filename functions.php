@@ -169,7 +169,9 @@ function isInteger($input)
 // Sort the agenda multiple times
 function sortAgenda(){
     //to sort the agenda
-    usort($_SESSION['agenda'], "cmp");
+    if(isset($_SESSION['agenda'])) {
+        usort($_SESSION['agenda'], "cmp");
+    }
 }
 
 //to sort the agenda array by starting date
