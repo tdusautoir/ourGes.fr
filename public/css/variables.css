@@ -46,7 +46,6 @@
 
 .fa-square-poll-vertical::before {
     content: '\f681';
-
 }
 
 .fa-plus::before {
@@ -83,6 +82,14 @@
 
 .fa-angle-down::before {
     content: "\f107";
+}
+
+.fa-angle-right::before {
+    content: "\f105";
+}
+
+.fa-angle-left::before {
+    content: "\f104";
 }
 
 .fa-cirlce-xmark::before {

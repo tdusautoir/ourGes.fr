@@ -27,8 +27,8 @@ require_once './agenda.php';
 </head>
 
 <body>
-    <?php if(!is_logged()): ?>
-        <form class="login" action="<?= (isset($_GET['surveyToken']) && !empty($_GET['surveyToken'])) ?"./controller/login.php?surveyToken=".$_GET['surveyToken'] : "./controller/login.php" ?>" method="POST">
+    <?php if (!is_logged()) : ?>
+        <form class="login" action="<?= (isset($_GET['surveyToken']) && !empty($_GET['surveyToken'])) ? "./controller/login.php?surveyToken=" . $_GET['surveyToken'] : "./controller/login.php" ?>" method="POST">
             <div class="login__inputs">
                 <input class="input" name="username" type="text" placeholder="username" autocomplete="off" maxlength="30">
                 <input id="password" class="input" name="password" type="password" placeholder="password" autocomplete="off" maxlength="30">
@@ -39,31 +39,31 @@ require_once './agenda.php';
             </div>
         </form>
     <?php else : ?>
-    <div class="logout" id="logout">
-        <div class="logout__head">
-            <p>Signed in as</p>
-            <p><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></p>
-        </div>
-        <div class="logout__content">
-            <div class="tag">
-                <p><?= $_SESSION['class']->promotion ?></p>
+        <div class="logout" id="logout">
+            <div class="logout__head">
+                <p>Signed in as</p>
+                <p><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></p>
             </div>
-            <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
+            <div class="logout__content">
+                <div class="tag">
+                    <p><?= $_SESSION['class']->promotion ?></p>
+                </div>
+                <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
+            </div>
         </div>
-    </div>
-    <div class="class__background" id="class__modal">
-        <div class="class">
-            <!-- <h2>Challenge Stack semestriel (figma/HTML/CSS)</h2> -->
-            <div class="class__content">
-                <!-- <p><i class="fa fa-user-tie" style="font-size: 14px;"></i>Professor : <span>Mr. VAAST</span></p>
+        <div class="class__background" id="class__modal">
+            <div class="class">
+                <!-- <h2>Challenge Stack semestriel (figma/HTML/CSS)</h2> -->
+                <div class="class__content">
+                    <!-- <p><i class="fa fa-user-tie" style="font-size: 14px;"></i>Professor : <span>Mr. VAAST</span></p>
                 <p>Room : <span>107</span></p>
                 <p>Stage : <span>2ème étage</span></p>
                 <p>Modality : <span>Présentiel</span></p>
                 <p>Campus : <span>Eductive Euralille</span></p> -->
+                </div>
+                <i class="fa fa-xmark" onclick="class__modal()"></i>
             </div>
-            <i class="fa fa-xmark" onclick="class__modal()"></i>
         </div>
-    </div>
     <?php endif; ?>
     <!-- ---HEADER--- -->
     <header class="header">
@@ -71,20 +71,20 @@ require_once './agenda.php';
             <p>our</p>
             <p>GES</p>
         </div>
-        <?php if(!is_logged()): ?>
+        <?php if (!is_logged()) : ?>
             <div class="header__buttons">
                 <button onclick="login()">
                     <p>login</p>
                 </button>
             </div>
-        <?php else: ?>
+        <?php else : ?>
             <div class="header__buttons" onclick="logout()">
                 <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="user image">
                 <i class="fa fa-angle-down"></i>
             </div>
         <?php endif; ?>
     </header>
-    <?php if(!is_logged()): ?>
+    <?php if (!is_logged()) : ?>
         <main class="hero">
             <div class="hero__text">
                 <div class="tag">
@@ -136,11 +136,12 @@ require_once './agenda.php';
                         <span>av.</span>
                     </div>
                     <div class="dashboard__component__content">
-                        <?php if(isset($_SESSION['grades']) && !empty($_SESSION['grades'])): ?>
+                        <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
                             <?php foreach ($_SESSION['grades'] as $grade) : ?>
                                 <div class="dashboard__component__content__lign">
                                     <p><?= $grade->course ?></p>
-                                    <p><?php if (isset($grade->average)) :echo $grade->average; endif; ?>
+                                    <p><?php if (isset($grade->average)) : echo $grade->average;
+                                        endif; ?>
                                 </div>
                             <?php endforeach ?>
                         <?php else : ?>
@@ -155,13 +156,13 @@ require_once './agenda.php';
                         <div class="tag">
                             <p><i class="fa fa-envelope"></i></i>news</p>
                         </div>
-                        <div class="dashboard__component__arrows">
-                            <i onclick="navigateToPrecedentNews()" class="fa fa-angle-down dashboard__component__arrows__arrow dashboard__component__arrows__arrow--left"></i>
-                            <i onclick="navigateToFollowingNews()" class="fa fa-angle-down dashboard__component__arrows__arrow dashboard__component__arrows__arrow--right"></i>
+                        <div class="dashboard__component__title__arrows">
+                            <i onclick="navigateToPrecedentNews()" class="fa fa-angle-left dashboard__component__title__arrows__arrow dashboard__component__title__arrows__arrow--left"></i>
+                            <i onclick="navigateToFollowingNews()" class="fa fa-angle-right dashboard__component__title__arrows__arrow dashboard__component__title__arrows__arrow--right"></i>
                         </div>
                     </div>
                     <div class="dashboard__component__content">
-                        <?php if(isset($_SESSION['news']) && !empty($_SESSION['news'])): ?>
+                        <?php if (isset($_SESSION['news']) && !empty($_SESSION['news'])) : ?>
                             <?php foreach ($_SESSION['news'] as $new) : ?>
                                 <?php if (isset($new->ba_id)) : ?>
                                     <div class="dashboard__component__content__banner" style="background-image: url(<?= $new->image ?>);">
@@ -193,7 +194,7 @@ require_once './agenda.php';
                         <span>coef.</span>
                     </div>
                     <div class="dashboard__component__content">
-                        <?php if(isset($_SESSION['grades']) && !empty($_SESSION['grades'])): ?>
+                        <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
                             <?php foreach ($_SESSION['grades'] as $course) : ?>
                                 <div class="dashboard__component__content__lign">
                                     <p><?= $course->course . " - " ?><span><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
@@ -215,13 +216,13 @@ require_once './agenda.php';
                             <div class="tag">
                                 <p><i class="fa fa-calendar"></i>planning</p>
                             </div>
-                            <?php foreach ($DAYS as $key => $day) : ?>                
-                                <p class="date"><?= date('l', $day)." ".date('d/m/y', $day) ?></p>
+                            <?php foreach ($DAYS as $key => $day) : ?>
+                                <p class="date"><?= date('l', $day) . " " . date('d/m/y', $day) ?></p>
                             <?php endforeach; ?>
                         </div>
-                        <div class="dashboard__component__arrows">
-                            <i onclick="navigateToPrecedentDay()" class="fa fa-angle-down dashboard__component__arrows__arrow dashboard__component__arrows__arrow--left"></i>
-                            <i onclick="navigateToFollowingDay()" class="fa fa-angle-down dashboard__component__arrows__arrow dashboard__component__arrows__arrow--right"></i>
+                        <div class="dashboard__component__title__arrows">
+                            <i onclick="navigateToPrecedentDay()" class="fa fa-angle-left dashboard__component__title__arrows__arrow dashboard__component__title__arrows__arrow--left"></i>
+                            <i onclick="navigateToFollowingDay()" class="fa fa-angle-right dashboard__component__title__arrows__arrow dashboard__component__title__arrows__arrow--right"></i>
                         </div>
                     </div>
                     <div class="dashboard__component__content">
@@ -244,7 +245,9 @@ require_once './agenda.php';
                                             $className = "";
                                         }
                                     ?>
-                                        <div class="planning__class <?php if (!empty($className)) { echo $className; } ?>" onclick="showClassModal(); getClassInfo(<?= $key ?>);">
+                                        <div class="planning__class <?php if (!empty($className)) {
+                                                                        echo $className;
+                                                                    } ?>" onclick="showClassModal(); getClassInfo(<?= $key ?>);">
                                             <p><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
                                             <p><?= $class->name ?></p>
                                             <?php if (isset($class->rooms[0])) : ?>
@@ -269,15 +272,15 @@ require_once './agenda.php';
                         <span>date</span>
                     </div>
                     <div class="dashboard__component__content">
-                        <?php if(isset($_SESSION['absences']) && !empty($_SESSION['absences'])): ?>
-                            <?php foreach($_SESSION['absences'] as $absence): ?>
+                        <?php if (isset($_SESSION['absences']) && !empty($_SESSION['absences'])) : ?>
+                            <?php foreach ($_SESSION['absences'] as $absence) : ?>
                                 <div class="dashboard__component__content__lign <?php $absence->justified ? 'justified' : '' ?>">
                                     <p><?= $absence->course_name ?></p>
                                     <p><?= date('d/m/Y', $absence->date / 1000); ?></p>
                                 </div>
                             <?php endforeach; ?>
                         <?php else : ?>
-                            <p>Empty absences</p>
+                            <p class="absence__empty">no absences</p>
                         <?php endif; ?>
                     </div>
                 </div>
