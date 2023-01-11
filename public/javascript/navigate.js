@@ -13,19 +13,23 @@ const nw_arrow_left = document.querySelector(".news .dashboard__component__title
 pl_arrow_left.className += " active";
 nw_arrow_left.className += " active";
 
+if (sessionStorage.pageNews == news_banners.length - 1) {
+  nw_arrow_right.classList.add('active');
+}
+
 // news_banners[0].className += " active"; //display the first new
 planning_day[0].className += " current"; //display the current day
 planning_date[0].className += " current"; //display the current date
 
 function navigateToFollowingNews() {
-  if (nw_arrow_left.classList.contains("active")) {
-    nw_arrow_left.className = "fa fa-angle-left dashboard__component__title__arrows__arrow";
+  if (nw_arrow_left.classList.contains("active") && !(sessionStorage.pageNews == news_banners.length - 1)) {
+    nw_arrow_left.classList.remove('active');
   }
 
   if (sessionStorage.pageNews < news_banners.length - 1) {
     sessionStorage.pageNews++;
-    if (sessionStorage.pagePlanning == news_banners.length - 1) {
-      nw_arrow_right.className = "fa fa-angle-left dashboard__component__title__arrows__arrow active";
+    if (sessionStorage.pageNews == news_banners.length - 1) {
+      nw_arrow_right.classList.add('active');
     }
     for (var i = 0; i < news_banners.length; i++) {
       news_banners[i].className = "dashboard__component__content__banner";
@@ -35,32 +39,31 @@ function navigateToFollowingNews() {
 }
 
 function navigateToPrecedentNews() {
-  ;
-  if (nw_arrow_right.classList.contains("active")) {
-    nw_arrow_right.className = "fa fa-angle-left dashboard__component__title__arrows__arrow";
+  if (nw_arrow_right.classList.contains("active") && !(sessionStorage.pageNews == 0)) {
+    nw_arrow_right.classList.remove('active');
   }
 
   if (sessionStorage.pageNews >= 1) {
     sessionStorage.pageNews--;
     if (sessionStorage.pageNews == 0) {
-      nw_arrow_left.className = "fa fa-angle-left dashboard__component__title__arrows__arrow active";
+      nw_arrow_left.classList.add('active');
     }
     for (var i = 0; i < news_banners.length; i++) {
       news_banners[i].className = "dashboard__component__content__banner";
-    } ``
+    }
     news_banners[sessionStorage.pageNews].className += " active";
   }
 }
 
 function navigateToFollowingDay() {
-  if (pl_arrow_left.classList.contains("active")) {
-    pl_arrow_left.className = "fa fa-angle-left dashboard__component__title__arrows__arrow";
+  if (pl_arrow_left.classList.contains("active") && !(sessionStorage.pagePlanning == planning_day.length - 1)) {
+    pl_arrow_left.classList.remove('active');
   }
 
   if (sessionStorage.pagePlanning < planning_day.length - 1) {
     sessionStorage.pagePlanning++;
     if (sessionStorage.pagePlanning == planning_day.length - 1) {
-      pl_arrow_right.className = "fa fa-angle-left dashboard__component__title__arrows__arrow active";
+      pl_arrow_right.classList.add('active');
     }
     for (var i = 0; i < planning_day.length; i++) {
       planning_day[i].className = "day";
@@ -72,14 +75,14 @@ function navigateToFollowingDay() {
 }
 
 function navigateToPrecedentDay() {
-  if (pl_arrow_right.classList.contains("active")) {
-    pl_arrow_right.className = "fa fa-angle-left dashboard__component__title__arrows__arrow";
+  if (pl_arrow_right.classList.contains("active") && !(sessionStorage.pagePlanning == 0)) {
+    pl_arrow_right.classList.remove('active');
   }
 
   if (sessionStorage.pagePlanning >= 1) {
     sessionStorage.pagePlanning--;
     if (sessionStorage.pagePlanning == 0) {
-      pl_arrow_left.className = "fa fa-angle-left dashboard__component__title__arrows__arrow active";
+      pl_arrow_left.classList.add('active');
     }
     for (var i = 0; i < planning_day.length; i++) {
       planning_day[i].className = "day";
