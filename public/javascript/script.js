@@ -74,3 +74,27 @@ function copy__link() {
         input.classList.toggle("share--active");
     }, 3000);
 }
+
+function get_class_info(classId) {
+    let modal = document.getElementById("class__modal");
+    let url = "./controller/getClassInfo.php?classId=" + classId;
+
+    fetch(url).then((result) => result.json()).then((jsondata) => {
+        if (jsondata.error != undefined) {
+            window.location.reload();
+        }
+
+        let data = jsondata[0];
+        let date = jsondata[1];
+
+        modal.querySelector('.class__title').innerHTML = data.name;
+        modal.querySelector('.professor').innerHTML = data.teacher;
+        modal.querySelector('.room').innerHTML = data.rooms[0].name;
+        modal.querySelector('.stage').innerHTML = data.rooms[0].floor;
+        modal.querySelector('.date').innerHTML = date[0] + ' - ' + date[1];
+        modal.querySelector('.modality').innerHTML = data.modality
+        modal.querySelector('.campus').innerHTML = data.rooms[0].campus
+
+        class__modal();
+    });
+}

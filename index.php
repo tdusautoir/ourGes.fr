@@ -53,13 +53,14 @@ require_once './agenda.php';
         </div>
         <div class="class__background" id="class__modal">
             <div class="class">
-                <!-- <h2>Challenge Stack semestriel (figma/HTML/CSS)</h2> -->
+                <h2 class="class__title">Challenge Stack semestriel (figma/HTML/CSS)</h2>
                 <div class="class__content">
-                    <!-- <p><i class="fa fa-user-tie" style="font-size: 14px;"></i>Professor : <span>Mr. VAAST</span></p>
-                <p>Room : <span>107</span></p>
-                <p>Stage : <span>2ème étage</span></p>
-                <p>Modality : <span>Présentiel</span></p>
-                <p>Campus : <span>Eductive Euralille</span></p> -->
+                    <p><i class="fa fa-user-tie" style="font-size: 14px;"></i>Professor : <span class="professor"></span></p>
+                    <p>Room : <span class="room"></span></p>
+                    <p>Stage : <span class="stage"></span></p>
+                    <p>Hour : <span class="date"></span></p>
+                    <p>Modality : <span class="modality"></span></p>
+                    <p>Campus : <span class="campus"></span></p>
                 </div>
                 <i class="fa fa-xmark" onclick="class__modal()"></i>
             </div>
@@ -247,7 +248,7 @@ require_once './agenda.php';
                                     ?>
                                         <div class="planning__class <?php if (!empty($className)) {
                                                                         echo $className;
-                                                                    } ?>" onclick="showClassModal(); getClassInfo(<?= $key ?>);">
+                                                                    } ?>" onclick="get_class_info(<?= $key ?>)">
                                             <p><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
                                             <p><?= $class->name ?></p>
                                             <?php if (isset($class->rooms[0])) : ?>
