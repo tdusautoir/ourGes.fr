@@ -22,7 +22,6 @@ if (isset($_GET['classId'])) {
         array_push($data, (array) $_SESSION['agenda'][$classId]);
         array_push($data, [$startDate->format('H:i'), $endDate->format('H:i')]);
     }
-
-
+    
     echo json_encode($data);
 }

@@ -10,6 +10,13 @@ require_once '../models/User.php';
 $username = $_POST['username'];
 $password = $_POST['password'];
 
+$lang = get_user_lang();
+if($lang == 'fr') {
+    $lang = $lang.'/';
+} else {
+    $lang = '';
+}
+
 try {
     // client-id = skolae-app
     $client = new MyGes\Client('skolae-app', $username, $password);
@@ -19,12 +26,8 @@ try {
     if (get_class($e) == "MyGes\Exceptions\BadCredentialsException") {
         //wrong credentials
         create_flash_message(ERROR_LOGIN, 'Invalid login informations.', FLASH_ERROR);
-        header("location: ../");
-        return;
     } else {
         create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
-        header("location: ../");
-        return;
     }
 }
 
@@ -97,8 +100,6 @@ if (isset($me)) {
     } catch (Exception $e) {
         $err = $e->getMessage();
         create_flash_message(ERROR_LOGIN, 'An error has occured, please try again.', FLASH_ERROR);
-        header("location: ../");
-        return;
     }
 
     init_php_session();
@@ -110,15 +111,15 @@ if (isset($me)) {
     $_SESSION['grades'] = $grades;
     $_SESSION['agenda'] = $agenda;
     $_SESSION['absences'] = $absences;
-
-    if(isset($_GET['surveyToken']) && !empty($_GET['surveyToken'])){
-        header('location: ../survey/index.php?token='.$_GET['surveyToken']);
-        return;
-    }
-
-    header("location: ../");
-    return;
 }
 
 //fatal error;
 register_shutdown_function("fatalErrorHandler");
+
+if(isset($_GET['surveyToken']) && !empty($_GET['surveyToken'])){
+    header('location: ../'.$lang.'survey/index.php?token='.$_GET['surveyToken']);
+} else {
+    header('location: ../'.$lang);
+}
+
+return;

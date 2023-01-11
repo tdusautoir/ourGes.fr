@@ -25,6 +25,13 @@ function dump($var) //function for debug
     echo "</pre>";
 }
 
+function get_user_lang() {
+    $lang = explode(",", $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+    $lang = strtolower(substr(chop($lang[0]), 0, 2));
+
+    return $lang;
+}
+
 function init_php_session(): bool //init php session
 {
     if (!session_id()) {
@@ -53,7 +60,6 @@ function errorHandler($errno, $errstr, $errfile, $errline) //error
 {
     /* $error = [$errno, $errstr, $errfile, $errline]; //information about the error (for debug) */
     create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
-    header("location: ../");
 
     /* Don't execute PHP internal error handler */
     return true;
@@ -63,7 +69,6 @@ function errorHandler($errno, $errstr, $errfile, $errline) //error
 function fatalErrorHandler() //fatal error
 {
     create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
-    header("location: ../");
 
     /* Don't execute PHP internal error handler */
     return true;

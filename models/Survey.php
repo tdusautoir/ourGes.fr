@@ -1,7 +1,5 @@
 <?php
 
-use function React\Promise\resolve;
-
 class Survey
 {
     private $token;
