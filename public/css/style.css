@@ -688,6 +688,9 @@ body {
   padding: 13px 10px;
   cursor: pointer;
 }
+.dashboard__component__title__arrows__arrow.active {
+  color: red;
+}
 .dashboard__component__content {
   margin-top: 10px;
 }

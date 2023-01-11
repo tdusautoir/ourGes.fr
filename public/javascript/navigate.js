@@ -19,13 +19,13 @@ planning_date[0].className += " current"; //display the current date
 
 function navigateToFollowingNews() {
   if (nw_arrow_left.classList.contains("active")) {
-    nw_arrow_left.className = "fa fa-angle-left";
+    nw_arrow_left.className = "fa fa-angle-left dashboard__component__title__arrows__arrow";
   }
 
   if (sessionStorage.pageNews < news_banners.length - 1) {
     sessionStorage.pageNews++;
     if (sessionStorage.pagePlanning == news_banners.length - 1) {
-      nw_arrow_right.className = "fa fa-angle-left active";
+      nw_arrow_right.className = "fa fa-angle-left dashboard__component__title__arrows__arrow active";
     }
     for (var i = 0; i < news_banners.length; i++) {
       news_banners[i].className = "dashboard__component__content__banner";
@@ -37,13 +37,13 @@ function navigateToFollowingNews() {
 function navigateToPrecedentNews() {
   ;
   if (nw_arrow_right.classList.contains("active")) {
-    nw_arrow_right.className = "fa fa-angle-left";
+    nw_arrow_right.className = "fa fa-angle-left dashboard__component__title__arrows__arrow";
   }
 
   if (sessionStorage.pageNews >= 1) {
     sessionStorage.pageNews--;
     if (sessionStorage.pageNews == 0) {
-      nw_arrow_left.className = "fa fa-angle-left active";
+      nw_arrow_left.className = "fa fa-angle-left dashboard__component__title__arrows__arrow active";
     }
     for (var i = 0; i < news_banners.length; i++) {
       news_banners[i].className = "dashboard__component__content__banner";
@@ -54,13 +54,13 @@ function navigateToPrecedentNews() {
 
 function navigateToFollowingDay() {
   if (pl_arrow_left.classList.contains("active")) {
-    pl_arrow_left.className = "fa fa-angle-left";
+    pl_arrow_left.className = "fa fa-angle-left dashboard__component__title__arrows__arrow";
   }
 
   if (sessionStorage.pagePlanning < planning_day.length - 1) {
     sessionStorage.pagePlanning++;
     if (sessionStorage.pagePlanning == planning_day.length - 1) {
-      pl_arrow_right.className = "fa fa-angle-left active";
+      pl_arrow_right.className = "fa fa-angle-left dashboard__component__title__arrows__arrow active";
     }
     for (var i = 0; i < planning_day.length; i++) {
       planning_day[i].className = "day";
@@ -73,13 +73,13 @@ function navigateToFollowingDay() {
 
 function navigateToPrecedentDay() {
   if (pl_arrow_right.classList.contains("active")) {
-    pl_arrow_right.className = "fa fa-angle-left";
+    pl_arrow_right.className = "fa fa-angle-left dashboard__component__title__arrows__arrow";
   }
 
   if (sessionStorage.pagePlanning >= 1) {
     sessionStorage.pagePlanning--;
     if (sessionStorage.pagePlanning == 0) {
-      pl_arrow_left.className = "fa fa-angle-left active";
+      pl_arrow_left.className = "fa fa-angle-left dashboard__component__title__arrows__arrow active";
     }
     for (var i = 0; i < planning_day.length; i++) {
       planning_day[i].className = "day";
