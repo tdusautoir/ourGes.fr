@@ -90,6 +90,9 @@ if (isset($me)) {
 
         //get News
         $news = $me->getNewsBanners();
+
+        //get Absences
+        $absences = $me->getAbsences($currentYear);
         
     } catch (Exception $e) {
         $err = $e->getMessage();
@@ -106,6 +109,7 @@ if (isset($me)) {
     $_SESSION['profile'] = $profile;
     $_SESSION['grades'] = $grades;
     $_SESSION['agenda'] = $agenda;
+    $_SESSION['absences'] = $absences;
 
     if(isset($_GET['surveyToken']) && !empty($_GET['surveyToken'])){
         header('location: ../survey/index.php?token='.$_GET['surveyToken']);

@@ -169,20 +169,13 @@ function isInteger($input)
 // Sort the agenda multiple times
 function sortAgenda(){
     //to sort the agenda
-    if (isset($_SESSION['agenda'])) {
-        for($i = 0; $i < 10; $i++){
-            usort($_SESSION['agenda'], "cmp");
-        }
-    }
+    usort($_SESSION['agenda'], "cmp");
 }
 
 //to sort the agenda array by starting date
 function cmp($a, $b)
 {
-    if ($b->start_date > $a->start_date) {
-        return 1;
-    }
-    return 0;
+    return $a->start_date - $b->start_date;
 }
 
 //generate an unique token

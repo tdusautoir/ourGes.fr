@@ -136,12 +136,18 @@ require_once './agenda.php';
                         <span>av.</span>
                     </div>
                     <div class="dashboard__component__content">
-                        <?php foreach ($_SESSION['grades'] as $grade) : ?>
+                        <?php if(isset($_SESSION['grades']) && !empty($_SESSION['grades'])): ?>
+                            <?php foreach ($_SESSION['grades'] as $grade) : ?>
+                                <div class="dashboard__component__content__lign">
+                                    <p><?= $grade->course ?></p>
+                                    <p><?php if (isset($grade->average)) :echo $grade->average; endif; ?>
+                                </div>
+                            <?php endforeach ?>
+                        <?php else : ?>
                             <div class="dashboard__component__content__lign">
-                                <p><?= $grade->course ?></p>
-                                <p><?php if (isset($grade->average)) :echo $grade->average; endif; ?>
+                                <p>Empty marks</p>
                             </div>
-                        <?php endforeach ?>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="dashboard__component news">
@@ -155,24 +161,28 @@ require_once './agenda.php';
                         </div>
                     </div>
                     <div class="dashboard__component__content">
-                        <?php foreach ($_SESSION['news'] as $new) : ?>
-                            <?php if (isset($new->ba_id)) : ?>
-                                <div class="dashboard__component__content__banner" style="background-image: url(<?= $new->image ?>);">
-                                    <!-- new title-->
-                                    <p><?= $new->title ?></p>
-                                    <?php if (isset($new->html)) :  ?>
-                                        <div>
-                                            <?php if (isset($new->url)) : ?>
-                                                <!-- new video-->
-                                                <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                            <?php endif; ?>
-                                            <!-- new description -->
-                                            <?= $new->html ?>
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
+                        <?php if(isset($_SESSION['news']) && !empty($_SESSION['news'])): ?>
+                            <?php foreach ($_SESSION['news'] as $new) : ?>
+                                <?php if (isset($new->ba_id)) : ?>
+                                    <div class="dashboard__component__content__banner" style="background-image: url(<?= $new->image ?>);">
+                                        <!-- new title-->
+                                        <p><?= $new->title ?></p>
+                                        <?php if (isset($new->html)) :  ?>
+                                            <div>
+                                                <?php if (isset($new->url)) : ?>
+                                                    <!-- new video-->
+                                                    <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                <?php endif; ?>
+                                                <!-- new description -->
+                                                <?= $new->html ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <p>Empty news</p>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="dashboard__component classes">
@@ -183,12 +193,18 @@ require_once './agenda.php';
                         <span>coef.</span>
                     </div>
                     <div class="dashboard__component__content">
-                        <?php foreach ($_SESSION['grades'] as $course) : ?>
+                        <?php if(isset($_SESSION['grades']) && !empty($_SESSION['grades'])): ?>
+                            <?php foreach ($_SESSION['grades'] as $course) : ?>
+                                <div class="dashboard__component__content__lign">
+                                    <p><?= $course->course . " - " ?><span><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
+                                    <p><?= $course->coef ?></p>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else : ?>
                             <div class="dashboard__component__content__lign">
-                                <p><?= $course->course . " - " ?><span><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
-                                <p><?= $course->coef ?></p>
+                                <p>Empty course</p>
                             </div>
-                        <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -253,14 +269,16 @@ require_once './agenda.php';
                         <span>date</span>
                     </div>
                     <div class="dashboard__component__content">
-                        <div class="dashboard__component__content__lign justified">
-                            <p>Anglais professionnel (ef)</p>
-                            <p>15/02/22</p>
-                        </div>
-                        <div class="dashboard__component__content__lign ">
-                            <p>Anglais professionnel (ef)</p>
-                            <p>15/02/22</p>
-                        </div>
+                        <?php if(isset($_SESSION['absences']) && !empty($_SESSION['absences'])): ?>
+                            <?php foreach($_SESSION['absences'] as $absence): ?>
+                                <div class="dashboard__component__content__lign <?php $absence->justified ? 'justified' : '' ?>">
+                                    <p><?= $absence->course_name ?></p>
+                                    <p><?= date('d/m/Y', $absence->date / 1000); ?></p>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <p>Empty absences</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
