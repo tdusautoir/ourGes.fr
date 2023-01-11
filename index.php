@@ -53,12 +53,12 @@ require_once './agenda.php';
         </div>
         <div class="class__background" id="class__modal">
             <div class="class">
+                <span class="class__date"></span>
                 <h2 class="class__title">Challenge Stack semestriel (figma/HTML/CSS)</h2>
                 <div class="class__content">
                     <p><i class="fa fa-user-tie" style="font-size: 14px;"></i>Professor : <span class="professor"></span></p>
                     <p>Room : <span class="room"></span></p>
                     <p>Stage : <span class="stage"></span></p>
-                    <p>Hour : <span class="date"></span></p>
                     <p>Modality : <span class="modality"></span></p>
                     <p>Campus : <span class="campus"></span></p>
                 </div>
@@ -121,11 +121,20 @@ require_once './agenda.php';
     <?php else : ?>
         <!-- ---DASHBOARD--- -->
         <div class="dashboard__buttons">
-            <a href="./survey/">
-                <div class="tag tag--click tag--new">
-                    <p><i class="fa fa-chart-pie"></i>Create a survey</p>
-                </div>
-            </a>
+            <div class="dashboard__buttons__left">
+                <select name="" id="">
+                    <option value="semester-1" selected disabled>Semester</option>
+                    <option value="semester-1">Semester 1</option>
+                    <option value="semester-2">Semester 2</option>
+                </select>
+            </div>
+            <div class="dashboard__buttons__right">
+                <a href="./survey/">
+                    <div class="tag tag--click tag--new">
+                        <p><i class="fa fa-chart-pie"></i>Create a survey</p>
+                    </div>
+                </a>
+            </div>
         </div>
         <main class="dashboard">
             <div class="dashboard__left">

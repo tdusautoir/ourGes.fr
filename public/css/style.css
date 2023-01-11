@@ -460,7 +460,30 @@ body {
   padding: 20px 100px;
   display: flex;
   gap: 20px;
-  justify-content: end;
+  justify-content: space-between;
+}
+.dashboard__buttons__left {
+  display: flex;
+  align-items: center;
+}
+.dashboard__buttons select {
+  background-color: transparent;
+  font-weight: 400;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: 300ms;
+}
+.dashboard__buttons select:focus {
+  outline: none;
+}
+.dashboard__buttons select:hover {
+  background-color: rgba(0, 0, 0, 0.158);
+}
+.dashboard__buttons select option {
+  background-color: white;
+  color: black;
 }
 .dashboard__component {
   background: var(--background-light);
@@ -476,7 +499,7 @@ body {
   border-radius: 4px;
 }
 .dashboard__component.news .dashboard__component__content__banner {
-  height: 200px;
+  height: 185px;
   background-blend-mode: soft-light;
   background-repeat: no-repeat;
   background-size: cover;
@@ -671,8 +694,7 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.dashboard__component__title span,
-.dashboard__component__title i {
+.dashboard__component__title span {
   font-weight: 300;
   color: var(--grey);
 }
@@ -684,12 +706,16 @@ body {
   right: 0;
 }
 .dashboard__component__title__arrows__arrow {
+  color: white;
   font-size: 1.3rem;
   padding: 13px 10px;
   cursor: pointer;
+  font-weight: 300 !important;
 }
 .dashboard__component__title__arrows__arrow.active {
-  color: red;
+  color: var(--grey);
+  cursor: default;
+  pointer-events: none;
 }
 .dashboard__component__content {
   margin-top: 10px;
@@ -698,7 +724,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 5px;
+  padding: 14px 5px;
 }
 .dashboard__component__content__lign:first-child {
   padding-top: 5px;
@@ -727,7 +753,7 @@ body {
   gap: 20px;
 }
 .dashboard__left .dashboard__component {
-  max-height: calc(33.33% - 18px);
+  max-height: calc(33.33% - 11px);
 }
 .dashboard__left .dashboard__component.results .dashboard__component__content {
   display: flex;
@@ -906,7 +932,11 @@ body {
 .class .fa-xmark:hover {
   color: var(--grey);
 }
+.class span {
+  color: var(--tag-cl);
+}
 .class h2 {
+  margin-top: 5px;
   font-size: 2rem;
   font-weight: 600;
   text-transform: capitalize;
@@ -929,6 +959,7 @@ body {
 }
 .class__content p span {
   font-weight: 500;
+  color: var(--grey);
 }
 
 .current {
@@ -940,6 +971,7 @@ body {
     flex-direction: column-reverse;
     justify-content: start;
     padding: 0 20px;
+    margin-bottom: 20px;
   }
   .dashboard__buttons {
     padding: 20px;

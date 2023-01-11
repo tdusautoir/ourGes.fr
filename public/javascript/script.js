@@ -88,10 +88,10 @@ function get_class_info(classId) {
         let date = jsondata[1];
 
         modal.querySelector('.class__title').innerHTML = data.name;
+        modal.querySelector('.class__date').innerHTML = date[0] + ' - ' + date[1];
         modal.querySelector('.professor').innerHTML = data.teacher;
         modal.querySelector('.room').innerHTML = data.rooms[0].name;
         modal.querySelector('.stage').innerHTML = data.rooms[0].floor;
-        modal.querySelector('.date').innerHTML = date[0] + ' - ' + date[1];
         modal.querySelector('.modality').innerHTML = data.modality
         modal.querySelector('.campus').innerHTML = data.rooms[0].campus
 
