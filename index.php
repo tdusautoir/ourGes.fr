@@ -53,13 +53,14 @@ require_once './agenda.php';
         </div>
         <div class="class__background" id="class__modal">
             <div class="class">
-                <!-- <h2>Challenge Stack semestriel (figma/HTML/CSS)</h2> -->
+                <span>11:30 - 13:00</span>
+                <h2>Challenge Stack semestriel (figma/HTML/CSS)</h2>
                 <div class="class__content">
-                    <!-- <p><i class="fa fa-user-tie" style="font-size: 14px;"></i>Professor : <span>Mr. VAAST</span></p>
-                <p>Room : <span>107</span></p>
-                <p>Stage : <span>2ème étage</span></p>
-                <p>Modality : <span>Présentiel</span></p>
-                <p>Campus : <span>Eductive Euralille</span></p> -->
+                    <p><i class="fa fa-user-tie" style="font-size: 14px;"></i>Professor : <span>Mr. VAAST</span></p>
+                    <p>Room : <span>107</span></p>
+                    <p>Stage : <span>2ème étage</span></p>
+                    <p>Modality : <span>Présentiel</span></p>
+                    <p>Campus : <span>Eductive Euralille</span></p>
                 </div>
                 <i class="fa fa-xmark" onclick="class__modal()"></i>
             </div>
@@ -120,11 +121,20 @@ require_once './agenda.php';
     <?php else : ?>
         <!-- ---DASHBOARD--- -->
         <div class="dashboard__buttons">
-            <a href="./survey/">
-                <div class="tag tag--click tag--new">
-                    <p><i class="fa fa-chart-pie"></i>Create a survey</p>
-                </div>
-            </a>
+            <div class="dashboard__buttons__left">
+                <select name="" id="">
+                    <option value="semester-1" selected disabled>Semester</option>
+                    <option value="semester-1">Semester 1</option>
+                    <option value="semester-2">Semester 2</option>
+                </select>
+            </div>
+            <div class="dashboard__buttons__right">
+                <a href="./survey/">
+                    <div class="tag tag--click tag--new">
+                        <p><i class="fa fa-chart-pie"></i>Create a survey</p>
+                    </div>
+                </a>
+            </div>
         </div>
         <main class="dashboard">
             <div class="dashboard__left">
