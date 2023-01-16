@@ -17,6 +17,7 @@ if (!is_logged() && isset($_GET['token']) && !empty($_GET['token'])) {
 if (isset($_GET['token']) && !empty($_GET['token'])) {
     $survey = new Survey;
     $survey->setToken($_GET['token']);
+    $survey->setUser($_SESSION['profile']->uid);
     $survey_data = $survey->get_survey();
 
     if (!$survey_data) {
@@ -26,6 +27,12 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     }
 
     $survey_data['choices'] = $survey->get_choices();
+    $survey_data['responses'] = $survey->get_responses();
+    $survey_data['user_responses'] = $survey->get_response_from_user(); 
+
+    echo "<pre>";
+    var_dump($survey_data);
+    echo "</pre>";
 }
 
 ?>
@@ -88,6 +95,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                     </div>
                     <?php if (isset($survey_data) && !empty($survey_data)) : ?>
                         <form method="POST" id="form_survey">
+                            <input type="hidden" name="token" value="<?= $_GET['token'] ?>">
                             <div class="dashboard__component__content">
                                 <div class="answer__head">
                                     <div class="dashboard__component__content__lign answer__head__title">
