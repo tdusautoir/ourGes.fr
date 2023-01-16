@@ -29,149 +29,202 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="ourGes is an extension to myGes. you can easily find your school information using a simple and easy-to-use interface">
+        <link rel="stylesheet" href="../public/css/reset.css">
+        <link rel="stylesheet" href="../public/css/style.css">
+        <link rel="stylesheet" href="../public/css/variables.css">
+        <link rel="stylesheet" href="../public/css/keyframes.css">
+        <link rel="icon" href="../public/img/favicon.png" />
+        <script src="../public/javascript/script.js"></script>
+        <script src="../public/javascript/survey.js" defer></script>
+        <title>ourGes 2.0 - Create a survey</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ourGes - Create a survey</title>
-    <link rel="stylesheet" href="../public/css/reset.css">
-    <link rel="stylesheet" href="../public/css/animations.css">
-    <link rel="stylesheet" href="../public/css/var.css">
-    <link rel="stylesheet" href="../public/css/global.css">
-    <link rel="stylesheet" href="../public/css/survey.css">
-    <link rel="stylesheet" href="../public/css/responsive.css">
-    <link rel="icon" href="../public/img/favicon.png" />
-    <script src="../public/js/jquery-3.6.0.min.js"></script>
-    <script src="../public/js/script.js" defer></script>
-    <script src="../public/js/survey.js"></script>
-</head>
-
-<body class="m-0a ovf" id="body">
-    <nav class="flex flex-al">
-        <div class="nav__logo flex flex-js pd-1">
-            <p>our</p>
-            <p onclick="easter()">GES</p>
-        </div>
-        <div class="nav__menu flex flex-al">
-            <div class="nav__menu__usr flex">
-                <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="profile" onclick="showSubmenu()">
-                <i class="fa fa-angle-down" id="fa-angle-down"></i>
+    <body>
+        <!-- ---MODALS--- -->
+        <div class="logout" id="logout">
+            <div class="logout__head">
+                <p>Signed in as</p>
+                <p><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></p>
+            </div>
+            <div class="logout__content">
+                <div class="tag">
+                    <p><?= $_SESSION['class']->promotion ?></p>
+                </div>
+                <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
             </div>
         </div>
-    </nav>
-    <div class="nav__submenu pd-1" id="dropdown-menu">
-        <div class="nav__submenu__head mb-1">
-            <p>Signed in as</p>
-            <span>
-                <?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?>
-            </span>
-        </div>
-        <div class="nav__submenu__foot flex">
-            <p class="tag">
-                <?= $_SESSION['class']->promotion ?>
-            </p>
-            <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
-        </div>
-    </div>
-    <div class="container container-survey" id="container">
-        <div class="content m-0a">
-            <div class="db-btn mb-2 flex gap-2">
-                <a href="javascript:delay('../')" onclick="transition()">
-                    <p class="db-btn__itm gap-1 flex flex-al tag"> Back </p>
-                </a>
+        <header class="header">
+            <div class="header__logo">
+                <p>our</p>
+                <p>GES</p>
             </div>
-            <div class="dashboard flex">
-                <div class="dashboard__row flex">
-                    <div class="dashboard__card pd-1">
-                        <div class="dashboard__card__head flex flex-al mb-2">
-                            <div class="dashboard__card__head__title flex flex-al gap-1">
-                                <h4 class="tag">Create a survey</h4>
+            <div class="header__buttons" onclick="logout()">
+                <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="user image">
+                <i class="fa fa-angle-down"></i>
+            </div>
+        </header>
+        <div class="dashboard__buttons">
+            <a href="../">
+                <div class="tag tag--click">
+                    <p><i class="fa fa-arrow-left"></i>Back</p>
+                </div>
+            </a>
+        </div>
+        <main class="dashboard survey">
+            <div class="dashboard__left">
+                <div class="dashboard__component answer" id="answer">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p><i class="fa fa-square-poll-vertical"></i>Answer</p>
+                        </div>
+                    </div>
+                    <?php if (isset($survey_data) && !empty($survey_data)) : ?>
+                        <form method="POST" id="form_survey">
+                            <div class="dashboard__component__content">
+                                <div class="answer__head">
+                                    <div class="dashboard__component__content__lign answer__head__title">
+                                        <p><?= $survey_data['name'] ?></p>
+                                    </div>
+                                    <?php if (isset($survey_data['description']) && !empty($survey_data['description'])) : ?>
+                                        <div class="dashboard__component__content__lign answer__head__description">
+                                            <p><?= $survey_data['description'] ?></p>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <?php foreach ($survey_data['choices'] as $choice) : 
+                                    $id = str_replace(' ', '_', strtolower($choice['choice'])); ?>
+                                    <?php if ($survey_data['type'] == 1) : ?>
+                                        <label for="<?= $id ?>" class="dashboard__component__content__lign answer__option">
+                                            <p><?= $choice['choice'] ?></p>
+                                            <input name="choice" id="<?= $id ?>" value='<?= $choice['id'] ?>' type="radio">
+                                        </label>
+                                    <?php else: ?>
+                                        <label for="<?= $id ?>" class="dashboard__component__content__lign answer__option">
+                                            <p><?= $choice['choice'] ?></p>
+                                            <input name="choice" id="<?= $id ?>" value='<?= $choice['id'] ?>' type="checkbox">
+                                        </label>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </div>
+                            <div class="answer__buttons">
+                                <button id="send_response_btn" type="submit" class="tag tag--click tag--check">
+                                    <p>submit</p>
+                                    <i class="fa fa-circle-check"></i>
+                                </button>
+                            </div>
+                        </form>
+                    <?php else : ?>
+                        <p>Aucun sondage</p>
+                    <?php endif; ?>
+                </div>
+                <div class="dashboard__component results">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p>Results</p>
+                        </div>
+                    </div>
+                    <div class="dashboard__component__content">
+                        <div class="results__bar__container">
+                            <p>Burger king - <span>3/4</span></p>
+                            <div class="dashboard__component__content__lign results__bar" id="results__bar__1"
+                                style="max-width: 75%;">
+                            </div>
+                            <div class="results__bar__container__images">
+                                <img src="../public/img/achille.jpeg" title="Achille DAVID" alt="survey results image">
+                                <img src="../public/img/thibaut.jpeg" title="Thibaut DUSAUTOIR"
+                                    alt="survey results image">
+                                <img src="../public/img/quentin.jpeg" title="Quentin GRANSART"
+                                    alt="survey results image">
                             </div>
                         </div>
+                        <div class="results__bar__container">
+                            <p>Tacos - <span>1/4</span></p>
+                            <div class="dashboard__component__content__lign results__bar" id="results__bar__2"
+                                style="max-width: 25%;">
+                            </div>
+                            <div class="results__bar__container__images">
+                                <img src="../public/img/matthys.jpeg" title="Matthys BOUREAU"
+                                    alt="survey results image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard__right">
+                <div class="dashboard__component">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p>Creation</p>
+                        </div>
+                    </div>
+                    <div class="dashboard__component__content creation__container">
                         <form action="../controller/survey.php" class="survey__create" method="POST">
-                            <div class="survey__form__container">
-                                <input type="text" name="name" autocomplete="off" maxlength="50" placeholder="Name">
-                                <input type="text" name="description" autocomplete="off" maxlength="100" placeholder="Description (optional)">
-
+                            <div class="creation">
+                                <label for="title">
+                                    <p>title</p>
+                                    <input id="title" name="name" type="text" placeholder="type your question here" autocomplete="off">
+                                </label>
+                                <label for="description">
+                                    <p>description (optional)</p>
+                                    <input id="description" name="description" type="text" autocomplete="off">
+                                </label>
                                 <input type="hidden" id="nb-choice" name="nb-choice" value="2">
-                                <select name="type">
-                                    <option value="1" selected disabled>Type</option>
-                                    <option value="1">Simple choice</option>
-                                    <option value="2">Multiple choices</option>
-                                </select>
-                                <div id="choices__container" class="choices__container">
-                                    <div class="survey-choices-input">
-                                        <input type="text" name="choice-1" autocomplete="off" maxlength="50" placeholder="Choice 1">
+                                <div id="creation__answers" class="creation__answers" name="type">
+                                    <p>answers options <i class="fa fa-plus" onclick="add__option()"></i></p>
+                                    <div class="creation__answers__input">
+                                        <input type="text" name="choice-1" placeholder="option 1" autocomplete="off">
                                     </div>
-                                    <div class="survey-choices-input">
-                                        <input type="text" name="choice-2" autocomplete="off" maxlength="50" placeholder="Choice 2">
-                                    </div>
-                                </div>
-                                <div class="addOption">
-                                    <div class="addOption__content tag" onclick="addOption()">
-                                        Add a choice<i class="fa fa-plus"></i>
+                                    <div class="creation__answers__input">
+                                        <input type="text" name="choice-2" placeholder="option 2" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="tag">Create</button>
+                            <div class="creation__settings">
+                                <label for="publicity" class="creation__settings__content">
+                                    <p>show poll in recent</p>
+                                    <label for="publicity" class="checkbox">
+                                        <input id="publicity" type="checkbox">
+                                    </label>
+                                </label>
+                                <label for="anonymous" class="creation__settings__content">
+                                    <p>required participant names</p>
+                                    <label for="anonymous" class="checkbox">
+                                        <input id="anonymous" type="checkbox">
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="creation__buttons">
+                                <button type="submit" class="tag tag--click">
+                                    <p>create</p>
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
-                <div class="dashboard__col flex flex-col">
-                    <div class="dashboard__card pd-1">
-                        <?php if (isset($_GET['token'])) : ?>
-                            <div class="dashboard__card__head flex flex-al mb-1">
-                                <h4 class="tag">Survey</h4>
-                            </div>
-                            <div class="survey__content">
-                                <h1 class="mb-1"><?= $survey_data['name'] ?></h1>
-                                <?php if (isset($survey_data['description']) && !empty($survey_data['description'])) : ?>
-                                    <p class="mb-2"><?= $survey_data['description'] ?></p>
-                                <?php endif; ?>
-                                <form id="form_survey">
-                                    <div class="survey__choices" id="survey__choices">
-                                        <?php foreach ($survey_data['choices'] as $choice) : ?>
-                                            <div class="survey__choice" id="survey__choice">
-                                                <?php if ($survey_data['type'] == 1) : ?>
-                                                    <button type="button" value='<?= $choice['id'] ?>' onclick="submitChoice(this)">
-                                                        <p><?= $choice['choice'] ?></p>
-                                                    </button>
-                                                <?php else : ?>
-                                                    <input name='choices' type='checkbox' value='<?= $choice['id'] ?>' name=<?= strtolower($choice['choice']) ?>>
-                                                    <label for=<?= strtolower($choice['choice']) ?>><?= $choice['choice'] ?></label>
-                                                <?php endif; ?>
-                                            </div>
-                                        <?php endforeach; ?>
-                                        <?php if (!($survey_data['type'] == 1)) : ?>
-                                            <button type="submit">Valider</button>
-                                        <?php endif; ?>
-                                    </div>
-                                </form>
-                            </div>
-                        <?php else : ?>
-                            <div class="dashboard__card__head flex flex-al mb-1">
-                                <h4 class="tag">Survey</h4>
-                            </div>
-                            <div class="survey__choice">
-                                <p>aucun sondage</p>
+                <div class="dashboard__component share">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p><i class="fa fa-share-nodes"></i>share</p>
+                        </div>
+                    </div>
+                    <div class="dashboard__component__content">
+                        <?php if (isset($survey_data) && !empty($survey_data)) : ?>
+                            <div class="dashboard__component__content__lign share">
+                                <input type="text" readonly value="https://www.ourges.fr/survey/?token=<?= $_GET['token'] ?>">
+                                <i class="fa fa-copy" title="copy to clipboard" onclick="copy__link()"></i>
                             </div>
                         <?php endif; ?>
                     </div>
-                    <div class="dashboard__card pd-1">
-                        <div class="dashboard__card__head flex flex-al mb-1">
-                            <h4 class="tag">Recent</h4>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    </div>
-    <?php require '../components/flash_message.php'; ?>
-</body>
-
+        </main>
+    </body>
 </html>
-<!-- developed by achille david and thibaut dusautoir -->

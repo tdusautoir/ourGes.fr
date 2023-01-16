@@ -61,12 +61,6 @@ function delete__option(choiceId) {
     inputNbChoice.value--;
 }
 
-function submit(button) {
-    let container = document.querySelector(".dashboard__component__content");
-    button.className = "tag tag--click tag--check active";
-    container.style.pointerEvents = "none";
-}
-
 function copy__link() {
     let input = document.querySelector('.share input');
     navigator.clipboard.writeText(input.value);
