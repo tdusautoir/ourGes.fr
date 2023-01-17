@@ -23,14 +23,10 @@ require_once './agenda.php';
     <link rel="icon" href="./public/img/favicon.png" />
     <script src="./public/javascript/script.js"></script>
     <script src="./public/javascript/navigate.js" defer></script>
-    <title>ourGes - myGes, but easier</title>
+    <title>ourGes 2.0 - myGes, but easier</title>
 </head>
 
-<body onload="notif()">
-    <div class="notif green">
-        <i class="fa fa-circle-check"></i>
-        <p>Successfully connected</p>
-    </div>
+<body>
     <?php if (!is_logged()) : ?>
         <form class="login" action="<?= (isset($_GET['surveyToken']) && !empty($_GET['surveyToken'])) ? "./controller/login.php?surveyToken=" . $_GET['surveyToken'] : "./controller/login.php" ?>" method="POST">
             <div class="login__inputs">

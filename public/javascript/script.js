@@ -92,10 +92,3 @@ function get_class_info(classId) {
         class__modal();
     });
 }
-
-function notif() {
-    let notif = document.querySelector('.notif');
-    setTimeout(function () {
-        notif.classList.toggle("close");
-    }, 2000);
-}

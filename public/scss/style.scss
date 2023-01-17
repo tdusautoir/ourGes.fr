@@ -70,6 +70,8 @@ body {
         }
     }
 
+
+
     &--click {
         outline: 2px solid var(--tag-cl);
         cursor: pointer;
@@ -170,58 +172,6 @@ body {
         width: 35px;
         height: 10px;
         cursor: pointer;
-    }
-}
-
-.notif {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    padding: 10px;
-    border-radius: 4px;
-    outline: 2px solid var(--green);
-    background-color: var(--green-light);
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    display: flex;
-    transition: 300ms;
-    z-index: 9999;
-    animation: slide 300ms ease both;
-
-    &.close {
-        animation: slideout 300ms ease both;
-    }
-
-    &.green {
-        background-color: var(--green-light);
-        outline: 2px solid var(--green);
-
-        p,
-        i {
-            color: var(--green);
-        }
-    }
-
-    &.red {
-        background-color: var(--red-light);
-        outline: 2px solid var(--red);
-
-        p,
-        i {
-            color: var(--red);
-        }
-    }
-
-    p,
-    i {
-        font-size: 1.2rem;
-        font-weight: 600;
-    }
-
-    i {
-        font-weight: 400;
-        font-size: 1.6rem;
     }
 }
 
@@ -601,7 +551,6 @@ body {
             color: white;
             cursor: pointer;
             transition: 300ms;
-            font-weight: 600;
 
             &:focus {
                 outline: none;
