@@ -151,6 +151,51 @@ body {
   cursor: pointer;
 }
 
+.notif {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  padding: 10px;
+  border-radius: 4px;
+  outline: 2px solid var(--green);
+  background-color: var(--green-light);
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  display: flex;
+  transition: 300ms;
+  z-index: 9999;
+  animation: slide 300ms ease both;
+}
+.notif.close {
+  animation: slideout 300ms ease both;
+}
+.notif.green {
+  background-color: var(--green-light);
+  outline: 2px solid var(--green);
+}
+.notif.green p,
+.notif.green i {
+  color: var(--green);
+}
+.notif.red {
+  background-color: var(--red-light);
+  outline: 2px solid var(--red);
+}
+.notif.red p,
+.notif.red i {
+  color: var(--red);
+}
+.notif p,
+.notif i {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.notif i {
+  font-weight: 400;
+  font-size: 1.6rem;
+}
+
 .input {
   color: var(--white);
   background: var(--submenu);
@@ -474,6 +519,7 @@ body {
   color: white;
   cursor: pointer;
   transition: 300ms;
+  font-weight: 600;
 }
 .dashboard__buttons select:focus {
   outline: none;
@@ -1015,7 +1061,7 @@ body {
     font-size: 5rem;
   }
   .hero__text__description p,
-.hero__text__description a {
+  .hero__text__description a {
     font-size: 1.3rem;
   }
   .hero__text__buttons {
@@ -1023,12 +1069,12 @@ body {
     align-items: center;
   }
   .hero__text__buttons button img,
-.hero__text__buttons a img {
+  .hero__text__buttons a img {
     width: 20px;
     height: 20px;
   }
   .hero__text__buttons button p,
-.hero__text__buttons a p {
+  .hero__text__buttons a p {
     font-size: 1.4rem;
   }
 }
@@ -1055,11 +1101,11 @@ body {
     font-size: 3rem;
   }
   .hero__text__description p,
-.hero__text__description a {
+  .hero__text__description a {
     font-size: 1rem;
   }
   .hero__text__buttons button p,
-.hero__text__buttons a p {
+  .hero__text__buttons a p {
     font-size: 1.2rem;
   }
 }
