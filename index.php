@@ -27,10 +27,7 @@ require_once './agenda.php';
 </head>
 
 <body>
-    <div class="notif green">
-        <i class="fa fa-circle-check"></i>
-        <p>Successfully connected</p>
-    </div>
+    <?php require_once('./components/flash_message.php'); ?>
     <?php if (!is_logged()) : ?>
         <form class="login" action="<?= (isset($_GET['surveyToken']) && !empty($_GET['surveyToken'])) ? "./controller/login.php?surveyToken=" . $_GET['surveyToken'] : "./controller/login.php" ?>" method="POST">
             <div class="login__inputs">

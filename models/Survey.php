@@ -133,7 +133,7 @@ class Survey
 
     function get_survey()
     {
-        $req = $this->connect->prepare('SELECT token, name, description, type FROM survey WHERE token = :token');
+        $req = $this->connect->prepare('SELECT token, name, description, type, nb_responses FROM survey WHERE token = :token');
         $req->bindValue(':token', $this->token);
         $req->execute();
         $survey_data = $req->fetchAll(PDO::FETCH_ASSOC);

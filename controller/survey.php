@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $survey->setUser($_SESSION['profile']->uid);
 
                 if(count($survey->get_response_from_user()) > 0) {
+                    create_flash_message(ERROR_LOGIN, 'You already voted for this survey', FLASH_ERROR);
                     echo json_encode(['error' => true]);
                     return;
                 }

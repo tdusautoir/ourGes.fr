@@ -10,13 +10,6 @@ require_once '../models/User.php';
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$lang = get_user_lang();
-if($lang == 'fr') {
-    $lang = $lang.'/';
-} else {
-    $lang = '';
-}
-
 try {
     // client-id = skolae-app
     $client = new MyGes\Client('skolae-app', $username, $password);
@@ -119,9 +112,9 @@ if(isset($client)) {
 register_shutdown_function("fatalErrorHandler");
 
 if(isset($_GET['surveyToken']) && !empty($_GET['surveyToken'])){
-    header('location: ../'.$lang.'survey/index.php?token='.$_GET['surveyToken']);
+    header('location: ../survey/index.php?token='.$_GET['surveyToken']);
 } else {
-    header('location: ../'.$lang);
+    header('location: ../');
 }
 
 return;

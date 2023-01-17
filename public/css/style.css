@@ -151,6 +151,51 @@ body {
   cursor: pointer;
 }
 
+.notif {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  padding: 10px;
+  border-radius: 4px;
+  outline: 2px solid var(--green);
+  background-color: var(--green-light);
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  display: flex;
+  transition: 300ms;
+  z-index: 9999;
+  animation: slide 300ms ease both;
+}
+.notif.close {
+  animation: slideout 300ms ease both;
+}
+.notif.green {
+  background-color: var(--green-light);
+  outline: 2px solid var(--green);
+}
+.notif.green p,
+.notif.green i {
+  color: var(--green);
+}
+.notif.red {
+  background-color: var(--red-light);
+  outline: 2px solid var(--red);
+}
+.notif.red p,
+.notif.red i {
+  color: var(--red);
+}
+.notif p,
+.notif i {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.notif i {
+  font-weight: 400;
+  font-size: 1.6rem;
+}
+
 .input {
   color: var(--white);
   background: var(--submenu);
@@ -315,53 +360,6 @@ body {
   cursor: pointer;
 }
 
-.notification {
-  z-index: 999;
-  display: flex;
-  gap: 15px;
-  position: fixed;
-  align-items: center;
-  text-align: right;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px;
-  border-radius: 4px;
-  pointer-events: none;
-  opacity: 0;
-}
-.notification.active {
-  animation: slideIn 400ms ease 400ms both;
-  pointer-events: all;
-}
-.notification.close {
-  animation: slideOut 400ms ease 200ms both;
-  pointer-events: none;
-}
-.notification p {
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-.notification i {
-  font-weight: 400;
-  font-size: 1.5rem;
-}
-.notification--red {
-  background-color: var(--red-light);
-  outline: 2px solid var(--red);
-}
-.notification--red p,
-.notification--red i {
-  color: var(--red);
-}
-.notification--green {
-  background-color: var(--green-light);
-  outline: 2px solid var(--green);
-}
-.notification--green p,
-.notification--green i {
-  color: var(--green);
-}
-
 .hero {
   display: flex;
   justify-content: space-between;
@@ -474,6 +472,7 @@ body {
   color: white;
   cursor: pointer;
   transition: 300ms;
+  font-weight: 600;
 }
 .dashboard__buttons select:focus {
   outline: none;

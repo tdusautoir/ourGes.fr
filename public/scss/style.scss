@@ -414,63 +414,6 @@ body {
     }
 }
 
-.notification {
-    z-index: 999;
-    display: flex;
-    gap: 15px;
-    position: fixed;
-    align-items: center;
-    text-align: right;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px;
-    border-radius: 4px;
-    pointer-events: none;
-    opacity: 0;
-
-    &.active {
-        animation: slideIn 400ms ease 400ms both;
-        pointer-events: all;
-    }
-
-    &.close {
-        animation: slideOut 400ms ease 200ms both;
-        pointer-events: none;
-    }
-
-    p {
-        font-weight: 600;
-        font-size: 1.1rem;
-    }
-
-    i {
-        font-weight: 400;
-        font-size: 1.5rem;
-    }
-
-    &--red {
-        background-color: var(--red-light);
-        outline: 2px solid var(--red);
-
-        p,
-        i {
-            color: var(--red);
-        }
-    }
-
-    &--green {
-        background-color: var(--green-light);
-        outline: 2px solid var(--green);
-
-        p,
-        i {
-            color: var(--green);
-        }
-    }
-
-
-}
-
 .hero {
     display: flex;
     justify-content: space-between;

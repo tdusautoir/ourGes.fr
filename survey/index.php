@@ -28,6 +28,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
 
     $survey_data['choices'] = $survey->get_choices();
     $survey_data['responses'] = $survey->get_responses();
+    $survey_data['current_user_response'] = $survey->get_response_from_user();
     $survey_data['users_infos'] = $survey->get_users_info();
 }
 ?>
@@ -51,6 +52,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
 
     <body>
         <!-- ---MODALS--- -->
+        <?php require_once('../components/flash_message.php'); ?>
         <div class="logout" id="logout">
             <div class="logout__head">
                 <p>Signed in as</p>
@@ -89,6 +91,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         </div>
                     </div>
                     <?php if (isset($survey_data) && !empty($survey_data)) : ?>
+                        <?php $disabled = count($survey_data['current_user_response']) ? 'disabled' : ''; ?>
                         <form method="POST" id="form_survey">
                             <input type="hidden" name="token" value="<?= $_GET['token'] ?>">
                             <div class="dashboard__component__content">
@@ -104,20 +107,23 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                 </div>
                                 <?php foreach ($survey_data['choices'] as $choice) : ?>
                                     <?php if ($survey_data['type'] == 1) : ?>
-                                        <label for="<?= 'choice_'.$choice['id']; ?> ?>" class="dashboard__component__content__lign answer__option">
+                                        <label for="<?= 'choice_'.$choice['id']; ?>" class="dashboard__component__content__lign answer__option">
                                             <p><?= $choice['choice'] ?></p>
-                                            <input name="choice" id="<?= 'choice_'.$choice['id']; ?> ?>" value='<?= $choice['id'] ?>' type="radio">
+                                            <input name="choice" id="<?= 'choice_'.$choice['id']; ?>" value='<?= $choice['id'] ?>' type="radio" <?= $disabled ?>>
                                         </label>
                                     <?php else: ?>
-                                        <label for="<?= 'choice_'.$choice['id']; ?> ?>" class="dashboard__component__content__lign answer__option">
+                                        <label for="<?= 'choice_'.$choice['id']; ?>" class="dashboard__component__content__lign answer__option">
                                             <p><?= $choice['choice'] ?></p>
-                                            <input name="choice" id="<?= 'choice_'.$choice['id']; ?> ?>" value='<?= $choice['id'] ?>' type="checkbox">
+                                            <input name="choice" id="<?= 'choice_'.$choice['id']; ?>" value='<?= $choice['id'] ?>' type="checkbox" <?= $disabled ?>>
                                         </label>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </div>
+                            <?php if($disabled): ?>
+                                <p>You already voted for this survey</p>
+                            <?php endif; ?>
                             <div class="answer__buttons">
-                                <button id="send_response_btn" type="submit" class="tag tag--click tag--check">
+                                <button id="send_response_btn" type="submit" class="tag tag--click tag--check" <?= $disabled ?>">
                                     <p>submit</p>
                                     <i class="fa fa-circle-check"></i>
                                 </button>
@@ -135,7 +141,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                     </div>
                     <div class="dashboard__component__content">
                         <?php if (isset($survey_data) && !empty($survey_data)) : ?>
-                            <?php if(count($survey_data['responses']) > 0): 
+                            <?php if($survey_data['nb_responses']): 
                                 foreach($survey_data['responses'] as $response): ?>
                                     <div class="results__bar__container">
                                         <p><?= $response['choice'] ?> - <span><?= $response['nb_response'].'/'.$response['total_response'] ?></span></p>
