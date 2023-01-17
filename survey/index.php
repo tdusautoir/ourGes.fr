@@ -28,13 +28,8 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
 
     $survey_data['choices'] = $survey->get_choices();
     $survey_data['responses'] = $survey->get_responses();
-    $survey_data['user_responses'] = $survey->get_response_from_user(); 
-
-    echo "<pre>";
-    var_dump($survey_data);
-    echo "</pre>";
+    $survey_data['users_infos'] = $survey->get_users_info();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -107,17 +102,16 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                         </div>
                                     <?php endif; ?>
                                 </div>
-                                <?php foreach ($survey_data['choices'] as $choice) : 
-                                    $id = str_replace(' ', '_', strtolower($choice['choice'])); ?>
+                                <?php foreach ($survey_data['choices'] as $choice) : ?>
                                     <?php if ($survey_data['type'] == 1) : ?>
-                                        <label for="<?= $id ?>" class="dashboard__component__content__lign answer__option">
+                                        <label for="<?= 'choice_'.$choice['id']; ?> ?>" class="dashboard__component__content__lign answer__option">
                                             <p><?= $choice['choice'] ?></p>
-                                            <input name="choice" id="<?= $id ?>" value='<?= $choice['id'] ?>' type="radio">
+                                            <input name="choice" id="<?= 'choice_'.$choice['id']; ?> ?>" value='<?= $choice['id'] ?>' type="radio">
                                         </label>
                                     <?php else: ?>
-                                        <label for="<?= $id ?>" class="dashboard__component__content__lign answer__option">
+                                        <label for="<?= 'choice_'.$choice['id']; ?> ?>" class="dashboard__component__content__lign answer__option">
                                             <p><?= $choice['choice'] ?></p>
-                                            <input name="choice" id="<?= $id ?>" value='<?= $choice['id'] ?>' type="checkbox">
+                                            <input name="choice" id="<?= 'choice_'.$choice['id']; ?> ?>" value='<?= $choice['id'] ?>' type="checkbox">
                                         </label>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
@@ -140,29 +134,29 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         </div>
                     </div>
                     <div class="dashboard__component__content">
-                        <div class="results__bar__container">
-                            <p>Burger king - <span>3/4</span></p>
-                            <div class="dashboard__component__content__lign results__bar" id="results__bar__1"
-                                style="max-width: 75%;">
-                            </div>
-                            <div class="results__bar__container__images">
-                                <img src="../public/img/achille.jpeg" title="Achille DAVID" alt="survey results image">
-                                <img src="../public/img/thibaut.jpeg" title="Thibaut DUSAUTOIR"
-                                    alt="survey results image">
-                                <img src="../public/img/quentin.jpeg" title="Quentin GRANSART"
-                                    alt="survey results image">
-                            </div>
-                        </div>
-                        <div class="results__bar__container">
-                            <p>Tacos - <span>1/4</span></p>
-                            <div class="dashboard__component__content__lign results__bar" id="results__bar__2"
-                                style="max-width: 25%;">
-                            </div>
-                            <div class="results__bar__container__images">
-                                <img src="../public/img/matthys.jpeg" title="Matthys BOUREAU"
-                                    alt="survey results image">
-                            </div>
-                        </div>
+                        <?php if (isset($survey_data) && !empty($survey_data)) : ?>
+                            <?php if(count($survey_data['responses']) > 0): 
+                                foreach($survey_data['responses'] as $response): ?>
+                                    <div class="results__bar__container">
+                                        <p><?= $response['choice'] ?> - <span><?= $response['nb_response'].'/'.$response['total_response'] ?></span></p>
+                                        <?php if(floor($response['choice_percentage']) > 0): ?>
+                                            <div class="dashboard__component__content__lign results__bar" id="<?= 'result'.$response['choice_id'] ?>" style="max-width: <?= floor($response['choice_percentage']) ?>%;"></div>
+                                        <?php endif; ?>
+                                        <div class="results__bar__container__images">
+                                            <?php foreach($survey_data['users_infos'] as $user) : 
+                                                if($user['choice_id'] == $response['choice_id']): ?>
+                                                    <img src="<?= isset($user['user_img']) ? $user['user_img'] : 'default.png' ?>" title="<?= $user['user_name'] ?>">
+                                                <?php endif;
+                                            endforeach; ?>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>Aucun résultat</p>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <p>Aucun sondage</p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

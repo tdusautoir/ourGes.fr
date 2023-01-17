@@ -135,7 +135,7 @@ class Survey
     {
         $req = $this->connect->prepare('SELECT token, name, description, type FROM survey WHERE token = :token');
         $req->bindValue(':token', $this->token);
-        $stmt = $req->execute();
+        $req->execute();
         $survey_data = $req->fetchAll(PDO::FETCH_ASSOC);
 
         if (isset($survey_data) && !empty($survey_data)) {
@@ -149,7 +149,7 @@ class Survey
     {
         $req = $this->connect->prepare('SELECT survey_choices.id, choice FROM survey_choices INNER JOIN survey ON survey.id = survey_choices.survey_id WHERE token = :token');
         $req->bindValue(':token', $this->token);
-        $stmt = $req->execute();
+        $req->execute();
         $choices = $req->fetchAll(PDO::FETCH_ASSOC);
 
         if (isset($choices) && !empty($choices)) {
@@ -186,7 +186,7 @@ class Survey
 
     function get_responses() {
         if(isset($this->token)){
-            $req = $this->connect->prepare('SELECT ROUND((survey_choices.nb_responses / survey.nb_responses * 100), 1) as choice_percentage, survey_choices.nb_responses as nb_response, survey.nb_responses as total_response, survey_id, choice FROM survey_choices INNER JOIN survey ON survey.id = survey_choices.survey_id WHERE survey.token = :token;');
+            $req = $this->connect->prepare('SELECT ROUND((survey_choices.nb_responses / survey.nb_responses * 100), 1) as choice_percentage, survey_choices.nb_responses as nb_response, survey.nb_responses as total_response, survey_id, choice, survey_choices.id as choice_id FROM survey_choices INNER JOIN survey ON survey.id = survey_choices.survey_id WHERE survey.token = :token;');
             $req->bindValue(':token', $this->token);
             $req->execute();
 
@@ -201,6 +201,18 @@ class Survey
             $req = $this->connect->prepare('SELECT choice FROM survey INNER JOIN survey_choices ON survey.id = survey_choices.survey_id INNER JOIN survey_responses ON survey_choices.id = survey_responses.choice_id WHERE survey.token = :token AND survey_responses.user_id = :user_id');
             $req->bindValue(':token', $this->token);
             $req->bindValue(':user_id', $this->user_id);
+            $req->execute();
+
+            return $req->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return 0;
+    }
+
+    function get_users_info() {
+        if(isset($this->token)) {
+            $req = $this->connect->prepare('SELECT user_img, user_name, survey_choices.id as choice_id FROM survey_responses INNER JOIN survey_choices ON survey_responses.choice_id = survey_choices.id INNER JOIN chat_user ON survey_responses.user_id = chat_user.user_id INNER JOIN survey ON survey_choices.survey_id = survey.id WHERE token = :token');
+            $req->bindValue(':token', $this->token);
             $req->execute();
 
             return $req->fetchAll(PDO::FETCH_ASSOC);

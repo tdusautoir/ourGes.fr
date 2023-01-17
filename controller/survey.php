@@ -1,6 +1,5 @@
 <?php
 
-
 require_once '../functions.php';
 require_once '../models/Survey.php';
 
@@ -13,11 +12,18 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $survey->setResponses($_POST['choice']);
                 $survey->setToken($_POST['token']);
                 $survey->setUser($_SESSION['profile']->uid);
-                if($survey->send_response()){
+
+                if(count($survey->get_response_from_user()) > 0) {
+                    echo json_encode(['error' => true]);
+                    return;
+                }
+
+                if($survey->send_response()) {
                     echo json_encode(['success' => true]);
                     return;
                 }
             }
+
             echo json_encode(['error' => true]);
             return;
         }
