@@ -68,7 +68,9 @@ function errorHandler($errno, $errstr, $errfile, $errline) //error
 
 function fatalErrorHandler() //fatal error
 {
-    create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
+    if(!is_logged()) {
+        create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
+    }
 
     /* Don't execute PHP internal error handler */
     return true;
