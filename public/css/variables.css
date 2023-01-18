@@ -20,6 +20,10 @@
     content: '\f19d';
 }
 
+.fa-paintbrush-pencil::before {
+    content: '\e206';
+}
+
 .fa-calendar::before {
     content: '\f133';
 }
