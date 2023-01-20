@@ -36,7 +36,7 @@ require_once './agenda.php';
                 <i onclick="password()" class="fa fa-eye-slash" id="eye"></i>
             </div>
             <div class="tag">
-                <button type="submit">connect</button>
+                <button type="submit" onclick="loading()">connect</button>
             </div>
         </form>
     <?php else : ?>

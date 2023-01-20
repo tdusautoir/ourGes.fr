@@ -141,7 +141,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                     </div>
                 <?php endif; ?>
             </div>
-            <div class="dashboard__component results">
+            <div class="dashboard__component results" id="results">
                 <div class="dashboard__component__title">
                     <div class="tag">
                         <p>Results</p>
@@ -152,10 +152,10 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         <?php if ($survey_data['nb_responses']) :
                             foreach ($survey_data['responses'] as $response) : ?>
                                 <div class="results__bar__container">
-                                    <p><?= $response['choice'] ?> - <span><?= $response['choice_percentage'] . '%  (' . $response['nb_response'] . ' votes)' ?></span></p>
-                                    <?php if (floor($response['choice_percentage']) > 0) : ?>
-                                        <div class="dashboard__component__content__lign results__bar" id="<?= 'result' . $response['choice_id'] ?>" style="max-width: <?= floor($response['choice_percentage']) ?>%;"></div>
-                                    <?php endif; ?>
+                                    <p><?= $response['choice'] ?></p>
+                                    <div class="dashboard__component__content__lign results__bar" id="<?= 'result' . $response['choice_id'] ?>">
+                                        <div class="results__bar__fill" style="width: <?= $response['choice_percentage'] ?>%"></div>
+                                    </div>
                                     <div class="results__bar__container__images">
                                         <?php foreach ($survey_data['users_infos'] as $user) :
                                             if ($user['choice_id'] == $response['choice_id']) : ?>
@@ -208,7 +208,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
             <div class="dashboard__component">
                 <div class="dashboard__component__title">
                     <div class="tag">
-                        <p><i class="fa fa-paintbrush-pencil"></i> Creation</p>
+                        <p><i class="fa fa-pen-paintbrush"></i> Creation</p>
                     </div>
                 </div>
                 <div class="dashboard__component__content creation__container">
@@ -264,7 +264,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                 <div class="dashboard__component__content">
                     <?php if (isset($survey_data) && !empty($survey_data)) : ?>
                         <div class="dashboard__component__content__lign share">
-                            <input type="text" readonly value="https://www.ourges.fr/survey/?token=<?= $_GET['token'] ?>">
+                            <input onclick="copy__link()" type="text" readonly value="https://www.ourges.fr/survey/?token=<?= $_GET['token'] ?>">
                             <i class="fa fa-copy" title="copy to clipboard" onclick="copy__link()"></i>
                         </div>
                     <?php else : ?>

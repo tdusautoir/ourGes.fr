@@ -6,20 +6,20 @@ require_once '../models/Survey.php';
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $survey = new Survey;
 
-    if(isset($_GET['method'])){
+    if (isset($_GET['method'])) {
         if ($_GET['method'] == 'response') {
-            if(isset($_POST['choice']) && isInteger($_POST['choice'])){
+            if (isset($_POST['choice']) && isInteger($_POST['choice'])) {
                 $survey->setResponses($_POST['choice']);
                 $survey->setToken($_POST['token']);
                 $survey->setUser($_SESSION['profile']->uid);
 
-                if(count($survey->get_response_from_user()) > 0) {
+                if (count($survey->get_response_from_user()) > 0) {
                     create_flash_message(ERROR_LOGIN, 'You already voted for this survey', FLASH_ERROR);
                     echo json_encode(['error' => true]);
                     return;
                 }
 
-                if($survey->send_response()) {
+                if ($survey->send_response()) {
                     echo json_encode(['success' => true]);
                     return;
                 }
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             die('erreur 2');
             return;
         }
-        
+
         if (!isInteger($_POST['nb-choice'])) {
             die('erreur 3');
             return;
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         }
         $token = guidv4();
         $survey->setToken($token);
-    
+
         if ($survey->create_survey()) {
             header("location: ../survey/?token=$token");
         } else {

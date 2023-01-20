@@ -64,9 +64,15 @@ function delete__option(choiceId) {
 function copy__link() {
     let input = document.querySelector('.share input');
     navigator.clipboard.writeText(input.value);
+    input.classList.toggle("share--active");
     setTimeout(function () {
-        input.classList.toggle("share--active");
-    }, 3000);
+        input.classList = "";
+    }, 1000);
+}
+
+function loading() {
+    let loading = document.querySelector('.login');
+    loading.classList.toggle("login--loading");
 }
 
 function get_class_info(classId) {
@@ -95,7 +101,7 @@ function get_class_info(classId) {
 
 function notif() {
     let notif = document.querySelector('.notif');
-    setTimeout(function() {
+    setTimeout(function () {
         notif.classList.toggle('close');
-    }, 2000);
+    }, 2500);
 }

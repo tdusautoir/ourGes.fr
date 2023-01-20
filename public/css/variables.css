@@ -20,8 +20,8 @@
     content: '\f19d';
 }
 
-.fa-paintbrush-pencil::before {
-    content: '\e206';
+.fa-pen-paintbrush::before {
+    content: '\f618';
 }
 
 .fa-calendar::before {
