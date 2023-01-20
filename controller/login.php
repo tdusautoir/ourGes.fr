@@ -21,7 +21,6 @@ try {
         create_flash_message(ERROR_LOGIN, 'Invalid login informations.', FLASH_ERROR);
     } else {
         create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
-        die($e);
     }
 }
 
@@ -109,10 +108,12 @@ if(isset($client)) {
     }
 }
 
-if(isset($_GET['surveyToken']) && !empty($_GET['surveyToken'])){
-    header('location: ../survey/index.php?token='.$_GET['surveyToken']);
+if(isset($_GET['callbackUrl']) && !empty($_GET['callbackUrl'])) {
+    header('location:'.$_GET['callbackUrl']);
+    return;
 } else {
     header('location: ../');
+    return;
 }
 
 register_shutdown_function("fatalErrorHandler");

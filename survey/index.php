@@ -3,16 +3,9 @@
 require_once '../functions.php';
 require_once '../controller/action.php';
 require_once '../models/Survey.php';
+require_once '../components/validation.php';
 
 init_php_session();
-
-if (!is_logged()) {
-    header("location: ../");
-}
-
-if (!is_logged() && isset($_GET['token']) && !empty($_GET['token'])) {
-    header("location: ../?surveyToken=" . $_GET['token']);
-}
 
 if (isset($_GET['token']) && !empty($_GET['token'])) {
     $survey = new Survey;
@@ -31,6 +24,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     $survey_data['current_user_response'] = $survey->get_response_from_user();
     $survey_data['users_infos'] = $survey->get_users_info();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -86,15 +80,14 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
         </a>
     </div>
     <main class="dashboard survey">
-        <div class="dashboard__left">
-            <div class="dashboard__component answer" id="answer">
-                <div class="dashboard__component__title">
-                    <div class="tag">
-                        <p><i class="fa fa-square-poll-vertical"></i>Answer</p>
+        <?php if (isset($survey_data) && !empty($survey_data)) : ?>
+            <div class="dashboard__left">
+                <div class="dashboard__component answer" id="answer">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p><i class="fa fa-square-poll-vertical"></i>Answer</p>
+                        </div>
                     </div>
-                </div>
-                <?php if (isset($survey_data) && !empty($survey_data)) : ?>
-                    <?php $disabled = count($survey_data['current_user_response']) ? 'disabled' : ''; ?>
                     <form method="POST" id="form_survey">
                         <input type="hidden" name="token" value="<?= $_GET['token'] ?>">
                         <div class="dashboard__component__content">
@@ -112,43 +105,37 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                 <?php if ($survey_data['type'] == 1) : ?>
                                     <label for="<?= 'choice_' . $choice['id']; ?>" class="dashboard__component__content__lign answer__option">
                                         <p><?= $choice['choice'] ?></p>
-                                        <input name="choice" id="<?= 'choice_' . $choice['id']; ?>" value='<?= $choice['id'] ?>' type="radio" <?= $disabled ?>>
+                                        <input name="choice" id="<?= 'choice_' . $choice['id']; ?>" value='<?= $choice['id'] ?>' type="radio">
                                     </label>
                                 <?php else : ?>
                                     <label for="<?= 'choice_' . $choice['id']; ?>" class="dashboard__component__content__lign answer__option">
                                         <p><?= $choice['choice'] ?></p>
-                                        <input name="choice" id="<?= 'choice_' . $choice['id']; ?>" value='<?= $choice['id'] ?>' type="checkbox" <?= $disabled ?>>
+                                        <input name="choice" id="<?= 'choice_' . $choice['id']; ?>" value='<?= $choice['id'] ?>' type="checkbox">
                                     </label>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
-                        <?php if ($disabled) : ?>
+                        <?php if (count($survey_data['current_user_response']) > 0) : ?>
                             <div class="survey__answered">
                                 <h1>You have already answered this survey</h1>
                                 <p>see the answers down there <i class="fa fa-angle-down"></i></p>
                             </div>
                         <?php endif; ?>
                         <div class="answer__buttons">
-                            <button id="send_response_btn" type="submit" class="tag tag--click tag--check" <?= $disabled ?>">
+                            <button id="send_response_btn" type="submit" class="tag tag--click tag--check">
                                 <p>submit</p>
                                 <i class="fa fa-circle-check"></i>
                             </button>
                         </div>
                     </form>
-                <?php else : ?>
-                    <div class="dashboard__component__content">
-                        <p>Survey not found</p>
-                    </div>
-                <?php endif; ?>
-            </div>
-            <div class="dashboard__component results" id="results">
-                <div class="dashboard__component__title">
-                    <div class="tag">
-                        <p>Results</p>
-                    </div>
                 </div>
-                <div class="dashboard__component__content">
-                    <?php if (isset($survey_data) && !empty($survey_data)) : ?>
+                <div class="dashboard__component results" id="results">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p>Results</p>
+                        </div>
+                    </div>
+                    <div class="dashboard__component__content">
                         <?php if ($survey_data['nb_responses']) :
                             foreach ($survey_data['responses'] as $response) : ?>
                                 <div class="results__bar__container">
@@ -168,42 +155,41 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         <?php else : ?>
                             <p>No results</p>
                         <?php endif; ?>
-                    <?php else : ?>
-                        <p>Survey not found</p>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
-        <!-- <div class="dashboard__left">
-            <div class="dashboard__component">
-                <div class="dashboard__component__title">
-                    <div class="tag">
-                        <p><i class="fa fa-chart-pie"></i>Recent</p>
-                    </div>
-                </div>
-                <div class="dashboard__component__content recent">
-                    <div class="recent__element">
-                        <div class="recent__element__title">
-                            <h1>Survey title</h1>
-                        </div>
-                        <div class="recent__element__answers">
-                            <div class="recent__element__answers__element">
-                                <p>Answer 1</p>
-                                <div class="recent__element__answers__bar">
-                                    <div class="recent__element__answers__bar__fill" style="width: 80%;"></div>
-                                </div>
-                            </div>
-                            <div class="recent__element__answers__element">
-                                <p>Answer 2</p>
-                                <div class="recent__element__answers__bar">
-                                    <div class="recent__element__answers__bar__fill red" style="width: 20%;"></div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-        </div> -->
+        <?php else : ?>
+            <div class="dashboard__left">
+                <div class="dashboard__component">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p><i class="fa fa-chart-pie"></i>Recent</p>
+                        </div>
+                    </div>
+                    <div class="dashboard__component__content recent">
+                        <div class="recent__element">
+                            <div class="recent__element__title">
+                                <h1>Survey title</h1>
+                            </div>
+                            <div class="recent__element__answers">
+                                <div class="recent__element__answers__element">
+                                    <p>Answer 1</p>
+                                    <div class="recent__element__answers__bar">
+                                        <div class="recent__element__answers__bar__fill" style="width: 80%;"></div>
+                                    </div>
+                                </div>
+                                <div class="recent__element__answers__element">
+                                    <p>Answer 2</p>
+                                    <div class="recent__element__answers__bar">
+                                        <div class="recent__element__answers__bar__fill red" style="width: 20%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
         <div class="dashboard__right">
             <div class="dashboard__component">
                 <div class="dashboard__component__title">

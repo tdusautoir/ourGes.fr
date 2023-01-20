@@ -14,7 +14,13 @@ if (form) {
       .then((data) => data.json())
       .then((res) => {
         console.log(res);
-        setTimeout(() => { window.location.reload() }, 1600);
+        setTimeout(() => { 
+          if(res.success) {
+            window.location.href = window.location.href + "&#results";
+          } else {
+            window.location.reload(); 
+          }
+        }, 1600);
       });
   })
 }

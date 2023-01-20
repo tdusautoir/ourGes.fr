@@ -29,7 +29,7 @@ require_once './agenda.php';
 <body>
     <?php require_once('./components/flash_message.php'); ?>
     <?php if (!is_logged()) : ?>
-        <form class="login" action="<?= (isset($_GET['surveyToken']) && !empty($_GET['surveyToken'])) ? "./controller/login.php?surveyToken=" . $_GET['surveyToken'] : "./controller/login.php" ?>" method="POST">
+        <form class="login" action="<?= (isset($_GET['callbackUrl'])) ? "./controller/login.php?callbackUrl=".$_GET['callbackUrl'] : "./controller/login.php" ?>" method="POST">
             <div class="login__inputs">
                 <input class="input" name="username" type="text" placeholder="username" autocomplete="off" maxlength="30">
                 <input id="password" class="input" name="password" type="password" placeholder="password" autocomplete="off" maxlength="30">

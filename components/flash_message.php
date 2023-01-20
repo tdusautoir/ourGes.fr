@@ -9,6 +9,9 @@
         <p><?php display_flash_message_by_type(FLASH_ERROR); ?></p>
     </div>
 <?php endif; ?>
-<script>
-    notif();
-</script>
+
+<?php if(isset_flash_message_by_type(FLASH_SUCCESS) || isset_flash_message_by_type(FLASH_ERROR)) : ?>
+    <script>
+        notif();
+    </script>
+<?php endif; ?>
