@@ -1237,6 +1237,7 @@ body {
         justify-content: center;
         background-color: rgba(0, 0, 0, 0.5);
         z-index: 1;
+        text-align: center;
 
         h1 {
             font-size: 1.5rem;
@@ -1353,7 +1354,7 @@ body {
 
                 &__content {
                     height: unset;
-                    max-height: 185px;
+                    max-height: 185px !important;
                 }
             }
         }
@@ -1427,6 +1428,56 @@ body {
         }
     }
 
+    .login {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8);
+        top: 0;
+        left: 0;
+        gap: 40px;
+        transform: unset;
+        transition: unset;
+
+        &--loading::before {
+            bottom: 60px;
+        }
+
+        &__inputs {
+            flex-direction: column;
+            padding: 0 20px;
+            gap: 15px;
+            width: calc(100% - 40px);
+
+            .input {
+                font-size: 1rem;
+                width: unset;
+                padding: 13px 20px;
+            }
+
+            i {
+                top: 73px;
+                right: 38px;
+                font-size: 1rem;
+            }
+        }
+
+        .tag {
+            padding: 10px 15px;
+
+            button {
+                font-size: 1rem;
+                line-height: 0.7;
+            }
+        }
+
+        &--active {
+            z-index: 1000;
+        }
+    }
+
     .hero {
         margin-top: 50px;
 
@@ -1434,7 +1485,8 @@ body {
             padding: 8px;
 
             p {
-                font-size: 1rem;
+                font-size: 0.85rem;
+                white-space: nowrap;
             }
         }
 
@@ -1463,7 +1515,7 @@ body {
                 button,
                 a {
                     p {
-                        font-size: 1.2rem;
+                        font-size: 0.85rem;
                     }
                 }
             }

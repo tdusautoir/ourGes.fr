@@ -1040,6 +1040,7 @@ body {
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
+  text-align: center;
 }
 .survey__answered h1 {
   font-size: 1.5rem;
@@ -1136,7 +1137,7 @@ body {
   }
   .dashboard__left .dashboard__component__content {
     height: unset;
-    max-height: 185px;
+    max-height: 185px !important;
   }
   .hero {
     margin-top: 100px;
@@ -1188,6 +1189,48 @@ body {
   .class h2 {
     font-size: 1.5rem;
   }
+  .login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    top: 0;
+    left: 0;
+    gap: 40px;
+    transform: unset;
+    transition: unset;
+  }
+  .login--loading::before {
+    bottom: 60px;
+  }
+  .login__inputs {
+    flex-direction: column;
+    padding: 0 20px;
+    gap: 15px;
+    width: calc(100% - 40px);
+  }
+  .login__inputs .input {
+    font-size: 1rem;
+    width: unset;
+    padding: 13px 20px;
+  }
+  .login__inputs i {
+    top: 73px;
+    right: 38px;
+    font-size: 1rem;
+  }
+  .login .tag {
+    padding: 10px 15px;
+  }
+  .login .tag button {
+    font-size: 1rem;
+    line-height: 0.7;
+  }
+  .login--active {
+    z-index: 1000;
+  }
   .hero {
     margin-top: 50px;
   }
@@ -1195,7 +1238,8 @@ body {
     padding: 8px;
   }
   .hero .tag p {
-    font-size: 1rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
   .hero__image {
     display: none;
@@ -1209,7 +1253,7 @@ body {
   }
   .hero__text__buttons button p,
 .hero__text__buttons a p {
-    font-size: 1.2rem;
+    font-size: 0.85rem;
   }
 }
 
