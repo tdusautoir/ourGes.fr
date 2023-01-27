@@ -28,6 +28,7 @@
 
     to {
         opacity: 0;
+        visibility: hidden;
         transform: translateX(30px);
     }
 }

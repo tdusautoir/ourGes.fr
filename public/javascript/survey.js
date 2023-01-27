@@ -1,5 +1,6 @@
 const form = document.getElementById('form_survey');
 const button = document.getElementById('send_response_btn');
+const recent_survey = document.querySelectorAll('.recent__element');
 
 if (form) {
   form.addEventListener('submit', function (event) {
@@ -23,4 +24,12 @@ if (form) {
         }, 1600);
       });
   })
+}
+
+if(recent_survey.length > 0) {
+  recent_survey.forEach(survey => {
+    survey.addEventListener('click', function() {
+      window.location.href = window.location.href + '?token=' + survey.dataset.token;
+    });
+  });
 }

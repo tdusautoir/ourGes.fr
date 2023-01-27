@@ -10,16 +10,18 @@ const pl_arrow_left = document.querySelector(".planning .dashboard__component__t
 const nw_arrow_right = document.querySelector(".news .dashboard__component__title__arrows__arrow--right");
 const nw_arrow_left = document.querySelector(".news .dashboard__component__title__arrows__arrow--left");
 
-pl_arrow_left.className += " active";
-nw_arrow_left.className += " active";
+if(news_banners.length > 0 && planning_date.length > 0 && planning_day.length > 0) {
+  pl_arrow_left.className += " active";
+  nw_arrow_left.className += " active";
 
-if (sessionStorage.pageNews == news_banners.length - 1) {
-  nw_arrow_right.classList.add('active');
+  if (sessionStorage.pageNews == news_banners.length - 1) {
+    nw_arrow_right.classList.add('active');
+  }
+
+  news_banners[0].className += " active"; //display the first new
+  planning_day[0].className += " current"; //display the current day
+  planning_date[0].className += " current"; //display the current date
 }
-
-// news_banners[0].className += " active"; //display the first new
-planning_day[0].className += " current"; //display the current day
-planning_date[0].className += " current"; //display the current date
 
 function navigateToFollowingNews() {
   if (nw_arrow_left.classList.contains("active") && !(sessionStorage.pageNews == news_banners.length - 1)) {

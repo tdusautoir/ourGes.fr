@@ -645,7 +645,7 @@ body {
                         width: calc(100% - 27px);
                         font-size: 1rem;
                         line-height: 1.5rem;
-                        padding: 8px 15px;
+                        padding: 8px 14px;
                         border: none;
                         border-radius: 4px;
                         background-color: rgb(25 33 46 / 50%);
@@ -654,6 +654,10 @@ body {
                         &::placeholder {
                             color: var(--grey);
                             opacity: 0.8;
+                        }
+
+                        &.error {
+                            border: 1px solid red;
                         }
                     }
 

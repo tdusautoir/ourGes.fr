@@ -23,6 +23,9 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     $survey_data['responses'] = $survey->get_responses();
     $survey_data['current_user_response'] = $survey->get_response_from_user();
     $survey_data['users_infos'] = $survey->get_users_info();
+} else {
+    $survey = new Survey;
+    $recent_surveys = $survey->get_public_survey();
 }
 
 ?>
@@ -47,7 +50,6 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
 
 <body>
     <!-- ---MODALS--- -->
-    <?php require_once('../components/flash_message.php'); ?>
     <div class="logout" id="logout">
         <div class="logout__head">
             <p>Signed in as</p>
@@ -143,13 +145,15 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                     <div class="dashboard__component__content__lign results__bar" id="<?= 'result' . $response['choice_id'] ?>">
                                         <div class="results__bar__fill" style="width: <?= $response['choice_percentage'] ?>%"></div>
                                     </div>
-                                    <div class="results__bar__container__images">
-                                        <?php foreach ($survey_data['users_infos'] as $user) :
-                                            if ($user['choice_id'] == $response['choice_id']) : ?>
-                                                <img src="<?= isset($user['user_img']) ? $user['user_img'] : 'default.png' ?>" title="<?= $user['user_name'] ?>">
-                                        <?php endif;
-                                        endforeach; ?>
-                                    </div>
+                                    <?php if($survey_data['anonymous']): ?>
+                                        <div class="results__bar__container__images">
+                                            <?php foreach ($survey_data['users_infos'] as $user) :
+                                                if ($user['choice_id'] == $response['choice_id']) : ?>
+                                                    <img src="<?= isset($user['user_img']) ? $user['user_img'] : 'default.png' ?>" title="<?= $user['user_name'] ?>">
+                                            <?php endif;
+                                            endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             <?php endforeach; ?>
                         <?php else : ?>
@@ -167,25 +171,28 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         </div>
                     </div>
                     <div class="dashboard__component__content recent">
-                        <div class="recent__element">
-                            <div class="recent__element__title">
-                                <h1>Survey title</h1>
-                            </div>
-                            <div class="recent__element__answers">
-                                <div class="recent__element__answers__element">
-                                    <p>Answer 1</p>
-                                    <div class="recent__element__answers__bar">
-                                        <div class="recent__element__answers__bar__fill" style="width: 80%;"></div>
+                        <?php if(isset($recent_surveys) && !empty($recent_surveys)): ?>
+                            <?php foreach($recent_surveys as $survey): ?>
+                                <div class="recent__element" data-token="<?= $survey['data']['token'] ?>">
+                                    <div class="recent__element__title">
+                                        <h1><?= $survey['data']['name'] ?></h1>
+                                    </div>
+                                    <div class="recent__element__answers">
+                                        <?php foreach($survey['responses'] as $key => $response): ?>
+                                            <?php if($key > 3) { 
+                                                break;
+                                            } ?>
+                                            <div class="recent__element__answers__element">
+                                                <p><?= $response['choice'] ?></p>
+                                                <div class="recent__element__answers__bar">
+                                                    <div class="recent__element__answers__bar__fill" style="width: <?= isset($response['choice_percentage']) ? $response['choice_percentage'] : 0 ?>"></div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
-                                <div class="recent__element__answers__element">
-                                    <p>Answer 2</p>
-                                    <div class="recent__element__answers__bar">
-                                        <div class="recent__element__answers__bar__fill red" style="width: 20%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -202,7 +209,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         <div class="creation">
                             <label for="title">
                                 <p>Title</p>
-                                <input id="title" name="name" type="text" placeholder="type your question here" autocomplete="off">
+                                <input id="title" <?php if(isset_flash_message_by_name('title_error')): ?> class="error" <?php endif; ?>name="name" type="text" placeholder="type your question here" autocomplete="off">
                             </label>
                             <label for="description">
                                 <p>description (optional)</p>
@@ -223,13 +230,13 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                             <label for="publicity" class="creation__settings__content">
                                 <p>show poll in recent</p>
                                 <label for="publicity" class="checkbox">
-                                    <input id="publicity" type="checkbox">
+                                    <input id="publicity" name="publicity" type="checkbox">
                                 </label>
                             </label>
                             <label for="anonymous" class="creation__settings__content">
                                 <p>required participant names</p>
                                 <label for="anonymous" class="checkbox">
-                                    <input id="anonymous" type="checkbox">
+                                    <input id="anonymous" name="anonymous" type="checkbox">
                                 </label>
                             </label>
                         </div>
@@ -260,6 +267,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
             </div>
         </div>
     </main>
+    <?php require_once('../components/flash_message.php'); ?>
 </body>
 
 </html>

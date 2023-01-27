@@ -8,6 +8,8 @@ class Survey
     private $type;
     private $nb_choice;
     private $user_id;
+    private $public;
+    private $anonymous;
     private $responses = [];
     private $choices = [];
     protected $survey_id;
@@ -102,24 +104,36 @@ class Survey
         return $this->user_id;
     }
 
+    function setPublic($value)
+    {
+        $this->public = $value;
+    }
+
+    function setAnonymous($value)
+    {
+        $this->anonymous = $value;
+    }
+
 
     function create_survey()
     {
-        $req = $this->connect->prepare('INSERT INTO survey (token, name, description, type, nb_choice, owner_id) VALUES (:token, :name, :description, :type, :nb_choice, :owner_id)');
+        $req = $this->connect->prepare('INSERT INTO survey (token, name, description, type, nb_choice, owner_id, public, anonymous) VALUES (:token, :name, :description, :type, :nb_choice, :owner_id, :public, :anonymous)');
         $req->bindValue(':token', $this->token);
         $req->bindValue(':name', $this->name);
         $req->bindValue(':description', $this->description);
         $req->bindValue(':type', $this->type);
         $req->bindValue(':nb_choice', $this->nb_choice);
         $req->bindValue(':owner_id', $_SESSION['profile']->uid);
+        $req->bindValue(':public', $this->public);
+        $req->bindValue(':anonymous', $this->anonymous);
         $stmt = $req->execute();
-
-        $getSurveyId = $this->connect->query('SELECT id FROM survey ORDER BY id DESC LIMIT 1');
-        $this->survey_id = $getSurveyId->fetch(PDO::FETCH_ASSOC)['id'];
 
         if (!isset($stmt)) {
             return false;
         }
+
+        $getSurveyId = $this->connect->query('SELECT id FROM survey ORDER BY id DESC LIMIT 1');
+        $this->survey_id = $getSurveyId->fetch(PDO::FETCH_ASSOC)['id'];
 
         foreach ($this->choices as $choice) {
             $createChoice = $this->connect->prepare('INSERT INTO survey_choices (choice, survey_id) VALUES (:choice, :survey_id)');
@@ -133,7 +147,7 @@ class Survey
 
     function get_survey()
     {
-        $req = $this->connect->prepare('SELECT token, name, description, type, nb_responses FROM survey WHERE token = :token');
+        $req = $this->connect->prepare('SELECT token, name, description, type, nb_responses, anonymous FROM survey WHERE token = :token');
         $req->bindValue(':token', $this->token);
         $req->execute();
         $survey_data = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -219,5 +233,28 @@ class Survey
         }
 
         return 0;
+    }
+
+    function get_public_survey() {
+        $req = $this->connect->prepare('SELECT id, token, name, DATEDIFF(NOW(), creation_date) as expiration FROM survey WHERE survey.public = 1 AND DATEDIFF(NOW(), creation_date) < 7');
+        $req->execute();
+        $all_survey = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        $req = $this->connect->prepare('SELECT ROUND((survey_choices.nb_responses / survey.nb_responses * 100), 1) as choice_percentage, survey_choices.nb_responses as nb_response, survey.nb_responses as total_response, survey_id, choice, survey_choices.id as choice_id FROM survey_choices INNER JOIN survey ON survey.id = survey_choices.survey_id WHERE survey.public = 1 AND DATEDIFF(NOW(), creation_date) < 7');
+        $req->execute();
+        $all_survey_responses = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        $surveys = [];
+
+        foreach($all_survey as $survey) {
+            $surveys[$survey['id']] = ["data" => $survey, "responses" => []];
+        }
+
+        // dd($surveys);
+        foreach($all_survey_responses as $response) {
+            array_push($surveys[$response['survey_id']]["responses"], $response);
+        }
+
+        return $surveys;
     }
 }

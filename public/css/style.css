@@ -559,7 +559,7 @@ body {
   width: calc(100% - 27px);
   font-size: 1rem;
   line-height: 1.5rem;
-  padding: 8px 15px;
+  padding: 8px 14px;
   border: none;
   border-radius: 4px;
   background-color: rgba(25, 33, 46, 0.5);
@@ -568,6 +568,9 @@ body {
 .dashboard__component .creation__container form .creation input::placeholder {
   color: var(--grey);
   opacity: 0.8;
+}
+.dashboard__component .creation__container form .creation input.error {
+  border: 1px solid red;
 }
 .dashboard__component .creation__container form .creation__answers {
   display: flex;

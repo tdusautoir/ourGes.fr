@@ -18,6 +18,14 @@ const ERROR_LOGIN = 'error_login';
 const ERROR_HANDLER = 'error_handler';
 const SUCCESS_LOGIN = 'success_login';
 
+function dd($var) //function for debug
+{
+    echo "<pre>";
+    print_r($var);
+    echo "</pre>";
+    die();
+}
+
 function dump($var) //function for debug
 {
     echo "<pre>";
@@ -201,4 +209,12 @@ function guidv4($data = null)
 
     // Output the 36 character UUID.
     return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+}
+
+function redirectToReferer(string $path) {
+    if(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+        header('location: '.$_SERVER['HTTP_REFERER']);
+    } else {
+        header('location: '.$path);
+    }
 }

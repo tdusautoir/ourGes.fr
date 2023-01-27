@@ -101,7 +101,9 @@ function get_class_info(classId) {
 
 function notif() {
     let notif = document.querySelector('.notif');
-    setTimeout(function () {
-        notif.classList.toggle('close');
-    }, 2500);
+    if(notif) {
+        setTimeout(function () {
+            notif.classList.toggle('close');
+        }, 2500);
+    }
 }

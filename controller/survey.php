@@ -25,18 +25,20 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 }
             }
 
+            create_flash_message('response_error', 'Something wrong, please retry !', FLASH_ERROR);
             echo json_encode(['error' => true]);
             return;
         }
     } else {
         if (!isset($_POST['name']) || empty($_POST['name'])) {
-            //erreur
-            die('erreur 2');
+            create_flash_message('title_error', 'Title is required', FLASH_ERROR);
+            redirectToReferer('../survey');
             return;
         }
 
         if (!isInteger($_POST['nb-choice'])) {
-            die('erreur 3');
+            create_flash_message('choice_error', 'Something wrong, please retry !', FLASH_ERROR);
+            redirectToReferer('../survey');
             return;
         }
 
@@ -48,17 +50,33 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (isset($_POST["choice-$i"]) && !empty($_POST["choice-$i"])) {
                 $survey->setChoices($_POST["choice-$i"]);
             } else {
-                $survey->setChoices("Choix $i");
+                $survey->setChoices("Choice $i");
             }
         }
+
+        if(isset($_POST['publicity'])) {
+            $survey->setPublic(1);
+        } else {
+            $survey->setPublic(0);
+        }
+
+        if(isset($_POST['anonymous'])) {
+            $survey->setAnonymous(1);
+        } else {
+            $survey->setAnonymous(0);
+        }
+
         $token = guidv4();
         $survey->setToken($token);
 
         if ($survey->create_survey()) {
             header("location: ../survey/?token=$token");
-        } else {
-            echo "Erreur lors de la création";
+            create_flash_message('create_success', 'Successfuly created.', FLASH_SUCCESS);
             return;
         }
+
+        create_flash_message('create_error', 'Something wrong, please retry !', FLASH_ERROR);
+        redirectToReferer('../survey');
+        return;
     }
 }
