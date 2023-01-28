@@ -6,6 +6,9 @@ require_once './controller/action.php';
 init_php_session();
 
 require_once './agenda.php';
+require_once './lang/lang.php';
+
+$lang = $lang[get_user_lang()];
 
 ?>
 
@@ -24,7 +27,7 @@ require_once './agenda.php';
     <link rel="icon" href="./public/img/favicon.png" />
     <script src="./public/javascript/functions.js"></script>
     <script src="./public/javascript/navigate.js" defer></script>
-    <title>ourGes - myGes, but easier.</title>
+    <title><?= $lang['title'] ?></title>
 </head>
 
 <body>
@@ -37,13 +40,13 @@ require_once './agenda.php';
                 <i onclick="password()" class="fa fa-eye-slash" id="eye"></i>
             </div>
             <div class="tag">
-                <button type="submit" onclick="loading()">connect</button>
+                <button type="submit" onclick="loading()"><?= $lang['buttons']['connect'] ?></button>
             </div>
         </form>
     <?php else : ?>
         <div class="logout" id="logout">
             <div class="logout__head">
-                <p>Signed in as</p>
+                <p><?= $lang['sign_as'] ?></p>
                 <p><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></p>
             </div>
             <div class="logout__content">
@@ -56,13 +59,13 @@ require_once './agenda.php';
         <div class="class__background" id="class__modal">
             <div class="class">
                 <span class="class__date"></span>
-                <h2 class="class__title">Challenge Stack semestriel (figma/HTML/CSS)</h2>
+                <h2 class="class__title"></h2>
                 <div class="class__content">
-                    <p><i class="fa fa-user-tie" style="font-size: 14px;"></i>Professor : <span class="professor"></span></p>
-                    <p>Room : <span class="room"></span></p>
-                    <p>Stage : <span class="stage"></span></p>
-                    <p>Modality : <span class="modality"></span></p>
-                    <p>Campus : <span class="campus"></span></p>
+                    <p><i class="fa fa-user-tie" style="font-size: 14px;"></i><?= $lang['professor'] ?> : <span class="professor"></span></p>
+                    <p><?= $lang['room'] ?> : <span class="room"></span></p>
+                    <p><?= $lang['stage'] ?> : <span class="stage"></span></p>
+                    <p><?= $lang['modality'] ?> : <span class="modality"></span></p>
+                    <p><?= $lang['campus'] ?> : <span class="campus"></span></p>
                 </div>
                 <i class="fa fa-xmark" onclick="class__modal()"></i>
             </div>
@@ -77,7 +80,7 @@ require_once './agenda.php';
         <?php if (!is_logged()) : ?>
             <div class="header__buttons">
                 <button onclick="login()">
-                    <p>login</p>
+                    <p><?= $lang['buttons']['login'] ?></p>
                 </button>
             </div>
         <?php else : ?>
@@ -91,28 +94,28 @@ require_once './agenda.php';
         <main class="hero">
             <div class="hero__text">
                 <div class="tag">
-                    <p>BUILT BY STUDENTS, FOR STUDENTS</p>
+                    <p><?= $lang['hero']['text'] ?></p>
                 </div>
                 <div class="hero__text__title">
                     <div class="hero__text__title__container">
-                        <h1>myGes,</h1>
+                        <h1><?= $lang['hero']['title'][0] ?></h1>
                     </div>
                     <div class="hero__text__title__container">
-                        <h1>but easier.</h1>
+                        <h1><?= $lang['hero']['title'][1] ?></h1>
                     </div>
                 </div>
                 <div class="hero__text__description">
-                    <p>ourGes is an extension to myGes</p>
-                    <p>you can easily find your school information using a simple and easy-to-use interface</p>
-                    <p>developed by <a href="https://github.com/achilledavid" target="_blank">achille</a> and <a href="https://github.com/tdusautoir" target="_blank">thibaut</a></p>
+                    <p><?= $lang['hero']['description'][0] ?></p>
+                    <p><?= $lang['hero']['description'][1] ?></p>
+                    <p><?= $lang['hero']['description']['developed_by'] ?> <a href="https://github.com/achilledavid" target="_blank">achille</a> <?= $lang['hero']['description']['and'] ?> <a href="https://github.com/tdusautoir" target="_blank">thibaut</a></p>
                 </div>
                 <div class="hero__text__buttons">
                     <button onclick="login()">
-                        <p>login</p>
+                        <p><?= $lang['buttons']['login'] ?></p>
                     </button>
                     <a href="https://github.com/tdusautoir/ourGes.fr" target="_blank">
                         <img src="./public/img/github.webp" alt="github logo" draggable="false">
-                        <p>see on github</p>
+                        <p><?= $lang['hero']['see_on_github'] ?></p>
                     </a>
                 </div>
             </div>
@@ -125,15 +128,15 @@ require_once './agenda.php';
         <div class="dashboard__buttons">
             <div class="dashboard__buttons__left">
                 <select onchange="setSemester(this);">
-                    <option value="0" selected disabled>Semester</option>
-                    <option value="1">Semester 1</option>
-                    <option value="2">Semester 2</option>
+                    <option value="0" selected disabled><?= $lang['home']['semester'][0] ?></option>
+                    <option value="1"><?= $lang['home']['semester'][1] ?></option>
+                    <option value="2"><?= $lang['home']['semester'][2] ?></option>
                 </select>
             </div>
             <div class="dashboard__buttons__right">
                 <a href="./survey/">
                     <div class="tag tag--click tag--new">
-                        <p><i class="fa fa-chart-pie"></i>Create a survey</p>
+                        <p><i class="fa fa-chart-pie"></i><?= $lang['buttons']['survey'] ?></p>
                     </div>
                 </a>
             </div>
@@ -143,9 +146,9 @@ require_once './agenda.php';
                 <div class="dashboard__component marks">
                     <div class="dashboard__component__title">
                         <div class="tag">
-                            <p><i class="fa fa-graduation-cap"></i>marks</p>
+                            <p><i class="fa fa-graduation-cap"></i><?= $lang['home']['dashboard']['title']['marks'] ?></p>
                         </div>
-                        <span>av.</span>
+                        <span><?= $lang['home']['dashboard']['average'] ?></span>
                     </div>
                     <div class="dashboard__component__content">
                         <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
@@ -158,7 +161,7 @@ require_once './agenda.php';
                             <?php endforeach ?>
                         <?php else : ?>
                             <div class="dashboard__component__content__lign">
-                                <p>Empty marks</p>
+                                <p><?= $lang['home']['dashboard']['empty']['marks'] ?></p>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -166,7 +169,7 @@ require_once './agenda.php';
                 <div class="dashboard__component news">
                     <div class="dashboard__component__title">
                         <div class="tag">
-                            <p><i class="fa fa-envelope"></i></i>news</p>
+                            <p><i class="fa fa-envelope"></i></i><?= $lang['home']['dashboard']['title']['news'] ?></p>
                         </div>
                         <div class="dashboard__component__title__arrows">
                             <i onclick="navigateToPrecedentNews()" class="fa fa-angle-left dashboard__component__title__arrows__arrow dashboard__component__title__arrows__arrow--left"></i>
@@ -194,16 +197,16 @@ require_once './agenda.php';
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php else : ?>
-                            <p>Empty news</p>
+                            <p><?= $lang['home']['dashboard']['empty']['news'] ?></p>
                         <?php endif; ?>
                     </div>
                 </div>
                 <div class="dashboard__component classes">
                     <div class="dashboard__component__title">
                         <div class="tag">
-                            <p><i class="fa fa-chalkboard-user"></i></i>classes</p>
+                            <p><i class="fa fa-chalkboard-user"></i></i><?= $lang['home']['dashboard']['title']['classes'] ?></p>
                         </div>
-                        <span>coef.</span>
+                        <span><?= $lang['home']['dashboard']['coef'] ?></span>
                     </div>
                     <div class="dashboard__component__content">
                         <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
@@ -215,7 +218,7 @@ require_once './agenda.php';
                             <?php endforeach; ?>
                         <?php else : ?>
                             <div class="dashboard__component__content__lign">
-                                <p>Empty course</p>
+                                <p><?= $lang['home']['dashboard']['empty']['courses'] ?></p>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -226,7 +229,7 @@ require_once './agenda.php';
                     <div class="dashboard__component__title">
                         <div class="dashboard__component__date">
                             <div class="tag">
-                                <p><i class="fa fa-calendar"></i>planning</p>
+                                <p><i class="fa fa-calendar"></i><?= $lang['home']['dashboard']['title']['planning'] ?></p>
                             </div>
                             <?php foreach ($DAYS as $key => $day) : ?>
                                 <p class="date"><?= date('l', $day) . " " . date('d/m/y', $day) ?></p>
@@ -279,9 +282,9 @@ require_once './agenda.php';
                 <div class="dashboard__component absence">
                     <div class="dashboard__component__title">
                         <div class="tag">
-                            <p><i class="fa fa-message-exclamation"></i>absence</p>
+                            <p><i class="fa fa-message-exclamation"></i><?= $lang['home']['dashboard']['title']['absence'] ?></p>
                         </div>
-                        <span>date</span>
+                        <span><?= $lang['home']['dashboard']['date'] ?></span>
                     </div>
                     <div class="dashboard__component__content">
                         <?php if (isset($_SESSION['absences']) && !empty($_SESSION['absences'])) : ?>
@@ -292,7 +295,7 @@ require_once './agenda.php';
                                 </div>
                             <?php endforeach; ?>
                         <?php else : ?>
-                            <p class="absence__empty">no absences</p>
+                            <p class="absence__empty"><?= $lang['home']['dashboard']['title']['absence'] ?></p>
                         <?php endif; ?>
                     </div>
                 </div>

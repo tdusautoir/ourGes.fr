@@ -4,6 +4,9 @@ require_once '../functions.php';
 require_once '../controller/action.php';
 require_once '../models/Survey.php';
 require_once '../components/validation.php';
+require_once '../lang/lang.php';
+
+$lang = $lang[get_user_lang()];
 
 init_php_session();
 
@@ -45,14 +48,14 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     <link rel="icon" href="../public/img/favicon.png" />
     <script src="../public/javascript/functions.js"></script>
     <script src="../public/javascript/survey.js" defer></script>
-    <title>ourGes - Create a survey</title>
+    <title><?= $lang['survey']['title'] ?></title>
 </head>
 
 <body>
     <!-- ---MODALS--- -->
     <div class="logout" id="logout">
         <div class="logout__head">
-            <p>Signed in as</p>
+            <p><?= $lang['sign_as'] ?></p>
             <p><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></p>
         </div>
         <div class="logout__content">
@@ -77,7 +80,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
         <p> </p>
         <a href="../">
             <div class="tag tag--click">
-                <p><i class="fa fa-arrow-left"></i>Back</p>
+                <p><i class="fa fa-arrow-left"></i><?= $lang['buttons']['back'] ?></p>
             </div>
         </a>
     </div>
@@ -87,7 +90,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                 <div class="dashboard__component answer" id="answer">
                     <div class="dashboard__component__title">
                         <div class="tag">
-                            <p><i class="fa fa-square-poll-vertical"></i>Answer</p>
+                            <p><i class="fa fa-square-poll-vertical"></i><?= $lang['survey']['dashboard']['title']['answer'] ?></p>
                         </div>
                     </div>
                     <form method="POST" id="form_survey">
@@ -119,13 +122,13 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         </div>
                         <?php if (count($survey_data['current_user_response']) > 0) : ?>
                             <div class="survey__answered">
-                                <h1>You have already answered this survey</h1>
-                                <p>see the answers down there <i class="fa fa-angle-down"></i></p>
+                                <h1><?= $lang['survey']['dashboard']['survey_answered'][0] ?></h1>
+                                <p><?= $lang['survey']['dashboard']['survey_answered'][1] ?> <i class="fa fa-angle-down"></i></p>
                             </div>
                         <?php endif; ?>
                         <div class="answer__buttons">
                             <button id="send_response_btn" type="submit" class="tag tag--click tag--check">
-                                <p>submit</p>
+                                <p><?= $lang['buttons']['submit'] ?></p>
                                 <i class="fa fa-circle-check"></i>
                             </button>
                         </div>
@@ -134,7 +137,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                 <div class="dashboard__component results" id="results">
                     <div class="dashboard__component__title">
                         <div class="tag">
-                            <p>Results</p>
+                            <p><?= $lang['survey']['dashboard']['title']['result'] ?></p>
                         </div>
                     </div>
                     <div class="dashboard__component__content">
@@ -157,7 +160,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                 </div>
                             <?php endforeach; ?>
                         <?php else : ?>
-                            <p>No results</p>
+                            <p><?= $lang['survey']['dashboard']['empty']['result'] ?></p>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -167,7 +170,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                 <div class="dashboard__component">
                     <div class="dashboard__component__title">
                         <div class="tag">
-                            <p><i class="fa fa-chart-pie"></i>Recent</p>
+                            <p><i class="fa fa-chart-pie"></i><?= $lang['survey']['dashboard']['title']['recent'] ?></p>
                         </div>
                     </div>
                     <div class="dashboard__component__content recent">
@@ -201,23 +204,23 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
             <div class="dashboard__component">
                 <div class="dashboard__component__title">
                     <div class="tag">
-                        <p><i class="fa fa-pen-paintbrush"></i> Creation</p>
+                        <p><i class="fa fa-pen-paintbrush"></i> <?= $lang['survey']['dashboard']['title']['creation'] ?></p>
                     </div>
                 </div>
                 <div class="dashboard__component__content creation__container">
                     <form action="../controller/survey.php" class="survey__create" method="POST">
                         <div class="creation">
                             <label for="title">
-                                <p>Title</p>
+                                <p><?= $lang['survey']['dashboard']['creation']['title'] ?></p>
                                 <input id="title" <?php if(isset_flash_message_by_name('title_error')): ?> class="error" <?php endif; ?>name="name" type="text" placeholder="type your question here" autocomplete="off">
                             </label>
                             <label for="description">
-                                <p>description (optional)</p>
+                                <p><?= $lang['survey']['dashboard']['creation']['description'] ?></p>
                                 <input id="description" name="description" type="text" autocomplete="off">
                             </label>
                             <input type="hidden" id="nb-choice" name="nb-choice" value="2">
                             <div id="creation__answers" class="creation__answers" name="type">
-                                <p>answers options <i class="fa fa-plus" onclick="add__option()"></i></p>
+                                <p><?= $lang['survey']['dashboard']['creation']['answer_options'] ?> <i class="fa fa-plus" onclick="add__option()"></i></p>
                                 <div class="creation__answers__input">
                                     <input type="text" name="choice-1" placeholder="option 1" autocomplete="off">
                                 </div>
@@ -228,13 +231,13 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         </div>
                         <div class="creation__settings">
                             <label for="publicity" class="creation__settings__content">
-                                <p>show poll in recent</p>
+                                <p><?= $lang['survey']['dashboard']['creation']['recent'] ?></p>
                                 <label for="publicity" class="checkbox">
                                     <input id="publicity" name="publicity" type="checkbox">
                                 </label>
                             </label>
                             <label for="anonymous" class="creation__settings__content">
-                                <p>required participant names</p>
+                                <p><?= $lang['survey']['dashboard']['creation']['participant_names'] ?></p>
                                 <label for="anonymous" class="checkbox">
                                     <input id="anonymous" name="anonymous" type="checkbox">
                                 </label>
@@ -242,7 +245,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         </div>
                         <div class="creation__buttons">
                             <button type="submit" class="tag tag--click">
-                                <p>create</p>
+                                <p><?= $lang['buttons']['create'] ?></p>
                             </button>
                         </div>
                     </form>
@@ -251,7 +254,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
             <div class="dashboard__component share">
                 <div class="dashboard__component__title">
                     <div class="tag">
-                        <p><i class="fa fa-share-nodes"></i>share</p>
+                        <p><i class="fa fa-share-nodes"></i><?= $lang['survey']['dashboard']['title']['share'] ?></p>
                     </div>
                 </div>
                 <div class="dashboard__component__content">
@@ -261,7 +264,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                             <i class="fa fa-copy" title="copy to clipboard" onclick="copy__link()"></i>
                         </div>
                     <?php else : ?>
-                        <p>Survey not found 🤷‍♂️</p>
+                        <p><?= $lang['survey']['dashboard']['empty']['share'] ?></p>
                     <?php endif; ?>
                 </div>
             </div>

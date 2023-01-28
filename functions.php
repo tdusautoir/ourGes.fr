@@ -20,7 +20,7 @@ const SUCCESS_LOGIN = 'success_login';
 
 function dd($var) //function for debug
 {
-    echo "<pre>";
+    echo "<pre style='font-size: 18px'>";
     print_r($var);
     echo "</pre>";
     die();
@@ -37,7 +37,11 @@ function get_user_lang() {
     $lang = explode(",", $_SERVER['HTTP_ACCEPT_LANGUAGE']);
     $lang = strtolower(substr(chop($lang[0]), 0, 2));
 
-    return $lang;
+    if(isset($lang) && ($lang == 'en' || $lang == 'fr')) {
+        return $lang;
+    } else {
+        return 'en';
+    }
 }
 
 function init_php_session(): bool //init php session
