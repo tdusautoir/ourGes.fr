@@ -2,6 +2,9 @@
 
 require_once '../functions.php';
 require_once '../models/Survey.php';
+require_once '../lang/lang.php';
+
+$lang = $lang[get_user_lang()];
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $survey = new Survey;
@@ -14,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $survey->setUser($_SESSION['profile']->uid);
 
                 if (count($survey->get_response_from_user()) > 0) {
-                    create_flash_message(ERROR_LOGIN, 'You already voted for this survey', FLASH_ERROR);
+                    create_flash_message(ERROR_LOGIN, $lang['errors']['already_answered'], FLASH_ERROR);
                     echo json_encode(['error' => true]);
                     return;
                 }
@@ -25,19 +28,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 }
             }
 
-            create_flash_message('response_error', 'Something wrong, please retry !', FLASH_ERROR);
+            create_flash_message('response_error', $lang['errors']['form']['something_wrong'], FLASH_ERROR);
             echo json_encode(['error' => true]);
             return;
         }
     } else {
         if (!isset($_POST['name']) || empty($_POST['name'])) {
-            create_flash_message('title_error', 'Title is required', FLASH_ERROR);
+            create_flash_message('title_error', $lang['errors']['form']['title_required'], FLASH_ERROR);
             redirectToReferer('../survey');
             return;
         }
 
         if (!isInteger($_POST['nb-choice'])) {
-            create_flash_message('choice_error', 'Something wrong, please retry !', FLASH_ERROR);
+            create_flash_message('choice_error', $lang['errors']['form']['something_wrong'], FLASH_ERROR);
             redirectToReferer('../survey');
             return;
         }
@@ -50,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if (isset($_POST["choice-$i"]) && !empty($_POST["choice-$i"])) {
                 $survey->setChoices($_POST["choice-$i"]);
             } else {
-                $survey->setChoices("Choice $i");
+                $survey->setChoices($lang['survey']['choice']." $i");
             }
         }
 
@@ -71,11 +74,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         if ($survey->create_survey()) {
             header("location: ../survey/?token=$token");
-            create_flash_message('create_success', 'Successfuly created.', FLASH_SUCCESS);
+            create_flash_message('create_success', $lang['success']['created'], FLASH_SUCCESS);
             return;
         }
 
-        create_flash_message('create_error', 'Something wrong, please retry !', FLASH_ERROR);
+        create_flash_message('create_error', $lang['errors']['form']['something_wrong'], FLASH_ERROR);
         redirectToReferer('../survey');
         return;
     }

@@ -17,7 +17,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     $survey_data = $survey->get_survey();
 
     if (!$survey_data) {
-        create_flash_message('token_error', 'This token id is invalid', FLASH_ERROR);
+        create_flash_message('token_error', $lang['errors']['token_id'], FLASH_ERROR);
         header("location: ../survey/");
         return;
     }

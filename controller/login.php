@@ -1,9 +1,12 @@
 <?php
 
 require_once '../functions.php';
+require_once '../lang/lang.php';
 require_once '../vendor/autoload.php';
 require_once '../models/Chatroom.php';
 require_once '../models/User.php';
+
+$lang = $lang[get_user_lang()];
 
 // set_error_handler("errorHandler");
 
@@ -18,9 +21,9 @@ try {
 
     if (get_class($e) == "MyGes\Exceptions\BadCredentialsException") {
         //wrong credentials
-        create_flash_message(ERROR_LOGIN, 'Invalid login informations.', FLASH_ERROR);
+        create_flash_message(ERROR_LOGIN, $lang['errors']['login'], FLASH_ERROR);
     } else {
-        create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
+        create_flash_message(ERROR_HANDLER,  $lang['errors']['error_occured_later'], FLASH_ERROR);
     }
 }
 
@@ -92,11 +95,11 @@ if (isset($client)) {
             $absences = $me->getAbsences($currentYear);
         } catch (Exception $e) {
             $err = $e->getMessage();
-            create_flash_message(ERROR_LOGIN, 'An error has occured, please try again.', FLASH_ERROR);
+            create_flash_message(ERROR_LOGIN, $lang['errors']['error_occured'], FLASH_ERROR);
         }
 
         init_php_session();
-        create_flash_message(SUCCESS_LOGIN, 'Successfully connected.', FLASH_SUCCESS);
+        create_flash_message(SUCCESS_LOGIN, $lang['success']['login'], FLASH_SUCCESS);
 
         $_SESSION['news'] = $news;
         $_SESSION['class'] = $class[0];

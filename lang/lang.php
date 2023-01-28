@@ -61,6 +61,7 @@ $lang = [
 
         'survey' => [
             'title' => 'ourGes - create a survey.',
+            'choice' => 'Choice',
 
             'dashboard' => [
                 'title' => [
@@ -97,6 +98,25 @@ $lang = [
             'stage' => 'Stage',
             'modality' => 'Modality',
             'campus' => 'Campus',
+        ],
+
+        'errors' => [
+            'login' => 'Invalid login informations.',
+            'error_occured' => 'An error has occured, please try again.',
+            'error_occured_later' => 'An error has occured, please try again later.',
+            'class_id' => 'Invalid class id.',
+            'token_id' => 'This token id is invalid',
+            'already_answered' => 'You have already answered this survey',
+
+            'form' => [
+                'something_wrong' => 'Something wrong, please retry !',
+                'title_required' => 'Title is required !',
+            ]
+        ],
+        
+        'success' => [
+            'login' => 'Successfully connected.',
+            'created' => 'Successfully created.',
         ]
     ],
 
@@ -162,6 +182,7 @@ $lang = [
 
         'survey' => [
             'title' => 'ourGes - create a survey.',
+            'choice' => 'Choix',
 
             'dashboard' => [
                 'title' => [
@@ -198,6 +219,25 @@ $lang = [
             'stage' => 'Étage',
             'modality' => 'Modalité',
             'campus' => 'Campus',
+        ],
+
+        'errors' => [
+            'login' => 'Identifiants incorrects.',
+            'error_occured' => 'Une erreur est survenue, veuillez réessayer.',
+            'error_occured_later' => 'Une erreur est survenue, veuillez réessayer plus tard.',
+            'class_id' => 'Classe inconnue.',
+            'token_id' => 'Ce token est invalide.',
+            'already_answered' => 'Vous avez déjà répondu à ce sondage.',
+
+            'form' => [
+                'something_wrong' => 'Quelque chose ne va pas, veuillez réessayer !',
+                'title_required' => 'Le titre est requis.',
+            ]
+        ],
+        
+        'success' => [
+            'login' => 'Connexion réussie.',
+            'created' => 'Création réussie.',
         ]
     ]
 ];
