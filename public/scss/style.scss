@@ -751,7 +751,7 @@ body {
                 display: flex;
                 flex-direction: column;
                 gap: 15px;
-                padding: 5px 5px 0 5px;
+                padding: 5px;
 
                 .absence__empty {
                     font-weight: 600;
@@ -950,6 +950,7 @@ body {
                         background-color: var(--green);
                         border-radius: 100vmax;
                         opacity: 0.8;
+                        transition: 500ms;
 
                         &.red {
                             background-color: var(--red);

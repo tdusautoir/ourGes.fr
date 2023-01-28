@@ -143,16 +143,16 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                     <div class="dashboard__component__content">
                         <?php if ($survey_data['nb_responses']) :
                             foreach ($survey_data['responses'] as $response) : ?>
-                                <div class="results__bar__container">
+                                <div class="results__bar__container" data-choice_id=<?= $response['choice_id'] ?>>
                                     <p><?= $response['choice'] ?></p>
-                                    <div class="dashboard__component__content__lign results__bar" id="<?= 'result' . $response['choice_id'] ?>">
+                                    <div class="dashboard__component__content__lign results__bar">
                                         <div class="results__bar__fill" style="width: <?= $response['choice_percentage'] ?>%"></div>
                                     </div>
                                     <?php if($survey_data['anonymous']): ?>
                                         <div class="results__bar__container__images">
                                             <?php foreach ($survey_data['users_infos'] as $user) :
                                                 if ($user['choice_id'] == $response['choice_id']) : ?>
-                                                    <img src="<?= isset($user['user_img']) ? $user['user_img'] : 'default.png' ?>" title="<?= $user['user_name'] ?>">
+                                                    <img src="<?= isset($user['user_img']) ? $user['user_img'] : 'default.png' ?>" title="<?= $user['user_name'] ?>" data-user_id="<?= $user['user_id'] ?>">
                                             <?php endif;
                                             endforeach; ?>
                                         </div>

@@ -225,7 +225,7 @@ class Survey
 
     function get_users_info() {
         if(isset($this->token)) {
-            $req = $this->connect->prepare('SELECT user_img, user_name, survey_choices.id as choice_id FROM survey_responses INNER JOIN survey_choices ON survey_responses.choice_id = survey_choices.id INNER JOIN chat_user ON survey_responses.user_id = chat_user.user_id INNER JOIN survey ON survey_choices.survey_id = survey.id WHERE token = :token');
+            $req = $this->connect->prepare('SELECT chat_user.user_id, user_img, user_name, survey_choices.id as choice_id FROM survey_responses INNER JOIN survey_choices ON survey_responses.choice_id = survey_choices.id INNER JOIN chat_user ON survey_responses.user_id = chat_user.user_id INNER JOIN survey ON survey_choices.survey_id = survey.id WHERE token = :token');
             $req->bindValue(':token', $this->token);
             $req->execute();
 
