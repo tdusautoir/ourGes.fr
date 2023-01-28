@@ -6,6 +6,7 @@ require_once './controller/action.php';
 init_php_session();
 
 require_once './agenda.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -21,9 +22,9 @@ require_once './agenda.php';
     <link rel="stylesheet" href="./public/css/variables.css">
     <link rel="stylesheet" href="./public/css/keyframes.css">
     <link rel="icon" href="./public/img/favicon.png" />
-    <script src="./public/javascript/script.js"></script>
+    <script src="./public/javascript/functions.js"></script>
     <script src="./public/javascript/navigate.js" defer></script>
-    <title>ourGes - myGes, but easier</title>
+    <title>ourGes - myGes, but easier.</title>
 </head>
 
 <body>
@@ -123,10 +124,10 @@ require_once './agenda.php';
         <!-- ---DASHBOARD--- -->
         <div class="dashboard__buttons">
             <div class="dashboard__buttons__left">
-                <select name="" id="">
-                    <option value="semester-1" selected disabled>Semester</option>
-                    <option value="semester-1">Semester 1</option>
-                    <option value="semester-2">Semester 2</option>
+                <select onchange="setSemester(this);">
+                    <option value="0" selected disabled>Semester</option>
+                    <option value="1">Semester 1</option>
+                    <option value="2">Semester 2</option>
                 </select>
             </div>
             <div class="dashboard__buttons__right">
@@ -149,7 +150,7 @@ require_once './agenda.php';
                     <div class="dashboard__component__content">
                         <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
                             <?php foreach ($_SESSION['grades'] as $grade) : ?>
-                                <div class="dashboard__component__content__lign">
+                                <div class="dashboard__component__content__lign" data-semester=<?= explode(' ', $grade->trimester_name)[1] ?>>
                                     <p><?= $grade->course ?></p>
                                     <p><?php if (isset($grade->average)) : echo $grade->average;
                                         endif; ?>
@@ -207,7 +208,7 @@ require_once './agenda.php';
                     <div class="dashboard__component__content">
                         <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
                             <?php foreach ($_SESSION['grades'] as $course) : ?>
-                                <div class="dashboard__component__content__lign">
+                                <div class="dashboard__component__content__lign" data-semester="<?= explode(' ',$course->trimester_name)[1] ?>">
                                     <p><?= $course->course . " - " ?><span><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
                                     <p><?= $course->coef ?></p>
                                 </div>
@@ -285,7 +286,7 @@ require_once './agenda.php';
                     <div class="dashboard__component__content">
                         <?php if (isset($_SESSION['absences']) && !empty($_SESSION['absences'])) : ?>
                             <?php foreach ($_SESSION['absences'] as $absence) : ?>
-                                <div class="dashboard__component__content__lign <?php $absence->justified ? 'justified' : '' ?>">
+                                <div class="dashboard__component__content__lign <?php $absence->justified ? 'justified' : '' ?>" data-semester="<?= explode(' ',$course->trimester_name)[1] ?>">
                                     <p><?= $absence->course_name ?></p>
                                     <p><?= date('d/m/Y', $absence->date / 1000); ?></p>
                                 </div>

@@ -43,7 +43,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     <link rel="stylesheet" href="../public/css/variables.css">
     <link rel="stylesheet" href="../public/css/keyframes.css">
     <link rel="icon" href="../public/img/favicon.png" />
-    <script src="../public/javascript/script.js"></script>
+    <script src="../public/javascript/functions.js"></script>
     <script src="../public/javascript/survey.js" defer></script>
     <title>ourGes - Create a survey</title>
 </head>

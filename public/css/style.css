@@ -36,6 +36,10 @@ body {
   color: var(--white);
 }
 
+.d-none {
+  display: none !important;
+}
+
 .tag {
   letter-spacing: 0;
   width: fit-content;

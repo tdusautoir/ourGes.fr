@@ -107,3 +107,25 @@ function notif() {
         }, 2500);
     }
 }
+
+function setSemester(option) {
+    const absences = document.querySelectorAll('.absence .dashboard__component__content__lign');
+    const courses = document.querySelectorAll('.classes .dashboard__component__content__lign');
+    const grades = document.querySelectorAll('.marks .dashboard__component__content__lign');
+
+    const containers = [absences, courses, grades];
+
+    containers.forEach(elements => {
+        elements.forEach(element => {
+            if(parseInt(option.value)) {
+                if(element.dataset.semester !== option.value) {
+                    element.classList.add("d-none");
+                } else {
+                    element.classList.remove("d-none");
+                }
+            } else {
+                element.classList.remove("d-none");
+            }
+        })
+    });
+}

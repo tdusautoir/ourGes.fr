@@ -107,8 +107,9 @@ if (isset($client)) {
     }
 }
 
-if (isset($_GET['surveyToken']) && !empty($_GET['surveyToken'])) {
-    header('location: ../survey/index.php?token=' . $_GET['surveyToken']);
+if(isset($_GET['callbackUrl']) && !empty($_GET['callbackUrl'])) {
+    header('location:'.$_GET['callbackUrl']);
+    return;
 } else {
     header('location: ../');
     return;

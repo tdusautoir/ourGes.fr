@@ -80,3 +80,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         return;
     }
 }
+
+register_shutdown_function("fatalErrorHandler");
