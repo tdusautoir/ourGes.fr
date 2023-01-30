@@ -37,7 +37,13 @@ if (isset($client)) {
 
         try {
             //get class
-            $class = $me->getClasses($currentYear);
+            try {
+                $class = $me->getClasses($currentYear);
+            } catch (Exception $e) {
+                if(get_class($e) == "GuzzleHttp\Exception\ClientException" && $e->getCode() == 423) {
+                    create_flash_message(ERROR_LOGIN, $lang['errors']['satisfaction_request'], FLASH_ERROR);
+                }
+            }
 
             //create promotion if the promo doesn't already exist
             $Chatroom = new ChatRoom;
@@ -95,17 +101,20 @@ if (isset($client)) {
             $absences = $me->getAbsences($currentYear);
         } catch (Exception $e) {
             $err = $e->getMessage();
+            var_dump(get_class($e));
             create_flash_message(ERROR_LOGIN, $lang['errors']['error_occured'], FLASH_ERROR);
         }
 
         init_php_session();
 
-        $_SESSION['news'] = $news;
-        $_SESSION['class'] = $class[0];
-        $_SESSION['profile'] = $profile;
-        $_SESSION['grades'] = $grades;
-        $_SESSION['agenda'] = $agenda;
-        $_SESSION['absences'] = $absences;
+        if(isset($class) && isset($news) && isset($profile) && isset($grades) && isset($agenda) && isset($absences)) {
+            $_SESSION['news'] = $news;
+            $_SESSION['profile'] = $profile;
+            $_SESSION['grades'] = $grades;
+            $_SESSION['agenda'] = $agenda;
+            $_SESSION['absences'] = $absences;
+            $_SESSION['class'] = $class[0];
+        }
 
         if(is_logged()) {
             create_flash_message(SUCCESS_LOGIN, $lang['success']['login'], FLASH_SUCCESS);

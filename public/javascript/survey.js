@@ -51,7 +51,7 @@ if(urlParams.get('token')) {
         data.responses.forEach(response => {
           let result = Array.from(results).find((element) => element.dataset.choice_id == response.choice_id);
           if(result) {
-            result.querySelector('.results__bar__fill').style.width = response.choice_percentage;
+            result.querySelector('.results__bar__fill').style.width = response.choice_percentage+'%';
           }
         });
 
@@ -64,19 +64,22 @@ if(urlParams.get('token')) {
             //check if he is display
             if(!(Array.from(images).find(image => image.dataset.user_id == user.user_id))) {
               let image_container = result.querySelector('.results__bar__container__images');
-              let img_element = document.createElement('img');
-              
-              img_element.src = user.user_img;
-              img_element.title = user.user_name;
-              img_element.dataset.user_id = user.user_id;
 
-              image_container.append(img_element);
+              if(image_container) {
+                let img_element = document.createElement('img');
+                
+                img_element.src = user.user_img;
+                img_element.title = user.user_name;
+                img_element.dataset.user_id = user.user_id;
+
+                image_container.append(img_element);
+              }
             }
           }
         });
       } else {
         clearInterval(refresh_survey);
       }
-    }, 20000);
+    }, 2000);
   }
 }

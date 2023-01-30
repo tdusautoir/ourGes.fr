@@ -107,6 +107,7 @@ $lang = [
             'class_id' => 'Invalid class id.',
             'token_id' => 'This token id is invalid',
             'already_answered' => 'You have already answered this survey',
+            'satisfaction_request' => 'Answer to myges request.',
 
             'form' => [
                 'something_wrong' => 'Something wrong, please retry !',
@@ -228,6 +229,7 @@ $lang = [
             'class_id' => 'Classe inconnue.',
             'token_id' => 'Ce token est invalide.',
             'already_answered' => 'Vous avez déjà répondu à ce sondage.',
+            'satisfaction_request' => 'Répondez à l\' enquête myGes.',
 
             'form' => [
                 'something_wrong' => 'Quelque chose ne va pas, veuillez réessayer !',
