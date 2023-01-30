@@ -99,7 +99,6 @@ if (isset($client)) {
         }
 
         init_php_session();
-        create_flash_message(SUCCESS_LOGIN, $lang['success']['login'], FLASH_SUCCESS);
 
         $_SESSION['news'] = $news;
         $_SESSION['class'] = $class[0];
@@ -107,6 +106,10 @@ if (isset($client)) {
         $_SESSION['grades'] = $grades;
         $_SESSION['agenda'] = $agenda;
         $_SESSION['absences'] = $absences;
+
+        if(is_logged()) {
+            create_flash_message(SUCCESS_LOGIN, $lang['success']['login'], FLASH_SUCCESS);
+        }
     }
 }
 
