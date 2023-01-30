@@ -77,6 +77,6 @@ if(urlParams.get('token')) {
       } else {
         clearInterval(refresh_survey);
       }
-    }, 5000);
+    }, 20000);
   }
 }
