@@ -107,13 +107,18 @@ if (isset($client)) {
 
         init_php_session();
 
-        if(isset($class) && isset($news) && isset($profile) && isset($grades) && isset($agenda) && isset($absences)) {
+        if(isset($class) && isset($news) && isset($profile) && isset($grades) && isset($agenda)) {
             $_SESSION['news'] = $news;
             $_SESSION['profile'] = $profile;
             $_SESSION['grades'] = $grades;
             $_SESSION['agenda'] = $agenda;
-            $_SESSION['absences'] = $absences;
             $_SESSION['class'] = $class[0];
+        }
+
+        if(isset($absences)) {
+            $_SESSION['absences'] = $absences;
+        } else {
+            $_SESSION['absences'] = [];
         }
 
         if(is_logged()) {

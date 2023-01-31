@@ -179,7 +179,11 @@ class Me
             ]
         ]);
 
-        return json_decode($response->getBody())->result;
+        if(json_decode($response->getBody()) == null) {
+            return null;
+        } else {
+            return json_decode($response->getBody())->result;
+        }
     }
 
     /**
