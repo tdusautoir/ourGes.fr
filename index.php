@@ -61,11 +61,11 @@ $lang = $lang[get_user_lang()];
                 <span class="class__date"></span>
                 <h2 class="class__title"></h2>
                 <div class="class__content">
-                    <p><i class="fa fa-user-tie" style="font-size: 14px;"></i><?= $lang['professor'] ?> : <span class="professor"></span></p>
-                    <p><?= $lang['room'] ?> : <span class="room"></span></p>
-                    <p><?= $lang['stage'] ?> : <span class="stage"></span></p>
-                    <p><?= $lang['modality'] ?> : <span class="modality"></span></p>
-                    <p><?= $lang['campus'] ?> : <span class="campus"></span></p>
+                    <p><i class="fa fa-user-tie" style="font-size: 14px;"></i><?= $lang['class_modal']['professor'] ?> : <span class="professor"></span></p>
+                    <p><?= $lang['class_modal']['room'] ?> : <span class="room"></span></p>
+                    <p><?= $lang['class_modal']['stage'] ?> : <span class="stage"></span></p>
+                    <p><?= $lang['class_modal']['modality'] ?> : <span class="modality"></span></p>
+                    <p><?= $lang['class_modal']['campus'] ?> : <span class="campus"></span></p>
                 </div>
                 <i class="fa fa-xmark" onclick="class__modal()"></i>
             </div>
@@ -295,7 +295,7 @@ $lang = $lang[get_user_lang()];
                                 </div>
                             <?php endforeach; ?>
                         <?php else : ?>
-                            <p class="absence__empty"><?= $lang['home']['dashboard']['title']['absence'] ?></p>
+                            <p class="absence__empty"><?= $lang['home']['dashboard']['empty']['absence'] ?></p>
                         <?php endif; ?>
                     </div>
                 </div>
