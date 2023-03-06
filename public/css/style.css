@@ -749,6 +749,15 @@ body {
   font-weight: 300;
   color: var(--grey);
 }
+.dashboard__component__title__content {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.dashboard__component__title__content span {
+  font-weight: 600;
+  color: var(--grey);
+}
 .dashboard__component__title__arrows {
   display: flex;
   align-items: center;
