@@ -188,7 +188,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                             <div class="recent__element__answers__element">
                                                 <p><?= $response['choice'] ?></p>
                                                 <div class="recent__element__answers__bar">
-                                                    <div class="recent__element__answers__bar__fill" style="width: <?= isset($response['choice_percentage']) ? $response['choice_percentage'] : 0 ?>"></div>
+                                                    <div class="recent__element__answers__bar__fill" style="width: <?= isset($response['choice_percentage']) ? $response['choice_percentage'] : 0 ?>%"></div>
                                                 </div>
                                             </div>
                                         <?php endforeach; ?>

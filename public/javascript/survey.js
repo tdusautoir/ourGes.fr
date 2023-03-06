@@ -18,7 +18,6 @@ if (form) {
     fetch("../controller/survey.php?method=response", { method: 'POST', body: formData })
       .then((data) => data.json())
       .then((res) => {
-        console.log(res);
         setTimeout(() => { 
           if(res.success) {
             window.location.href = window.location.href + "&#results";
