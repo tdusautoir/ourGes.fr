@@ -154,7 +154,7 @@ $lang = $lang[get_user_lang()];
                         <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
                             <?php foreach ($_SESSION['grades'] as $grade) : ?>
                                 <div class="dashboard__component__content__lign" data-semester=<?= explode(' ', $grade->trimester_name)[1] ?>>
-                                    <p><?= $grade->course ?></p>
+                                    <p><span class="dashboard__component__content__lign__trimester"><?= 'S'.explode(' ', $grade->trimester_name)[1] ?></span> - <?= $grade->course ?></p>
                                     <p><?php if (isset($grade->average)) : echo $grade->average;
                                         endif; ?>
                                 </div>
@@ -212,7 +212,7 @@ $lang = $lang[get_user_lang()];
                         <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
                             <?php foreach ($_SESSION['grades'] as $course) : ?>
                                 <div class="dashboard__component__content__lign" data-semester="<?= explode(' ', $course->trimester_name)[1] ?>">
-                                    <p><?= $course->course . " - " ?><span><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
+                                    <p><span class="dashboard__component__content__lign__trimester"><?= 'S'.explode(' ', $course->trimester_name)[1] ?></span> - </span><?= $course->course . " - " ?><span><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->trimester_name ?></span></p>
                                     <p><?= $course->coef ?></p>
                                 </div>
                             <?php endforeach; ?>
