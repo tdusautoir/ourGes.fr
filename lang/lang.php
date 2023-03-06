@@ -124,7 +124,7 @@ $lang = [
 
     'fr' => [
         'title' => 'ourGes - myGes, mais simplement.',
-        'sign_as' => 'Connecté en tant que',
+        'sign_as' => 'Bonjour ',
         'back' => 'Retour',
 
 
