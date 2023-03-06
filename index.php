@@ -10,8 +10,6 @@ require_once './lang/lang.php';
 
 $lang = $lang[get_user_lang()];
 
-getAverageFromGrades($_SESSION['grades']);
-
 ?>
 
 <!DOCTYPE html>
