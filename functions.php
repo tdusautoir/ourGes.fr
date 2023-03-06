@@ -184,6 +184,33 @@ function isInteger($input)
     return (ctype_digit(strval($input)));
 }
 
+function getAverageFromGrades($grades) {
+    $coefs = 0;
+    $additionnalAverage = 0;
+
+    if(isset($grades) && !empty($grades)) {
+        foreach($grades as $grade) {
+            if($grade->coef != 'N.C.') {
+                $coef = null;
+
+                if(!empty($grade->grades)) {
+                    $coef = intval($grade->coef);
+                    $additionnalAverage = $additionnalAverage + floatval($grade->ccaverage) * intval($grade->coef);
+                }
+                if(isset($grade->average)) {
+                    $coef = intval($grade->coef);
+                    $additionnalAverage = $additionnalAverage + floatval($grade->average) * intval($grade->coef);
+                }
+
+                if(isset($coef)) {
+                    $coefs = $coefs + $coef;
+                }
+            }
+        }
+    }
+
+    return $additionnalAverage / $coefs;
+}
 
 // Sort the agenda multiple times
 function sortAgenda(){

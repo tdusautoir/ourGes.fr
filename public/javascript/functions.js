@@ -174,4 +174,12 @@ function setSemester(option) {
             }
         })
     });
+
+    const semester_indicators = document.querySelectorAll('.dashboard__component__content__lign__trimester');
+
+    if(semester_indicators.length > 0) {
+        for(let i = 0; i < semester_indicators.length; i++) {
+            semester_indicators[i].classList.add('d-none');
+        }
+    }
 }
