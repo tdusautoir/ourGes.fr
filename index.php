@@ -293,7 +293,7 @@ $lang = $lang[get_user_lang()];
                     <div class="dashboard__component__content">
                         <?php if (isset($_SESSION['absences']) && !empty($_SESSION['absences'])) : ?>
                             <?php foreach ($_SESSION['absences'] as $absence) : ?>
-                                <div class="dashboard__component__content__lign <?php $absence->justified ? 'justified' : '' ?>" data-semester="<?= explode(' ', $course->trimester_name)[1] ?>">
+                                <div class="dashboard__component__content__lign<?= $absence->justified ? ' justified' : '' ?>" data-semester="<?= explode(' ', $course->trimester_name)[1] ?>">
                                     <p><?= $absence->course_name ?></p>
                                     <p><?= date('d/m/Y', $absence->date / 1000); ?></p>
                                 </div>
