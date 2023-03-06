@@ -291,6 +291,7 @@ body {
   transition: 400ms ease 100ms;
   transform: translateX(-50%);
   z-index: 1;
+  pointer-events: none;
 }
 .login--loading::before {
   content: "";
@@ -308,6 +309,7 @@ body {
 .login--active {
   top: 40px;
   opacity: 1;
+  pointer-events: all;
 }
 .login__inputs {
   display: flex;
@@ -331,6 +333,7 @@ body {
   color: rgb(185, 185, 185);
   cursor: pointer;
   font-size: 0.8rem;
+  z-index: 1;
 }
 .login .tag {
   cursor: pointer;
