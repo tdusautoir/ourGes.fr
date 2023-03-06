@@ -769,14 +769,17 @@ body {
   cursor: default;
   pointer-events: none;
 }
+.dashboard__component__content__lign:first-child {
+  padding-top: 0;
+}
+.dashboard__component__content:has(.d-none) .dashboard__component__content__lign:nth-child(2) {
+  padding-top: 0;
+}
 .dashboard__component__content__lign {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 14px 5px;
-}
-.dashboard__component__content__lign:first-child {
-  padding-top: 5px;
 }
 .dashboard__component__content__lign:last-child {
   padding-bottom: 5px;
@@ -1148,7 +1151,7 @@ body {
     flex-direction: column-reverse;
     justify-content: start;
     padding: 0 20px;
-    margin-bottom: 20px;
+    padding-bottom: 20px;
   }
   .dashboard__buttons {
     padding: 20px;
