@@ -1262,7 +1262,6 @@ body {
     .dashboard__component {
         max-height: 900px;
         height: 900px;
-        overflow: hidden;
     }
 
     .results {
@@ -1315,6 +1314,8 @@ body {
     flex-direction: column;
     gap: 20px;
     padding: 0 5px 0 0;
+    max-height: calc(100% - 40px);
+    overflow: auto;
 
     &__element {
         background-color: rgba(25, 33, 46, 0.45);

@@ -1058,7 +1058,6 @@ body {
 .survey .dashboard__component {
   max-height: 900px;
   height: 900px;
-  overflow: hidden;
 }
 .survey .results {
   overflow: auto;
@@ -1104,6 +1103,8 @@ body {
   flex-direction: column;
   gap: 20px;
   padding: 0 5px 0 0;
+  max-height: calc(100% - 40px);
+  overflow: auto;
 }
 .recent__element {
   background-color: rgba(25, 33, 46, 0.45);

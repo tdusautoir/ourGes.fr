@@ -155,7 +155,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                     <div class="dashboard__component__content__lign results__bar">
                                         <div class="results__bar__fill" style="width: <?= $response['choice_percentage'] ?>%"></div>
                                     </div>
-                                    <?php if($survey_data['anonymous']): ?>
+                                    <?php if ($survey_data['anonymous']) : ?>
                                         <div class="results__bar__container__images">
                                             <?php foreach ($survey_data['users_infos'] as $user) :
                                                 if ($user['choice_id'] == $response['choice_id']) : ?>
@@ -181,15 +181,15 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         </div>
                     </div>
                     <div class="dashboard__component__content recent">
-                        <?php if(isset($recent_surveys) && !empty($recent_surveys)): ?>
-                            <?php foreach($recent_surveys as $survey): ?>
+                        <?php if (isset($recent_surveys) && !empty($recent_surveys)) : ?>
+                            <?php foreach ($recent_surveys as $survey) : ?>
                                 <div class="recent__element" data-token="<?= $survey['data']['token'] ?>">
                                     <div class="recent__element__title">
                                         <h1><?= $survey['data']['name'] ?></h1>
                                     </div>
                                     <div class="recent__element__answers">
-                                        <?php foreach($survey['responses'] as $key => $response): ?>
-                                            <?php if($key > 3) { 
+                                        <?php foreach ($survey['responses'] as $key => $response) : ?>
+                                            <?php if ($key > 3) {
                                                 break;
                                             } ?>
                                             <div class="recent__element__answers__element">
@@ -219,7 +219,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                         <div class="creation">
                             <label for="title">
                                 <p><?= $lang['survey']['dashboard']['creation']['title'] ?></p>
-                                <input id="title" <?php if(isset_flash_message_by_name('title_error')): ?> class="error" <?php endif; ?>name="name" type="text" placeholder="type your question here" autocomplete="off">
+                                <input id="title" <?php if (isset_flash_message_by_name('title_error')) : ?> class="error" <?php endif; ?>name="name" type="text" placeholder="type your question here" autocomplete="off">
                             </label>
                             <label for="description">
                                 <p><?= $lang['survey']['dashboard']['creation']['description'] ?></p>
