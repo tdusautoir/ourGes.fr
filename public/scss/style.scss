@@ -1213,6 +1213,10 @@ body {
                 font-weight: 500;
                 color: var(--grey);
             }
+            
+            &.empty {
+                display: none;
+            }
         }
     }
 }

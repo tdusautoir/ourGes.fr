@@ -1021,6 +1021,9 @@ body {
   font-weight: 500;
   color: var(--grey);
 }
+.class__content p.empty {
+  display: none;
+}
 
 .current {
   display: flex !important;

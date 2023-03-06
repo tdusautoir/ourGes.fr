@@ -87,13 +87,59 @@ function get_class_info(classId) {
         let data = jsondata[0];
         let date = jsondata[1];
 
+        //reset modal
+        modal.querySelector('.room').parentNode.classList.remove('empty');
+        modal.querySelector('.stage').parentNode.classList.remove('empty');
+        modal.querySelector('.campus').parentNode.classList.remove('empty');
+        modal.querySelector('.professor').parentNode.classList.remove('empty');
+        modal.querySelector('.modality').parentNode.classList.remove('empty');
+
         modal.querySelector('.class__title').innerHTML = data.name;
         modal.querySelector('.class__date').innerHTML = date[0] + ' - ' + date[1];
-        modal.querySelector('.professor').innerHTML = data.teacher;
-        modal.querySelector('.room').innerHTML = data.rooms[0].name;
-        modal.querySelector('.stage').innerHTML = data.rooms[0].floor;
-        modal.querySelector('.modality').innerHTML = data.modality
-        modal.querySelector('.campus').innerHTML = data.rooms[0].campus
+
+        if(data.teacher && !(data.teacher.trim() == '')) {
+            if(!(data.teacher.trim() == '')) {
+                modal.querySelector('.professor').innerHTML = data.teacher;
+            } else {
+                modal.querySelector('.professor').parentNode.classList.add('empty');
+            }
+        } else {
+            modal.querySelector('.professor').parentNode.classList.add('empty');
+        }
+
+        if(data.rooms) {
+            if(!(data.rooms[0].name.trim() == '')) {
+                modal.querySelector('.room').innerHTML = data.rooms[0].name;
+            } else {
+                modal.querySelector('.room').parentNode.classList.add('empty');
+            }
+
+            if(!(data.rooms[0].floor.trim() == '')) {
+                modal.querySelector('.stage').innerHTML = data.rooms[0].floor;
+            } else {
+                modal.querySelector('.stage').parentNode.classList.add('empty');
+            }
+
+            if(!(data.rooms[0].campus.trim() == '')) {
+                modal.querySelector('.campus').innerHTML = data.rooms[0].campus
+            } else {
+                modal.querySelector('.campus').parentNode.classList.add('empty');
+            }
+        } else {
+            modal.querySelector('.room').parentNode.classList.add('empty');
+            modal.querySelector('.stage').parentNode.classList.add('empty');
+            modal.querySelector('.campus').parentNode.classList.add('empty');
+        }
+
+        if(data.modality) {
+            if(!(data.modality.trim() == '')) { 
+                modal.querySelector('.modality').innerHTML = data.modality
+            } else {
+                modal.querySelector('.modality').parentNode.classList.add('empty');
+            }
+        } else {
+            modal.querySelector('.modality').parentNode.classList.add('empty');
+        }
 
         class__modal();
     });
