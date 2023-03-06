@@ -494,9 +494,6 @@ body {
 .dashboard__buttons select:focus {
   outline: none;
 }
-.dashboard__buttons select:hover {
-  background-color: rgba(0, 0, 0, 0.158);
-}
 .dashboard__buttons select option {
   background-color: white;
   color: black;
@@ -526,6 +523,8 @@ body {
   background-size: cover;
   background-position: center;
   display: none;
+  padding: 10px;
+  box-sizing: border-box;
 }
 .dashboard__component.news .dashboard__component__content__banner.active {
   display: block;
