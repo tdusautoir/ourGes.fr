@@ -279,12 +279,13 @@ body {
         }
 
         img {
-            max-width: 35px;
             aspect-ratio: 1;
             object-fit: cover;
             border-radius: 100vmax;
             transition: 300ms;
             cursor: pointer;
+            width: 35px;
+            height: 35px;
 
 
             &:hover {
@@ -858,7 +859,6 @@ body {
             }
 
             .planning__empty {
-                text-align: center;
                 font-weight: 600;
             }
         }
@@ -1225,7 +1225,7 @@ body {
                 font-weight: 500;
                 color: var(--grey);
             }
-            
+
             &.empty {
                 display: none;
             }
