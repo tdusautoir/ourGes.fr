@@ -260,9 +260,7 @@ $lang = $lang[get_user_lang()];
                                             $className = "";
                                         }
                                     ?>
-                                        <div class="planning__class <?php if (!empty($className)) {
-                                                                        echo $className;
-                                                                    } ?>" onclick="get_class_info(<?= $key ?>)">
+                                        <div class="planning__class<?php if ($class->type == 'Examen') { echo ' examen'; } ?><?php if (!empty($className)) { echo ' '.$className; } ?>" onclick="get_class_info(<?= $key ?>)">
                                             <p><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
                                             <p><?= $class->name ?></p>
                                             <?php if (isset($class->rooms[0])) : ?>
