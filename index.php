@@ -157,8 +157,24 @@ getAverageFromGrades($_SESSION['grades']);
                             <?php foreach ($_SESSION['grades'] as $grade) : ?>
                                 <div class="dashboard__component__content__lign" data-semester=<?= explode(' ', $grade->trimester_name)[1] ?>>
                                     <p><span class="dashboard__component__content__lign__trimester"><?= 'S'.explode(' ', $grade->trimester_name)[1] ?> - </span><?= $grade->course ?></p>
-                                    <?php if(!empty($grade->grades)) : ?>
-                                        <p><?php if (isset($grade->ccaverage)) : echo $grade->ccaverage; endif; ?></p>
+                                    <?php if(!empty($grade->grades) || isset($grade->average)) : ?>
+                                        <p>
+                                            <?php 
+                                                $average = 0;
+                                                $division = 0;
+                                                if (!empty($grade->grades) && isset($grade->ccaverage)) {
+                                                    $average += floatval($grade->ccaverage);
+                                                    $division += 1;
+                                                }
+
+                                                if(isset($grade->average)) {
+                                                    $average += floatval($grade->average);
+                                                    $division += 1;
+                                                }
+
+                                                echo $average / $division;
+                                            ?>
+                                        </p>
                                     <?php endif; ?>
                                 </div>
                             <?php endforeach ?>
