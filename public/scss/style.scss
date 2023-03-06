@@ -31,7 +31,6 @@ body {
     position: relative;
     overflow-x: hidden;
     min-width: 320px;
-    min-height: 100vh;
     margin: 0 auto;
     background: linear-gradient(45deg, rgba(25, 33, 46, 1) 75%, rgba(33, 45, 64, 1) 100%);
     background-repeat: no-repeat;
@@ -443,6 +442,7 @@ body {
     margin: 0 auto;
     margin-top: 60px;
     max-width: 1440px;
+    overflow-y: hidden;
     padding: 80px 100px;
     padding-top: 0;
 
@@ -1511,9 +1511,7 @@ body {
             }
 
             i {
-                top: 73px;
-                right: 38px;
-                font-size: 1rem;
+                display: none;
             }
         }
 
