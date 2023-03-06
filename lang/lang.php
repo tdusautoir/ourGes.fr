@@ -114,7 +114,7 @@ $lang = [
                 'title_required' => 'Title is required !',
             ]
         ],
-        
+
         'success' => [
             'login' => 'Successfully connected.',
             'created' => 'Successfully created.',
@@ -137,11 +137,11 @@ $lang = [
         ],
 
         'hero' => [
-            'text' => 'DÉVELOPPÉ PAR DES ÉTUDIANTS, POUR DES ÉTUDIANTS',
+            'text' => 'BUILT BY STUDENTS, FOR STUDENTS',
 
             'title' => [
                 'myGes,',
-                'Mais simplement'
+                'but easier'
             ],
 
             'description' => [
@@ -236,7 +236,7 @@ $lang = [
                 'title_required' => 'Le titre est requis.',
             ]
         ],
-        
+
         'success' => [
             'login' => 'Connexion réussie.',
             'created' => 'Création réussie.',

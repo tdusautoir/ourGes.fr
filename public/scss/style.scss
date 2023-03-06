@@ -39,7 +39,7 @@ body {
 }
 
 .d-none {
-    display: none!important;
+    display: none !important;
 }
 
 .tag {
@@ -605,6 +605,11 @@ body {
                     background-repeat: no-repeat;
                     background-size: cover;
                     background-position: center;
+                    display: none;
+
+                    &.active {
+                        display: block;
+                    }
                 }
             }
         }

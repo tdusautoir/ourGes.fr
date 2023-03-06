@@ -33,7 +33,7 @@ $lang = $lang[get_user_lang()];
 <body>
     <?php require_once('./components/flash_message.php'); ?>
     <?php if (!is_logged()) : ?>
-        <form class="login" action="<?= (isset($_GET['callbackUrl'])) ? "./controller/login.php?callbackUrl=".$_GET['callbackUrl'] : "./controller/login.php" ?>" method="POST">
+        <form class="login" action="<?= (isset($_GET['callbackUrl'])) ? "./controller/login.php?callbackUrl=" . $_GET['callbackUrl'] : "./controller/login.php" ?>" method="POST">
             <div class="login__inputs">
                 <input class="input" name="username" type="text" placeholder="username" autocomplete="off" maxlength="30">
                 <input id="password" class="input" name="password" type="password" placeholder="password" autocomplete="off" maxlength="30">
@@ -211,7 +211,7 @@ $lang = $lang[get_user_lang()];
                     <div class="dashboard__component__content">
                         <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
                             <?php foreach ($_SESSION['grades'] as $course) : ?>
-                                <div class="dashboard__component__content__lign" data-semester="<?= explode(' ',$course->trimester_name)[1] ?>">
+                                <div class="dashboard__component__content__lign" data-semester="<?= explode(' ', $course->trimester_name)[1] ?>">
                                     <p><?= $course->course . " - " ?><span><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
                                     <p><?= $course->coef ?></p>
                                 </div>
@@ -287,7 +287,7 @@ $lang = $lang[get_user_lang()];
                     <div class="dashboard__component__content">
                         <?php if (isset($_SESSION['absences']) && !empty($_SESSION['absences'])) : ?>
                             <?php foreach ($_SESSION['absences'] as $absence) : ?>
-                                <div class="dashboard__component__content__lign <?php $absence->justified ? 'justified' : '' ?>" data-semester="<?= explode(' ',$course->trimester_name)[1] ?>">
+                                <div class="dashboard__component__content__lign <?php $absence->justified ? 'justified' : '' ?>" data-semester="<?= explode(' ', $course->trimester_name)[1] ?>">
                                     <p><?= $absence->course_name ?></p>
                                     <p><?= date('d/m/Y', $absence->date / 1000); ?></p>
                                 </div>

@@ -525,6 +525,10 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  display: none;
+}
+.dashboard__component.news .dashboard__component__content__banner.active {
+  display: block;
 }
 .dashboard__component .creation__container {
   overflow: auto;
