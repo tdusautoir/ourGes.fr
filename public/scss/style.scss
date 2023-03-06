@@ -877,6 +877,17 @@ body {
                 color: var(--grey);
             }
 
+            &__content {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+
+                span {
+                    font-weight: 600;
+                    color: var(--grey);
+                }
+            }
+
             &__arrows {
                 display: flex;
                 align-items: center;
