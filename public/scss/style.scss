@@ -329,6 +329,7 @@ body {
     opacity: 0;
     transition: 400ms ease 100ms;
     transform: translateX(-50%);
+    z-index: 1;
 
     &--loading::before {
         content: '';
@@ -604,6 +605,13 @@ body {
                     display: none;
                     padding: 10px;
                     box-sizing: border-box;
+
+                    p {
+                        padding: 5px;
+                        border-radius: 4px;
+                        background-color: rgba(0, 0, 0, 0.6);
+                        width: fit-content;
+                    }
 
                     &.active {
                         display: block;
@@ -914,6 +922,7 @@ body {
 
                     &:first-child {
                         color: var(--white);
+                        max-width: 85%;
                     }
                 }
             }
@@ -1356,6 +1365,13 @@ body {
 
         &__component__content__lign {
             gap: 10px;
+
+            p:first-child {
+                max-width: 85%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
         }
 
         &__left {
@@ -1367,6 +1383,19 @@ body {
                 &__content {
                     height: unset;
                     max-height: 185px !important;
+                }
+            }
+        }
+
+        &__right {
+
+            .dashboard__component {
+                &.absence {
+                    height: fit-content;
+                }
+
+                &.planning {
+                    height: fit-content;
                 }
             }
         }
