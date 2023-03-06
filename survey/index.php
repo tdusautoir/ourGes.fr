@@ -77,19 +77,22 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
         </div>
     </header>
     <div class="dashboard__buttons">
-        <p> </p>
-        <?php if (isset($survey_data) && !empty($survey_data)) : ?>
-            <a href="../survey/">
+        <div class="dashboard__buttons__left"></div>
+        <div class="dashboard__buttons__right">
+            <a href="../">
                 <div class="tag tag--click">
-                    <p><i class="fa fa-arrow-left"></i><?= $lang['survey']['dashboard']['title']['recent'] ?></p>
+                    <p><i class="fa fa-arrow-left"></i><?= $lang['buttons']['back'] ?></p>
                 </div>
-            </a>    
-        <?php endif; ?>
-        <a href="../">
-            <div class="tag tag--click">
-                <p><i class="fa fa-arrow-left"></i><?= $lang['buttons']['back'] ?></p>
-            </div>
-        </a>
+            </a>
+            <?php if (isset($survey_data) && !empty($survey_data)) : ?>
+                <a href="../survey/">
+                    <div class="tag tag--click">
+                        <p><?= $lang['survey']['dashboard']['title']['recent'] ?></p>
+                    </div>
+                </a>
+            <?php endif; ?>
+        </div>
+
     </div>
     <main class="dashboard survey">
         <?php if (isset($survey_data) && !empty($survey_data)) : ?>

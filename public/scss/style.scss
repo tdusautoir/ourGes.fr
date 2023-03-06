@@ -558,6 +558,12 @@ body {
             align-items: center;
         }
 
+        &__right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         select {
             background-color: transparent;
             font-weight: 400;

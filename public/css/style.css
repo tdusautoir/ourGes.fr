@@ -486,6 +486,11 @@ body {
   display: flex;
   align-items: center;
 }
+.dashboard__buttons__right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .dashboard__buttons select {
   background-color: transparent;
   font-weight: 400;
