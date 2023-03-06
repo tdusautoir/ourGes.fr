@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set('Europe/Paris');
 
 require_once './functions.php';
 require_once './controller/action.php';
@@ -7,6 +6,10 @@ require_once './controller/action.php';
 init_php_session();
 
 require_once './agenda.php';
+require_once './lang/lang.php';
+
+$lang = $lang[get_user_lang()];
+
 ?>
 
 <!DOCTYPE html>
@@ -16,295 +19,319 @@ require_once './agenda.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ourGes - myGes, but easier</title>
+    <meta name="description" content="ourGes is an extension to myGes. you can easily find your school information using a simple and easy-to-use interface">
     <link rel="stylesheet" href="./public/css/reset.css">
-    <link rel="stylesheet" href="./public/css/animations.css">
-    <link rel="stylesheet" href="./public/css/var.css">
-    <link rel="stylesheet" href="./public/css/global.css">
-    <link rel="icon" href="./img/favicon.png" />
-    <script src="./public/js/script.js"></script>
-    <script src="./public/js/jquery-3.6.0.min.js"></script>
-    <script src="./public/js/socket.js"></script>
+    <link rel="stylesheet" href="./public/css/style.css">
+    <link rel="stylesheet" href="./public/css/variables.css">
+    <link rel="stylesheet" href="./public/css/keyframes.css">
+    <link rel="icon" href="./public/img/favicon.png" />
+    <script src="./public/javascript/functions.js"></script>
+    <script src="./public/javascript/navigate.js" defer></script>
+    <title><?= $lang['title'] ?></title>
 </head>
 
-<body class="m-0a ovf" id="body">
-
-    <?php if (is_logged()) : ?>
-        <div class="message flex flex-col" id="message">
-            <div class="message__head flex flex-al" onclick="showMessage(); updateScroll()">
-                <p class="flex flex-al">#<?= $_SESSION['class']->promotion ?><span>&nbsp;- General Chat</span></p>
-                <i class="fa fa-angle-down" id="fa-angle-down-message"></i>
+<body>
+    <?php require_once('./components/flash_message.php'); ?>
+    <?php if (!is_logged()) : ?>
+        <form class="login" action="<?= (isset($_GET['callbackUrl'])) ? "./controller/login.php?callbackUrl=" . $_GET['callbackUrl'] : "./controller/login.php" ?>" method="POST">
+            <div class="login__inputs">
+                <input class="input" name="username" type="text" placeholder="username" autocomplete="off" maxlength="30">
+                <input id="password" class="input" name="password" type="password" placeholder="password" autocomplete="off" maxlength="30">
+                <i onclick="password()" class="fa fa-eye-slash" id="eye"></i>
             </div>
-            <div class="message__content flex flex-col pd-1">
-                <div class="chats-container flex flex-col gap-2" id="chats-container">
-
-                    <!-- <div class="chat flex gap-1">
-                        <div class="chat__usr">
-                            <img src=$_SESSION['profile']->_links->photo->href alt="">
-                        </div>
-                        <div class="chat__content flex flex-col">
-                            <div class="chat__content__name flex flex-al gap-1">
-                                <p>$_SESSION['profile']->firstname</p>
-                                <p>19:46</p>
-                            </div>
-                            <div class="chat__content__text pd-1">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo, quia possimus explicabo ea nihil modi.</p>
-                            </div>
-                        </div>
-                    </div> -->
-
-                </div>
+            <div class="tag">
+                <button type="submit" onclick="loading()"><?= $lang['buttons']['connect'] ?></button>
             </div>
-            <form id="chat-form">
-                <div class="message__write flex gap-1 flex-al">
-                    <input type="hidden" value="<?= $_SESSION['profile']->uid ?>" id="id_user">
-                    <input type="text" id="chat-message" placeholder="Send a message in #<?= $_SESSION['class']->promotion ?>" autocomplete="off" maxlength="144">
-                    <button type="submit" style="background:transparent;"><i class="fa fa-paper-plane"></i></button>
+        </form>
+    <?php else : ?>
+        <div class="logout" id="logout">
+            <div class="logout__head">
+                <p><?= $lang['sign_as'] ?></p>
+                <p><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></p>
+            </div>
+            <div class="logout__content">
+                <div class="tag">
+                    <p><?= $_SESSION['class']->promotion ?></p>
                 </div>
-            </form>
+                <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
+            </div>
+        </div>
+        <div class="class__background" id="class__modal">
+            <div class="class">
+                <span class="class__date"></span>
+                <h2 class="class__title"></h2>
+                <div class="class__content">
+                    <p><i class="fa fa-user-tie" style="font-size: 14px;"></i><?= $lang['class_modal']['professor'] ?> : <span class="professor"></span></p>
+                    <p><?= $lang['class_modal']['room'] ?> : <span class="room"></span></p>
+                    <p><?= $lang['class_modal']['stage'] ?> : <span class="stage"></span></p>
+                    <p><?= $lang['class_modal']['modality'] ?> : <span class="modality"></span></p>
+                    <p><?= $lang['class_modal']['campus'] ?> : <span class="campus"></span></p>
+                </div>
+                <i class="fa fa-xmark" onclick="class__modal()"></i>
+            </div>
         </div>
     <?php endif; ?>
-
-    <nav class="flex flex-al">
-        <div class="nav__logo flex flex-js pd-1">
+    <!-- ---HEADER--- -->
+    <header class="header">
+        <div class="header__logo">
             <p>our</p>
-            <p onclick="easter()">GES</p>
-        </div>
-        <div class="nav__menu flex flex-al">
-            <?php if (!is_logged()) : ?>
-                <!-- IS LOGGED -->
-                <button onclick="showForm()">login</button>
-            <?php else : ?>
-                <div class="nav__menu__usr flex">
-                    <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="profile" onclick="showSubmenu()">
-                    <i class="fa fa-angle-down" id="fa-angle-down"></i>
-                </div>
-            <?php endif; ?>
-        </div>
-    </nav>
-    <div class="nav__submenu pd-1" id="dropdown-menu">
-        <div class="nav__submenu__head mb-1">
-            <p>Signed in as</p>
-            <span><?= $_SESSION['profile']->firstname . " " .  $_SESSION['profile']->name ?></span>
-        </div>
-        <div class="nav__submenu__foot flex">
-            <p class="tag"><?= $_SESSION['class']->promotion ?></p>
-            <a href="index.php?action=logout"><i class="fa fa-sign-out"></i></a>
-        </div>
-    </div>
-
-    <div class="container" id="container">
-        <div class="login m-0a" id="login-form">
-            <form class="flex flex-col flex-al" action="./controller/login.php" method="POST">
-                <div class="login__items gap-1 mb-1 flex flex-al">
-                    <input name="username" type="text" placeholder="username" autocomplete="off" maxlength="20">
-                    <input id="password" name="password" type="password" placeholder="password" autocomplete="off" maxlength="30">
-                    <i onclick="showPwd()" class="fa fa-eye-slash" id="eye"></i>
-                </div>
-                <button type="submit" class="tag">connect</button>
-            </form>
+            <p>GES</p>
         </div>
         <?php if (!is_logged()) : ?>
-            <div class="content mt-3 flex">
-                <div class="hero flex flex-col flex-js">
-                    <span class="tag mb-2">Built by students, for students</span>
-                    <div class="hero__title">
-                        <p>myGes,</p>
-                    </div>
-                    <div class="hero__title mb-2">
-                        <p class="snd">but easier.</p>
-                    </div>
-                    <div class="hero__headline">
-                        <p>
-                            ourGes is an extension to myGes
-                        </p>
-                        <p class="mb-1">
-                            you can easily find your school information using a simple and easy-to-use interface
-                        </p>
-                        <p class="mb-2">
-                            developed by <a href="https://github.com/achilledavid" target="blank">achille</a> and <a href="https://github.com/tdusautoir" target="blank">thibaut</a>
-                        </p>
-                        <div class="hero__buttons flex">
-                            <button onclick="showForm()">
-                                <p>login</p>
-                            </button>
-                            <a class="flex flex-js flex-al" href="https://github.com/tdusautoir/ourGes" target="blank">
-                                <img src="./img/github.png" alt="">
-                                <p>see on github</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="img flex">
-                    <img src="./public/img/right-img.png" alt="" draggable="false">
-                </div>
+            <div class="header__buttons">
+                <button onclick="login()">
+                    <p><?= $lang['buttons']['login'] ?></p>
+                </button>
             </div>
         <?php else : ?>
-            <div class="content m-0a">
-                <div class="dashboard flex">
-                    <div class="dashboard__col flex flex-col">
-
-                        <div class="dashboard__card pd-1">
-                            <div class="dashboard__card__head flex flex-al mb-1">
-                                <div class="dashboard__card__head__title flex flex-al gap-1">
-                                    <h4 class="tag">Marks</h4>
-                                    <!-- <p class="global-average">15.35</p> -->
-                                </div>
-                                <div class="dashboard__card__legend dashboard__card__tab flex gap-1">
-                                    <span>Av.</span>
-                                </div>
+            <div class="header__buttons" onclick="logout()">
+                <img src="<?= $_SESSION['profile']->_links->photo->href ?>" alt="user image">
+                <i class="fa fa-angle-down"></i>
+            </div>
+        <?php endif; ?>
+    </header>
+    <?php if (!is_logged()) : ?>
+        <main class="hero">
+            <div class="hero__text">
+                <div class="tag">
+                    <p><?= $lang['hero']['text'] ?></p>
+                </div>
+                <div class="hero__text__title">
+                    <div class="hero__text__title__container">
+                        <h1><?= $lang['hero']['title'][0] ?></h1>
+                    </div>
+                    <div class="hero__text__title__container">
+                        <h1><?= $lang['hero']['title'][1] ?></h1>
+                    </div>
+                </div>
+                <div class="hero__text__description">
+                    <p><?= $lang['hero']['description'][0] ?></p>
+                    <p><?= $lang['hero']['description'][1] ?></p>
+                    <p><?= $lang['hero']['description']['developed_by'] ?> <a href="https://github.com/achilledavid" target="_blank">achille</a> <?= $lang['hero']['description']['and'] ?> <a href="https://github.com/tdusautoir" target="_blank">thibaut</a></p>
+                </div>
+                <div class="hero__text__buttons">
+                    <button onclick="login()">
+                        <p><?= $lang['buttons']['login'] ?></p>
+                    </button>
+                    <a href="https://github.com/tdusautoir/ourGes.fr" target="_blank">
+                        <img src="./public/img/github.webp" alt="github logo" draggable="false">
+                        <p><?= $lang['hero']['see_on_github'] ?></p>
+                    </a>
+                </div>
+            </div>
+            <div class="hero__image">
+                <img src="./public/img/right-img.webp" alt="hero banner image" draggable="false">
+            </div>
+        </main>
+    <?php else : ?>
+        <!-- ---DASHBOARD--- -->
+        <div class="dashboard__buttons">
+            <div class="dashboard__buttons__left">
+                <select onchange="setSemester(this);">
+                    <option value="0" selected disabled><?= $lang['home']['semester'][0] ?></option>
+                    <option value="1"><?= $lang['home']['semester'][1] ?></option>
+                    <option value="2"><?= $lang['home']['semester'][2] ?></option>
+                </select>
+            </div>
+            <div class="dashboard__buttons__right">
+                <a href="./survey/">
+                    <div class="tag tag--click tag--new">
+                        <p><i class="fa fa-chart-pie"></i><?= $lang['buttons']['survey'] ?></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <main class="dashboard">
+            <div class="dashboard__left">
+                <div class="dashboard__component marks">
+                    <div class="dashboard__component__title">
+                        <div class="dashboard__component__title__content">
+                            <div class="tag">
+                                <p><i class="fa fa-graduation-cap"></i><?= $lang['home']['dashboard']['title']['marks'] ?></p>
                             </div>
-                            <div class="course-list">
-                                <?php foreach ($_SESSION['grades'] as $grade) : ?>
-                                    <div class="course-list__grade flex">
-                                        <p class="course-list__name"><?= $grade->course ?></p>
-                                        <div class="dashboard__card__tab flex gap-1">
-                                            <!-- <p class="course-list__marks">
-                                                <?php if (isset($grade->grades)) :
-                                                    foreach ($grade->grades as $key => $mark) :
-                                                        if (end($grade->grades) == $mark) :
-                                                            echo $mark;
-                                                        else :
-                                                            echo $mark . ",";
-                                                        endif;
-                                                    endforeach;
-                                                endif; ?>
-                                            </p> -->
-                                            <p class="course-list__average ml-tab mr-tab">
-                                                <?php if (isset($grade->average)) :
-                                                    echo $grade->average;
-                                                endif; ?>
-                                            </p>
-                                        </div>
-                                    </div>
-                                <?php endforeach ?>
-                            </div>
+                            <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
+                                <span><?= number_format((float)getAverageFromGrades($_SESSION['grades']), 2, '.', ''); ?></span>
+                            <?php endif; ?>
                         </div>
+                        <span><?= $lang['home']['dashboard']['average'] ?></span>
+                    </div>
+                    <div class="dashboard__component__content">
+                        <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
+                            <?php foreach ($_SESSION['grades'] as $grade) : ?>
+                                <div class="dashboard__component__content__lign" data-semester=<?= explode(' ', $grade->trimester_name)[1] ?>>
+                                    <p><span class="dashboard__component__content__lign__trimester"><?= 'S'.explode(' ', $grade->trimester_name)[1] ?> - </span><?= $grade->course ?></p>
+                                    <?php if(!empty($grade->grades) || isset($grade->average)) : ?>
+                                        <p>
+                                            <?php 
+                                                $average = 0;
+                                                $division = 0;
+                                                if (!empty($grade->grades) && isset($grade->ccaverage)) {
+                                                    $average += floatval($grade->ccaverage);
+                                                    $division += 1;
+                                                }
 
-                        <div class="dashboard__card pd-1">
-                            <div class="dashboard__card__head flex flex-al mb-1">
-                                <h4 class="tag">News</h4>
-                                <div class="dashboard__head__arrows gap-1 flex">
-                                    <i onclick="navigateToPrecedent()" class="fa fa-angle-down"></i>
-                                    <i onclick="navigateToFollowing()" class="fa fa-angle-down"></i>
+                                                if(isset($grade->average)) {
+                                                    $average += floatval($grade->average);
+                                                    $division += 1;
+                                                }
+
+                                                echo $average / $division;
+                                            ?>
+                                        </p>
+                                    <?php endif; ?>
                                 </div>
+                            <?php endforeach ?>
+                        <?php else : ?>
+                            <div class="dashboard__component__content__lign">
+                                <p><?= $lang['home']['dashboard']['empty']['marks'] ?></p>
                             </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="dashboard__component news">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p><i class="fa fa-envelope"></i></i><?= $lang['home']['dashboard']['title']['news'] ?></p>
+                        </div>
+                        <div class="dashboard__component__title__arrows">
+                            <i onclick="navigateToPrecedentNews()" class="fa fa-angle-left dashboard__component__title__arrows__arrow dashboard__component__title__arrows__arrow--left"></i>
+                            <i onclick="navigateToFollowingNews()" class="fa fa-angle-right dashboard__component__title__arrows__arrow dashboard__component__title__arrows__arrow--right"></i>
+                        </div>
+                    </div>
+                    <div class="dashboard__component__content">
+                        <?php if (isset($_SESSION['news']) && !empty($_SESSION['news'])) : ?>
                             <?php foreach ($_SESSION['news'] as $new) : ?>
                                 <?php if (isset($new->ba_id)) : ?>
-                                    <div class="news__banner pd-1" style="background-image: url(<?= $new->image ?>);">
+                                    <div class="dashboard__component__content__banner" style="background-image: url(<?= $new->image ?>);">
                                         <!-- new title-->
-                                        <p class="news__banner__title flex mb-1"><?= $new->title ?></p>
-                                        <div class="news__banner__desc pd-1">
-                                            <?php if (isset($new->url)) : ?>
-                                                <!-- new video-->
-                                                <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                            <?php endif; ?>
-                                            <!-- new description -->
-                                            <?php if (isset($new->html)) :  ?>
+                                        <p><?= $new->title ?></p>
+                                        <?php if (isset($new->html)) :  ?>
+                                            <div>
+                                                <?php if (isset($new->url)) : ?>
+                                                    <!-- new video-->
+                                                    <iframe width="200" height="110" src="<?php echo str_replace('watch?v=', 'embed/', $new->url); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                <?php endif; ?>
+                                                <!-- new description -->
                                                 <?= $new->html ?>
-                                            <?php endif; ?>
-                                        </div>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
-                        </div>
-
-                        <div class="dashboard__card pd-1">
-                            <div class="dashboard__card__head flex flex-al mb-1">
-                                <h4 class="tag">Classes</h4>
-                                <span class="course-list__course__coef">coef</span>
-                            </div>
-                            <div class="course-list">
-                                <?php foreach ($_SESSION['grades'] as $course) : ?>
-                                    <div class="course-list__course flex">
-                                        <!-- name of the course - professor -->
-                                        <p><?= $course->course . " - " ?><span class='course-list__course__teacher'><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->teacher_last_name ?></span></p>
-                                        <!-- coef -->
-                                        <span class="course-list__course__coef"><?= $course->coef ?></span>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
+                        <?php else : ?>
+                            <p><?= $lang['home']['dashboard']['empty']['news'] ?></p>
+                        <?php endif; ?>
                     </div>
-
-                    <div class="dashboard__row flex">
-
-                        <div class="dashboard__card pd-1">
-                            <div class="dashboard__card__head flex flex-al mb-2">
-                                <div class="dashboard__card__head__title flex flex-al gap-1">
-                                    <h4 class="tag">Planning</h4>
-                                    <?php foreach ($DAYS as $key => $day) : ?>
-                                        <div class="date-container flex">
-                                            <p class="date"><?= date('l', $day) ?></p>
-                                            <p class="date"><?= date('d/m/y', $day) ?></p>
-                                        </div>
-                                    <?php endforeach; ?>
-                                </div>
-                                <div class="dashboard__head__arrows gap-1 flex">
-                                    <i onclick="navigateToPrecedentDay()" id="pl-lst" class="fa fa-angle-down"></i>
-                                    <i onclick="navigateToFollowingDay()" id="pl-nxt" class="fa fa-angle-down"></i>
-                                </div>
-                            </div>
-                            <div class="planning__content">
-                                <?php foreach ($DAYS as $key => $day) : ?>
-                                    <div <?php if (date('l', $day) == date('l')) : ?> class="current day" <?php else : ?> class="day" <?php endif ?>>
-                                        <?php foreach ($_SESSION['agenda'] as $key => $class) : ?>
-                                            <?php if (date('l', $class->start_date / 1000) == date('l', $day)) : //if the name of the day (ex : 'Monday') is equal --> same day
-
-                                                //calcul the class time
-                                                $startDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->start_date / 1000));
-                                                $endDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->end_date / 1000));
-
-                                                //calcul the class time
-                                                $interval = date_diff($startDate, $endDate);
-                                                if ($interval->format('%h') >= 4) {
-                                                    $className = 'class--long-4';
-                                                } elseif ($interval->format('%h') >= 3) {
-                                                    $className = 'class--long';
-                                                } else {
-                                                    $className = "";
-                                                }
-                                            ?>
-                                                <div class="class <?php if (!empty($className)) {
-                                                                        echo $className;
-                                                                    } ?>" onclick="showClassModal()">
-                                                    <p class="class__hour mb-1"><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
-                                                    <div class="class__details ml-1">
-                                                        <p><?= $class->name ?></p>
-                                                        <?php if (isset($class->comment)) : ?>
-                                                            <p><?= $class->comment ?></p>
-                                                        <?php endif; ?>
-                                                        <?php if (isset($class->rooms[0])) : ?>
-                                                            <?php if (isset($class->teacher) && strlen($class->teacher) > 1) : /* $class->teacher is equal to 1 caracter when it's not defined */ ?>
-                                                                <p><?= $class->teacher ?> - <?= $class->rooms[0]->name ?></p>
-                                                            <?php else : ?>
-                                                                <p><?= $class->rooms[0]->name ?></p>
-                                                            <?php endif; ?>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                </div>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
+                </div>
+                <div class="dashboard__component classes">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p><i class="fa fa-chalkboard-user"></i></i><?= $lang['home']['dashboard']['title']['classes'] ?></p>
                         </div>
+                        <span><?= $lang['home']['dashboard']['coef'] ?></span>
+                    </div>
+                    <div class="dashboard__component__content">
+                        <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
+                            <?php foreach ($_SESSION['grades'] as $course) : ?>
+                                <div class="dashboard__component__content__lign" data-semester="<?= explode(' ', $course->trimester_name)[1] ?>">
+                                    <p><span class="dashboard__component__content__lign__trimester"><?= 'S' . explode(' ', $course->trimester_name)[1] ?> - </span></span><?= $course->course . " - " ?><span><?= $course->teacher_civility . ' ' . $course->teacher_first_name ?></span></p>
+                                    <p><?= $course->coef ?></p>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <div class="dashboard__component__content__lign">
+                                <p><?= $lang['home']['dashboard']['empty']['courses'] ?></p>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
-            <script src=" ./public/js/navigate.js"></script>
-            <script>
-                init_socket('<?= $_SESSION['class']->promotion; ?>');
-            </script>
-        <?php endif; ?>
-    </div>
+            <div class="dashboard__right">
+                <div class="dashboard__component planning">
+                    <div class="dashboard__component__title">
+                        <div class="dashboard__component__date">
+                            <div class="tag">
+                                <p><i class="fa fa-calendar"></i><?= $lang['home']['dashboard']['title']['planning'] ?></p>
+                            </div>
+                            <?php foreach ($DAYS as $key => $day) : ?>
+                                <p class="date"><?= date('l', $day) . " " . date('d/m/y', $day) ?></p>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="dashboard__component__title__arrows">
+                            <i onclick="navigateToPrecedentDay()" class="fa fa-angle-left dashboard__component__title__arrows__arrow dashboard__component__title__arrows__arrow--left"></i>
+                            <i onclick="navigateToFollowingDay()" class="fa fa-angle-right dashboard__component__title__arrows__arrow dashboard__component__title__arrows__arrow--right"></i>
+                        </div>
+                    </div>
+                    <div class="dashboard__component__content">
+                        <?php foreach ($DAYS as $key => $day) :
+                            $dayEmpty = true; ?>
+                            <div <?php if (date('l', $day) == date('l')) : ?> class="current day" <?php else : ?> class="day" <?php endif ?>>
+                                <?php foreach ($_SESSION['agenda'] as $key => $class) : ?>
+                                    <?php if (date('l', $class->start_date / 1000) == date('l', $day)) : //if the name of the day is equal --> same day
 
-    <div class="class__modal__bg" id="class__modal__bg">
-        <div class="class__modal" id="class__modal"></div>
-    </div>
+                                        //calcul the class time
+                                        $startDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->start_date / 1000));
+                                        $endDate = new DateTime(date('Y-m-d H:i:s', $_SESSION['agenda'][$key]->end_date / 1000));
 
-    <!-- <img src="https://www.section.io/engineering-education/authors/michael-barasa/avatar.png" class="michael" id="michael" alt=""> -->
-    <?php require './components/flash_message.php'; ?>
+                                        //calcul the class time
+                                        $interval = date_diff($startDate, $endDate);
+                                        if ($interval->format('%h') >= 4) {
+                                            $className = 'class--long-4';
+                                        } elseif ($interval->format('%h') >= 3) {
+                                            $className = 'class--long';
+                                        } else {
+                                            $className = "";
+                                        }
+
+                                        $dayEmpty = false;
+                                    ?>
+                                        <div class="planning__class<?php if ($class->type == 'Examen') {
+                                                                        echo ' examen';
+                                                                    } ?><?php if (!empty($className)) {
+                                                                            echo ' ' . $className;
+                                                                        } ?>" onclick="get_class_info(<?= $key ?>)">
+                                            <p><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
+                                            <p><?= $class->name ?></p>
+                                            <?php if (isset($class->rooms[0])) : ?>
+                                                <?php if (isset($class->teacher) && strlen($class->teacher) > 1) : /* $class->teacher is equal to 1 caracter when it's not defined */ ?>
+                                                    <p><?= $class->teacher ?> - <?= $class->rooms[0]->name ?></p>
+                                                <?php else : ?>
+                                                    <p><?= $class->rooms[0]->name ?></p>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                                <?php if ($dayEmpty) : ?>
+                                    <p class="planning__empty"><?= $lang['home']['dashboard']['empty']['agenda'] ?></p>
+                                <?php endif ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="dashboard__component absence">
+                    <div class="dashboard__component__title">
+                        <div class="tag">
+                            <p><i class="fa fa-message-exclamation"></i><?= $lang['home']['dashboard']['title']['absence'] ?></p>
+                        </div>
+                        <span><?= $lang['home']['dashboard']['date'] ?></span>
+                    </div>
+                    <div class="dashboard__component__content">
+                        <?php if (isset($_SESSION['absences']) && !empty($_SESSION['absences'])) : ?>
+                            <?php foreach ($_SESSION['absences'] as $absence) : ?>
+                                <div class="dashboard__component__content__lign<?= $absence->justified ? ' justified' : '' ?>" data-semester="<?= explode(' ', $course->trimester_name)[1] ?>">
+                                    <p><?= $absence->course_name ?></p>
+                                    <p><?= date('d/m/Y', $absence->date / 1000); ?></p>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <p class="absence__empty"><?= $lang['home']['dashboard']['empty']['absence'] ?></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </main>
+    <?php endif ?>
 </body>
 
 </html>

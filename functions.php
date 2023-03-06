@@ -1,5 +1,6 @@
 <?php
 
+date_default_timezone_set('Europe/Paris');
 session_start();
 
 //Constants
@@ -17,11 +18,30 @@ const ERROR_LOGIN = 'error_login';
 const ERROR_HANDLER = 'error_handler';
 const SUCCESS_LOGIN = 'success_login';
 
+function dd($var) //function for debug
+{
+    echo "<pre style='font-size: 18px'>";
+    print_r($var);
+    echo "</pre>";
+    die();
+}
+
 function dump($var) //function for debug
 {
     echo "<pre>";
     print_r($var);
     echo "</pre>";
+}
+
+function get_user_lang() {
+    $lang = explode(",", $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+    $lang = strtolower(substr(chop($lang[0]), 0, 2));
+
+    if(isset($lang) && ($lang == 'en' || $lang == 'fr')) {
+        return $lang;
+    } else {
+        return 'en';
+    }
 }
 
 function init_php_session(): bool //init php session
@@ -52,7 +72,6 @@ function errorHandler($errno, $errstr, $errfile, $errline) //error
 {
     /* $error = [$errno, $errstr, $errfile, $errline]; //information about the error (for debug) */
     create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
-    header("location: ../");
 
     /* Don't execute PHP internal error handler */
     return true;
@@ -61,25 +80,25 @@ function errorHandler($errno, $errstr, $errfile, $errline) //error
 
 function fatalErrorHandler() //fatal error
 {
-    create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
-    header("location: ../");
+    if(!is_logged()) {
+        create_flash_message(ERROR_HANDLER, 'An error has occured, please try again later.', FLASH_ERROR);
+    }
 
     /* Don't execute PHP internal error handler */
     return true;
 }
 
-
-function create_flash_message(string $name, string $message, string $type): void //creer un flash message
+//create a flash message
+function create_flash_message(string $name, string $message, string $type): void
 {
-    // supprimer le flash message s'il est défini suivant le nom
     if (isset($_SESSION[FLASH][$name])) {
         unset($_SESSION[FLASH][$name]);
     }
-    // Ajouter le flash message dans la session
     $_SESSION[FLASH][$name] = ['message' => $message, 'type' => $type];
 }
 
-function isset_flash_message_by_name(string $name): bool //Verifier si le flash message est défini via son nom
+//check if flash message is define by name
+function isset_flash_message_by_name(string $name): bool
 {
     if (isset($_SESSION[FLASH][$name])) {
         return true;
@@ -88,11 +107,12 @@ function isset_flash_message_by_name(string $name): bool //Verifier si le flash 
     }
 }
 
-function isset_flash_message_by_type(string $type): bool //Verifier si le flash message est défini via son type
+//check if flash message is define by type
+function isset_flash_message_by_type(string $type): bool
 {
     if (isset($_SESSION[FLASH])) {
-        foreach ($_SESSION[FLASH] as $key => $value) { //parcourir les flashs messages et verifier si le type est défini
-            if ($value['type'] == $type) { //si oui, retourner vrai
+        foreach ($_SESSION[FLASH] as $key => $value) {
+            if ($value['type'] == $type) {
                 return true;
             } else {
                 return false;
@@ -102,7 +122,8 @@ function isset_flash_message_by_type(string $type): bool //Verifier si le flash 
     return false;
 }
 
-function delete_flash_message_by_name(string $name): bool //Supprimer un flash message via son nom
+//Delete flash message by name
+function delete_flash_message_by_name(string $name): bool
 {
     if (isset($_SESSION[FLASH][$name])) {
         unset($_SESSION[FLASH][$name]);
@@ -112,11 +133,12 @@ function delete_flash_message_by_name(string $name): bool //Supprimer un flash m
 }
 
 
-function delete_flash_message_by_type(string $type): bool //Supprimer un flash message via son type
+//delete flash message by type
+function delete_flash_message_by_type(string $type): bool
 {
     if (isset($_SESSION[FLASH])) {
-        foreach ($_SESSION[FLASH] as $key => $value) { //parcourir les flashs messages et verifier si le type existe
-            if ($value['type'] == $type) { //si oui, le supprimer
+        foreach ($_SESSION[FLASH] as $key => $value) {
+            if ($value['type'] == $type) {
                 unset($_SESSION[FLASH][$key]);
             } else {
                 return false;
@@ -126,45 +148,104 @@ function delete_flash_message_by_type(string $type): bool //Supprimer un flash m
     return false;
 }
 
-function display_flash_message_by_name(string $name): void //Afficher le flash message via son nom
+//Display flash message by type
+function display_flash_message_by_name(string $name): void
 {
-    //s'il n'existe pas ne rien renvoyer
     if (!isset($_SESSION[FLASH][$name])) {
         return;
     }
-
-    // recuperer la valeur du message dans une variable
     $flash_message[$name] = $_SESSION[FLASH][$name];
-
-    // supprimer le flash message de la session
     unset($_SESSION[FLASH][$name]);
 
 
     echo $flash_message[$name]['message'];
 }
 
-function display_flash_message_by_type(string $type): void //Afficher le flash message via son type
+
+//Display flash message by type
+function display_flash_message_by_type(string $type): void
 {
     if (isset($_SESSION[FLASH])) {
-        foreach ($_SESSION[FLASH] as $key => $value) {  //parcourir les flashs messages et verifier si le type existe
-            if ($value['type'] == $type) { //si oui, récupérer le message dans une variable
+        foreach ($_SESSION[FLASH] as $key => $value) {
+            if ($value['type'] == $type) {
+
                 $flash_message = $value['message'];
-
-                // supprimer le flash message de la session
                 unset($_SESSION[FLASH][$key]);
-
-                // Afficher le flash message
                 echo $flash_message;
             }
         }
     }
 }
 
-//to sort the agenda array
+// Check if a value is a integer (
+// "23" return true, 23 return true, 23.4 return false
+function isInteger($input)
+{
+    return (ctype_digit(strval($input)));
+}
+
+function getAverageFromGrades($grades) {
+    $coefs = 0;
+    $additionnalAverage = 0;
+
+    if(isset($grades) && !empty($grades)) {
+        foreach($grades as $grade) {
+            if($grade->coef != 'N.C.') {
+                $coef = null;
+
+                if(!empty($grade->grades)) {
+                    $coef = intval($grade->coef);
+                    $additionnalAverage = $additionnalAverage + floatval($grade->ccaverage) * intval($grade->coef);
+                }
+                if(isset($grade->average)) {
+                    $coef = intval($grade->coef);
+                    $additionnalAverage = $additionnalAverage + floatval($grade->average) * intval($grade->coef);
+                }
+
+                if(isset($coef)) {
+                    $coefs = $coefs + $coef;
+                }
+            }
+        }
+    }
+
+    return $additionnalAverage / $coefs;
+}
+
+// Sort the agenda multiple times
+function sortAgenda(){
+    //to sort the agenda
+    if(isset($_SESSION['agenda'])) {
+        usort($_SESSION['agenda'], "cmp");
+    }
+}
+
+//to sort the agenda array by starting date
 function cmp($a, $b)
 {
-    if ($a->start_date < $b->start_date) {
-        return 1;
+    return $a->start_date - $b->start_date;
+}
+
+//generate an unique token
+function guidv4($data = null)
+{
+    // Generate 16 bytes (128 bits) of random data or use the data passed into the function.
+    $data = $data ?? random_bytes(16);
+    assert(strlen($data) == 16);
+
+    // Set version to 0100
+    $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+    // Set bits 6-7 to 10
+    $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+
+    // Output the 36 character UUID.
+    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+}
+
+function redirectToReferer(string $path) {
+    if(isset($_SERVER['HTTP_REFERER']) && !empty($_SERVER['HTTP_REFERER'])) {
+        header('location: '.$_SERVER['HTTP_REFERER']);
+    } else {
+        header('location: '.$path);
     }
-    return 0;
 }

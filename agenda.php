@@ -1,9 +1,7 @@
 <?php
 
 //to sort the agenda
-if (isset($_SESSION['agenda'])) {
-    usort($_SESSION['agenda'], "cmp");
-}
+sortAgenda();
 
 $DAYS = [
     strtotime("today"),
