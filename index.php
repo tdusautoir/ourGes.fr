@@ -215,11 +215,7 @@ getAverageFromGrades($_SESSION['grades']);
                         <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
                             <?php foreach ($_SESSION['grades'] as $course) : ?>
                                 <div class="dashboard__component__content__lign" data-semester="<?= explode(' ', $course->trimester_name)[1] ?>">
-<<<<<<< HEAD
                                     <p><span class="dashboard__component__content__lign__trimester"><?= 'S'.explode(' ', $course->trimester_name)[1] ?> - </span></span><?= $course->course . " - " ?><span><?= $course->teacher_civility . ' ' . $course->teacher_first_name ?></span></p>
-=======
-                                    <p><span class="dashboard__component__content__lign__trimester"><?= 'S' . explode(' ', $course->trimester_name)[1] ?></span> - </span><?= $course->course . " - " ?><span><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->trimester_name ?></span></p>
->>>>>>> d195a48d3b3621c47200d2045165f52d7e82d208
                                     <p><?= $course->coef ?></p>
                                 </div>
                             <?php endforeach; ?>
