@@ -726,6 +726,9 @@ body {
   margin-top: 5px;
   font-weight: 500;
 }
+.dashboard__component.planning .planning__empty {
+  text-align: center;
+}
 .dashboard__component__title {
   display: flex;
   justify-content: space-between;

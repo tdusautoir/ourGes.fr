@@ -241,7 +241,8 @@ $lang = $lang[get_user_lang()];
                         </div>
                     </div>
                     <div class="dashboard__component__content">
-                        <?php foreach ($DAYS as $key => $day) : ?>
+                        <?php foreach ($DAYS as $key => $day) :
+                            $dayEmpty = true; ?>
                             <div <?php if (date('l', $day) == date('l')) : ?> class="current day" <?php else : ?> class="day" <?php endif ?>>
                                 <?php foreach ($_SESSION['agenda'] as $key => $class) : ?>
                                     <?php if (date('l', $class->start_date / 1000) == date('l', $day)) : //if the name of the day is equal --> same day
@@ -259,6 +260,8 @@ $lang = $lang[get_user_lang()];
                                         } else {
                                             $className = "";
                                         }
+
+                                        $dayEmpty = false;
                                     ?>
                                         <div class="planning__class<?php if ($class->type == 'Examen') { echo ' examen'; } ?><?php if (!empty($className)) { echo ' '.$className; } ?>" onclick="get_class_info(<?= $key ?>)">
                                             <p><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
@@ -273,6 +276,9 @@ $lang = $lang[get_user_lang()];
                                         </div>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
+                                <?php if($dayEmpty) : ?>
+                                    <p class="planning__empty"><?= $lang['home']['dashboard']['empty']['agenda'] ?></p>
+                                <?php endif ?>
                             </div>
                         <?php endforeach; ?>
                     </div>

@@ -55,6 +55,7 @@ $lang = [
                     'news' => 'Empty news',
                     'courses' => 'Empty course',
                     'absence' => 'no absences',
+                    'agenda' => 'No classes 🎉',
                 ]
             ]
         ],
@@ -177,6 +178,7 @@ $lang = [
                     'news' => 'Pas de nouveautés',
                     'courses' => 'Pas de matières',
                     'absence' => 'Aucune absence',
+                    'agenda' => 'Aucun cours 🎉',
                 ]
             ]
         ],
