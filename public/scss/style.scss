@@ -115,7 +115,7 @@ body {
 
     &--check {
         overflow: hidden;
-        height: 25px;
+        height: 28px;
 
         i {
             transform: translate(5px, 20px) rotate(-180deg);
@@ -441,12 +441,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 auto;
+    margin: 0;
     margin-top: 60px;
     max-width: 1440px;
     overflow-y: hidden;
-    padding: 80px 100px;
-    padding-top: 0;
+    padding: 0 100px;
 
     &__text {
         max-width: 50%;
@@ -544,7 +543,7 @@ body {
     gap: 20px;
     padding: 0 100px;
     min-height: 900px;
-    margin-bottom: 80px;
+    padding-bottom: 20px;
     transition: 300ms ease;
 
     &__buttons {
@@ -763,7 +762,7 @@ body {
 
             .dashboard__component__content {
                 overflow: auto;
-                max-height: calc(100% - 40px);
+                max-height: calc(100% - 50px);
                 display: flex;
                 flex-direction: column;
                 gap: 15px;
@@ -1410,10 +1409,6 @@ body {
         &__right {
 
             .dashboard__component {
-                &.absence {
-                    height: fit-content;
-                }
-
                 &.planning {
                     height: fit-content;
                 }
@@ -1432,7 +1427,7 @@ body {
             padding: 10px;
 
             p {
-                font-size: 1.1rem;
+                font-size: 0.85rem;
             }
         }
 
@@ -1448,7 +1443,7 @@ body {
 
             &__title {
                 h1 {
-                    font-size: 5rem;
+                    font-size: 4rem;
                 }
             }
 
@@ -1456,7 +1451,7 @@ body {
 
                 p,
                 a {
-                    font-size: 1.3rem;
+                    font-size: 1rem;
                 }
             }
 
@@ -1472,7 +1467,7 @@ body {
                     }
 
                     p {
-                        font-size: 1.4rem;
+                        font-size: 1rem;
                     }
                 }
             }
@@ -1503,7 +1498,7 @@ body {
         transition: unset;
 
         &--loading::before {
-            bottom: 60px;
+            top: 60px;
         }
 
         &__inputs {

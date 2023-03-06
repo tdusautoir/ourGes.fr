@@ -215,7 +215,11 @@ getAverageFromGrades($_SESSION['grades']);
                         <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
                             <?php foreach ($_SESSION['grades'] as $course) : ?>
                                 <div class="dashboard__component__content__lign" data-semester="<?= explode(' ', $course->trimester_name)[1] ?>">
+<<<<<<< HEAD
                                     <p><span class="dashboard__component__content__lign__trimester"><?= 'S'.explode(' ', $course->trimester_name)[1] ?> - </span></span><?= $course->course . " - " ?><span><?= $course->teacher_civility . ' ' . $course->teacher_first_name ?></span></p>
+=======
+                                    <p><span class="dashboard__component__content__lign__trimester"><?= 'S' . explode(' ', $course->trimester_name)[1] ?></span> - </span><?= $course->course . " - " ?><span><?= $course->teacher_civility . ' ' . $course->teacher_first_name . ' ' . $course->trimester_name ?></span></p>
+>>>>>>> d195a48d3b3621c47200d2045165f52d7e82d208
                                     <p><?= $course->coef ?></p>
                                 </div>
                             <?php endforeach; ?>
@@ -266,7 +270,11 @@ getAverageFromGrades($_SESSION['grades']);
 
                                         $dayEmpty = false;
                                     ?>
-                                        <div class="planning__class<?php if ($class->type == 'Examen') { echo ' examen'; } ?><?php if (!empty($className)) { echo ' '.$className; } ?>" onclick="get_class_info(<?= $key ?>)">
+                                        <div class="planning__class<?php if ($class->type == 'Examen') {
+                                                                        echo ' examen';
+                                                                    } ?><?php if (!empty($className)) {
+                                                                            echo ' ' . $className;
+                                                                        } ?>" onclick="get_class_info(<?= $key ?>)">
                                             <p><?= $startDate->format('H:i') ?> - <?= $endDate->format('H:i') ?></p>
                                             <p><?= $class->name ?></p>
                                             <?php if (isset($class->rooms[0])) : ?>
@@ -279,7 +287,7 @@ getAverageFromGrades($_SESSION['grades']);
                                         </div>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
-                                <?php if($dayEmpty) : ?>
+                                <?php if ($dayEmpty) : ?>
                                     <p class="planning__empty"><?= $lang['home']['dashboard']['empty']['agenda'] ?></p>
                                 <?php endif ?>
                             </div>
