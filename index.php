@@ -151,7 +151,9 @@ getAverageFromGrades($_SESSION['grades']);
                             <div class="tag">
                                 <p><i class="fa fa-graduation-cap"></i><?= $lang['home']['dashboard']['title']['marks'] ?></p>
                             </div>
-                            <span></span>
+                            <?php if (isset($_SESSION['grades']) && !empty($_SESSION['grades'])) : ?>
+                                <span><?= number_format((float)getAverageFromGrades($_SESSION['grades']), 2, '.', ''); ?></span>
+                            <?php endif; ?>
                         </div>
                         <span><?= $lang['home']['dashboard']['average'] ?></span>
                     </div>
